@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Mortgage Calculators | Cholan Mortgages</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                brand: {
+                  navy: '#1B365D',
+                  sage: '#8AA399',
+                  warm: '#F4F1EE',
+                  wood: '#7D5A50',
+                  accent: '#4A6D7C'
+                }
+              }
+            }
+          }
+        }
+    </script>
+    <!-- Icons (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calc-tab.active {
+            border-bottom: 2px solid #1B365D;
+            color: #1B365D;
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-navy bg-brand-warm min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-2xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#services">Services</a>
+                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#about">Why Us</a>
+                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#booking">Book Consultation</a>
+                    <a class="text-sm font-medium text-brand-navy" href="calculators.html">Calculators</a>
+                    <a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-accent transition-all shadow-md" href="index.html#contact">Get a Free Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="calculator-app">
+                <!-- Calculators will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <span class="text-xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></span>
+            </div>
+            <p class="text-gray-500 text-sm max-w-md mx-auto mb-8">
+                Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
+            </p>
+            <div class="text-xs text-gray-400">
+                &copy; <span id="year"></span> Cholan Mortgages. All rights reserved. NMLS #123456. Equal Housing Lender.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="calculators.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Inject calculators
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('calculator-app');
+            if (typeof window.renderCalculators === 'function') {
+                // We might need a modified version of renderCalculators that doesn't include the section wrapper if we want more control
+                container.innerHTML = window.renderCalculators();
+                if (typeof window.initCalculatorLogic === 'function') {
+                    window.initCalculatorLogic();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

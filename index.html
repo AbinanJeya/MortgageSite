@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Cholan Mortgages | Expert Guidance for Your Home Journey</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                brand: {
+                  navy: '#1B365D',
+                  sage: '#8AA399',
+                  warm: '#F4F1EE',
+                  wood: '#7D5A50',
+                  accent: '#4A6D7C'
+                }
+              }
+            }
+          }
+        }
+    </script>
+    
+    <!-- Icons (Phosphor Icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS (for custom transitions) -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Calendly Widget Script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body class="font-sans text-brand-navy bg-white">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold tracking-tight text-brand-navy" id="brand-logo-container">
+                        <!-- Injected via main.js -->
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center" id="nav-links-container">
+                    <!-- Injected via main.js -->
+                </div>
+                <div class="md:hidden">
+                    <button class="p-2 text-brand-navy" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dynamic Content Injection Point -->
+    <main id="app-content">
+        <!-- Hero, Services, Why Us, Booking, Testimonials, Contact, Footer will be injected here -->
+    </main>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
