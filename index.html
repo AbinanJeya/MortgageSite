@@ -55,6 +55,27 @@
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Overlay & Panel -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-brand-navy/20 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+        <!-- Sidebar -->
+        <div class="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl transition-transform duration-300 transform">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-8">
+                    <span class="text-xl font-bold text-brand-navy">Menu</span>
+                    <button class="p-2 -mr-2 text-brand-navy" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-6" id="mobile-links-container">
+                    <!-- Injected via main.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Dynamic Content Injection Point -->
     <main id="app-content">

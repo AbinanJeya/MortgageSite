@@ -472,6 +472,20 @@ window.switchCalculator = function(calcId) {
     if (targetBody) targetBody.classList.add('active');
 };
 
+window.toggleMobileMenu = function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        } else {
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+};
+
 // --- Calculator Logic & Math --- \\
 
 function formatCurrency(num) {

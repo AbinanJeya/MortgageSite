@@ -61,6 +61,18 @@ function renderNavigation() {
         <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="calculators.html">Calculators</a>
         <a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-accent transition-all shadow-md" href="#contact">Get a Free Quote</a>
     `;
+
+    // Populate Mobile Menu
+    const mobileLinksContainer = document.getElementById('mobile-links-container');
+    if (mobileLinksContainer) {
+        mobileLinksContainer.innerHTML = `
+            <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="#services" onclick="toggleMobileMenu()">Services</a>
+            <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="#features" onclick="toggleMobileMenu()">Why Us</a>
+            <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="#booking" onclick="toggleMobileMenu()">Book Consultation</a>
+            <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="calculators.html">Calculators</a>
+            <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-brand-accent transition-all shadow-lg mt-4" href="#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
+        `;
+    }
 }
 
 function renderHero() {
@@ -322,6 +334,15 @@ function initSmoothScroll() {
 }
 
 window.toggleMobileMenu = function() {
-    // Simple alert for legacy behavior or add real toggle logic here
-    alert('Mobile menu toggle - Integration pending');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        } else {
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
 }

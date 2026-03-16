@@ -49,9 +49,39 @@
                     <a class="text-sm font-medium text-brand-navy" href="calculators.html">Calculators</a>
                     <a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-accent transition-all shadow-md" href="index.html#contact">Get a Free Quote</a>
                 </div>
+                <div class="md:hidden">
+                    <button class="p-2 text-brand-navy" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay & Panel -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-brand-navy/20 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+        <!-- Sidebar -->
+        <div class="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl transition-transform duration-300 transform">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-8">
+                    <span class="text-xl font-bold text-brand-navy">Menu</span>
+                    <button class="p-2 -mr-2 text-brand-navy" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-6" id="mobile-links-container">
+                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#services" onclick="toggleMobileMenu()">Services</a>
+                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#about" onclick="toggleMobileMenu()">Why Us</a>
+                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#booking" onclick="toggleMobileMenu()">Book Consultation</a>
+                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
+                    <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-brand-accent transition-all shadow-lg mt-4" href="index.html#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Main Content -->
     <main class="flex-grow py-12">
