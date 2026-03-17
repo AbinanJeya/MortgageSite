@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Mortgage Calculators | Cholan Mortgages</title>
+    <title>Mortgage Calculators | AskJuthis</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
@@ -12,11 +12,10 @@
             extend: {
               colors: {
                 brand: {
-                  navy: '#1B365D',
-                  sage: '#8AA399',
-                  warm: '#F4F1EE',
-                  wood: '#7D5A50',
-                  accent: '#4A6D7C'
+                  navy: '#0F1E2E',
+                  gold: '#D3BD73',
+                  slate: '#4A5D73',
+                  warm: '#F4F1EE'
                 }
               }
             }
@@ -29,28 +28,28 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .calc-tab.active {
-            border-bottom: 2px solid #1B365D;
-            color: #1B365D;
+            border-bottom: 2px solid #D3BD73;
+            color: #D3BD73;
         }
     </style>
 </head>
-<body class="font-sans text-brand-navy bg-brand-warm min-h-screen flex flex-col">
+<body class="font-sans text-white bg-brand-slate min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <nav class="sticky top-0 z-50 bg-brand-slate/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html" class="text-2xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></a>
+                    <a href="index.html" class="text-2xl font-bold tracking-tight text-white uppercase">ASK<span class="text-brand-gold">JUTHIS</span></a>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#services">Services</a>
-                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#about">Why Us</a>
-                    <a class="text-sm font-medium hover:text-brand-sage transition-colors" href="index.html#booking">Book Consultation</a>
-                    <a class="text-sm font-medium text-brand-navy" href="calculators.html">Calculators</a>
-                    <a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-accent transition-all shadow-md" href="index.html#contact">Get a Free Quote</a>
+                    <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-hover px-3 py-2 rounded-lg" href="index.html#services">Services</a>
+                    <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-hover px-3 py-2 rounded-lg" href="index.html#features">Why Us</a>
+                    <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-hover px-3 py-2 rounded-lg" href="index.html#booking">Book Consultation</a>
+                    <a class="text-sm font-medium text-brand-gold glass-hover px-3 py-2 rounded-lg" href="calculators.html">Calculators</a>
+                    <a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-white hover:text-brand-navy transition-all shadow-md glass-hover" href="index.html#contact">Get a Free Quote</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="p-2 text-brand-navy" onclick="toggleMobileMenu()">
+                    <button class="p-2 text-white" onclick="toggleMobileMenu()">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                     </button>
                 </div>
@@ -63,20 +62,20 @@
         <!-- Backdrop -->
         <div class="fixed inset-0 bg-brand-navy/20 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
         <!-- Sidebar -->
-        <div class="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl transition-transform duration-300 transform">
+        <div class="fixed right-0 top-0 h-full w-72 bg-brand-slate shadow-2xl transition-transform duration-300 transform border-l border-white/10">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-8">
-                    <span class="text-xl font-bold text-brand-navy">Menu</span>
-                    <button class="p-2 -mr-2 text-brand-navy" onclick="toggleMobileMenu()">
+                    <span class="text-xl font-bold text-white uppercase">Menu</span>
+                    <button class="p-2 -mr-2 text-white" onclick="toggleMobileMenu()">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                     </button>
                 </div>
                 <div class="flex flex-col space-y-6" id="mobile-links-container">
-                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#services" onclick="toggleMobileMenu()">Services</a>
-                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#about" onclick="toggleMobileMenu()">Why Us</a>
-                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="index.html#booking" onclick="toggleMobileMenu()">Book Consultation</a>
-                    <a class="text-lg font-semibold text-brand-navy border-b border-gray-100 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
-                    <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-brand-accent transition-all shadow-lg mt-4" href="index.html#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
+                    <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="index.html#services" onclick="toggleMobileMenu()">Services</a>
+                    <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="index.html#about" onclick="toggleMobileMenu()">Why Us</a>
+                    <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="index.html#booking" onclick="toggleMobileMenu()">Book Consultation</a>
+                    <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
+                    <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-white hover:text-brand-navy transition-all shadow-lg mt-4" href="index.html#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
                 </div>
             </div>
         </div>
@@ -93,16 +92,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-12 mt-auto">
+    <footer class="bg-brand-slate border-t border-white/10 py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="mb-8">
-                <span class="text-xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></span>
+                <span class="text-xl font-bold tracking-tight text-white uppercase">ASK<span class="text-brand-gold">JUTHIS</span></span>
             </div>
-            <p class="text-gray-500 text-sm max-w-md mx-auto mb-8">
+            <p class="text-white/70 text-sm max-w-md mx-auto mb-8">
                 Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
             </p>
-            <div class="text-xs text-gray-400">
-                &copy; <span id="year"></span> Cholan Mortgages. All rights reserved. NMLS #123456. Equal Housing Lender.
+            <div class="text-xs text-white/40">
+                &copy; <span id="year"></span> AskJuthis. All rights reserved. NMLS #123456. Equal Housing Lender.
             </div>
         </div>
     </footer>

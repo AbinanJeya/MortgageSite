@@ -3,7 +3,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Cholan Mortgages | Expert Guidance for Your Home Journey</title>
+<title>AskJuthis | Expert Guidance for Your Home Journey</title>
 <!-- BEGIN: Scripts -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
@@ -12,11 +12,10 @@
         extend: {
           colors: {
             brand: {
-              navy: '#1B365D',
-              sage: '#8AA399',
-              warm: '#F4F1EE',
-              wood: '#7D5A50',
-              accent: '#4A6D7C'
+              navy: '#0F1E2E',
+              gold: '#D3BD73',
+              slate: '#4A5D73',
+              warm: '#F4F1EE'
             }
           }
         }
@@ -34,25 +33,44 @@
     .hover-lift:hover {
       transform: translateY(-5px);
     }
+    /* Glassmorphism Classes */
+    .glass-card {
+      background: #0F1E2E;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-card-light {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .glass-card-dark {
+      background: #0F1E2E;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
   </style>
 </head>
-<body class="font-sans text-brand-navy bg-white">
+<body class="font-sans text-white bg-brand-slate">
 <!-- BEGIN: Navigation -->
-<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+<nav class="sticky top-0 z-50 bg-brand-slate/80 backdrop-blur-md border-b border-white/10">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex justify-between h-20 items-center">
 <div class="flex-shrink-0 flex items-center">
-<span class="text-2xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></span>
+<span class="text-2xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
 </div>
 <div class="hidden md:flex space-x-8 items-center">
-<a class="text-sm font-medium hover:text-brand-sage transition-colors" href="#services">Services</a>
-<a class="text-sm font-medium hover:text-brand-sage transition-colors" href="#about">Why Us</a>
-<a class="text-sm font-medium hover:text-brand-sage transition-colors" href="#booking">Book Consultation</a>
-<a class="text-sm font-medium hover:text-brand-sage transition-colors" href="#testimonials">Success Stories</a>
-<a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-accent transition-all shadow-md" href="#contact">Get a Free Quote</a>
+<a class="text-sm font-medium hover:text-brand-gold transition-colors text-white" href="#services">Services</a>
+<a class="text-sm font-medium hover:text-brand-gold transition-colors text-white" href="#about">Why Us</a>
+<a class="text-sm font-medium hover:text-brand-gold transition-colors text-white" href="#booking">Book Consultation</a>
+<a class="text-sm font-medium hover:text-brand-gold transition-colors text-white" href="#testimonials">Success Stories</a>
+<a class="bg-brand-navy text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-white hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
 </div>
 <div class="md:hidden">
-<button class="p-2 text-brand-navy" data-purpose="mobile-menu-toggle">
+<button class="p-2 text-white" data-purpose="mobile-menu-toggle">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
 </div>
@@ -68,14 +86,14 @@
 <div class="sm:text-center lg:text-left">
 <h1 class="text-4xl tracking-tight font-extrabold text-brand-navy sm:text-5xl md:text-6xl">
 <span class="block">Your Path to</span>
-<span class="block text-brand-sage">Homeownership</span>
+<span class="block text-brand-gold">Homeownership</span>
 <span class="block">Starts Here</span>
 </h1>
-<p class="mt-3 text-base text-gray-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+<p class="mt-3 text-base text-gray-700 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
               Personalized mortgage solutions designed to fit your unique life goals. From first-time buyers to refinancing experts, we navigate the complexity so you don't have to.
             </p>
 <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
-<a class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-navy hover:bg-brand-accent md:py-4 md:text-lg md:px-10 shadow-lg" href="#booking">
+<a class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-navy hover:bg-brand-slate md:py-4 md:text-lg md:px-10 shadow-lg" href="#booking">
                 Book a Consultation
               </a>
 <a class="flex items-center justify-center px-8 py-3 border border-brand-navy text-base font-medium rounded-md text-brand-navy bg-transparent hover:bg-white md:py-4 md:text-lg md:px-10" href="#services">
@@ -87,90 +105,89 @@
 </div>
 </div>
 <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-<!-- Image of the friendly agent with a warm blurred background -->
 <img alt="Professional Mortgage Agent smiling" class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiJ7FnqO5VreqZ7M3OeA8-BpwLnaFjrcINo3a49fkUpbmIthbKSLJVcrXSqiJ1F5BbiffLFxUO2NKVGFaKHfv5LTHNySQHOZ6yOA_7wxiDsJSlJ8pZ-UFB2Y1GRZguev6st0cV7YS2sCc6_qs1edKmGQxGYdhMibxKyj-oe6UR2RBhj2KXhQrRx_b3AaYkR4-QpOD9CcuvSejsHV-uDmPkMcx297WQwb7oW-G6gTwVg-s0-_mF3e177aPfJ3LZU4YtJMKZjC1nTCnA"/>
 </div>
 </header>
 <!-- END: Hero Section -->
 <!-- BEGIN: Services Section -->
-<section class="py-24 bg-white" id="services">
+<section class="py-24 bg-brand-slate" id="services">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="text-center mb-16">
-<h2 class="text-base text-brand-sage font-semibold tracking-wide uppercase">Expertise</h2>
-<p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-brand-navy sm:text-4xl">Comprehensive Financing Solutions</p>
+<h2 class="text-base text-brand-gold font-semibold tracking-wide uppercase">Expertise</h2>
+<p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Comprehensive Financing Solutions</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 <!-- Home Purchase -->
-<div class="group p-8 rounded-2xl bg-brand-warm hover-lift shadow-sm border border-gray-100">
-<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-brand-sage shadow-md">
+<div class="group p-8 rounded-2xl glass-card hover-lift shadow-lg">
+<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold text-brand-navy shadow-md">
 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
-<h3 class="text-2xl font-bold text-brand-navy mb-4">Home Purchase</h3>
-<p class="text-gray-600 mb-6">Buying your first home or moving up? We find the best rates and terms to make your dream home a reality.</p>
-<ul class="space-y-2 text-brand-navy/80 mb-8">
-<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-sage" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> First-time Homebuyer Programs</li>
-<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-sage" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Conventional &amp; FHA Loans</li>
+<h3 class="text-2xl font-bold text-white mb-4">Home Purchase</h3>
+<p class="text-white/90 mb-6">Buying your first home or moving up? We find the best rates and terms to make your dream home a reality.</p>
+<ul class="space-y-2 text-white/80 mb-8">
+<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-gold" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> First-time Homebuyer Programs</li>
+<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-gold" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Conventional &amp; FHA Loans</li>
 </ul>
-<a class="font-semibold text-brand-sage hover:text-brand-navy transition-colors" href="#">Learn More →</a>
+<a class="font-semibold text-brand-gold hover:text-white transition-colors" href="#">Learn More →</a>
 </div>
 <!-- Refinancing -->
-<div class="group p-8 rounded-2xl bg-brand-warm hover-lift shadow-sm border border-gray-100">
-<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-brand-sage shadow-md">
+<div class="group p-8 rounded-2xl glass-card hover-lift shadow-lg">
+<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold text-brand-navy shadow-md">
 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
-<h3 class="text-2xl font-bold text-brand-navy mb-4">Refinancing</h3>
-<p class="text-gray-600 mb-6">Lower your monthly payments or tap into your home's equity. We analyze your situation to ensure it's the right move.</p>
-<ul class="space-y-2 text-brand-navy/80 mb-8">
-<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-sage" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Rate &amp; Term Refinance</li>
-<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-sage" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Cash-Out Equity Access</li>
+<h3 class="text-2xl font-bold text-white mb-4">Refinancing</h3>
+<p class="text-white/90 mb-6">Lower your monthly payments or tap into your home's equity. We analyze your situation to ensure it's the right move.</p>
+<ul class="space-y-2 text-white/80 mb-8">
+<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-gold" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Rate &amp; Term Refinance</li>
+<li class="flex items-center"><svg class="w-4 h-4 mr-2 text-brand-gold" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg> Cash-Out Equity Access</li>
 </ul>
-<a class="font-semibold text-brand-sage hover:text-brand-navy transition-colors" href="#">Learn More →</a>
+<a class="font-semibold text-brand-gold hover:text-white transition-colors" href="#">Learn More →</a>
 </div>
 </div>
 </div>
 </section>
 <!-- END: Services Section -->
 <!-- BEGIN: Why Choose Us -->
-<section class="py-24 bg-brand-navy text-white" id="about">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-24 bg-brand-navy text-white relative overflow-hidden" id="about">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 <div class="lg:flex lg:items-center lg:gap-16">
 <div class="lg:w-1/2 mb-12 lg:mb-0">
 <img alt="Happy family in front of new home" class="rounded-3xl shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK99SSh4qbqlLxQb9fHL9e7iy48ygYH_awMB1ICnrx4je-oF1PZB9EwTOGHj3mlODdTkVaMhKf_Vw680QqFan7bwYD8C-mVT4md0FJvwe3nN25sm1Ol9e0yG-inrBK-24W-Q6BssACbNEgbY3fTaNGKj3blSYJYNovgiScQz0o-Yhhp_lh21I7PgnmGTAhIxv00dBRN1jpc1ut-7Jo_9QUqbnsafGyWPdb5gmB-LDhoHtSVELYY7VLxo8KTLK1WZ-Gfeujs4_LNUF7"/>
 </div>
-<div class="lg:w-1/2">
-                        <h2 class="text-3xl font-extrabold mb-8 text-white">Why Work With Cholan?</h2>
+<div class="lg:w-1/2 p-10 glass-card rounded-3xl" style="background: #4A5D73;">
+<h2 class="text-3xl font-extrabold mb-8 text-white">Why Work With Juthis?</h2>
 <div class="space-y-10">
 <div class="flex items-start">
 <div class="flex-shrink-0">
-<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-sage text-white">
+<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-gold text-brand-navy">
 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 </div>
 <div class="ml-4">
 <h3 class="text-lg font-bold text-white">Fast Approval Process</h3>
-<p class="mt-2 text-brand-warm/80">Our streamlined technology ensures you get pre-approved quickly, giving you a competitive edge in any market.</p>
+<p class="mt-2 text-white/80">Our streamlined technology ensures you get pre-approved quickly, giving you a competitive edge in any market.</p>
 </div>
 </div>
 <div class="flex items-start">
 <div class="flex-shrink-0">
-<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-sage text-white">
+<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-gold text-brand-navy">
 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 </div>
 <div class="ml-4">
 <h3 class="text-lg font-bold text-white">Transparent Communication</h3>
-<p class="mt-2 text-brand-warm/80">No hidden fees or surprises. We explain every detail in plain English throughout the entire process.</p>
+<p class="mt-2 text-white/80">No hidden fees or surprises. We explain every detail in plain English throughout the entire process.</p>
 </div>
 </div>
 <div class="flex items-start">
 <div class="flex-shrink-0">
-<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-sage text-white">
+<div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-gold text-brand-navy">
 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 </div>
 <div class="ml-4">
 <h3 class="text-lg font-bold text-white">Local Market Experts</h3>
-<p class="mt-2 text-brand-warm/80">We live and work in your community. We understand the local housing landscape better than big bank apps.</p>
+<p class="mt-2 text-white/80">We live and work in your community. We understand the local housing landscape better than big bank apps.</p>
 </div>
 </div>
 </div>
@@ -180,65 +197,65 @@
 </section>
 <!-- END: Why Choose Us -->
 <!-- BEGIN: Appointment Booking Section -->
-<section class="py-24 bg-brand-warm" id="booking">
+<section class="py-24 bg-brand-warm relative" id="booking">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="lg:flex lg:items-center lg:justify-between gap-12">
 <div class="lg:w-1/2 mb-12 lg:mb-0">
-<h2 class="text-base text-brand-sage font-semibold tracking-wide uppercase mb-2">Schedule Now</h2>
+<h2 class="text-base text-brand-gold font-semibold tracking-wide uppercase mb-2">Schedule Now</h2>
 <h3 class="text-4xl font-extrabold text-brand-navy mb-6">Expert Guidance is Just a Click Away</h3>
-<p class="text-lg text-gray-600 mb-8">
+<p class="text-lg text-gray-700 mb-8">
             Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
           </p>
 <div class="space-y-4">
 <div class="flex items-center text-brand-navy">
-<svg class="w-5 h-5 mr-3 text-brand-sage" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-5 h-5 mr-3 text-brand-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 <span class="font-medium">Free 15-minute Discovery Call</span>
 </div>
 <div class="flex items-center text-brand-navy">
-<svg class="w-5 h-5 mr-3 text-brand-sage" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-5 h-5 mr-3 text-brand-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 <span class="font-medium">No obligation, just expert advice</span>
 </div>
 <div class="flex items-center text-brand-navy">
-<svg class="w-5 h-5 mr-3 text-brand-sage" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-5 h-5 mr-3 text-brand-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 <span class="font-medium">Get your questions answered live</span>
 </div>
 </div>
 </div>
 <div class="lg:w-1/2">
-<div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-<div class="mb-6 flex items-center justify-between border-b border-gray-100 pb-4">
+<div class="glass-card-light rounded-3xl shadow-xl p-8 border border-white/40">
+<div class="mb-6 flex items-center justify-between border-b border-gray-200 pb-4">
 <h4 class="font-bold text-brand-navy">Select a Date &amp; Time</h4>
-<div class="text-sm text-brand-sage font-semibold">Available Today</div>
+<div class="text-sm text-brand-gold font-bold">Available Today</div>
 </div>
 <!-- Mock Calendar Grid -->
 <div class="mb-8">
-<div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-gray-400 uppercase mb-4">
+<div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-gray-500 uppercase mb-4">
 <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
 </div>
 <div class="grid grid-cols-7 gap-2">
-<div class="h-10 flex items-center justify-center text-gray-300">28</div>
-<div class="h-10 flex items-center justify-center text-gray-300">29</div>
-<div class="h-10 flex items-center justify-center text-gray-300">30</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">1</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors bg-brand-navy text-white font-bold">2</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">3</div>
-<div class="h-10 flex items-center justify-center text-gray-300">4</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">5</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">6</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">7</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">8</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">9</div>
-<div class="h-10 flex items-center justify-center rounded-lg border border-gray-100 hover:bg-brand-sage hover:text-white cursor-pointer transition-colors">10</div>
-<div class="h-10 flex items-center justify-center text-gray-300">11</div>
+<div class="h-10 flex items-center justify-center text-gray-400">28</div>
+<div class="h-10 flex items-center justify-center text-gray-400">29</div>
+<div class="h-10 flex items-center justify-center text-gray-400">30</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">1</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-transparent hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors bg-brand-navy text-white font-bold">2</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">3</div>
+<div class="h-10 flex items-center justify-center text-gray-400">4</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">5</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">6</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">7</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">8</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">9</div>
+<div class="h-10 flex items-center justify-center rounded-lg border border-gray-200 hover:bg-brand-gold hover:text-brand-navy cursor-pointer transition-colors text-brand-navy">10</div>
+<div class="h-10 flex items-center justify-center text-gray-400">11</div>
 </div>
 </div>
 <div class="grid grid-cols-2 gap-3 mb-8">
-<button class="py-3 px-4 rounded-lg border border-brand-sage text-brand-sage font-medium hover:bg-brand-sage hover:text-white transition-all text-sm">09:00 AM</button>
-<button class="py-3 px-4 rounded-lg border border-brand-sage text-brand-sage font-medium hover:bg-brand-sage hover:text-white transition-all text-sm">11:30 AM</button>
-<button class="py-3 px-4 rounded-lg border border-brand-sage text-brand-sage font-medium hover:bg-brand-sage hover:text-white transition-all text-sm">02:00 PM</button>
-<button class="py-3 px-4 rounded-lg border border-brand-sage text-brand-sage font-medium hover:bg-brand-sage hover:text-white transition-all text-sm">04:30 PM</button>
+<button class="py-3 px-4 rounded-lg border border-brand-gold/60 text-brand-navy font-bold hover:bg-brand-gold transition-all text-sm">09:00 AM</button>
+<button class="py-3 px-4 rounded-lg border border-brand-gold/60 text-brand-navy font-bold hover:bg-brand-gold transition-all text-sm">11:30 AM</button>
+<button class="py-3 px-4 rounded-lg border border-brand-gold/60 text-brand-navy font-bold hover:bg-brand-gold transition-all text-sm">02:00 PM</button>
+<button class="py-3 px-4 rounded-lg border border-brand-gold/60 text-brand-navy font-bold hover:bg-brand-gold transition-all text-sm">04:30 PM</button>
 </div>
-<button class="w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-accent transition-all shadow-lg flex items-center justify-center">
+<button class="w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-slate transition-all shadow-lg flex items-center justify-center">
               Confirm Appointment
 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
@@ -249,28 +266,26 @@
 </section>
 <!-- END: Appointment Booking Section -->
 <!-- BEGIN: Testimonials Slider -->
-<section class="py-24 bg-white overflow-hidden" id="testimonials">
+<section class="py-24 bg-brand-slate overflow-hidden" id="testimonials">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="relative">
 <div class="text-center max-w-3xl mx-auto" id="testimonial-container">
 <div class="testimonial-slide" data-purpose="active-testimonial">
-<svg class="h-12 w-12 text-brand-sage opacity-25 mx-auto mb-6" fill="currentColor" viewbox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
-                        <p class="text-2xl italic font-medium text-brand-navy mb-8">
-                            "Cholan Mortgages made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!"
-                        </p>
+<svg class="h-12 w-12 text-brand-gold opacity-50 mx-auto mb-6" fill="currentColor" viewbox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
+<p class="text-2xl italic font-medium text-white mb-8">"AskJuthis made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!"</p>
 <div class="flex items-center justify-center">
 <div class="ml-4 text-left">
-<div class="text-base font-bold">The Miller Family</div>
-<div class="text-sm text-gray-500">First-time Homebuyers</div>
+<div class="text-base font-bold text-white">The Miller Family</div>
+<div class="text-sm text-brand-warm/70">First-time Homebuyers</div>
 </div>
 </div>
 </div>
 </div>
 <!-- Simple Controls -->
 <div class="flex justify-center mt-12 gap-2">
-<button class="w-3 h-3 rounded-full bg-brand-sage"></button>
-<button class="w-3 h-3 rounded-full bg-gray-300"></button>
-<button class="w-3 h-3 rounded-full bg-gray-300"></button>
+<button class="w-3 h-3 rounded-full bg-brand-gold"></button>
+<button class="w-3 h-3 rounded-full bg-white/20"></button>
+<button class="w-3 h-3 rounded-full bg-white/20"></button>
 </div>
 </div>
 </div>
@@ -279,40 +294,44 @@
 <!-- BEGIN: Contact Form Section -->
 <section class="py-24 bg-brand-warm" id="contact">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="bg-white rounded-3xl shadow-xl overflow-hidden lg:flex">
-<div class="lg:w-1/2 p-12 bg-brand-navy text-white">
-<h2 class="text-3xl font-bold mb-6 text-white">Get a Free Quote</h2>
-<p class="text-brand-warm/80 mb-8 text-lg">Tell us a little about your goals, and we'll provide a no-obligation mortgage estimate tailored to your needs.</p>
+<div class="glass-card-dark rounded-3xl shadow-2xl overflow-hidden lg:flex">
+<div class="lg:w-1/2 p-12 bg-brand-navy/60 text-white flex flex-col justify-center">
+<h2 class="text-3xl font-bold mb-6">Get a Free Quote</h2>
+<p class="text-white/80 mb-8 text-lg">Tell us a little about your goals, and we'll provide a no-obligation mortgage estimate tailored to your needs.</p>
 <div class="space-y-6">
 <div class="flex items-center">
-<svg class="w-6 h-6 mr-4 text-brand-sage" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span>(555) 123-4567</span>
+<div class="w-12 h-12 rounded-full glass-card flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-lg font-medium">(555) 123-4567</span>
 </div>
 <div class="flex items-center">
-<svg class="w-6 h-6 mr-4 text-brand-sage" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span>hello@cholanmortgages.com</span>
+<div class="w-12 h-12 rounded-full glass-card flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-lg font-medium">hello@askjuthis.com</span>
 </div>
 </div>
 </div>
-<div class="lg:w-1/2 p-12">
+<div class="lg:w-1/2 p-12 bg-white/95">
 <form action="#" class="grid grid-cols-1 gap-y-6" method="POST">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
-<label class="block text-sm font-medium text-gray-700" for="first-name">First Name</label>
-<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-sage focus:ring-brand-sage" id="first-name" name="first-name" type="text"/>
+<label class="block text-sm font-bold text-brand-navy" for="first-name">First Name</label>
+<input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" id="first-name" name="first-name" type="text"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700" for="last-name">Last Name</label>
-<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-sage focus:ring-brand-sage" id="last-name" name="last-name" type="text"/>
+<label class="block text-sm font-bold text-brand-navy" for="last-name">Last Name</label>
+<input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" id="last-name" name="last-name" type="text"/>
 </div>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700" for="email">Email Address</label>
-<input class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-sage focus:ring-brand-sage" id="email" name="email" type="email"/>
+<label class="block text-sm font-bold text-brand-navy" for="email">Email Address</label>
+<input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" id="email" name="email" type="email"/>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700" for="service-type">I am interested in...</label>
-<select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-sage focus:ring-brand-sage" id="service-type" name="service-type">
+<label class="block text-sm font-bold text-brand-navy" for="service-type">I am interested in...</label>
+<select class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" id="service-type" name="service-type">
 <option>New Home Purchase</option>
 <option>Refinancing</option>
 <option>Debt Consolidation</option>
@@ -320,10 +339,10 @@
 </select>
 </div>
 <div>
-<label class="block text-sm font-medium text-gray-700" for="message">Message (Optional)</label>
-<textarea class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-sage focus:ring-brand-sage" id="message" name="message" rows="4"></textarea>
+<label class="block text-sm font-bold text-brand-navy" for="message">Message (Optional)</label>
+<textarea class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" id="message" name="message" rows="4"></textarea>
 </div>
-<button class="w-full bg-brand-sage text-white font-bold py-4 rounded-lg hover:bg-brand-accent transition-colors shadow-lg" type="submit">Submit Request</button>
+<button class="w-full bg-brand-gold text-brand-navy font-bold py-4 rounded-lg hover:bg-brand-navy hover:text-white transition-all shadow-lg" type="submit">Submit Request</button>
 </form>
 </div>
 </div>
@@ -331,27 +350,25 @@
 </section>
 <!-- END: Contact Form Section -->
 <!-- BEGIN: Footer -->
-<footer class="bg-white border-t border-gray-100 py-12">
+<footer class="bg-brand-slate border-t border-white/10 py-12">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 <div class="mb-8">
-<span class="text-xl font-bold tracking-tight text-brand-navy">CHOLAN<span class="text-brand-sage">MORTGAGES</span></span>
+<span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
 </div>
-<p class="text-gray-500 text-sm max-w-md mx-auto mb-8">
+<p class="text-white/70 text-sm max-w-md mx-auto mb-8">
         Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
       </p>
 <div class="flex justify-center space-x-6 mb-8">
-<!-- Placeholder Social Icons -->
-<a class="text-gray-400 hover:text-brand-navy" href="#"><svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg></a>
-<a class="text-gray-400 hover:text-brand-navy" href="#"><svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 1.802a3.333 3.333 0 110 6.666 3.333 3.333 0 010-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path></svg></a>
+<a class="text-white/60 hover:text-white" href="#"><svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg></a>
+<a class="text-white/60 hover:text-white" href="#"><svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 1.802a3.333 3.333 0 110 6.666 3.333 3.333 0 010-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path></svg></a>
 </div>
-<div class="text-xs text-gray-400">
-        © 2026 Cholan Mortgages. All rights reserved. NMLS #123456. Equal Housing Lender.
+<div class="text-xs text-white/40">
+        © 2023 AskJuthis. All rights reserved. NMLS #123456. Equal Housing Lender.
       </div>
 </div>
 </footer>
 <!-- END: Footer -->
 <script data-purpose="simple-interactions">
-    // Add simple scroll behavior for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();

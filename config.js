@@ -8,36 +8,36 @@
 const agentConfig = {
     // Basic Information
     branding: {
-        companyName: "CHOLAN MORTGAGES", // Appears in navbar
-        accentColor: "#1B365D",          // Navy
-        secondaryColor: "#8AA399",       // Sage
+        companyName: "ASK JUTHIS", // Appears in navbar
+        accentColor: "#0F1E2E",          // Deep Navy
+        secondaryColor: "#4A5D73",       // Slate Blue
         warmColor: "#F4F1EE"             // Warm
     },
-    
+
     agent: {
-        name: "Cholan Mortgages",
+        name: "Juthis",
         title: "Expert Mortgage Services",
         licenseNumber: "NMLS #123456",
-        photoUrl: "assets/agent.png", 
-        shortQuote: "Cholan Mortgages made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!",
+        photoUrl: "assets/agent.png",
+        shortQuote: "Juthis made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!",
         fullBio: `Personalized mortgage solutions designed to fit your unique life goals. From first-time buyers to refinancing experts, we navigate the complexity so you don't have to.`
     },
 
     contact: {
         phone: "(555) 123-4567",
         phoneLink: "5551234567", // For tel: links
-        email: "hello@cholanmortgages.com",
+        email: "hello@askjuthis.com",
         officeAddress: "Ottawa, ON",
-        bookingWidgetUrl: "https://calendly.com/abinan-jeyachandran/30min", 
+        bookingWidgetUrl: "https://calendly.com/abinan-jeyachandran/30min",
         bookingUrl: "#booking" // Adjusted to match new ID
     },
 
     social: {
-        linkedin: "https://linkedin.com",
-        instagram: "https://instagram.com",
-        facebook: "https://facebook.com"
+        linkedin: "https://www.linkedin.com/in/juthis-kuper/",
+        instagram: "https://www.instagram.com/askjuthis/",
+        x: "https://x.com"
     },
-    
+
     // Feature Highlights (Why Choose Us)
     features: [
         {

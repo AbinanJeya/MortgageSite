@@ -8,9 +8,9 @@ function getAffordabilityCalculatorHTML() {
 
     return `
         <div class="aff-calculator">
-            <div class="aff-header" style="padding: 15px 0; border-bottom: 1px solid #eee; margin-bottom: 2rem;">
+            <div class="aff-header" style="padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #00877a; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #D3BD73; color: #0F1E2E; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
                     <span style="font-weight: 500;">Calculate your maximum affordability</span>
                     <i class="ph ph-caret-up" style="margin-left: auto;"></i>
                 </div>
@@ -94,12 +94,12 @@ function getAffordabilityCalculatorHTML() {
             </div>
 
             <!-- Results Banner -->
-            <div class="aff-results-banner" style="background: #f8fcfb; border: 1px solid #d3eeeb; padding: 25px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                <h4 style="color: #333; margin-bottom: 10px; font-weight: 500;">Maximum affordable house price</h4>
-                <div id="aff-max-price" style="font-size: 2.5rem; font-weight: 700; color: #00877a;">$-</div>
+            <div class="aff-results-banner glass-card" style="padding: 25px; border-radius: 12px; margin-top: 20px; text-align: center;">
+                <h4 style="color: #fff; opacity: 0.9; margin-bottom: 10px; font-weight: 500;">Maximum affordable house price</h4>
+                <div id="aff-max-price" style="font-size: 2.5rem; font-weight: 700; color: #D3BD73;">$-</div>
                 
-                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 0.95rem; color: #666;">
-                    <div>Estimated monthly mortgage: <span id="aff-max-payment" style="font-weight: 600; color: #333;">$-</span></div>
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
+                    <div>Estimated monthly mortgage: <span id="aff-max-payment" style="font-weight: 600; color: #fff;">$-</span></div>
                 </div>
             </div>
         </div>

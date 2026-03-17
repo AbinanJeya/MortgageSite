@@ -5,10 +5,10 @@
 
 :root {
     /* Color Palette */
-    --color-primary: #10B981; /* Emerald Green */
-    --color-primary-dark: #059669;
-    --color-secondary: #020617; /* Slate Blue/Navy */
-    --color-accent: #FACC15; /* Gold */
+    --color-primary: #4A5D73; /* Slate Blue */
+    --color-primary-dark: #3A4D63;
+    --color-secondary: #0F1E2E; /* Deep Navy */
+    --color-accent: #D3BD73; /* Gold */
     
     /* Neutral Colors */
     --color-bg: #FFFFFF;
@@ -63,6 +63,59 @@ a {
 
 ul {
     list-style: none;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+/* Glassmorphism Classes */
+.glass-card {
+  background: #0F1E2E;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.glass-card-dark {
+  background: #0F1E2E;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-hover {
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.glass-nav-link {
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.glass-nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Components */
