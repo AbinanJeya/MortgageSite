@@ -1,5 +1,19 @@
 // calculators.js
 
+function getScenarioSelectorHTML(type) {
+    return `
+        <div class="scenario-selector-mobile lg:hidden">
+            ${[...Array(4)].map((_, i) => `
+                <button class="scenario-btn-mobile ${i === 0 ? 'active' : ''}" 
+                        onclick="window.switchScenario('${type}', ${i})" 
+                        id="${type}-btn-${i}">
+                    Plan ${i + 1}
+                </button>
+            `).join('')}
+        </div>
+    `;
+}
+
 function getAffordabilityCalculatorHTML() {
     let amortOptions = '';
     for(let i=1; i<=30; i++) {
@@ -151,136 +165,133 @@ function getLandTransferTaxCalculatorHTML() {
 }
 
 function getRefinanceCalculatorHTML() {
-    let amortOptions = '';
-    for(let i=1; i<=30; i++) {
-        amortOptions += `<option value="${i}" ${i === 25 ? 'selected' : ''}>${i}-year</option>`;
-    }
-
     return `
-        <div class="calc-scroll-wrapper">
-            <div class="calc-grid payment-grid">
-                <!-- Row 1: Start Here -->
-            <div class="calc-cell label-cell" style="display:flex;align-items:center;">
-                <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
-                <i class="ph ph-arrow-right"></i>
-            </div>
-            <div class="calc-cell calc-span-2">
-                <div class="calc-input-group outlined border-red">
-                    <label class="floating-label text-red">Mortgage amount</label>
-                    <input type="text" id="ref-amount" class="text-red">
-                </div>
-            </div>
-            <div class="calc-cell calc-span-2" style="display:flex; gap:10px;">
-                <div class="calc-input-group outlined" style="flex:1;">
-                    <label class="floating-label">Location</label>
-                    <input type="text" id="ref-location" value="Toronto, ON">
-                </div>
-                <div class="calc-input-group outlined" style="flex:1;">
-                    <label class="floating-label">Original down payment %</label>
-                    <select id="ref-orig-dp">
-                        <option value="less_20">Less than 20%</option>
-                        <option value="more_20">20% or more</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="calc-divider calc-span-5"></div>
-
-            <!-- Row 2: Amortization -->
-            <div class="calc-cell label-cell">
-                Amortization
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <select class="calc-input" id="ref-amort-${i}">
-                        ${amortOptions}
-                    </select>
-                </div>
-            `).join('')}
-
-            <!-- Row 3: Mortgage rate -->
-            <div class="calc-cell label-cell">
-                Mortgage rate
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <div class="calc-input-wrapper with-symbol">
-                        <input type="text" class="calc-input" id="ref-rate-${i}" placeholder="Rate">
-                        <span class="symbol">%</span>
+        <div id="calc-refinance">
+            ${getScenarioSelectorHTML('ref')}
+            <div class="calc-scroll-wrapper">
+                <div class="calc-grid payment-grid">
+                    <!-- Row 1: Start Here -->
+                    <div class="calc-cell label-cell" style="display:flex;align-items:center;">
+                        <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
+                        <i class="ph ph-arrow-right"></i>
                     </div>
-                </div>
-            `).join('')}
+                    <div class="calc-cell calc-span-4">
+                        <div class="calc-input-group outlined border-red">
+                            <label class="floating-label text-red">Mortgage amount</label>
+                            <input type="text" id="ref-amount" class="text-red" placeholder="Enter amount">
+                        </div>
+                    </div>
 
-            <!-- Row 4: Payment frequency -->
-            <div class="calc-cell label-cell">
-                Payment frequency
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <select class="calc-input" id="ref-freq-${i}">
-                        <option value="monthly">Monthly</option>
-                        <option value="semi-monthly">Semi-monthly</option>
-                        <option value="biweekly">Bi-weekly</option>
-                        <option value="weekly">Weekly</option>
-                    </select>
-                </div>
-            `).join('')}
+                    <div class="calc-divider calc-span-5"></div>
 
-            <!-- Row 5: Mortgage payment -->
-            <div class="calc-cell label-cell highlight-row bg-light-blue border-bottom-0">
-                <span class="text-blue">=</span> <span class="text-blue">Mortgage payment</span>
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0" id="ref-payment-${i}">$-</div>
-            `).join('')}
-        </div>
-    </div>
-    
-    <div class="calc-collapsible-list" style="margin-top: 2rem;">
-            <div class="calc-collapsible disabled">Monthly expenses</div>
-            <div class="calc-collapsible disabled">Interest rate risk</div>
-            <div class="calc-collapsible disabled">Amortization schedule</div>
-        </div>
+                    <!-- Row 2: Amortization -->
+                    <div class="calc-cell label-cell">
+                        Amortization
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
+                            <select class="calc-input" id="ref-amort-${i}">
+                                <option value="25">25-year</option>
+                                <option value="30">30-year</option>
+                            </select>
+                        </div>
+                    `).join('')}
 
-        <!-- Elite Features: Visuals & Export -->
-        <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
-                <h4 class="text-xl font-black mb-6 flex items-center gap-3">
-                    <i class="ph ph-chart-pie text-brand-gold"></i>
-                    Visual Analysis
-                </h4>
-                <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                    <canvas id="refinanceChart"></canvas>
+                    <!-- Row 3: Mortgage rate -->
+                    <div class="calc-cell label-cell">
+                        Mortgage rate
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
+                            <div class="calc-input-wrapper with-symbol">
+                                <input type="text" class="calc-input" id="ref-rate-${i}" placeholder="Rate">
+                                <span class="symbol">%</span>
+                            </div>
+                        </div>
+                    `).join('')}
+
+                    <!-- Row 4: Payment frequency -->
+                    <div class="calc-cell label-cell">
+                        Payment frequency
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
+                            <select class="calc-input" id="ref-freq-${i}">
+                                <option value="monthly">Monthly</option>
+                                <option value="biweekly">Bi-weekly</option>
+                            </select>
+                        </div>
+                    `).join('')}
+
+                    <!-- Row 5: Mortgage payment -->
+                    <div class="calc-cell label-cell highlight-row bg-light-blue border-bottom-0">
+                        <span class="text-blue">=</span> <span class="text-blue">Mortgage payment</span>
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}" id="ref-payment-${i}">$-</div>
+                    `).join('')}
                 </div>
-                <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]">Principal vs Total Interest (Scenario 1)</p>
             </div>
             
-            <div class="flex flex-col gap-6">
-                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
-                    <h4 class="text-xl font-black mb-6 flex items-center gap-3">
-                        <i class="ph ph-file-pdf text-brand-gold"></i>
-                        Professional Report
-                    </h4>
-                    <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your refinance scenarios to review with your advisor.</p>
-                    <button onclick="downloadPDF('refinance')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
-                        <i class="ph ph-download-simple"></i>
-                        Download PDF Report
+            <!-- Sticky Result Bar (Mobile Only) -->
+            <div class="sticky-result-bar lg:hidden" id="ref-sticky">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex flex-col">
+                        <span class="sticky-label" id="ref-sticky-label">Plan 1 Payment</span>
+                        <span class="sticky-value" id="ref-sticky-val">$-</span>
+                    </div>
+                    <button onclick="downloadPDF('refinance')" class="bg-brand-gold text-brand-navy p-3 rounded-xl shadow-lg">
+                        <i class="ph ph-file-pdf text-xl"></i>
                     </button>
                 </div>
+            </div>
+            
+            <div class="calc-collapsible-list" style="margin-top: 2rem;">
+                <div class="calc-collapsible disabled">Monthly expenses</div>
+                <div class="calc-collapsible disabled">Interest rate risk</div>
+                <div class="calc-collapsible disabled">Amortization schedule</div>
+            </div>
 
-                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+            <!-- Elite Features: Visuals & Export -->
+            <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
                     <h4 class="text-xl font-black mb-6 flex items-center gap-3">
-                        <i class="ph ph-envelope-simple text-brand-gold"></i>
-                        Email My Results
+                        <i class="ph ph-chart-pie text-brand-gold"></i>
+                        Visual Analysis
                     </h4>
-                    <div class="flex flex-col gap-4">
-                        <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
-                        <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
-                            Send Results
+                    <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
+                        <canvas id="refinanceChart"></canvas>
+                    </div>
+                    <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="ref-chart-label">Principal vs Total Interest (Plan 1)</p>
+                </div>
+                
+                <div class="flex flex-col gap-6">
+                    <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                        <h4 class="text-xl font-black mb-6 flex items-center gap-3">
+                            <i class="ph ph-file-pdf text-brand-gold"></i>
+                            Professional Report
+                        </h4>
+                        <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your refinance scenarios to review with your advisor.</p>
+                        <button onclick="downloadPDF('refinance')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
+                            <i class="ph ph-download-simple"></i>
+                            Download PDF Report
                         </button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                        <h4 class="text-xl font-black mb-6 flex items-center gap-3">
+                            <i class="ph ph-envelope-simple text-brand-gold"></i>
+                            Email My Results
+                        </h4>
+                        <div class="flex flex-col gap-4">
+                            <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
+                            <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
+                                Send Results
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -290,193 +301,185 @@ function getRefinanceCalculatorHTML() {
 
 function getPaymentCalculatorHTML() {
     return `
-        <div class="calc-scroll-wrapper">
-            <div class="calc-grid payment-grid">
-                <!-- Row 1: Start Here -->
-            <div class="calc-cell label-cell" style="display:flex;align-items:center;">
-                <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
-                <i class="ph ph-arrow-right"></i>
-            </div>
-            <div class="calc-cell calc-span-2">
-                <div class="calc-input-group outlined border-red">
-                    <label class="floating-label text-red">Price</label>
-                    <input type="text" id="pay-price" class="text-red">
-                </div>
-                <div class="error-badge bg-red text-white" style="display:none;">Please enter a valid number</div>
-            </div>
-            <div class="calc-cell calc-span-2">
-                <div class="calc-input-group outlined">
-                    <label class="floating-label">Location</label>
-                    <input type="text" id="pay-location" value="Toronto, ON">
-                </div>
-            </div>
-
-            <div class="calc-divider calc-span-5"></div>
-
-            <!-- Row 2: Down Payment -->
-            <div class="calc-cell label-cell">
-                <span class="text-blue">-</span> Down payment
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell flex-col">
-                    <div class="calc-input-wrapper with-symbol mb-2">
-                        <input type="text" class="calc-input" id="pay-dp-pct-${i}">
-                        <span class="symbol">%</span>
+        <div id="calc-payment">
+            ${getScenarioSelectorHTML('pay')}
+            <div class="calc-scroll-wrapper">
+                <div class="calc-grid payment-grid">
+                    <!-- Row 1: Start Here -->
+                    <div class="calc-cell label-cell" style="display:flex;align-items:center;">
+                        <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
+                        <i class="ph ph-arrow-right"></i>
                     </div>
-                    <div class="calc-input-wrapper with-symbol text-red">
-                        <span class="symbol">$</span>
-                        <input type="text" class="calc-input" id="pay-dp-amt-${i}" placeholder="Enter amount">
+                    <div class="calc-cell calc-span-4">
+                        <div class="calc-input-group outlined border-red">
+                            <label class="floating-label text-red">Price</label>
+                            <input type="text" id="pay-price" class="text-red" placeholder="Purchase price">
+                        </div>
                     </div>
-                </div>
-            `).join('')}
 
-            <!-- Row 3: CMHC -->
-            <div class="calc-cell label-cell">
-                <span class="text-blue">+</span> CMHC insurance
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell calc-readonly text-blue fw-bold" id="pay-cmhc-${i}">$-</div>
-            `).join('')}
+                    <div class="calc-divider calc-span-5"></div>
 
-            <!-- Row 4: Total Mortgage -->
-            <div class="calc-cell label-cell highlight-row bg-light-blue calc-span-1">
-                <span class="text-blue">=</span> <span class="text-blue">Total mortgage</span>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold" id="pay-total-${i}">$-</div>
-            `).join('')}
-
-            <!-- Row 5: Amortization -->
-            <div class="calc-cell label-cell">
-                Amortization
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <select class="calc-input" id="pay-amort-${i}">
-                        <option value="25">25-year</option>
-                        <option value="30">30-year</option>
-                    </select>
-                </div>
-            `).join('')}
-
-            <!-- Row 6: Mortgage Rate -->
-            <div class="calc-cell label-cell">
-                Mortgage rate
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <div class="calc-input-wrapper with-symbol">
-                        <input type="text" class="calc-input" id="pay-rate-${i}" placeholder="Rate">
-                        <span class="symbol">%</span>
+                    <!-- Row 2: Down Payment -->
+                    <div class="calc-cell label-cell">
+                        <span class="text-blue">-</span> Down payment
+                        <i class="ph ph-question info-icon"></i>
                     </div>
-                </div>
-            `).join('')}
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell flex-col ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
+                            <div class="calc-input-wrapper with-symbol mb-2">
+                                <input type="text" class="calc-input" id="pay-dp-pct-${i}">
+                                <span class="symbol">%</span>
+                            </div>
+                            <div class="calc-input-wrapper with-symbol">
+                                <span class="symbol">$</span>
+                                <input type="text" class="calc-input" id="pay-dp-amt-${i}" placeholder="Amount">
+                            </div>
+                        </div>
+                    `).join('')}
 
-            <!-- Row 7: Payment Frequency -->
-            <div class="calc-cell label-cell">
-                Payment frequency
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell">
-                    <select class="calc-input" id="pay-freq-${i}">
-                        <option value="monthly">Monthly</option>
-                        <option value="biweekly">Bi-weekly</option>
-                    </select>
-                </div>
-            `).join('')}
+                    <!-- Row 3: CMHC -->
+                    <div class="calc-cell label-cell">
+                        <span class="text-blue">+</span> CMHC insurance
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-cmhc-${i}">$-</div>
+                    `).join('')}
 
-            <!-- Row 8: Mortgage Payment -->
-            <div class="calc-cell label-cell highlight-row bg-light-blue border-bottom-0">
-                <span class="text-blue">=</span> <span class="text-blue">Mortgage payment</span>
-                <i class="ph ph-question info-icon"></i>
-            </div>
-            ${[...Array(4)].map((_, i) => `
-                <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0" id="pay-payment-${i}">$-</div>
-            `).join('')}
-        </div>
-    </div>
-        
-    <div class="calc-bottom-section">
-            <div class="calc-bottom-left">
-                <p class="fw-bold mb-2" style="font-size: 0.95rem;">Are you a first time home buyer?</p>
-                <div class="toggle-group">
-                    <button class="toggle-btn">Yes</button>
-                    <button class="toggle-btn active">No</button>
-                </div>
-            </div>
-            <div class="calc-bottom-right calc-tax-breakdown">
-                <div class="tax-row">
-                    <span class="tax-label">Provincial</span>
-                    <span class="tax-dots"></span>
-                    <span class="tax-val">$-</span>
-                </div>
-                <div class="tax-row">
-                    <span class="tax-label"><span class="text-blue">+</span> Municipal</span>
-                    <span class="tax-dots"></span>
-                    <span class="tax-val">$-</span>
-                </div>
-                <div class="tax-row">
-                    <span class="tax-label"><span class="text-blue">-</span> Rebate</span>
-                    <span class="tax-dots"></span>
-                    <span class="tax-val">$-</span>
-                </div>
-                <div class="tax-row fw-bold mt-2 pt-2 border-top">
-                    <span class="tax-label">Land transfer tax</span>
-                    <span class="tax-dots"></span>
-                    <span class="tax-val">$-</span>
-                </div>
-            </div>
-        </div>
+                    <!-- Row 4: Total Mortgage -->
+                    <div class="calc-cell label-cell highlight-row bg-light-blue calc-span-1">
+                        <span class="text-blue">=</span> <span class="text-blue">Total mortgage</span>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-total-${i}">$-</div>
+                    `).join('')}
 
-        <div class="calc-collapsible-list">
-            <div class="calc-collapsible">Cash needed to close</div>
-            <div class="calc-collapsible">Monthly expenses</div>
-            <div class="calc-collapsible">Interest rate risk</div>
-            <div class="calc-collapsible">Amortization schedule</div>
-        </div>
+                    <!-- Row 5: Amortization -->
+                    <div class="calc-cell label-cell">
+                        Amortization
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
+                            <select class="calc-input" id="pay-amort-${i}">
+                                <option value="25">25-year</option>
+                                <option value="30">30-year</option>
+                            </select>
+                        </div>
+                    `).join('')}
 
-        <!-- Elite Features: Visuals & Export -->
-        <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
-                <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
-                    <i class="ph ph-chart-pie text-brand-gold"></i>
-                    Visual Analysis
-                </h4>
-                <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                    <canvas id="paymentChart"></canvas>
+                    <!-- Row 6: Mortgage Rate -->
+                    <div class="calc-cell label-cell">
+                        Mortgage rate
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
+                            <div class="calc-input-wrapper with-symbol">
+                                <input type="text" class="calc-input" id="pay-rate-${i}" placeholder="Rate">
+                                <span class="symbol">%</span>
+                            </div>
+                        </div>
+                    `).join('')}
+
+                    <!-- Row 7: Payment Frequency -->
+                    <div class="calc-cell label-cell">
+                        Payment frequency
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
+                            <select class="calc-input" id="pay-freq-${i}">
+                                <option value="monthly">Monthly</option>
+                                <option value="biweekly">Bi-weekly</option>
+                            </select>
+                        </div>
+                    `).join('')}
+
+                    <!-- Row 8: Mortgage Payment -->
+                    <div class="calc-cell label-cell highlight-row bg-light-blue border-bottom-0">
+                        <span class="text-blue">=</span> <span class="text-blue">Mortgage payment</span>
+                        <i class="ph ph-question info-icon"></i>
+                    </div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-payment-${i}">$-</div>
+                    `).join('')}
                 </div>
-                <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]">Principal vs Total Interest (Scenario 1)</p>
             </div>
-                <p class="text-center text-xs text-brand-navy/40 mt-6 font-bold uppercase tracking-widest">Principal vs Total Interest (Scenario 1)</p>
-            </div>
-            
-            <div class="flex flex-col gap-6">
-                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
-                    <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
-                        <i class="ph ph-file-pdf text-brand-gold"></i>
-                        Professional Report
-                    </h4>
-                    <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your mortgage scenarios to review with your advisor.</p>
-                    <button onclick="downloadPDF('payment')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
-                        <i class="ph ph-download-simple"></i>
-                        Download PDF Report
+
+            <!-- Sticky Result Bar (Mobile Only) -->
+            <div class="sticky-result-bar lg:hidden" id="pay-sticky">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex flex-col">
+                        <span class="sticky-label" id="pay-sticky-label">Plan 1 Payment</span>
+                        <span class="sticky-value" id="pay-sticky-val">$-</span>
+                    </div>
+                    <button onclick="downloadPDF('payment')" class="bg-brand-gold text-brand-navy p-3 rounded-xl shadow-lg">
+                        <i class="ph ph-file-pdf text-xl"></i>
                     </button>
                 </div>
+            </div>
+                
+            <div class="calc-bottom-section mt-8">
+                <div class="calc-bottom-left">
+                    <p class="fw-bold mb-2" style="font-size: 0.95rem;">Are you a first time home buyer?</p>
+                    <div class="toggle-group">
+                        <button class="toggle-btn" id="pay-ftb-yes">Yes</button>
+                        <button class="toggle-btn active" id="pay-ftb-no">No</button>
+                    </div>
+                </div>
+                <div class="calc-bottom-right calc-tax-breakdown">
+                    <div class="tax-row">
+                        <span class="tax-label">Land transfer tax</span>
+                        <span class="tax-dots"></span>
+                        <span class="tax-val" id="pay-ltt">$-</span>
+                    </div>
+                </div>
+            </div>
 
-                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+            <div class="calc-collapsible-list mt-8">
+                <div class="calc-collapsible">Cash needed to close</div>
+                <div class="calc-collapsible">Monthly expenses</div>
+                <div class="calc-collapsible">Interest rate risk</div>
+                <div class="calc-collapsible">Amortization schedule</div>
+            </div>
+
+            <!-- Elite Features: Visuals & Export -->
+            <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
                     <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
-                        <i class="ph ph-envelope-simple text-brand-gold"></i>
-                        Email My Results
+                        <i class="ph ph-chart-pie text-brand-gold"></i>
+                        Visual Analysis
                     </h4>
-                    <div class="flex flex-col gap-4">
-                        <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
-                        <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
-                            Send Results
+                    <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
+                        <canvas id="paymentChart"></canvas>
+                    </div>
+                    <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="pay-chart-label">Principal vs Total Interest (Plan 1)</p>
+                </div>
+                
+                <div class="flex flex-col gap-6">
+                    <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                        <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
+                            <i class="ph ph-file-pdf text-brand-gold"></i>
+                            Professional Report
+                        </h4>
+                        <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your mortgage scenarios to review with your advisor.</p>
+                        <button onclick="downloadPDF('payment')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
+                            <i class="ph ph-download-simple"></i>
+                            Download PDF Report
                         </button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                        <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
+                            <i class="ph ph-envelope-simple text-brand-gold"></i>
+                            Email My Results
+                        </h4>
+                        <div class="flex flex-col gap-4">
+                            <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
+                            <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
+                                Send Results
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -692,6 +695,12 @@ function updatePaymentCalculator() {
             if (i === 0) {
                 updateCharts('payment', totalMortgage, rate, amort);
             }
+
+            // Sync Sticky Bar if it's the active scenario on mobile
+            const activeBtn = document.querySelector('#pay-btn-' + i + '.active');
+            if (activeBtn) {
+                window.updateStickyBar('pay', i);
+            }
         } else {
             document.getElementById(`pay-cmhc-${i}`).innerText = '$-';
             document.getElementById(`pay-total-${i}`).innerText = '$-';
@@ -725,6 +734,12 @@ function updateRefinanceCalculator() {
             // Update chart for Scenario 1
             if (i === 0) {
                 updateCharts('refinance', principal, rate, amort);
+            }
+
+            // Sync Sticky Bar if it's the active scenario on mobile
+            const activeBtn = document.querySelector('#ref-btn-' + i + '.active');
+            if (activeBtn) {
+                window.updateStickyBar('ref', i);
             }
         } else {
             paymentOutput.innerText = '$-';
@@ -1170,3 +1185,71 @@ window.downloadPDF = function(type) {
         if (btn) btn.innerHTML = originalContent;
     });
 };
+
+/**
+ * Mobile UX: Switch between mortgage scenarios (Plan 1-4)
+ */
+window.switchScenario = function(type, index) {
+    // 1. Update Buttons
+    const buttons = document.querySelectorAll(`[id^="${type}-btn-"]`);
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    const activeBtn = document.getElementById(`${type}-btn-${index}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // 2. Update Grid Visibility
+    const cells = document.querySelectorAll(`[data-type="${type}"][data-scenario]`);
+    cells.forEach(cell => {
+        if (parseInt(cell.getAttribute('data-scenario')) === index) {
+            cell.classList.remove('mobile-hide');
+        } else {
+            cell.classList.add('mobile-hide');
+        }
+    });
+
+    // 3. Update Chart Label/Data if applicable
+    const chartLabel = document.getElementById(`${type}-chart-label`);
+    if (chartLabel) {
+        chartLabel.innerText = `Principal vs Total Interest (Plan ${index + 1})`;
+    }
+
+    // 4. Update Sticky Bar
+    window.updateStickyBar(type, index);
+
+    // 5. Trigger re-calculation for this scenario to update chart
+    // This depends on your specific calculation triggered logic
+    const priceInput = document.getElementById(`${type === 'pay' ? 'pay-price' : 'ref-amount'}`);
+    if (priceInput) priceInput.dispatchEvent(new Event('input'));
+};
+
+/**
+ * Mobile UX: Update the persistent sticky payment bar
+ */
+window.updateStickyBar = function(type, scenarioIndex) {
+    const stickyBar = document.getElementById(`${type}-sticky`);
+    if (!stickyBar) return;
+
+    // Show sticky bar only if we have results
+    const paymentVal = document.getElementById(`${type}-${type === 'pay' ? 'payment' : 'payment'}-${scenarioIndex}`);
+    const stickyLabel = document.getElementById(`${type}-sticky-label`);
+    const stickyVal = document.getElementById(`${type}-sticky-val`);
+
+    if (paymentVal && paymentVal.innerText !== '$-') {
+        stickyBar.classList.add('active');
+        if (stickyLabel) stickyLabel.innerText = `Plan ${scenarioIndex + 1} Monthly Payment`;
+        if (stickyVal) stickyVal.innerText = paymentVal.innerText;
+    } else {
+        stickyBar.classList.remove('active');
+    }
+};
+
+// Initial state for mobile scenarios
+document.addEventListener('DOMContentLoaded', () => {
+    // Small delay to ensure renderCalculators ran
+    setTimeout(() => {
+        if (window.innerWidth < 1024) {
+            window.updateStickyBar('pay', 0);
+            window.updateStickyBar('ref', 0);
+        }
+    }, 500);
+});
