@@ -40,8 +40,8 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc">Your gross income before-tax, including bonuses and supplementary income.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" id="aff-inc-1" class="calc-input mb-3" placeholder="e.g. 100,000">
-                    <input type="text" id="aff-inc-2" class="calc-input" placeholder="Co-applicant's income (Optional)">
+                    <input type="text" inputmode="numeric" id="aff-inc-1" class="calc-input mb-3" placeholder="e.g. 100,000">
+                    <input type="text" inputmode="numeric" id="aff-inc-2" class="calc-input" placeholder="Co-applicant's income (Optional)">
                 </div>
             </div>
 
@@ -54,7 +54,7 @@ function getAffordabilityCalculatorHTML() {
                 <div class="aff-input-col">
                     <div class="calc-input-wrapper with-symbol">
                         <span class="symbol" style="color:#666;">$</span>
-                        <input type="text" id="aff-dp" class="calc-input outlined-soft" placeholder="Enter amount">
+                        <input type="text" inputmode="numeric" id="aff-dp" class="calc-input outlined-soft" placeholder="Enter amount">
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ function getAffordabilityCalculatorHTML() {
                     <span class="aff-row-title">Location of your future home</span>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" id="aff-loc" class="calc-input outlined-soft" value="Toronto, ON">
+                    <input type="text" inputmode="numeric" id="aff-loc" class="calc-input outlined-soft" value="Toronto, ON">
                 </div>
             </div>
 
@@ -90,9 +90,9 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc"><i>(Optional)</i><br>If you don't know these costs, leave the fields blank and we will estimate for you.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" id="aff-tax" class="calc-input outlined-soft mb-2" placeholder="Annual property tax">
-                    <input type="text" id="aff-condo" class="calc-input outlined-soft mb-2" placeholder="Monthly condo fees">
-                    <input type="text" id="aff-heat" class="calc-input outlined-soft" placeholder="Monthly heating costs">
+                    <input type="text" inputmode="numeric" id="aff-tax" class="calc-input outlined-soft mb-2" placeholder="Annual property tax">
+                    <input type="text" inputmode="numeric" id="aff-condo" class="calc-input outlined-soft mb-2" placeholder="Monthly condo fees">
+                    <input type="text" inputmode="numeric" id="aff-heat" class="calc-input outlined-soft" placeholder="Monthly heating costs">
                 </div>
             </div>
 
@@ -104,9 +104,9 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc"><i>(Optional)</i><br>Enter debt payments if applicable. If you have none, you can leave blank.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" id="aff-cc" class="calc-input outlined-soft mb-2" placeholder="Credit card debt payment">
-                    <input type="text" id="aff-car" class="calc-input outlined-soft mb-2" placeholder="Car payment">
-                    <input type="text" id="aff-loan" class="calc-input outlined-soft" placeholder="Other loan expenses">
+                    <input type="text" inputmode="numeric" id="aff-cc" class="calc-input outlined-soft mb-2" placeholder="Credit card debt payment">
+                    <input type="text" inputmode="numeric" id="aff-car" class="calc-input outlined-soft mb-2" placeholder="Car payment">
+                    <input type="text" inputmode="numeric" id="aff-loan" class="calc-input outlined-soft" placeholder="Other loan expenses">
                 </div>
             </div>
 
@@ -116,12 +116,12 @@ function getAffordabilityCalculatorHTML() {
                     <i class="ph ph-crown-simple text-brand-gold text-2xl"></i>
                     <h4 style="color: var(--color-navy); margin: 0; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;">Maximum Affordable Home Price</h4>
                 </div>
-                <div id="aff-max-price" class="text-gold-elite" style="font-size: 3.5rem; line-height: 1;">$-</div>
+                <div id="aff-max-price" class="text-gold-elite" style="font-size: 3.5rem; line-height: 1;"><span class="skeleton-shimmer">$-</span></div>
                 
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 1rem; color: var(--color-navy); font-weight: 600;">
                     <div class="flex items-center gap-2">
                         <i class="ph ph-chart-line-up text-brand-gold"></i>
-                        Monthly Payment: <span id="aff-max-payment" class="text-gold-elite">$-</span>
+                        Monthly Payment: <span id="aff-max-payment" class="text-gold-elite"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                 </div>
             </div>
@@ -133,15 +133,19 @@ function getLandTransferTaxCalculatorHTML() {
     return `
             <div class="ltt-calculator">
                 <div class="ltt-top-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
-                    <div class="calc-input-group outlined" style="flex: 1;">
-                        <label class="floating-label flex items-center gap-2">
-                             <i class="ph ph-tag-silver text-[10px]"></i> Price
-                        </label>
-                        <input type="text" id="ltt-price" placeholder="e.g. 800,000" class="fw-bold text-navy">
+                    <div class="calc-cell calc-span-4">
+                        <div class="calc-input-group outlined">
+                            <label class="floating-label flex items-center gap-2">
+                                 <i class="ph ph-tag-silver text-[10px]"></i> Price
+                                 <i class="ph ph-question tooltip-trigger" data-tip="The purchase price of the property."></i>
+                            </label>
+                            <input type="text" inputmode="numeric" id="ltt-price" placeholder="e.g. 800,000" class="fw-bold text-navy">
+                        </div>
                     </div>
-                    <div class="calc-input-group outlined" style="flex: 1;">
+                    <div class="calc-input-group outlined">
                         <label class="floating-label flex items-center gap-2">
                             <i class="ph ph-map-pin text-[10px]"></i> Location
+                            <i class="ph ph-question tooltip-trigger" data-tip="Toronto has its own municipal land transfer tax in addition to the provincial tax."></i>
                         </label>
                         <input type="text" id="ltt-location" value="Toronto, ON" class="text-navy">
                     </div>
@@ -155,19 +159,19 @@ function getLandTransferTaxCalculatorHTML() {
                 <div class="calc-tax-breakdown ltt-results-box" style="border: 2px solid var(--color-primary); background: #fff; border-radius: 2rem; padding: 30px;">
                     <div class="tax-row">
                         <span class="tax-label flex items-center gap-2"><i class="ph ph-bank text-brand-navy/30"></i> Provincial</span>
-                        <span class="tax-val font-bold" id="ltt-prov">$-</span>
+                        <span class="tax-val font-bold" id="ltt-prov"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                     <div class="tax-row mt-4">
                         <span class="tax-label flex items-center gap-2"><i class="ph ph-city text-brand-navy/30"></i> Municipal</span>
-                        <span class="tax-val font-bold" id="ltt-muni">$-</span>
+                        <span class="tax-val font-bold" id="ltt-muni"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                     <div class="tax-row mt-4 text-emerald-600">
                         <span class="tax-label flex items-center gap-2"><i class="ph ph-gift text-emerald-500/50"></i> Total Rebate</span>
-                        <span class="tax-val font-bold" id="ltt-rebate">$-</span>
+                        <span class="tax-val font-bold" id="ltt-rebate"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                     <div class="tax-row mt-8 pt-6 border-t flex justify-between items-center">
                         <span class="tax-label text-xl font-black text-brand-navy uppercase tracking-tighter" style="font-family: 'Outfit', sans-serif;">Total Land Transfer Tax</span>
-                        <span class="text-3xl text-gold-elite" id="ltt-total">$-</span>
+                        <span class="text-3xl text-gold-elite" id="ltt-total"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                 </div>
             </div>
@@ -191,7 +195,7 @@ function getRefinanceCalculatorHTML() {
                     <div class="calc-cell calc-span-4">
                         <div class="calc-input-group outlined border-red">
                             <label class="floating-label">Refinance Amount</label>
-                            <input type="text" id="ref-amount" class="text-navy" placeholder="e.g. 500,000">
+                            <input type="text" inputmode="numeric" id="ref-amount" class="text-navy" placeholder="e.g. 500,000">
                         </div>
                     </div>
 
@@ -208,10 +212,11 @@ function getRefinanceCalculatorHTML() {
                     <!-- Row 2: Amortization -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-calendar text-brand-navy/30 text-xl mr-3"></i>
-                        <div>
-                            <span>Amortization</span>
-                            <span class="label-sub">Total years to pay off loan</span>
-                        </div>
+                        <div class="calc-cell label-cell">
+                        <span>Amortization</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The total length of time it takes to pay off the mortgage in full. Typically 25 or 30 years."></i>
+                        <span class="label-sub">Total years to pay off loan</span>
+                    </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
@@ -225,15 +230,16 @@ function getRefinanceCalculatorHTML() {
                     <!-- Row 3: Mortgage rate -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-percent text-brand-navy/30 text-xl mr-3"></i>
-                        <div>
-                            <span>Mortgage Rate</span>
-                            <span class="label-sub">Expected interest rate</span>
-                        </div>
+                        <div class="calc-cell label-cell">
+                        <span>Mortgage rate</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The annual interest rate charged by the lender. Fixed or variable options available."></i>
+                        <span class="label-sub">Current annual interest rate</span>
+                    </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
                             <div class="calc-input-wrapper with-symbol">
-                                <input type="text" class="calc-input" id="ref-rate-${i}" placeholder="e.g. 4.5">
+                                <input type="text" inputmode="numeric" class="calc-input" id="ref-rate-${i}" placeholder="e.g. 4.5">
                                 <span class="symbol">%</span>
                             </div>
                         </div>
@@ -265,7 +271,7 @@ function getRefinanceCalculatorHTML() {
                         </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
-                        <div class="calc-cell highlight-row calc-readonly text-gold-elite border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}" id="ref-payment-${i}">$-</div>
+                        <div class="calc-cell highlight-row calc-readonly text-gold-elite border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}" id="ref-payment-${i}"><span class="skeleton-shimmer">$-</span></div>
                     `).join('')}
                 </div>
             </div>
@@ -275,7 +281,7 @@ function getRefinanceCalculatorHTML() {
                 <div class="flex items-center justify-between w-full">
                     <div class="flex flex-col">
                         <span class="sticky-label" id="ref-sticky-label">Plan 1 Payment</span>
-                        <span class="sticky-value" id="ref-sticky-val">$-</span>
+                        <span class="sticky-value" id="ref-sticky-val"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                     <button onclick="downloadPDF('refinance')" class="bg-brand-gold text-brand-navy p-3 rounded-xl shadow-lg">
                         <i class="ph ph-file-pdf text-xl"></i>
@@ -297,7 +303,18 @@ function getRefinanceCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                        <canvas id="refinanceChart"></canvas>
+                    <div class="calc-cell calc-span-5 flex justify-center py-10">
+                        <div class="w-64 h-64 relative" id="ref-chart-container">
+                            <!-- SVG Donut Chart -->
+                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
+                                <circle id="ref-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
+                                <span class="text-3xl font-black text-brand-navy" id="ref-chart-pct">0%</span>
+                            </div>
+                        </div>
                     </div>
                     <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="ref-chart-label">Principal vs Total Interest (Plan 1)</p>
                 </div>
@@ -348,9 +365,9 @@ function getPaymentCalculatorHTML() {
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
-                        <div class="calc-input-group outlined border-red">
-                            <label class="floating-label">Enter Price</label>
-                            <input type="text" id="pay-price" class="text-navy" placeholder="e.g. 500,000">
+                        <div class="calc-input-group outlined">
+                            <label class="floating-label">Purchase Price</label>
+                            <input type="text" inputmode="numeric" id="pay-price" placeholder="e.g. 500,000" class="text-navy">
                         </div>
                     </div>
 
@@ -375,12 +392,12 @@ function getPaymentCalculatorHTML() {
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell flex-col ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
                             <div class="calc-input-wrapper with-symbol mb-2">
-                                <input type="text" class="calc-input" id="pay-dp-pct-${i}" placeholder="20">
+                                <input type="text" inputmode="numeric" class="calc-input" id="pay-dp-pct-${i}" placeholder="20">
                                 <span class="symbol">%</span>
                             </div>
                             <div class="calc-input-wrapper with-symbol">
                                 <span class="symbol">$</span>
-                                <input type="text" class="calc-input" id="pay-dp-amt-${i}" placeholder="Amount">
+                                <input type="text" inputmode="numeric" class="calc-input" id="pay-dp-amt-${i}" placeholder="Amount">
                             </div>
                         </div>
                     `).join('')}
@@ -388,10 +405,10 @@ function getPaymentCalculatorHTML() {
                     <!-- Row 3: CMHC -->
                     <div class="calc-cell label-cell">
                         <span class="text-blue">+</span> CMHC insurance
-                        <i class="ph ph-question info-icon"></i>
+                        <i class="ph ph-question tooltip-trigger" data-tip="Mandatory for down payments under 20% in Canada. Protects the lender in case of default."></i>
                     </div>
                     ${[...Array(4)].map((_, i) => `
-                        <div class="calc-cell calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-cmhc-${i}">$-</div>
+                        <div class="calc-cell calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-cmhc-${i}"><span class="skeleton-shimmer">$-</span></div>
                     `).join('')}
 
                     <!-- Row 4: Total Mortgage -->
@@ -399,7 +416,7 @@ function getPaymentCalculatorHTML() {
                         <span class="text-blue">=</span> <span class="text-blue">Total mortgage</span>
                     </div>
                     ${[...Array(4)].map((_, i) => `
-                        <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-total-${i}">$-</div>
+                        <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-total-${i}"><span class="skeleton-shimmer">$-</span></div>
                     `).join('')}
 
                     <!-- Row 5: Amortization -->
@@ -424,7 +441,7 @@ function getPaymentCalculatorHTML() {
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
                             <div class="calc-input-wrapper with-symbol">
-                                <input type="text" class="calc-input" id="pay-rate-${i}" placeholder="Rate">
+                                <input type="text" inputmode="numeric" class="calc-input" id="pay-rate-${i}" placeholder="Rate">
                                 <span class="symbol">%</span>
                             </div>
                         </div>
@@ -452,7 +469,7 @@ function getPaymentCalculatorHTML() {
                         </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
-                        <div class="calc-cell highlight-row calc-readonly text-gold-elite border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-payment-${i}">$-</div>
+                        <div class="calc-cell highlight-row calc-readonly text-gold-elite border-bottom-0 ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}" id="pay-payment-${i}"><span class="skeleton-shimmer">$-</span></div>
                     `).join('')}
                 </div>
             </div>
@@ -462,7 +479,7 @@ function getPaymentCalculatorHTML() {
                 <div class="flex items-center justify-between w-full">
                     <div class="flex flex-col">
                         <span class="sticky-label" id="pay-sticky-label">Plan 1 Payment</span>
-                        <span class="sticky-value" id="pay-sticky-val">$-</span>
+                        <span class="sticky-value" id="pay-sticky-val"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                     <button onclick="downloadPDF('payment')" class="bg-brand-gold text-brand-navy p-3 rounded-xl shadow-lg">
                         <i class="ph ph-file-pdf text-xl"></i>
@@ -482,7 +499,7 @@ function getPaymentCalculatorHTML() {
                     <div class="tax-row">
                         <span class="tax-label">Land transfer tax</span>
                         <span class="tax-dots"></span>
-                        <span class="tax-val" id="pay-ltt">$-</span>
+                        <span class="tax-val" id="pay-ltt"><span class="skeleton-shimmer">$-</span></span>
                     </div>
                 </div>
             </div>
@@ -502,7 +519,18 @@ function getPaymentCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                        <canvas id="paymentChart"></canvas>
+                    <div class="calc-cell calc-span-5 flex justify-center py-10">
+                        <div class="w-64 h-64 relative" id="pay-chart-container">
+                            <!-- SVG Donut Chart -->
+                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
+                                <circle id="pay-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
+                                <span class="text-3xl font-black text-brand-navy" id="pay-chart-pct">0%</span>
+                            </div>
+                        </div>
                     </div>
                     <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="pay-chart-label">Principal vs Total Interest (Plan 1)</p>
                 </div>
@@ -640,13 +668,57 @@ window.toggleMobileMenu = function() {
 // --- Calculator Logic & Math --- \\
 
 function formatCurrency(num) {
-    if (isNaN(num) || num === null) return '$-';
+    if (isNaN(num) || num === null) return '<span class="skeleton-shimmer">$-</span>';
     return '$' + Math.round(num).toLocaleString('en-CA');
+}
+
+function formatNumber(num) {
+    if (isNaN(num) || num === null) return '-';
+    return Math.round(num).toLocaleString('en-CA');
+}
+
+function parseNumber(str) {
+    if (!str) return 0;
+    return parseFloat(str.toString().replace(/[^\d.]/g, '')) || 0;
 }
 
 function parseCurrency(str) {
     if (!str) return 0;
     return parseFloat(str.toString().replace(/[\$,,\s]/g, '')) || 0;
+}
+
+// Live Input Masking
+function initInputMasking() {
+    const inputs = document.querySelectorAll('.calc-input:not([type="email"])');
+    inputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            // Skip pct inputs for now or handle them differently
+            if (this.id.includes('pct') || this.id.includes('rate') || this.id.includes('tax')) {
+                return;
+            }
+            
+            let cursor = this.selectionStart;
+            let oldLen = this.value.length;
+            
+            let val = this.value.replace(/[^\d]/g, '');
+            if (val) {
+                let formatted = parseInt(val).toLocaleString('en-CA');
+                this.value = '$ ' + formatted;
+            } else {
+                this.value = '';
+            }
+            
+            // Adjust cursor position
+            let newLen = this.value.length;
+            this.setSelectionRange(cursor + (newLen - oldLen), cursor + (newLen - oldLen));
+            
+            // Trigger calculation
+            if (this.id.startsWith('pay-')) updatePaymentCalculator();
+            if (this.id.startsWith('ref-')) updateRefinanceCalculator();
+            if (this.id.startsWith('aff-')) updateAffordabilityCalculator();
+            if (this.id.startsWith('ltt-')) updateLandTransferTaxCalculator();
+        });
+    });
 }
 
 function computeCMHC(price, dpAmt) {
@@ -729,9 +801,9 @@ function updatePaymentCalculator() {
             const cmhc = computeCMHC(price, dpAmt);
             if (cmhc === null) {
                 // Invalid DP (e.g., < 5%)
-                cmhcOutput.innerText = '$-';
-                totalOutput.innerText = '$-';
-                paymentOutput.innerText = '$-';
+                cmhcOutput.innerHTML = '<span class="skeleton-shimmer">$-</span>';
+                totalOutput.innerHTML = '<span class="skeleton-shimmer">$-</span>';
+                paymentOutput.innerHTML = '<span class="skeleton-shimmer">$-</span>';
                 continue;
             }
 
@@ -742,9 +814,16 @@ function updatePaymentCalculator() {
             animateValue(`pay-total-${i}`, totalMortgage);
             animateValue(`pay-payment-${i}`, payment);
 
-            // Update chart for Scenario 1
+            // Update visual analysis: Principal vs Total Interest
+            const nMonths = amort * 12;
+            const r = rate / 100;
+            const iMonths = Math.pow(1 + r/2, 2/12) - 1;
+            const monthlyPayment = totalMortgage * (iMonths * Math.pow(1 + iMonths, nMonths)) / (Math.pow(1 + iMonths, nMonths) - 1);
+            const totalPaid = monthlyPayment * nMonths;
+            const totalInterest = Math.max(0, totalPaid - totalMortgage);
+
             if (i === 0) {
-                updateCharts('payment', totalMortgage, rate, amort);
+                window.updateDonutChart('pay', totalMortgage, totalInterest, i);
             }
 
             // Sync Sticky Bar if it's the active scenario on mobile
@@ -753,9 +832,9 @@ function updatePaymentCalculator() {
                 window.updateStickyBar('pay', i);
             }
         } else {
-            document.getElementById(`pay-cmhc-${i}`).innerText = '$-';
-            document.getElementById(`pay-total-${i}`).innerText = '$-';
-            document.getElementById(`pay-payment-${i}`).innerText = '$-';
+            document.getElementById(`pay-cmhc-${i}`).innerHTML = '<span class="skeleton-shimmer">$-</span>';
+            document.getElementById(`pay-total-${i}`).innerHTML = '<span class="skeleton-shimmer">$-</span>';
+            document.getElementById(`pay-payment-${i}`).innerHTML = '<span class="skeleton-shimmer">$-</span>';
         }
     }
 }
@@ -777,14 +856,21 @@ function updateRefinanceCalculator() {
         const amort = parseInt(amortInput.value) || 25;
         const rate = parseFloat(rateInput.value) || 0;
         const freq = freqInput.value;
-
         if (principal > 0) {
             const payment = computePayment(principal, rate, amort, freq);
             animateValue(`ref-payment-${i}`, payment);
             
+            // Calculate total interest for the donut chart
+            const r = rate / 100;
+            const iMonths = Math.pow(1 + r/2, 2/12) - 1;
+            const nMonths = amort * 12;
+            const monthlyPayment = principal * (iMonths * Math.pow(1 + iMonths, nMonths)) / (Math.pow(1 + iMonths, nMonths) - 1);
+            const totalPaid = monthlyPayment * nMonths;
+            const totalInterest = Math.max(0, totalPaid - principal);
+
             // Update chart for Scenario 1
             if (i === 0) {
-                updateCharts('refinance', principal, rate, amort);
+                window.updateDonutChart('ref', principal, totalInterest, i);
             }
 
             // Sync Sticky Bar if it's the active scenario on mobile
@@ -793,7 +879,7 @@ function updateRefinanceCalculator() {
                 window.updateStickyBar('ref', i);
             }
         } else {
-            paymentOutput.innerText = '$-';
+            paymentOutput.innerHTML = '<span class="skeleton-shimmer">$-</span>';
         }
     }
 }
@@ -888,7 +974,7 @@ function updateAffordabilityCalculator() {
     const inc2 = parseCurrency(document.getElementById('aff-inc-2')?.value);
     const dp = parseCurrency(document.getElementById('aff-dp')?.value);
     
-    const amort = parseInt(document.getElementById('aff-amort')?.value) || 25;
+    const amort = parseNumber(document.getElementById('aff-amort')?.value) || 25;
     
     const tax = parseCurrency(document.getElementById('aff-tax')?.value);
     const condo = parseCurrency(document.getElementById('aff-condo')?.value);
@@ -929,8 +1015,8 @@ function updateAffordabilityCalculator() {
             animateValue('aff-max-price', maxPrice);
             animateValue('aff-max-payment', maxPayment);
         } else {
-            priceEl.innerText = '$-';
-            paymentEl.innerText = '$-';
+            priceEl.innerHTML = '<span class="skeleton-shimmer">$-</span>';
+            paymentEl.innerHTML = '<span class="skeleton-shimmer">$-</span>';
         }
     }
 }
@@ -1169,72 +1255,206 @@ function updateCharts(type, principal, annualRate, amortYears) {
  * Generate a branded PDF report of the calculation results
  */
 window.downloadPDF = function(type) {
-    const element = document.getElementById(`calc-${type}`);
-    if (!element) return;
+    // Add a printing class to body
+    document.body.classList.add('is-printing');
+    window.print();
+    document.body.classList.remove('is-printing');
+}
 
-    // Use a loading state for the button
-    const btn = event?.currentTarget;
-    const originalContent = btn ? btn.innerHTML : '';
-    if (btn) btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Generating...';
+// --- Advanced Features Implementation ---
 
-    const opt = {
-        margin:       [0.5, 0.5],
-        filename:     `AskJuthis_Mortgage_Report_${type.toUpperCase()}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { 
-            scale: 2, 
-            useCORS: true,
-            letterRendering: true
-        },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+window.updateDonutChart = function(type, principal, interest, scenarioIndex = 0) {
+    const total = principal + interest;
+    if (!total) return;
+    const interestPct = (interest / total) * 100;
+    const interestEl = document.getElementById(`${type}-chart-interest`);
+    const pctEl = document.getElementById(`${type}-chart-pct`);
+    const labelEl = document.getElementById(`${type}-chart-label`);
+    
+    if (interestEl && pctEl) {
+        interestEl.setAttribute('stroke-dasharray', `${interestPct.toFixed(1)} 100`);
+        pctEl.innerText = `${Math.round(interestPct)}%`;
+        if (labelEl) labelEl.innerText = `Principal vs Total Interest (Plan ${scenarioIndex + 1})`;
+    }
+}
+
+function initStickySummary() {
+    const stickyPay = document.getElementById('pay-sticky-bar');
+    const stickyRef = document.getElementById('ref-sticky-bar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth > 1024) return; // Desktop handled differently
+        
+        const payCalc = document.getElementById('calc-payment');
+        const refCalc = document.getElementById('calc-refinance');
+        
+        if (payCalc && payCalc.style.display !== 'none') {
+            const rect = payCalc.getBoundingClientRect();
+            if (rect.top < 0 && rect.bottom > 500) {
+                document.getElementById('sticky-mobile-summary').classList.add('visible');
+            } else {
+                document.getElementById('sticky-mobile-summary').classList.remove('visible');
+            }
+        }
+    });
+}
+
+function initAdvancedFeatures() {
+    initInputMasking();
+    initStickySummary();
+    
+    // Add sticky summary container to body if it doesn't exist
+    if (!document.getElementById('sticky-mobile-summary')) {
+        const div = document.createElement('div');
+        div.id = 'sticky-mobile-summary';
+        div.innerHTML = `
+            <div id="pay-mobile-summary" style="display:none;">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Monthly Payment</div>
+                        <div class="text-xl font-black text-brand-navy" id="mobile-pay-val">$0</div>
+                    </div>
+                    <button onclick="downloadPDF('payment')" class="bg-brand-gold text-brand-navy px-4 py-2 rounded-lg font-bold text-xs uppercase">Report</button>
+                </div>
+            </div>
+            <div id="ref-mobile-summary" style="display:none;">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Monthly Payment</div>
+                        <div class="text-xl font-black text-brand-navy" id="mobile-ref-val">$0</div>
+                    </div>
+                    <button onclick="downloadPDF('refinance')" class="bg-brand-gold text-brand-navy px-4 py-2 rounded-lg font-bold text-xs uppercase">Report</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(div);
+    }
+}
+
+window.initCalculatorLogic = function() {
+    // Placeholder for initTabs and initInteractiveGrid if they exist elsewhere
+    // initTabs();
+    // initInteractiveGrid();
+    initAdvancedFeatures();
+    
+    // --- Payment Calculator Defaults ---
+    const payPrice = document.getElementById('pay-price');
+    if(payPrice) payPrice.value = '500,000';
+    
+    const payDp0 = document.getElementById('pay-dp-pct-0');
+    if(payDp0) payDp0.value = '20';
+    
+    const payRate0 = document.getElementById('pay-rate-0');
+    if(payRate0) payRate0.value = '4.50';
+
+    // --- Refinance Calculator Defaults ---
+    const refAmount = document.getElementById('ref-amount');
+    if(refAmount) refAmount.value = '350,000';
+    
+    const refRate0 = document.getElementById('ref-rate-0');
+    if(refRate0) refRate0.value = '4.50';
+
+    // --- LTT Calculator Defaults ---
+    const lttPrice = document.getElementById('ltt-price');
+    if(lttPrice) lttPrice.value = '800,000';
+
+    // --- Affordability Calculator Defaults ---
+    const affInc1 = document.getElementById('aff-inc-1');
+    if(affInc1) affInc1.value = '100,000';
+    const affDp = document.getElementById('aff-dp');
+    if(affDp) affDp.value = '50,000';
+
+    // Add event listeners to all payment calculator inputs
+    const payInputs = [
+        'pay-price',
+        ...[...Array(4)].map((_, i) => `pay-dp-pct-${i}`),
+        ...[...Array(4)].map((_, i) => `pay-dp-amt-${i}`),
+        ...[...Array(4)].map((_, i) => `pay-amort-${i}`),
+        ...[...Array(4)].map((_, i) => `pay-rate-${i}`),
+        ...[...Array(4)].map((_, i) => `pay-freq-${i}`)
+    ];
+
+    payInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updatePaymentCalculator);
+            el.addEventListener('change', updatePaymentCalculator);
+        }
+    });
+
+    // Add event listeners to all refinance calculator inputs
+    const refInputs = [
+        'ref-amount',
+        ...[...Array(4)].map((_, i) => `ref-amort-${i}`),
+        ...[...Array(4)].map((_, i) => `ref-rate-${i}`),
+        ...[...Array(4)].map((_, i) => `ref-freq-${i}`)
+    ];
+
+    refInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updateRefinanceCalculator);
+            el.addEventListener('change', updateRefinanceCalculator);
+        }
+    });
+
+    // Add event listeners to LTT inputs
+    const lttInputs = ['ltt-price', 'ltt-location', 'ltt-ftb'];
+    lttInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updateLandTransferTaxCalculator);
+            el.addEventListener('change', updateLandTransferTaxCalculator);
+        }
+    });
+
+    // Add event listeners to Affordability inputs
+    const affInputs = [
+        'aff-inc-1', 'aff-inc-2', 'aff-dp', 'aff-amort', 'aff-loc',
+        'aff-tax', 'aff-condo', 'aff-heat', 'aff-cc', 'aff-car', 'aff-loan'
+    ];
+    affInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updateAffordabilityCalculator);
+            el.addEventListener('change', updateAffordabilityCalculator);
+        }
+    });
+
+    // Format fields on blur
+    const formatOnBlur = function() {
+        const val = parseCurrency(this.value);
+        if(val > 0) this.value = val.toLocaleString('en-US');
     };
 
-    // Construct a branded wrapper for the PDF
-    const wrapper = document.createElement('div');
-    wrapper.style.padding = '40px';
-    wrapper.style.background = '#fff';
-    wrapper.style.fontFamily = 'Inter, sans-serif';
-
-    const brandHeader = `
-        <div style="text-align: center; border-bottom: 3px solid #D3BD73; padding-bottom: 25px; margin-bottom: 40px;">
-            <h1 style="color: #0F1E2E; font-size: 28px; margin: 0; font-weight: 900; letter-spacing: -0.02em;">ASK JUTHIS</h1>
-            <p style="color: #D3BD73; margin: 8px 0 0 0; font-weight: 800; letter-spacing: 0.2em; font-size: 10px; text-transform: uppercase;">Expert Mortgage Strategy & Analysis</p>
-        </div>
-    `;
-
-    // Clone the calculator but simplify for PDF
-    const clone = element.cloneNode(true);
+    if(payPrice) payPrice.addEventListener('blur', formatOnBlur);
+    if(refAmount) refAmount.addEventListener('blur', formatOnBlur);
+    if(lttPrice) lttPrice.addEventListener('blur', formatOnBlur);
     
-    // Cleanup: Remove inputs and keep only results for a clean report
-    const eliteSection = clone.querySelector('.calc-elite-section');
-    if (eliteSection) {
-        // Find and remove interactive controls (buttons, email form)
-        const forms = eliteSection.querySelectorAll('.flex.flex-col.gap-6');
-        forms.forEach(f => f.remove());
-        // Center the remaining chart card
-        const chartCard = eliteSection.querySelector('.glass-card');
-        if (chartCard) {
-            chartCard.style.margin = '0 auto';
-            chartCard.style.maxWidth = '500px';
-        }
+    ['aff-inc-1', 'aff-inc-2', 'aff-dp', 'aff-tax', 'aff-condo', 'aff-heat', 'aff-cc', 'aff-car', 'aff-loan'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('blur', formatOnBlur);
+    });
+
+    for(let i=0; i<4; i++) {
+        const dpField = document.getElementById(`pay-dp-amt-${i}`);
+        if(dpField) dpField.addEventListener('blur', formatOnBlur);
     }
 
-    wrapper.innerHTML = brandHeader;
-    wrapper.appendChild(clone);
-
-    // Footer for the PDF
-    const footer = document.createElement('div');
-    footer.innerHTML = `
-        <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 10px;">
-            <p>Calculations are for informational purposes only. Contact AskJuthis for a formal mortgage commitment.</p>
-            <p>© ${new Date().getFullYear()} AskJuthis | hello@askjuthis.com</p>
-        </div>
-    `;
-    wrapper.appendChild(footer);
-
-    html2pdf().set(opt).from(wrapper).save().then(() => {
-        if (btn) btn.innerHTML = originalContent;
+    // Connect toggle buttons
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
     });
+
+    // Initial calculation
+    updatePaymentCalculator();
+    updateRefinanceCalculator();
+    updateLandTransferTaxCalculator();
+    updateAffordabilityCalculator();
 };
 
 /**
@@ -1285,7 +1505,7 @@ window.updateStickyBar = function(type, scenarioIndex) {
     const stickyLabel = document.getElementById(`${type}-sticky-label`);
     const stickyVal = document.getElementById(`${type}-sticky-val`);
 
-    if (paymentVal && paymentVal.innerText !== '$-') {
+    if (paymentVal && paymentVal.innerText !== '<span class="skeleton-shimmer">$-</span>') {
         stickyBar.classList.add('active');
         if (stickyLabel) stickyLabel.innerText = `Plan ${scenarioIndex + 1} Monthly Payment`;
         if (stickyVal) stickyVal.innerText = paymentVal.innerText;
