@@ -165,7 +165,7 @@ function renderDivider(type, colorClass, isTop = false) {
 
 function renderHero() {
     return `
-        <header class="relative min-h-[85vh] sm:min-h-screen flex items-center pt-20 sm:pt-44 pb-12 sm:pb-24 bg-brand-navy">
+        <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-brand-navy">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/hero.png" alt="Home background" class="w-full h-full object-cover opacity-40">
@@ -190,7 +190,7 @@ function renderHero() {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                 <div class="max-w-4xl mx-auto text-center">
                     <!-- Mobile-only Circular Headshot -->
-                    <div class="flex justify-center mt-8 sm:mt-10 mb-6 sm:mb-10 lg:hidden reveal reveal-scale">
+                    <div class="flex justify-center mb-8 sm:mb-10 lg:hidden reveal reveal-scale">
                         <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
                             <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                         </div>
