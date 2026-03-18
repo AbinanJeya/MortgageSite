@@ -303,16 +303,17 @@ function getRefinanceCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                    <div class="calc-cell calc-span-5 flex justify-center py-10">
-                        <div class="w-64 h-64 relative" id="ref-chart-container">
-                            <!-- SVG Donut Chart -->
-                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
-                                <circle id="ref-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
-                                <span class="text-3xl font-black text-brand-navy" id="ref-chart-pct">0%</span>
+                        <div class="flex justify-center py-10">
+                            <div class="w-64 h-64 relative" id="ref-chart-container">
+                                <!-- SVG Donut Chart -->
+                                <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
+                                    <circle id="ref-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
+                                    <span class="text-3xl font-black text-brand-navy" id="ref-chart-pct">0%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -519,16 +520,17 @@ function getPaymentCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                    <div class="calc-cell calc-span-5 flex justify-center py-10">
-                        <div class="w-64 h-64 relative" id="pay-chart-container">
-                            <!-- SVG Donut Chart -->
-                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                                <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
-                                <circle id="pay-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
-                                <span class="text-3xl font-black text-brand-navy" id="pay-chart-pct">0%</span>
+                        <div class="flex justify-center py-10">
+                            <div class="w-64 h-64 relative" id="pay-chart-container">
+                                <!-- SVG Donut Chart -->
+                                <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
+                                    <circle id="pay-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
+                                    <span class="text-3xl font-black text-brand-navy" id="pay-chart-pct">0%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
