@@ -400,6 +400,12 @@ ul {
     text-align: center;
 }
 
+@media (max-width: 480px) {
+    .hero {
+        padding: 6rem 1.25rem 2rem;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -414,11 +420,11 @@ ul {
 }
 
 .hero-title {
-    font-size: clamp(2.25rem, 8vw, 4.25rem);
+    font-size: clamp(1.85rem, 8vw, 4.25rem);
     color: white;
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     word-break: break-word;
 }
 
