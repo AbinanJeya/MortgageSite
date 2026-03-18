@@ -165,7 +165,7 @@ function renderDivider(type, colorClass, isTop = false) {
 
 function renderHero() {
     return `
-        <header class="relative min-h-[80vh] sm:min-h-screen flex items-center pt-28 sm:pt-44 pb-16 sm:pb-24 bg-brand-navy">
+        <header class="relative min-h-[85vh] sm:min-h-screen flex items-center pt-20 sm:pt-44 pb-12 sm:pb-24 bg-brand-navy">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/hero.png" alt="Home background" class="w-full h-full object-cover opacity-40">
@@ -190,8 +190,8 @@ function renderHero() {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                 <div class="max-w-4xl mx-auto text-center">
                     <!-- Mobile-only Circular Headshot -->
-                    <div class="flex justify-center mb-6 sm:mb-10 lg:hidden reveal reveal-scale">
-                        <div class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
+                    <div class="flex justify-center mt-8 sm:mt-10 mb-6 sm:mb-10 lg:hidden reveal reveal-scale">
+                        <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
                             <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                         </div>
                     </div>
@@ -311,9 +311,9 @@ function renderServices() {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     ${agentConfig.services.map((service, index) => `
                         <div class="group p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
-                            <div class="flex items-start gap-8">
-                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
-                                    <i class="ph ph-${service.icon} text-4xl"></i>
+                            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-8">
+                                <div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
+                                    <i class="ph ph-${service.icon} text-3xl sm:text-4xl"></i>
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
