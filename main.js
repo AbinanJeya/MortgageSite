@@ -6,15 +6,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Setup Branding & Navigation
     renderNavigation();
-    
+
     // 2. Build Hero Section
     const heroHTML = renderHero();
 
     // 3. Build Services Section
     const servicesHTML = renderServices();
 
-    // 4. Build Why Choose Us (Features) Section
-    const featuresHTML = renderFeatures();
+    // 4. Build About / Why Choose Section (New Design)
+    const aboutHTML = renderAbout();
 
     // 5. Build Appointment Booking Section
     const bookingHTML = renderBooking();
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     appContent.innerHTML = `
         ${heroHTML}
         ${servicesHTML}
-        ${featuresHTML}
+        ${aboutHTML}
         ${bookingHTML}
         ${testimonialsHTML}
         ${contactHTML}
@@ -56,7 +56,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     initCalendly();
+    initTestimonialSlider();
+    initScrollReveal();
 });
+
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Optional: stop observing once revealed
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initTestimonialSlider() {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    let currentSlide = 0;
+    const intervalTime = 5000;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+            dots[i].classList.toggle('bg-brand-gold', i === index);
+            dots[i].classList.toggle('bg-white/20', i !== index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    if (slides.length > 0) {
+        let slideInterval = setInterval(nextSlide, intervalTime);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                currentSlide = index;
+                showSlide(currentSlide);
+                slideInterval = setInterval(nextSlide, intervalTime);
+            });
+        });
+
+        showSlide(0);
+    }
+}
 
 function renderNavigation() {
     const logoContainer = document.getElementById('brand-logo-container');
@@ -66,7 +122,7 @@ function renderNavigation() {
 
     linksContainer.innerHTML = `
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#services">Services</a>
-        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#features">Why Us</a>
+        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#why-choose">Why Us</a>
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#booking">Book Consultation</a>
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="calculators.html">Calculators</a>
         <a class="bg-brand-slate text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
@@ -77,7 +133,7 @@ function renderNavigation() {
     if (mobileLinksContainer) {
         mobileLinksContainer.innerHTML = `
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#services" onclick="toggleMobileMenu()">Services</a>
-            <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#features" onclick="toggleMobileMenu()">Why Us</a>
+            <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#why-choose" onclick="toggleMobileMenu()">Why Us</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#booking" onclick="toggleMobileMenu()">Book Consultation</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
             <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-white hover:text-brand-navy transition-all shadow-lg mt-4" href="#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
@@ -85,189 +141,311 @@ function renderNavigation() {
     }
 }
 
+function renderDivider(type, colorClass, isTop = false) {
+    const positionClass = isTop ? 'section-divider-top' : 'section-divider-bottom';
+    let path = '';
+    
+    // Professional, static geometric paths
+    if (type === 'curve') {
+        path = `<path d="M0,64 C480,128 960,0 1440,64 L1440,128 L0,128 Z" class="${colorClass}"></path>`;
+    } else if (type === 'slant') {
+        path = `<path d="M0,0 L1440,96 L1440,128 L0,128 Z" class="${colorClass}"></path>`;
+    } else if (type === 'step') {
+        path = `<path d="M0,64 L720,64 L720,0 L1440,0 L1440,128 L0,128 Z" class="${colorClass}"></path>`;
+    }
+
+    return `
+        <div class="section-divider ${positionClass}">
+            <svg viewBox="0 0 1440 128" preserveAspectRatio="none">
+                ${path}
+            </svg>
+        </div>
+    `;
+}
+
 function renderHero() {
     return `
-        <header class="relative bg-brand-warm overflow-hidden">
-            <div class="max-w-7xl mx-auto">
-                <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-48 xl:pb-64 lg:pt-48 xl:pt-64 pt-12 px-4 sm:px-6 lg:px-8">
-                    <main class="mx-auto max-w-7xl">
-                        <div class="sm:text-center lg:text-left">
-                            <h1 class="text-4xl tracking-tight font-extrabold text-brand-navy sm:text-5xl md:text-6xl">
-                                <span class="block">Your Path to</span>
-                                <span class="block text-brand-gold">Homeownership</span>
-                                <span class="block">Starts Here</span>
-                            </h1>
-                            <p class="mt-3 text-base text-gray-700 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                ${agentConfig.agent.fullBio}
-                            </p>
-                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
-                                <a class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-navy hover:bg-brand-slate md:py-4 md:text-lg md:px-10 shadow-lg" href="#booking">
-                                    Book a Consultation
-                                </a>
-                                <a class="flex items-center justify-center px-8 py-3 border border-brand-navy text-base font-medium rounded-md text-brand-navy bg-transparent hover:bg-white md:py-4 md:text-lg md:px-10" href="#services">
-                                    Our Services
-                                </a>
-                            </div>
+        <header class="relative min-h-screen flex items-center pt-44 pb-24 bg-brand-navy">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="assets/hero.png" alt="Home background" class="w-full h-full object-cover opacity-40">
+                <div class="absolute inset-0 bg-brand-navy/60"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/80 via-transparent to-brand-navy/80"></div>
+            </div>
+
+            <!-- Permanent Broker Profile Card - Top Right of Header -->
+            <div class="absolute top-6 right-10 z-30 hidden lg:block">
+                <div class="w-64 glass-card p-2 rounded-[2.5rem] shadow-[0_45px_100px_-20px_rgba(0,0,0,0.6)] border border-white/30 backdrop-blur-2xl bg-brand-navy/60">
+                    <div class="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden">
+                        <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-brand-navy via-brand-navy/40 to-transparent"></div>
+                        <div class="absolute bottom-6 left-0 right-0 text-center px-4">
+                            <p class="text-brand-gold text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Expert Guidance</p>
+                            <p class="text-white text-xl font-extrabold tracking-tight">${agentConfig.agent.name}</p>
                         </div>
-                    </main>
+                    </div>
                 </div>
             </div>
-            <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <img alt="Professional Mortgage Agent" class="h-56 w-full object-cover object-top sm:h-72 md:h-96 lg:w-full lg:h-full lg:object-top" src="${agentConfig.agent.photoUrl}"/>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-6xl md:text-8xl tracking-tight font-extrabold text-white mb-10">
+                        <span class="block">Your Path to</span>
+                        <span class="block text-brand-gold my-2">Homeownership</span>
+                        <span class="block">Starts Here</span>
+                    </h1>
+                    <p class="mt-8 text-xl md:text-3xl text-white/90 max-w-3xl mx-auto font-medium leading-relaxed mb-16 px-4">
+                        ${agentConfig.agent.fullBio}
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
+                        <a class="w-full sm:w-auto flex items-center justify-center px-12 py-5 border border-transparent text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
+                            Book a Consultation
+                        </a>
+                        <a class="w-full sm:w-auto flex items-center justify-center px-12 py-5 border-2 border-white/30 backdrop-blur-sm text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
+                            Our Services
+                        </a>
+                    </div>
+                </div>
             </div>
+            ${renderDivider('curve', 'fill-brand-navy')}
         </header>
+    `;
+}
+
+function renderAbout() {
+    const { about } = agentConfig;
+    return `
+        <section class="py-32 bg-rich text-white overflow-hidden" id="about">
+            <img src="assets/about_bg.png" alt="Homeownership lifestyle" class="bg-rich-image opacity-20">
+            <div class="bg-rich-overlay opacity-50"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-20 items-center">
+                    <!-- Left Column - Stats & Info -->
+                    <div class="order-2 lg:order-1 lg:col-span-1 reveal reveal-right">
+                        <div class="glass-card p-10 rounded-[3rem] border-white/10 shadow-2xl bg-brand-navy/60 backdrop-blur-3xl">
+                            <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
+                                <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
+                            </div>
+                            <h2 class="text-5xl font-black mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
+                            <div class="space-y-6 text-white/60 mb-12 text-lg leading-relaxed">
+                                <p>${about.description1}</p>
+                                <p>${about.description2}</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-x-8 gap-y-10">
+                                ${about.stats.map(stat => `
+                                    <div class="flex flex-col items-center lg:items-start group/stat">
+                                        <div class="text-brand-gold mb-3 transform transition-transform group-hover/stat:scale-110">
+                                            <i class="ph ph-${stat.icon} text-3xl"></i>
+                                        </div>
+                                        <div class="text-3xl font-black text-white tracking-tight">${stat.value}</div>
+                                        <div class="text-xs text-white/60 font-bold uppercase tracking-[0.2em]">${stat.label}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Column - Broker Photo -->
+                    <div class="order-1 lg:order-2 flex justify-center reveal reveal-up">
+                        <div class="relative group">
+                            <div class="absolute -inset-10 bg-brand-gold/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                            <div class="relative w-80 h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[12px] border-white backdrop-blur-md bg-white/40">
+                                <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-contain object-bottom pt-8 transition-transform duration-1000 group-hover:scale-105">
+                                <div class="absolute bottom-8 left-0 right-0 text-center">
+                                    <div class="inline-block bg-brand-navy/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
+                                        <span class="text-white text-xs font-bold uppercase tracking-[0.2em]">Dedicated to You</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Bio -->
+                    <div class="order-3 lg:col-span-1 reveal reveal-left">
+                        <div class="glass-card p-10 rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
+                            <h2 class="text-3xl font-black mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
+                            <div class="relative mb-10">
+                                <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
+                                <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
+                                    "${about.meetBroker.quote}"
+                                </p>
+                            </div>
+                            <p class="text-white/60 leading-relaxed mb-10 text-lg">
+                                ${about.meetBroker.description}
+                            </p>
+                            <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-brand-gold text-brand-navy font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
+                                ${about.meetBroker.linkText}
+                                <i class="ph ph-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ${renderDivider('slant', 'fill-brand-navy')}
+        </section>
     `;
 }
 
 function renderServices() {
     return `
-        <section class="py-24 bg-brand-slate" id="services">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-base text-brand-gold font-semibold tracking-wide uppercase">Expertise</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Comprehensive Financing Solutions</p>
+        <section class="py-32 bg-rich overflow-hidden" id="services">
+            <img src="assets/services_bg.png" alt="Consultation background" class="bg-rich-image">
+            <div class="bg-rich-overlay"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-24 reveal reveal-up">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
+                    </div>
+                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    ${agentConfig.services.map(service => `
-                        <div class="group p-8 rounded-2xl glass-card hover-lift shadow-lg">
-                            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold text-brand-navy shadow-md">
-                                <i class="ph ph-${service.icon} text-3xl"></i>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    ${agentConfig.services.map((service, index) => `
+                        <div class="group p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
+                            <div class="flex items-start gap-8">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
+                                    <i class="ph ph-${service.icon} text-4xl"></i>
+                                </div>
+                                <div class="flex-grow">
+                                    <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
+                                    <p class="text-white/60 text-lg leading-relaxed mb-8">${service.description}</p>
+                                    
+                                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                                        ${service.details ? service.details.map(detail => `
+                                            <li class="flex items-center text-sm font-medium text-white/80">
+                                                <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                                ${detail}
+                                            </li>
+                                        `).join('') : ''}
+                                    </ul>
+                                    
+                                    <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="#">
+                                        Explore Scope 
+                                        <div class="ml-3 w-8 h-[2px] bg-brand-gold transform group-hover/btn:w-12 transition-all"></div>
+                                    </a>
+                                </div>
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">${service.title}</h3>
-                            <p class="text-brand-gold mb-6">${service.description}</p>
-                            <ul class="space-y-2 text-brand-gold mb-8">
-                                ${service.details ? service.details.map(detail => `
-                                    <li class="flex items-center">
-                                        <i class="ph ph-check-circle mr-2 text-brand-gold"></i> ${detail}
-                                    </li>
-                                `).join('') : ''}
-                            </ul>
-                            <a class="font-semibold text-brand-gold hover:text-white transition-colors" href="#">Learn More →</a>
                         </div>
                     `).join('')}
                 </div>
             </div>
+            ${renderDivider('curve', 'fill-brand-navy')}
         </section>
     `;
 }
 
-function renderFeatures() {
-    return `
-        <section class="py-24 bg-brand-navy text-white relative overflow-hidden" id="features">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="lg:flex lg:items-center lg:gap-16">
-                    <div class="lg:w-1/2 mb-12 lg:mb-0">
-                        <img alt="Happy family in front of new home" class="rounded-3xl shadow-2xl" src="assets/hero.png"/>
-                    </div>
-                    <div class="lg:w-1/2 p-10 glass-card rounded-3xl" style="background: #4A5D73;">
-                        <h2 class="text-3xl font-extrabold mb-8 text-white">Why Work With Juthis?</h2>
-                        <div class="space-y-10">
-                            ${agentConfig.features.map(feature => `
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0">
-                                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-gold text-brand-navy">
-                                            <i class="ph ph-${feature.icon} text-2xl"></i>
-                                        </div>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h3 class="text-lg font-bold text-white">${feature.title}</h3>
-                                        <p class="mt-2 text-brand-gold">${feature.description}</p>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    `;
-}
+
 
 function renderBooking() {
     return `
-        <section class="py-24 bg-brand-warm relative" id="booking">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="lg:flex lg:items-center lg:justify-between gap-12">
-                    <div class="lg:w-1/2 mb-12 lg:mb-0">
-                        <h2 class="text-base text-brand-navy font-semibold tracking-wide uppercase mb-2">Schedule Now</h2>
-                        <h3 class="text-4xl font-extrabold text-brand-navy mb-6">Expert Guidance is Just a Click Away</h3>
-                        <p class="text-lg text-gray-700 mb-8">
+        <section class="py-32 bg-brand-warm/10 relative overflow-hidden" id="booking">
+            <!-- Decorative Elements -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-gold/5 rounded-full blur-[120px] reveal reveal-scale"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-navy/5 rounded-full blur-[120px] reveal reveal-scale"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="lg:flex lg:items-center lg:justify-between gap-20">
+                    <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-navy/5 border border-brand-navy/10 mb-6">
+                            <span class="text-brand-navy text-xs font-bold uppercase tracking-[0.3em] leading-none">Consultation</span>
+                        </div>
+                        <h3 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tight leading-tight">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
+                        <p class="text-xl text-brand-navy/60 mb-10 leading-relaxed">
                             Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
                         </p>
-                        <div class="space-y-4">
-                            <div class="flex items-center text-brand-navy">
-                                <i class="ph ph-check-circle mr-3 text-brand-gold text-xl"></i>
-                                <span class="font-medium">Free 15-minute Discovery Call</span>
+                        <div class="space-y-6">
+                            <div class="flex items-center group/item reveal reveal-up">
+                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
+                                    <i class="ph ph-calendar-check text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                                </div>
+                                <span class="text-lg font-bold text-brand-navy">Free 15-minute Discovery Call</span>
                             </div>
-                            <div class="flex items-center text-brand-navy">
-                                <i class="ph ph-check-circle mr-3 text-brand-gold text-xl"></i>
-                                <span class="font-medium">No obligation, just expert advice</span>
+                            <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
+                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
+                                    <i class="ph ph-shield-check text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                                </div>
+                                <span class="text-lg font-bold text-brand-navy">No obligation, just expert advice</span>
                             </div>
-                            <div class="flex items-center text-brand-navy">
-                                <i class="ph ph-check-circle mr-3 text-brand-gold text-xl"></i>
-                                <span class="font-medium">Get your questions answered live</span>
+                            <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
+                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
+                                    <i class="ph ph-chat-text text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                                </div>
+                                <span class="text-lg font-bold text-brand-navy">Get your questions answered live</span>
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2">
-                        <div class="glass-card-light rounded-3xl shadow-xl p-4 border border-white/40 min-h-[600px]">
-                            <div class="calendly-inline-widget" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
+                    <div class="lg:w-1/2 reveal reveal-left">
+                        <div class="bg-white rounded-[3rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] p-4 border border-brand-navy/5 min-h-[600px] relative overflow-hidden group">
+                           <div class="absolute inset-0 bg-brand-gold/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700"></div>
+                            <div class="calendly-inline-widget relative z-10" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
+            ${renderDivider('curve', 'fill-white')}
         </section>
     `;
 }
 
 function renderTestimonials() {
     return `
-        <section class="py-24 overflow-hidden" id="testimonials" style="background: #0F1E2E;">
+        <section class="py-24 overflow-hidden bg-brand-navy/90 glass-section" id="testimonials">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="relative">
+                <div class="relative testimonial-container">
                     <div class="text-center max-w-3xl mx-auto">
                         <i class="ph ph-quotes text-6xl text-brand-gold opacity-50 mx-auto mb-6"></i>
-                        <p class="text-2xl italic font-medium mb-8" style="color: #D3BD73;">
-                            "${agentConfig.agent.shortQuote}"
-                        </p>
-                        <div class="flex items-center justify-center">
-                            <div class="ml-4 text-center">
-                                <div class="text-base font-bold text-white">The Miller Family</div>
-                                <div class="text-sm text-brand-gold/70">First-time Homebuyers</div>
-                            </div>
+                        <div class="relative h-64 md:h-48">
+                            ${agentConfig.agent.testimonials.map((t, i) => `
+                                <div class="testimonial-slide absolute inset-0 transition-all duration-700 opacity-0 transform translate-x-8 ${i === 0 ? 'active' : ''}">
+                                    <p class="text-2xl italic font-black mb-8 text-brand-gold tracking-tight leading-relaxed">
+                                        "${t.quote}"
+                                    </p>
+                                    <div class="flex items-center justify-center">
+                                        <div class="ml-4 text-center">
+                                            <div class="text-base font-black text-white tracking-tight uppercase tracking-[0.1em]">${t.author}</div>
+                                            <div class="text-sm text-brand-gold/60 font-bold uppercase tracking-[0.2em]">${t.role}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                     <div class="flex justify-center mt-12 gap-2">
-                        <button class="w-3 h-3 rounded-full bg-brand-gold"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/20"></button>
-                        <button class="w-3 h-3 rounded-full bg-white/20"></button>
+                        ${agentConfig.agent.testimonials.map((_, i) => `
+                            <button class="testimonial-dot w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? 'bg-brand-gold' : 'bg-white/20'}" data-index="${i}"></button>
+                        `).join('')}
                     </div>
                 </div>
             </div>
+            ${renderDivider('slant', 'fill-brand-navy')}
         </section>
     `;
 }
 
 function renderContact() {
     return `
-        <section class="py-24 bg-brand-warm" id="contact">
+        <section class="py-24 bg-brand-gold/80 glass-section" id="contact">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="glass-card-dark rounded-3xl shadow-2xl overflow-hidden lg:flex">
                     <div class="lg:w-1/2 p-12 text-white flex flex-col justify-center">
-                        <h2 class="text-3xl font-bold mb-6 text-white">Get a Free Quote</h2>
-                        <p class="text-brand-gold mb-8 text-lg">Tell us a little about your goals, and we'll provide a no-obligation mortgage estimate tailored to your needs.</p>
-                        <div class="space-y-6">
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center mr-4">
+                        <h2 class="text-5xl font-black mb-6 text-white tracking-tight leading-tight">Get a Free Quote</h2>
+                        <p class="text-brand-gold/80 mb-12 text-lg font-bold uppercase tracking-[0.2em]">Tailored Mortgage Solutions</p>
+                        <div class="space-y-8">
+                            <div class="flex items-center group/contact transform hover:translate-x-2 transition-transform">
+                                <div class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center mr-6 border-white/10 group-hover:border-brand-gold/50 transition-colors">
                                     <i class="ph ph-phone text-brand-gold text-2xl"></i>
                                 </div>
-                                <span class="text-lg font-medium">${agentConfig.contact.phone}</span>
+                                <span class="text-lg font-black text-white tracking-tight">${agentConfig.contact.phone}</span>
                             </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full glass-card flex items-center justify-center mr-4">
+                            <div class="flex items-center group/contact transform hover:translate-x-2 transition-transform">
+                                <div class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center mr-6 border-white/10 group-hover:border-brand-gold/50 transition-colors">
                                     <i class="ph ph-envelope-simple text-brand-gold text-2xl"></i>
                                 </div>
-                                <span class="text-lg font-medium">${agentConfig.contact.email}</span>
+                                <span class="text-lg font-black text-white tracking-tight">${agentConfig.contact.email}</span>
                             </div>
                         </div>
                     </div>
@@ -305,13 +483,14 @@ function renderContact() {
                     </div>
                 </div>
             </div>
+            ${renderDivider('curve', 'fill-brand-gold')}
         </section>
     `;
 }
 
 function renderFooter() {
     return `
-        <footer style="background: #0F1E2E;" class="border-t border-white/10 py-12">
+        <footer class="bg-brand-navy/90 glass-section border-t border-white/10 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="mb-8">
                     <span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
@@ -347,7 +526,7 @@ function initSmoothScroll() {
     });
 }
 
-window.toggleMobileMenu = function() {
+window.toggleMobileMenu = function () {
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenu) {
         const isHidden = mobileMenu.classList.contains('hidden');

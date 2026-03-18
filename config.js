@@ -19,7 +19,23 @@ const agentConfig = {
         title: "Expert Mortgage Services",
         licenseNumber: "NMLS #123456",
         photoUrl: "assets/agent.png",
-        shortQuote: "Juthis made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!",
+        testimonials: [
+            {
+                quote: "AskJuthis made buying our first home surprisingly easy. They took the time to answer all our frantic questions and got us a rate we didn't think was possible!",
+                author: "The Miller Family",
+                role: "First-time Homebuyers"
+            },
+            {
+                quote: "I was worried about refinancing my mortgage, but Juthis guided me through every step. The process was transparent and much faster than I expected.",
+                author: "Sarah Jenkins",
+                role: "Refinance Client"
+            },
+            {
+                quote: "The team at AskJuthis is incredibly professional and knowledgeable. They found us a great rate and made the entire application process stress-free.",
+                author: "Michael & Emily",
+                role: "Investment Property Owners"
+            }
+        ],
         fullBio: `Personalized mortgage solutions designed to fit your unique life goals. From first-time buyers to refinancing experts, we navigate the complexity so you don't have to.`
     },
 
@@ -38,24 +54,25 @@ const agentConfig = {
         x: "https://x.com"
     },
 
-    // Feature Highlights (Why Choose Us)
-    features: [
-        {
-            icon: "headset",
-            title: "Fast Approval Process",
-            description: "Our streamlined technology ensures you get pre-approved quickly, giving you a competitive edge in any market."
-        },
-        {
-            icon: "lock-simple",
-            title: "Transparent Communication",
-            description: "No hidden fees or surprises. We explain every detail in plain English throughout the entire process."
-        },
-        {
-            icon: "map-pin",
-            title: "Local Market Experts",
-            description: "We live and work in your community. We understand the local housing landscape better than big bank apps."
+    // About / Why Choose Section (Based on new design)
+    about: {
+        title: "Why Choose Juthis Mortgages?",
+        description1: "We are dedicated to helping families achieve their homeownership dreams. Our commitment to personalized service and expert guidance sets us apart from the rest.",
+        description2: "We work with a wide network of lenders to ensure you get the most competitive rates and terms. Our transparent process means no hidden fees or surprises—just honest, straightforward mortgage solutions.",
+        stats: [
+            { icon: "medal", value: "50+", label: "Lender Options" },
+            { icon: "users-three", value: "1-on-1", label: "Personal Service" },
+            { icon: "clock", value: "24/7", label: "Support Available" },
+            { icon: "heart", value: "Fast", label: "Pre-Approvals" }
+        ],
+        meetBroker: {
+            title: "Meet Your Broker",
+            quote: "\"Hi, I'm passionate about helping families find their dream homes. With a deep understanding of the market and a commitment to personalized service, I guide you through every step of the mortgage process.\"",
+            description: "Whether you're a first-time buyer or looking to refinance, I'm here to answer your questions and find the best solution for your unique financial situation.",
+            linkText: "Read Full Bio →",
+            linkUrl: "#bio"
         }
-    ],
+    },
 
     // Services Offered
     services: [
