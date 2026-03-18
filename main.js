@@ -188,8 +188,13 @@ function renderHero() {
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-
                 <div class="max-w-4xl mx-auto text-center">
+                    <!-- Mobile-only Circular Headshot -->
+                    <div class="flex justify-center mb-10 lg:hidden reveal reveal-scale">
+                        <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
+                            <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
+                        </div>
+                    </div>
                     <h1 class="text-6xl md:text-8xl tracking-tight font-extrabold text-white mb-10">
                         <span class="block">Your Path to</span>
                         <span class="block text-brand-gold my-2">Homeownership</span>

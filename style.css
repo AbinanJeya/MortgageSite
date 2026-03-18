@@ -402,7 +402,7 @@ ul {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 6rem 1.25rem 2rem;
+        padding: 6rem 1rem 2rem;
     }
 }
 
@@ -420,7 +420,7 @@ ul {
 }
 
 .hero-title {
-    font-size: clamp(1.85rem, 8vw, 4.25rem);
+    font-size: clamp(1.55rem, 8vw, 4.25rem);
     color: white;
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
