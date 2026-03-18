@@ -303,19 +303,7 @@ function getRefinanceCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                        <div class="flex justify-center py-10">
-                            <div class="w-64 h-64 relative" id="ref-chart-container">
-                                <!-- SVG Donut Chart -->
-                                <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
-                                    <circle id="ref-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
-                                </svg>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
-                                    <span class="text-3xl font-black text-brand-navy" id="ref-chart-pct">0%</span>
-                                </div>
-                            </div>
-                        </div>
+                        <canvas id="refinanceChart"></canvas>
                     </div>
                     <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="ref-chart-label">Principal vs Total Interest (Plan 1)</p>
                 </div>
@@ -520,19 +508,7 @@ function getPaymentCalculatorHTML() {
                         Visual Analysis
                     </h4>
                     <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
-                        <div class="flex justify-center py-10">
-                            <div class="w-64 h-64 relative" id="pay-chart-container">
-                                <!-- SVG Donut Chart -->
-                                <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="rgba(15, 30, 46, 0.05)" stroke-width="3"></circle>
-                                    <circle id="pay-chart-interest" cx="18" cy="18" r="15.9" fill="transparent" stroke="var(--color-gold)" stroke-width="3" stroke-dasharray="0 100" stroke-linecap="round"></circle>
-                                </svg>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span class="text-[10px] uppercase tracking-widest text-brand-navy/40 font-bold">Interest %</span>
-                                    <span class="text-3xl font-black text-brand-navy" id="pay-chart-pct">0%</span>
-                                </div>
-                            </div>
-                        </div>
+                        <canvas id="paymentChart"></canvas>
                     </div>
                     <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]" id="pay-chart-label">Principal vs Total Interest (Plan 1)</p>
                 </div>
@@ -816,16 +792,9 @@ function updatePaymentCalculator() {
             animateValue(`pay-total-${i}`, totalMortgage);
             animateValue(`pay-payment-${i}`, payment);
 
-            // Update visual analysis: Principal vs Total Interest
-            const nMonths = amort * 12;
-            const r = rate / 100;
-            const iMonths = Math.pow(1 + r/2, 2/12) - 1;
-            const monthlyPayment = totalMortgage * (iMonths * Math.pow(1 + iMonths, nMonths)) / (Math.pow(1 + iMonths, nMonths) - 1);
-            const totalPaid = monthlyPayment * nMonths;
-            const totalInterest = Math.max(0, totalPaid - totalMortgage);
-
+            // Update visual analysis: Principal vs Total Interest (Scenario 1)
             if (i === 0) {
-                window.updateDonutChart('pay', totalMortgage, totalInterest, i);
+                updateCharts('payment', totalMortgage, rate, amort);
             }
 
             // Sync Sticky Bar if it's the active scenario on mobile
@@ -870,9 +839,9 @@ function updateRefinanceCalculator() {
             const totalPaid = monthlyPayment * nMonths;
             const totalInterest = Math.max(0, totalPaid - principal);
 
-            // Update chart for Scenario 1
+            // Update charts
             if (i === 0) {
-                window.updateDonutChart('ref', principal, totalInterest, i);
+                updateCharts('refinance', principal, rate, amort);
             }
 
             // Sync Sticky Bar if it's the active scenario on mobile
@@ -1265,20 +1234,6 @@ window.downloadPDF = function(type) {
 
 // --- Advanced Features Implementation ---
 
-window.updateDonutChart = function(type, principal, interest, scenarioIndex = 0) {
-    const total = principal + interest;
-    if (!total) return;
-    const interestPct = (interest / total) * 100;
-    const interestEl = document.getElementById(`${type}-chart-interest`);
-    const pctEl = document.getElementById(`${type}-chart-pct`);
-    const labelEl = document.getElementById(`${type}-chart-label`);
-    
-    if (interestEl && pctEl) {
-        interestEl.setAttribute('stroke-dasharray', `${interestPct.toFixed(1)} 100`);
-        pctEl.innerText = `${Math.round(interestPct)}%`;
-        if (labelEl) labelEl.innerText = `Principal vs Total Interest (Plan ${scenarioIndex + 1})`;
-    }
-}
 
 function initStickySummary() {
     const stickyPay = document.getElementById('pay-sticky-bar');
