@@ -165,7 +165,7 @@ function renderDivider(type, colorClass, isTop = false) {
 
 function renderHero() {
     return `
-        <header class="relative min-h-screen flex items-center pt-44 pb-24 bg-brand-navy">
+        <header class="relative min-h-[80vh] sm:min-h-screen flex items-center pt-28 sm:pt-44 pb-16 sm:pb-24 bg-brand-navy">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/hero.png" alt="Home background" class="w-full h-full object-cover opacity-40">
@@ -190,24 +190,24 @@ function renderHero() {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                 <div class="max-w-4xl mx-auto text-center">
                     <!-- Mobile-only Circular Headshot -->
-                    <div class="flex justify-center mb-10 lg:hidden reveal reveal-scale">
-                        <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
+                    <div class="flex justify-center mb-6 sm:mb-10 lg:hidden reveal reveal-scale">
+                        <div class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
                             <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                         </div>
                     </div>
-                    <h1 class="text-6xl md:text-8xl tracking-tight font-extrabold text-white mb-10">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10">
                         <span class="block">Your Path to</span>
-                        <span class="block text-brand-gold my-2">Homeownership</span>
+                        <span class="block text-brand-gold my-1 sm:my-2">Homeownership</span>
                         <span class="block">Starts Here</span>
                     </h1>
-                    <p class="mt-8 text-xl md:text-3xl text-white/90 max-w-3xl mx-auto font-medium leading-relaxed mb-16 px-4">
+                    <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto font-medium leading-relaxed mb-8 sm:mb-16 px-4">
                         ${agentConfig.agent.fullBio}
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-                        <a class="w-full sm:w-auto flex items-center justify-center px-12 py-5 border border-transparent text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center px-4">
+                        <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
                             Book a Consultation
                         </a>
-                        <a class="w-full sm:w-auto flex items-center justify-center px-12 py-5 border-2 border-white/30 backdrop-blur-sm text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
+                        <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
                             Our Services
                         </a>
                     </div>
@@ -221,20 +221,20 @@ function renderHero() {
 function renderAbout() {
     const { about } = agentConfig;
     return `
-        <section class="py-32 bg-rich text-white overflow-hidden" id="about">
+        <section class="py-16 sm:py-32 bg-rich text-white overflow-hidden" id="about">
             <img src="assets/about_bg.png" alt="Homeownership lifestyle" class="bg-rich-image opacity-20">
             <div class="bg-rich-overlay opacity-50"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-20 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-20 items-center">
                     <!-- Left Column - Stats & Info -->
                     <div class="order-2 lg:order-1 lg:col-span-1 reveal reveal-right">
-                        <div class="glass-card p-10 rounded-[3rem] border-white/10 shadow-2xl bg-brand-navy/60 backdrop-blur-3xl">
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-2xl bg-brand-navy/60 backdrop-blur-3xl">
                             <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                                 <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
                             </div>
-                            <h2 class="text-5xl font-black mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
-                            <div class="space-y-6 text-white/60 mb-12 text-lg leading-relaxed">
+                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
+                            <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed">
                                 <p>${about.description1}</p>
                                 <p>${about.description2}</p>
                             </div>
@@ -257,7 +257,7 @@ function renderAbout() {
                     <div class="order-1 lg:order-2 flex justify-center reveal reveal-up">
                         <div class="relative group">
                             <div class="absolute -inset-10 bg-brand-gold/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                            <div class="relative w-80 h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[12px] border-white backdrop-blur-md bg-white/40">
+                            <div class="relative w-64 h-[24rem] sm:w-80 sm:h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[8px] sm:border-[12px] border-white backdrop-blur-md bg-white/40">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105">
                                 <div class="absolute bottom-8 left-0 right-0 text-center">
                                     <div class="inline-block bg-brand-navy/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
@@ -270,8 +270,8 @@ function renderAbout() {
 
                     <!-- Right Column - Bio -->
                     <div class="order-3 lg:col-span-1 reveal reveal-left">
-                        <div class="glass-card p-10 rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
-                            <h2 class="text-3xl font-black mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
+                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
                             <div class="relative mb-10">
                                 <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
                                 <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
@@ -296,7 +296,7 @@ function renderAbout() {
 
 function renderServices() {
     return `
-        <section class="py-32 bg-rich overflow-hidden" id="services">
+        <section class="py-16 sm:py-32 bg-rich overflow-hidden" id="services">
             <img src="assets/services_bg.png" alt="Consultation background" class="bg-rich-image">
             <div class="bg-rich-overlay"></div>
             
@@ -305,18 +305,18 @@ function renderServices() {
                     <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                         <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
                     </div>
-                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
+                    <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     ${agentConfig.services.map((service, index) => `
-                        <div class="group p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
+                        <div class="group p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
                             <div class="flex items-start gap-8">
                                 <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
                                     <i class="ph ph-${service.icon} text-4xl"></i>
                                 </div>
                                 <div class="flex-grow">
-                                    <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
+                                    <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
                                     <p class="text-white/60 text-lg leading-relaxed mb-8">${service.description}</p>
                                     
                                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
