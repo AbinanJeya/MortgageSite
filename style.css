@@ -426,6 +426,7 @@ ul {
     letter-spacing: -0.025em;
     overflow-wrap: anywhere;
     word-break: break-word;
+    hyphens: auto;
 }
 
 .highlight {
