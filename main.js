@@ -348,7 +348,7 @@ function renderServices() {
 function renderBooking() {
     return `
         <section class="py-32 bg-rich glass-section relative overflow-hidden" id="booking">
-            <div class="bg-rich-image" style="background-image: url('assets/booking_bg.png'); opacity: 0.15; filter: grayscale(20%);"></div>
+            <div class="bg-rich-image" style="background-image: url('assets/booking_bg.png'); opacity: 0.15; filter: blur(12px) grayscale(20%); transform: scale(1.1);"></div>
             <div class="absolute inset-0 bg-brand-navy/60"></div>
             
             <!-- Decorative Elements -->

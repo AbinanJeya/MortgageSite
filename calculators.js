@@ -197,6 +197,14 @@ function getRefinanceCalculatorHTML() {
 
                     <div class="calc-divider calc-span-5"></div>
 
+                    <!-- Header Row - Desktop Only -->
+                    <div class="calc-cell mobile-hide"></div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell mobile-hide text-center py-4" data-type="ref" data-scenario="${i}">
+                            <span class="scenario-header-tag">Plan ${i + 1}</span>
+                        </div>
+                    `).join('')}
+
                     <!-- Row 2: Amortization -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-calendar text-brand-navy/30 text-xl mr-3"></i>
@@ -347,6 +355,14 @@ function getPaymentCalculatorHTML() {
                     </div>
 
                     <div class="calc-divider calc-span-5"></div>
+
+                    <!-- Header Row - Desktop Only -->
+                    <div class="calc-cell mobile-hide"></div>
+                    ${[...Array(4)].map((_, i) => `
+                        <div class="calc-cell mobile-hide text-center py-4" data-type="pay" data-scenario="${i}">
+                            <span class="scenario-header-tag">Plan ${i + 1}</span>
+                        </div>
+                    `).join('')}
 
                     <!-- Row 2: Down Payment -->
                     <div class="calc-cell label-cell flex items-center">
@@ -528,7 +544,7 @@ window.renderCalculators = function() {
         <div class="calculator-container bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/5">
             <!-- Tab Navigation -->
             <div class="grid grid-cols-2 lg:grid-cols-4 p-2 gap-2 bg-brand-navy/30 backdrop-blur-xl border-b border-white/10">
-                <button class="calc-tab active group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('payment')">
+                <button class="calc-tab active group relative px-6 py-5 rounded-md transition-all duration-500 overflow-hidden" onclick="switchCalculator('payment')">
                     <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col items-center gap-2">
                         <i class="ph ph-calculator text-2xl group-[.active]:text-brand-gold transition-colors"></i>
@@ -536,7 +552,7 @@ window.renderCalculators = function() {
                     </div>
                     <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </button>
-                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('refinance')">
+                <button class="calc-tab group relative px-6 py-5 rounded-md transition-all duration-500 overflow-hidden" onclick="switchCalculator('refinance')">
                     <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col items-center gap-2">
                         <i class="ph ph-arrows-merge text-2xl group-[.active]:text-brand-gold transition-colors"></i>
@@ -544,7 +560,7 @@ window.renderCalculators = function() {
                     </div>
                     <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </button>
-                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('land-transfer')">
+                <button class="calc-tab group relative px-6 py-5 rounded-md transition-all duration-500 overflow-hidden" onclick="switchCalculator('land-transfer')">
                     <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col items-center gap-2">
                         <i class="ph ph-stamp text-2xl group-[.active]:text-brand-gold transition-colors"></i>
@@ -552,7 +568,7 @@ window.renderCalculators = function() {
                     </div>
                     <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </button>
-                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('affordability')">
+                <button class="calc-tab group relative px-6 py-5 rounded-md transition-all duration-500 overflow-hidden" onclick="switchCalculator('affordability')">
                     <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col items-center gap-2">
                         <i class="ph ph-piggy-bank text-2xl group-[.active]:text-brand-gold transition-colors"></i>

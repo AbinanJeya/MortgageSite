@@ -147,6 +147,7 @@ ul {
     background-repeat: repeat;
     opacity: 0.12;
     filter: blur(12px) grayscale(20%);
+    transform: scale(1.1);
     z-index: 0;
     transition: transform 1.5s var(--reveal-timing);
 }
@@ -402,7 +403,13 @@ ul {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 6rem 1rem 2rem;
+        padding: 6rem 0.75rem 2rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero {
+        padding: 6rem 0.5rem 2rem;
     }
 }
 
@@ -420,13 +427,20 @@ ul {
 }
 
 .hero-title {
-    font-size: clamp(1.55rem, 8vw, 4.25rem);
+    font-size: clamp(1.2rem, 8vw, 4.25rem);
     color: white;
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
     overflow-wrap: anywhere;
     word-break: break-word;
     hyphens: auto;
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+    }
 }
 
 .highlight {
@@ -915,8 +929,8 @@ ul {
     display: flex;
     align-items: center;
     border: 1px solid rgba(15, 30, 46, 0.1);
-    border-radius: 0.75rem;
-    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    padding: 0.75rem 1.25rem;
     transition: all 0.3s ease;
 }
 
@@ -931,10 +945,13 @@ ul {
 
 .calc-input-wrapper .symbol {
     color: var(--color-primary);
-    font-weight: 800;
+    font-weight: 500;
     font-size: 1rem;
     flex-shrink: 0;
+    opacity: 0.4;
 }
+.calc-input-wrapper .symbol:first-child { margin-right: 0.75rem; }
+.calc-input-wrapper .symbol:last-child { margin-left: 0.75rem; }
 
 .calc-input {
     width: 100%;
@@ -1014,6 +1031,100 @@ ul {
     flex-grow: 1;
     border-bottom: 2px dotted rgba(15, 30, 46, 0.05);
     margin: 0 0.8rem;
+}
+
+/* Static Scenario Headers - Desktop Only */
+.scenario-header-tag {
+    background: rgba(15, 30, 46, 0.05);
+    color: var(--color-navy);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Mobile Scenario Selector */
+.scenario-selector-mobile {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    justify-content: center;
+}
+
+.scenario-selector-mobile::-webkit-scrollbar { display: none; }
+
+.scenario-btn-mobile {
+    min-width: 100px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 1rem;
+    background: rgba(15, 30, 46, 0.03);
+    border: 1px solid rgba(15, 30, 46, 0.08);
+    color: var(--color-navy);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.scenario-btn-mobile:hover {
+    background: rgba(15, 30, 46, 0.08);
+    transform: translateY(-1px);
+}
+
+.scenario-btn-mobile.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 24px -6px rgba(15, 30, 46, 0.25);
+}
+
+/* Scenario Selector Styles - Global */
+.scenario-selector-mobile {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    justify-content: center;
+}
+
+.scenario-selector-mobile::-webkit-scrollbar { display: none; }
+
+.scenario-btn-mobile {
+    min-width: 100px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 0.5rem;
+    background: rgba(15, 30, 46, 0.03);
+    border: 1px solid rgba(15, 30, 46, 0.08);
+    color: var(--color-navy);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.scenario-btn-mobile:hover {
+    background: rgba(15, 30, 46, 0.08);
+    transform: translateY(-1px);
+}
+
+.scenario-btn-mobile.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 24px -6px rgba(15, 30, 46, 0.25);
 }
 
 .calc-collapsible-list {
@@ -1111,25 +1222,7 @@ ul {
 
     .scenario-selector-mobile::-webkit-scrollbar { display: none; }
 
-    .scenario-btn-mobile {
-        flex: 1;
-        min-width: 80px;
-        padding: 0.75rem;
-        border-radius: 1rem;
-        background: rgba(15, 30, 46, 0.05);
-        border: 1px solid rgba(15, 30, 46, 0.1);
-        color: var(--color-primary);
-        font-size: 0.75rem;
-        font-weight: 800;
-        text-align: center;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-    }
-
     .scenario-btn-mobile.active {
-        background: var(--color-primary);
-        color: white;
-        border-color: var(--color-primary);
         box-shadow: 0 10px 20px -5px rgba(15, 30, 46, 0.3);
     }
 
@@ -1190,7 +1283,7 @@ ul {
 
 .ltt-results-box {
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 1.5rem;
     background-color: #f8fafc;
 }
