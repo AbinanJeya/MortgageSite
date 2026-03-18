@@ -247,15 +247,15 @@ function getRefinanceCalculatorHTML() {
 
         <!-- Elite Features: Visuals & Export -->
         <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
+            <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
                 <h4 class="text-xl font-black mb-6 flex items-center gap-3">
                     <i class="ph ph-chart-pie text-brand-gold"></i>
                     Visual Analysis
                 </h4>
-                <div class="relative aspect-square max-w-[300px] mx-auto">
+                <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
                     <canvas id="refinanceChart"></canvas>
                 </div>
-                <p class="text-center text-xs text-brand-navy/40 mt-6 font-bold uppercase tracking-widest">Principal vs Total Interest (Scenario 1)</p>
+                <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]">Principal vs Total Interest (Scenario 1)</p>
             </div>
             
             <div class="flex flex-col gap-6">
@@ -441,14 +441,16 @@ function getPaymentCalculatorHTML() {
 
         <!-- Elite Features: Visuals & Export -->
         <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
+            <div class="glass-card p-6 md:p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
                 <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
                     <i class="ph ph-chart-pie text-brand-gold"></i>
                     Visual Analysis
                 </h4>
-                <div class="relative aspect-square max-w-[300px] mx-auto">
+                <div class="relative w-full min-h-[320px] max-w-[400px] mx-auto">
                     <canvas id="paymentChart"></canvas>
                 </div>
+                <p class="text-center text-[10px] text-brand-navy/40 mt-6 font-bold uppercase tracking-[0.2em]">Principal vs Total Interest (Scenario 1)</p>
+            </div>
                 <p class="text-center text-xs text-brand-navy/40 mt-6 font-bold uppercase tracking-widest">Principal vs Total Interest (Scenario 1)</p>
             </div>
             

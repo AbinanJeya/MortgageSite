@@ -55,8 +55,9 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -409,10 +410,12 @@ ul {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.25rem, 8vw, 4.5rem);
     color: white;
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .highlight {
@@ -1018,6 +1021,33 @@ ul {
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    /* Calculator Mobile Stacking */
+    .payment-grid {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        gap: 1.5rem;
+    }
+
+    .payment-grid .label-cell {
+        position: static;
+        width: 100%;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .calc-bottom-section {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .calc-tab {
+        min-width: 120px;
+        padding: 1rem 0.5rem;
+        font-size: 0.85rem;
     }
 }
 
