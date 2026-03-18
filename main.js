@@ -253,7 +253,7 @@ function renderAbout() {
                         <div class="relative group">
                             <div class="absolute -inset-10 bg-brand-gold/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                             <div class="relative w-80 h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[12px] border-white backdrop-blur-md bg-white/40">
-                                <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-contain object-bottom pt-8 transition-transform duration-1000 group-hover:scale-105">
+                                <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105">
                                 <div class="absolute bottom-8 left-0 right-0 text-center">
                                     <div class="inline-block bg-brand-navy/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
                                         <span class="text-white text-xs font-bold uppercase tracking-[0.2em]">Dedicated to You</span>
@@ -342,44 +342,60 @@ function renderServices() {
 
 function renderBooking() {
     return `
-        <section class="py-32 bg-brand-warm/10 relative overflow-hidden" id="booking">
+        <section class="py-32 bg-rich glass-section relative overflow-hidden" id="booking">
+            <div class="bg-rich-image" style="background-image: url('assets/booking_bg.png'); opacity: 0.15; filter: grayscale(20%);"></div>
+            <div class="absolute inset-0 bg-brand-navy/60"></div>
+            
             <!-- Decorative Elements -->
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-gold/5 rounded-full blur-[120px] reveal reveal-scale"></div>
-            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-navy/5 rounded-full blur-[120px] reveal reveal-scale"></div>
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-[120px] reveal reveal-scale"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-navy/20 rounded-full blur-[120px] reveal reveal-scale"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="lg:flex lg:items-center lg:justify-between gap-20">
-                    <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right">
-                        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-navy/5 border border-brand-navy/10 mb-6">
-                            <span class="text-brand-navy text-xs font-bold uppercase tracking-[0.3em] leading-none">Consultation</span>
-                        </div>
-                        <h3 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tight leading-tight">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
-                        <p class="text-xl text-brand-navy/60 mb-10 leading-relaxed">
-                            Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
-                        </p>
-                        <div class="space-y-6">
-                            <div class="flex items-center group/item reveal reveal-up">
-                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
-                                    <i class="ph ph-calendar-check text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                <div class="lg:flex lg:items-center lg:justify-between gap-12">
+                    <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right flex flex-col h-full">
+                        <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 h-full flex flex-col">
+                            <div>
+                                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
+                                    <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
                                 </div>
-                                <span class="text-lg font-bold text-brand-navy">Free 15-minute Discovery Call</span>
+                                <h3 class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
+                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-medium">
+                                    Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
+                                </p>
                             </div>
-                            <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
-                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
-                                    <i class="ph ph-shield-check text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                            <div class="space-y-10">
+                                <div class="flex items-center group/item reveal reveal-up">
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
+                                        <i class="ph ph-calendar-check text-4xl relative z-10"></i>
+                                    </div>
+                                    <div class="ml-8">
+                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">Free 15-minute Discovery Call</span>
+                                    </div>
                                 </div>
-                                <span class="text-lg font-bold text-brand-navy">No obligation, just expert advice</span>
-                            </div>
-                            <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
-                                <div class="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mr-5 group-hover/item:bg-brand-gold transition-colors">
-                                    <i class="ph ph-chat-text text-2xl text-brand-gold group-hover/item:text-brand-navy"></i>
+                                <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
+                                        <i class="ph ph-shield-check text-4xl relative z-10"></i>
+                                    </div>
+                                    <div class="ml-8">
+                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">No obligation, just expert advice</span>
+                                    </div>
                                 </div>
-                                <span class="text-lg font-bold text-brand-navy">Get your questions answered live</span>
+                                <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
+                                        <i class="ph ph-chat-text text-4xl relative z-10"></i>
+                                    </div>
+                                    <div class="ml-8">
+                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">Get your questions answered live</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="lg:w-1/2 reveal reveal-left">
-                        <div class="bg-white rounded-[3rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] p-4 border border-brand-navy/5 min-h-[600px] relative overflow-hidden group">
+                        <div class="group p-6 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
                            <div class="absolute inset-0 bg-brand-gold/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700"></div>
                             <div class="calendly-inline-widget relative z-10" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
                         </div>
@@ -428,46 +444,89 @@ function renderTestimonials() {
 
 function renderContact() {
     return `
-        <section class="py-24 bg-brand-gold/80 glass-section" id="contact">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass-card-dark rounded-3xl shadow-2xl overflow-hidden lg:flex">
-                    <div class="lg:w-1/2 p-12 text-white flex flex-col justify-center">
-                        <h2 class="text-5xl font-black mb-6 text-white tracking-tight leading-tight">Get a Free Quote</h2>
-                        <p class="text-brand-gold/80 mb-12 text-lg font-bold uppercase tracking-[0.2em]">Tailored Mortgage Solutions</p>
-                        <div class="space-y-8">
-                            <div class="flex items-center group/contact transform hover:translate-x-2 transition-transform">
-                                <div class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center mr-6 border-white/10 group-hover:border-brand-gold/50 transition-colors">
-                                    <i class="ph ph-phone text-brand-gold text-2xl"></i>
+        <section class="py-32 bg-rich overflow-hidden" id="contact">
+            <img src="assets/contact_bg.png" alt="Contact background" class="bg-rich-image">
+            <div class="bg-rich-overlay"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-24 reveal reveal-up">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
+                        <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Get Started</span>
+                    </div>
+                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Secure Your<br><span class="text-brand-gold">Free Quote Today</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Info Card -->
+                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-right flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-4xl font-black text-white mb-6 tracking-tight leading-tight">Direct Access to<br><span class="text-brand-gold">Expert Advice</span></h3>
+                            <p class="text-white/60 text-xl leading-relaxed mb-12">
+                                Skip the robots. Reach out directly for a personalized consultation tailored to your unique financial goals.
+                            </p>
+                            
+                            <div class="space-y-10">
+                                <div class="flex items-center group/item transform hover:translate-x-3 transition-transform duration-500">
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
+                                        <i class="ph ph-phone text-4xl"></i>
+                                    </div>
+                                    <div class="ml-8">
+                                        <p class="text-brand-gold/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Call Anytime</p>
+                                        <p class="text-2xl font-black text-white tracking-tight">${agentConfig.contact.phone}</p>
+                                    </div>
                                 </div>
-                                <span class="text-lg font-black text-white tracking-tight">${agentConfig.contact.phone}</span>
-                            </div>
-                            <div class="flex items-center group/contact transform hover:translate-x-2 transition-transform">
-                                <div class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center mr-6 border-white/10 group-hover:border-brand-gold/50 transition-colors">
-                                    <i class="ph ph-envelope-simple text-brand-gold text-2xl"></i>
+                                
+                                <div class="flex items-center group/item transform hover:translate-x-3 transition-transform duration-500">
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
+                                        <i class="ph ph-envelope-simple text-4xl"></i>
+                                    </div>
+                                    <div class="ml-8">
+                                        <p class="text-brand-gold/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Email Us</p>
+                                        <p class="text-2xl font-black text-white tracking-tight">${agentConfig.contact.email}</p>
+                                    </div>
                                 </div>
-                                <span class="text-lg font-black text-white tracking-tight">${agentConfig.contact.email}</span>
                             </div>
                         </div>
+                        
+                        <div class="mt-16">
+                            <ul class="space-y-4 mb-10">
+                                <li class="flex items-center text-sm font-medium text-white/80">
+                                    <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                    No-Obligation Financial Review
+                                </li>
+                                <li class="flex items-center text-sm font-medium text-white/80">
+                                    <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                    Direct Underwriter Direct Access
+                                </li>
+                            </ul>
+                            
+                            <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="mailto:${agentConfig.contact.email}">
+                                Send Message 
+                                <div class="ml-3 w-8 h-[2px] bg-brand-gold transform group-hover/btn:w-12 transition-all"></div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="lg:w-1/2 p-12 bg-white/95">
+                    
+                    <!-- Form Card -->
+                    <div class="p-10 md:p-14 rounded-[3rem] glass-card border-white/10 reveal reveal-left">
                         <form action="#" class="grid grid-cols-1 gap-y-6" onsubmit="event.preventDefault(); alert('Request sent!');">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-bold text-brand-navy">First Name</label>
-                                    <input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" type="text"/>
+                                    <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">First Name</label>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="John"/>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-brand-navy">Last Name</label>
-                                    <input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" type="text"/>
+                                    <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Last Name</label>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="Doe"/>
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-brand-navy">Email Address</label>
-                                <input class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" type="email"/>
+                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Email Address</label>
+                                <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="email" placeholder="john@example.com"/>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-brand-navy">I am interested in...</label>
-                                <select class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy">
+                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Interest</label>
+                                <select class="w-full bg-brand-navy border border-white/10 rounded-2xl py-4 px-6 text-white appearance-none focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold cursor-pointer">
                                     <option>New Home Purchase</option>
                                     <option>Refinancing</option>
                                     <option>Debt Consolidation</option>
@@ -475,10 +534,12 @@ function renderContact() {
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-brand-navy">Message (Optional)</label>
-                                <textarea class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-gold focus:ring-brand-gold text-brand-navy" rows="4"></textarea>
+                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Message</label>
+                                <textarea class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" rows="4" placeholder="How can we help?"></textarea>
                             </div>
-                            <button class="w-full bg-brand-gold text-brand-navy font-bold py-4 rounded-lg hover:bg-brand-navy hover:text-white transition-all shadow-lg" type="submit">Submit Request</button>
+                            <button class="w-full mt-4 bg-brand-gold text-brand-navy font-black py-5 rounded-[2rem] hover:bg-brand-navy hover:text-white hover:scale-[1.02] transition-all shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] uppercase tracking-[0.2em] text-sm" type="submit">
+                                Request Quote
+                            </button>
                         </form>
                     </div>
                 </div>

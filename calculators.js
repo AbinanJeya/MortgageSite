@@ -157,8 +157,9 @@ function getRefinanceCalculatorHTML() {
     }
 
     return `
-        <div class="calc-grid payment-grid">
-            <!-- Row 1: Start Here -->
+        <div class="calc-scroll-wrapper">
+            <div class="calc-grid payment-grid">
+                <!-- Row 1: Start Here -->
             <div class="calc-cell label-cell" style="display:flex;align-items:center;">
                 <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
                 <i class="ph ph-arrow-right"></i>
@@ -236,19 +237,62 @@ function getRefinanceCalculatorHTML() {
                 <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0" id="ref-payment-${i}">$-</div>
             `).join('')}
         </div>
-        
-        <div class="calc-collapsible-list" style="margin-top: 2rem;">
+    </div>
+    
+    <div class="calc-collapsible-list" style="margin-top: 2rem;">
             <div class="calc-collapsible disabled">Monthly expenses</div>
             <div class="calc-collapsible disabled">Interest rate risk</div>
             <div class="calc-collapsible disabled">Amortization schedule</div>
+        </div>
+
+        <!-- Elite Features: Visuals & Export -->
+        <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
+                <h4 class="text-xl font-black mb-6 flex items-center gap-3">
+                    <i class="ph ph-chart-pie text-brand-gold"></i>
+                    Visual Analysis
+                </h4>
+                <div class="relative aspect-square max-w-[300px] mx-auto">
+                    <canvas id="refinanceChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-brand-navy/40 mt-6 font-bold uppercase tracking-widest">Principal vs Total Interest (Scenario 1)</p>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                    <h4 class="text-xl font-black mb-6 flex items-center gap-3">
+                        <i class="ph ph-file-pdf text-brand-gold"></i>
+                        Professional Report
+                    </h4>
+                    <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your refinance scenarios to review with your advisor.</p>
+                    <button onclick="downloadPDF('refinance')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
+                        <i class="ph ph-download-simple"></i>
+                        Download PDF Report
+                    </button>
+                </div>
+
+                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                    <h4 class="text-xl font-black mb-6 flex items-center gap-3">
+                        <i class="ph ph-envelope-simple text-brand-gold"></i>
+                        Email My Results
+                    </h4>
+                    <div class="flex flex-col gap-4">
+                        <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
+                        <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
+                            Send Results
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     `;
 }
 
 function getPaymentCalculatorHTML() {
     return `
-        <div class="calc-grid payment-grid">
-            <!-- Row 1: Start Here -->
+        <div class="calc-scroll-wrapper">
+            <div class="calc-grid payment-grid">
+                <!-- Row 1: Start Here -->
             <div class="calc-cell label-cell" style="display:flex;align-items:center;">
                 <span style="font-weight:600;margin-right:0.5rem;">Start here</span> 
                 <i class="ph ph-arrow-right"></i>
@@ -354,8 +398,9 @@ function getPaymentCalculatorHTML() {
                 <div class="calc-cell highlight-row bg-light-blue calc-readonly text-blue fw-bold border-bottom-0" id="pay-payment-${i}">$-</div>
             `).join('')}
         </div>
+    </div>
         
-        <div class="calc-bottom-section">
+    <div class="calc-bottom-section">
             <div class="calc-bottom-left">
                 <p class="fw-bold mb-2" style="font-size: 0.95rem;">Are you a first time home buyer?</p>
                 <div class="toggle-group">
@@ -393,63 +438,113 @@ function getPaymentCalculatorHTML() {
             <div class="calc-collapsible">Interest rate risk</div>
             <div class="calc-collapsible">Amortization schedule</div>
         </div>
-    `;
-}
 
-// Function exposed to main.js to generate the HTML structure
-window.renderCalculators = function() {
-    return `
-        <section class="section calculators-section" id="calculators">
-            <div class="container">
-                <h2 class="section-title">Mortgage Calculators</h2>
-                <p class="section-subtitle">Use our interactive tools to estimate your payments, affordability, and more.</p>
-                
-                <div class="calculator-container">
-                    <!-- Tab Navigation -->
-                    <div class="calculator-tabs">
-                        <button class="calc-tab active" onclick="switchCalculator('payment')">
-                            <i class="ph-fill ph-calculator"></i>
-                            <span>Payment Calculator</span>
+        <!-- Elite Features: Visuals & Export -->
+        <div class="calc-elite-section mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5 shadow-inner">
+                <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
+                    <i class="ph ph-chart-pie text-brand-gold"></i>
+                    Visual Analysis
+                </h4>
+                <div class="relative aspect-square max-w-[300px] mx-auto">
+                    <canvas id="paymentChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-brand-navy/40 mt-6 font-bold uppercase tracking-widest">Principal vs Total Interest (Scenario 1)</p>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                    <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
+                        <i class="ph ph-file-pdf text-brand-gold"></i>
+                        Professional Report
+                    </h4>
+                    <p class="text-sm text-brand-navy/60 mb-8 leading-relaxed">Download a branded PDF summary of your mortgage scenarios to review with your advisor.</p>
+                    <button onclick="downloadPDF('payment')" class="w-full bg-brand-navy text-white font-black py-4 rounded-2xl hover:bg-brand-gold hover:text-brand-navy transition-all shadow-lg uppercase tracking-widest text-xs flex items-center justify-center gap-3">
+                        <i class="ph ph-download-simple"></i>
+                        Download PDF Report
+                    </button>
+                </div>
+
+                <div class="glass-card p-8 rounded-[2.5rem] border-brand-navy/5 bg-brand-navy/5">
+                    <h4 class="text-xl font-black mb-6 flex items-center gap-3 text-brand-navy">
+                        <i class="ph ph-envelope-simple text-brand-gold"></i>
+                        Email My Results
+                    </h4>
+                    <div class="flex flex-col gap-4">
+                        <input type="email" placeholder="your@email.com" class="calc-input outlined-soft py-3 px-5 rounded-xl text-sm font-bold">
+                        <button onclick="alert('Results shared! We will reach out shortly.')" class="w-full bg-brand-gold text-brand-navy font-black py-4 rounded-2xl hover:bg-brand-navy hover:text-white transition-all shadow-lg uppercase tracking-widest text-xs">
+                            Send Results
                         </button>
-                        <button class="calc-tab" onclick="switchCalculator('refinance')">
-                            <i class="ph-fill ph-house-line"></i>
-                            <span>Refinance Calculator</span>
-                        </button>
-                        <button class="calc-tab" onclick="switchCalculator('land-transfer')">
-                            <i class="ph-fill ph-tree"></i>
-                            <span>Land Transfer Tax Calculator</span>
-                        </button>
-                        <button class="calc-tab" onclick="switchCalculator('affordability')">
-                            <i class="ph-fill ph-piggy-bank"></i>
-                            <span>Affordability Calculator</span>
-                        </button>
-                    </div>
-
-                    <!-- Calculator Bodies -->
-                    <div class="calculator-bodies">
-                        <!-- Payment Calculator -->
-                        <div id="calc-payment" class="calc-body active">
-                            ${getPaymentCalculatorHTML()}
-                        </div>
-
-                        <!-- Refinance Calculator -->
-                        <div id="calc-refinance" class="calc-body">
-                            ${getRefinanceCalculatorHTML()}
-                        </div>
-
-                        <!-- Land Transfer Tax Calculator -->
-                        <div id="calc-land-transfer" class="calc-body">
-                            ${getLandTransferTaxCalculatorHTML()}
-                        </div>
-
-                        <!-- Affordability Calculator -->
-                        <div id="calc-affordability" class="calc-body">
-                            ${getAffordabilityCalculatorHTML()}
-                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    `;
+}
+
+// Function exposed to main.html to generate the HTML structure
+window.renderCalculators = function() {
+    return `
+        <div class="calculator-container bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/5">
+            <!-- Tab Navigation -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 p-2 gap-2 bg-brand-navy/30 backdrop-blur-xl border-b border-white/10">
+                <button class="calc-tab active group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('payment')">
+                    <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col items-center gap-2">
+                        <i class="ph ph-calculator text-2xl group-[.active]:text-brand-gold transition-colors"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] group-[.active]:text-brand-gold transition-colors">Payment</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
+                </button>
+                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('refinance')">
+                    <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col items-center gap-2">
+                        <i class="ph ph-arrows-merge text-2xl group-[.active]:text-brand-gold transition-colors"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] group-[.active]:text-brand-gold transition-colors">Refinance</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
+                </button>
+                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('land-transfer')">
+                    <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col items-center gap-2">
+                        <i class="ph ph-stamp text-2xl group-[.active]:text-brand-gold transition-colors"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] group-[.active]:text-brand-gold transition-colors">Tax (LTT)</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
+                </button>
+                <button class="calc-tab group relative px-6 py-5 rounded-2xl transition-all duration-500 overflow-hidden" onclick="switchCalculator('affordability')">
+                    <div class="absolute inset-0 bg-brand-gold/10 opacity-0 group-[.active]:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 flex flex-col items-center gap-2">
+                        <i class="ph ph-piggy-bank text-2xl group-[.active]:text-brand-gold transition-colors"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] group-[.active]:text-brand-gold transition-colors">Affordability</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-[.active]:scale-x-100 transition-transform duration-500 origin-left"></div>
+                </button>
+            </div>
+
+            <!-- Calculator Bodies -->
+            <div class="calculator-bodies bg-white p-8 md:p-12 text-brand-navy">
+                <!-- Payment Calculator -->
+                <div id="calc-payment" class="calc-body active revealed">
+                    ${getPaymentCalculatorHTML()}
+                </div>
+
+                <!-- Refinance Calculator -->
+                <div id="calc-refinance" class="calc-body revealed">
+                    ${getRefinanceCalculatorHTML()}
+                </div>
+
+                <!-- Land Transfer Tax Calculator -->
+                <div id="calc-land-transfer" class="calc-body revealed">
+                    ${getLandTransferTaxCalculatorHTML()}
+                </div>
+
+                <!-- Affordability Calculator -->
+                <div id="calc-affordability" class="calc-body revealed">
+                    ${getAffordabilityCalculatorHTML()}
+                </div>
+            </div>
+        </div>
     `;
 };
 
@@ -547,20 +642,23 @@ function updatePaymentCalculator() {
         let dpAmt = parseCurrency(dpAmtInput.value);
         let dpPct = parseFloat(dpPctInput.value);
         
-        // Let's assume user interacts with DP%. Calculate DP$ if valid price.
-        if (price > 0 && !isNaN(dpPct) && document.activeElement === dpPctInput) {
-            dpAmt = price * (dpPct / 100);
-            dpAmtInput.value = formatCurrency(dpAmt).replace('$', '');
-        } else if (price > 0 && !isNaN(dpAmt) && document.activeElement === dpAmtInput) {
-            dpPct = (dpAmt / price) * 100;
-            dpPctInput.value = dpPct.toFixed(2);
-        } else if (price > 0 && isNaN(dpPct) && !isNaN(dpAmt)) {
-            dpPct = (dpAmt / price) * 100;
-            dpPctInput.value = dpPct.toFixed(2);
-        } else if (price > 0 && !isNaN(dpPct) && isNaN(dpAmt)) {
-            dpAmt = price * (dpPct / 100);
-            dpAmtInput.value = formatCurrency(dpAmt).replace('$', '');
+        // Refined sync logic to avoid "jumpy" values while typing
+        if (price > 0) {
+            if (document.activeElement === dpPctInput && !isNaN(dpPct)) {
+                const newAmt = price * (dpPct / 100);
+                if (Math.abs(parseCurrency(dpAmtInput.value) - newAmt) > 1) {
+                    dpAmtInput.value = Math.round(newAmt).toLocaleString('en-CA');
+                }
+            } else if (document.activeElement === dpAmtInput && !isNaN(dpAmt)) {
+                const newPct = (dpAmt / price) * 100;
+                if (Math.abs(parseFloat(dpPctInput.value) - newPct) > 0.01) {
+                    dpPctInput.value = newPct.toFixed(2);
+                }
+            }
         }
+        
+        // Re-parse after potential sync
+        dpAmt = parseCurrency(dpAmtInput.value);
 
         // Calculate outputs
         const rate = parseFloat(rateInput.value) || 0;
@@ -584,13 +682,18 @@ function updatePaymentCalculator() {
             const totalMortgage = (price - dpAmt) + cmhc;
             const payment = computePayment(totalMortgage, rate, amort, freq);
 
-            cmhcOutput.innerText = formatCurrency(cmhc);
-            totalOutput.innerText = formatCurrency(totalMortgage);
-            paymentOutput.innerText = formatCurrency(payment);
+            animateValue(`pay-cmhc-${i}`, cmhc);
+            animateValue(`pay-total-${i}`, totalMortgage);
+            animateValue(`pay-payment-${i}`, payment);
+
+            // Update chart for Scenario 1
+            if (i === 0) {
+                updateCharts('payment', totalMortgage, rate, amort);
+            }
         } else {
-            cmhcOutput.innerText = '$-';
-            totalOutput.innerText = '$-';
-            paymentOutput.innerText = '$-';
+            document.getElementById(`pay-cmhc-${i}`).innerText = '$-';
+            document.getElementById(`pay-total-${i}`).innerText = '$-';
+            document.getElementById(`pay-payment-${i}`).innerText = '$-';
         }
     }
 }
@@ -615,7 +718,12 @@ function updateRefinanceCalculator() {
 
         if (principal > 0) {
             const payment = computePayment(principal, rate, amort, freq);
-            paymentOutput.innerText = formatCurrency(payment);
+            animateValue(`ref-payment-${i}`, payment);
+            
+            // Update chart for Scenario 1
+            if (i === 0) {
+                updateCharts('refinance', principal, rate, amort);
+            }
         } else {
             paymentOutput.innerText = '$-';
         }
@@ -692,7 +800,7 @@ function updateLandTransferTaxCalculator() {
         document.getElementById('ltt-rebate').parentElement.style.display = 'none';
     }
 
-    document.getElementById('ltt-total').innerText = formatCurrency(totalTax);
+    animateValue('ltt-total', totalTax);
 }
 
 function computePrincipal(payment, annualRate, amortYears) {
@@ -750,8 +858,8 @@ function updateAffordabilityCalculator() {
 
     if (priceEl && paymentEl) {
         if (totalIncome > 0 || dp > 0) {
-            priceEl.innerText = formatCurrency(maxPrice);
-            paymentEl.innerText = formatCurrency(maxPayment);
+            animateValue('aff-max-price', maxPrice);
+            animateValue('aff-max-payment', maxPayment);
         } else {
             priceEl.innerText = '$-';
             paymentEl.innerText = '$-';
@@ -879,4 +987,184 @@ window.initCalculatorLogic = function() {
     updateRefinanceCalculator();
     updateLandTransferTaxCalculator();
     updateAffordabilityCalculator();
+};
+
+// --- Elite Features Logic --- \\
+
+let chartInstances = {};
+let prevValues = {};
+
+/**
+ * numerical roll animation for a haptic-like feel
+ */
+function animateValue(id, end, duration = 800, isCurrency = true) {
+    const obj = document.getElementById(id);
+    if (!obj) return;
+    
+    // Parse the current value from the text content
+    const start = prevValues[id] || 0;
+    prevValues[id] = end;
+
+    // If change is too small, just set it
+    if (Math.abs(start - end) < 1) {
+        obj.innerText = isCurrency ? formatCurrency(end) : end.toLocaleString();
+        return;
+    }
+
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        // Easing function (outQuart)
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(easeProgress * (end - start) + start);
+        obj.innerText = isCurrency ? formatCurrency(current) : current.toLocaleString();
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+/**
+ * Update Chart.js visualization for Principal vs Interest
+ */
+function updateCharts(type, principal, annualRate, amortYears) {
+    const canvasId = type === 'payment' ? 'paymentChart' : 'refinanceChart';
+    const ctx = document.getElementById(canvasId);
+    if (!ctx) return;
+
+    // Calculation for total interest over the full amortization
+    const r = annualRate / 100;
+    if (r <= 0 || amortYears <= 0 || principal <= 0) return;
+
+    // Canadian standard compounding
+    const iMonths = Math.pow(1 + r/2, 2/12) - 1;
+    const nMonths = amortYears * 12;
+    const monthlyPayment = principal * (iMonths * Math.pow(1 + iMonths, nMonths)) / (Math.pow(1 + iMonths, nMonths) - 1);
+    const totalPaid = monthlyPayment * nMonths;
+    const totalInterest = Math.max(0, totalPaid - principal);
+
+    if (chartInstances[canvasId]) {
+        chartInstances[canvasId].destroy();
+    }
+
+    chartInstances[canvasId] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Principal', 'Interest'],
+            datasets: [{
+                data: [Math.round(principal), Math.round(totalInterest)],
+                backgroundColor: ['#0F1E2E', '#D3BD73'],
+                borderWidth: 0,
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 2000,
+                easing: 'easeOutQuart'
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#0F1E2E',
+                        font: {
+                            family: 'Inter, sans-serif',
+                            weight: '700',
+                            size: 11
+                        },
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) label += ': ';
+                            label += formatCurrency(context.raw);
+                            return label;
+                        }
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+}
+
+/**
+ * Generate a branded PDF report of the calculation results
+ */
+window.downloadPDF = function(type) {
+    const element = document.getElementById(`calc-${type}`);
+    if (!element) return;
+
+    // Use a loading state for the button
+    const btn = event?.currentTarget;
+    const originalContent = btn ? btn.innerHTML : '';
+    if (btn) btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Generating...';
+
+    const opt = {
+        margin:       [0.5, 0.5],
+        filename:     `AskJuthis_Mortgage_Report_${type.toUpperCase()}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true,
+            letterRendering: true
+        },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // Construct a branded wrapper for the PDF
+    const wrapper = document.createElement('div');
+    wrapper.style.padding = '40px';
+    wrapper.style.background = '#fff';
+    wrapper.style.fontFamily = 'Inter, sans-serif';
+
+    const brandHeader = `
+        <div style="text-align: center; border-bottom: 3px solid #D3BD73; padding-bottom: 25px; margin-bottom: 40px;">
+            <h1 style="color: #0F1E2E; font-size: 28px; margin: 0; font-weight: 900; letter-spacing: -0.02em;">ASK JUTHIS</h1>
+            <p style="color: #D3BD73; margin: 8px 0 0 0; font-weight: 800; letter-spacing: 0.2em; font-size: 10px; text-transform: uppercase;">Expert Mortgage Strategy & Analysis</p>
+        </div>
+    `;
+
+    // Clone the calculator but simplify for PDF
+    const clone = element.cloneNode(true);
+    
+    // Cleanup: Remove inputs and keep only results for a clean report
+    const eliteSection = clone.querySelector('.calc-elite-section');
+    if (eliteSection) {
+        // Find and remove interactive controls (buttons, email form)
+        const forms = eliteSection.querySelectorAll('.flex.flex-col.gap-6');
+        forms.forEach(f => f.remove());
+        // Center the remaining chart card
+        const chartCard = eliteSection.querySelector('.glass-card');
+        if (chartCard) {
+            chartCard.style.margin = '0 auto';
+            chartCard.style.maxWidth = '500px';
+        }
+    }
+
+    wrapper.innerHTML = brandHeader;
+    wrapper.appendChild(clone);
+
+    // Footer for the PDF
+    const footer = document.createElement('div');
+    footer.innerHTML = `
+        <div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #999; font-size: 10px;">
+            <p>Calculations are for informational purposes only. Contact AskJuthis for a formal mortgage commitment.</p>
+            <p>© ${new Date().getFullYear()} AskJuthis | hello@askjuthis.com</p>
+        </div>
+    `;
+    wrapper.appendChild(footer);
+
+    html2pdf().set(opt).from(wrapper).save().then(() => {
+        if (btn) btn.innerHTML = originalContent;
+    });
 };
