@@ -955,22 +955,22 @@ ul {
 
 .calc-input {
     width: 100%;
-    border: 1.5px solid rgba(15, 30, 46, 0.08);
-    border-radius: 1rem;
+    border: 1.5px solid rgba(15, 30, 46, 0.15);
+    border-radius: 0.75rem;
     padding: 1rem 1.25rem;
     outline: none;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 500;
     color: var(--color-navy);
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    box-shadow: 0 4px 6px -1px rgba(15, 30, 46, 0.05), 0 2px 4px -1px rgba(15, 30, 46, 0.03);
+    transition: all 0.3s ease;
 }
 
 .calc-input:focus {
     border-color: var(--color-primary);
     background: #fff;
-    box-shadow: 0 10px 25px -5px rgba(211, 189, 115, 0.15);
+    box-shadow: 0 0 0 4px rgba(211, 189, 115, 0.15);
     transform: translateY(-1px);
 }
 
@@ -1061,18 +1061,20 @@ ul {
 .scenario-selector-mobile::-webkit-scrollbar { display: none; }
 
 .scenario-btn-mobile {
-    min-width: 100px;
-    padding: 0.85rem 1.5rem;
-    border-radius: 1rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 0.25rem;
+    border-radius: 0.5rem;
     background: rgba(15, 30, 46, 0.03);
     border: 1px solid rgba(15, 30, 46, 0.08);
     color: var(--color-navy);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800;
     text-align: center;
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .scenario-btn-mobile:hover {
@@ -1101,18 +1103,20 @@ ul {
 .scenario-selector-mobile::-webkit-scrollbar { display: none; }
 
 .scenario-btn-mobile {
-    min-width: 100px;
-    padding: 0.85rem 1.5rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 0.25rem;
     border-radius: 0.5rem;
     background: rgba(15, 30, 46, 0.03);
     border: 1px solid rgba(15, 30, 46, 0.08);
     color: var(--color-navy);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800;
     text-align: center;
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .scenario-btn-mobile:hover {

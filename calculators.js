@@ -116,7 +116,7 @@ function getAffordabilityCalculatorHTML() {
                     <i class="ph ph-crown-simple text-brand-gold text-2xl"></i>
                     <h4 style="color: var(--color-navy); margin: 0; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;">Maximum Affordable Home Price</h4>
                 </div>
-                <div id="aff-max-price" class="text-gold-elite" style="font-size: 3.5rem; line-height: 1;"><span class="skeleton-shimmer">$-</span></div>
+                <div id="aff-max-price" class="text-4xl sm:text-5xl md:text-6xl text-gold-elite font-black tracking-tighter" style="line-height: 1;"><span class="skeleton-shimmer">$-</span></div>
                 
                 <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 1rem; color: var(--color-navy); font-weight: 600;">
                     <div class="flex items-center gap-2">
@@ -169,9 +169,10 @@ function getLandTransferTaxCalculatorHTML() {
                         <span class="tax-label flex items-center gap-2"><i class="ph ph-gift text-emerald-500/50"></i> Total Rebate</span>
                         <span class="tax-val font-bold" id="ltt-rebate"><span class="skeleton-shimmer">$-</span></span>
                     </div>
-                    <div class="tax-row mt-8 pt-6 border-t flex justify-between items-center">
-                        <span class="tax-label text-xl font-black text-brand-navy uppercase tracking-tighter" style="font-family: 'Outfit', sans-serif;">Total Land Transfer Tax</span>
-                        <span class="text-3xl text-gold-elite" id="ltt-total"><span class="skeleton-shimmer">$-</span></span>
+                    <div class="tax-row mt-8 pt-6 border-t flex justify-between items-center gap-2">
+                        <span class="tax-label text-sm sm:text-xl font-bold sm:font-black text-brand-navy uppercase tracking-tighter" style="font-family: 'Outfit', sans-serif;">Total Land Transfer Tax</span>
+                        <span class="text-2xl sm:text-3xl text-gold-elite font-black" id="ltt-total"><span class="skeleton-shimmer">$-</span></span>
+
                     </div>
                 </div>
             </div>
