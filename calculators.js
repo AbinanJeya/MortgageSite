@@ -368,11 +368,13 @@ function getRefinanceCalculatorHTML() {
                     <!-- Row 2: Amortization -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-calendar text-brand-navy/30 text-xl mr-3"></i>
-                        <div class="calc-cell label-cell">
-                        <span>Amortization</span>
-                        <i class="ph ph-question tooltip-trigger" data-tip="The total length of time it takes to pay off the mortgage in full. Typically 25 or 30 years."></i>
-                        <span class="label-sub">Total years to pay off loan</span>
-                    </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span>Amortization</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="The total length of time it takes to pay off the mortgage in full. Typically 25 or 30 years."></i>
+                            </div>
+                            <span class="label-sub">Total years to pay off loan</span>
+                        </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
@@ -386,11 +388,13 @@ function getRefinanceCalculatorHTML() {
                     <!-- Row 3: Mortgage rate -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-percent text-brand-navy/30 text-xl mr-3"></i>
-                        <div class="calc-cell label-cell">
-                        <span>Mortgage rate</span>
-                        <i class="ph ph-question tooltip-trigger" data-tip="The annual interest rate charged by the lender. Fixed or variable options available."></i>
-                        <span class="label-sub">Current annual interest rate</span>
-                    </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span>Mortgage rate</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="The annual interest rate charged by the lender. Fixed or variable options available."></i>
+                            </div>
+                            <span class="label-sub">Current annual interest rate</span>
+                        </div>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
@@ -404,7 +408,10 @@ function getRefinanceCalculatorHTML() {
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-clock text-brand-navy/30 text-xl mr-3"></i>
                         <div>
-                            <span>Payment Frequency</span>
+                            <div class="flex items-center gap-2">
+                                <span>Payment Frequency</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="How often you make mortgage payments (Monthly, Bi-weekly, etc.)."></i>
+                            </div>
                             <span class="label-sub">How often you pay</span>
                         </div>
                     </div>
