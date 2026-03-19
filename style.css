@@ -1665,10 +1665,13 @@ ul {
 .tooltip-trigger { position: relative; cursor: help; }
 .tooltip-trigger::after {
     content: attr(data-tip);
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    text-transform: none;
     position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(10px);
-    padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3); color: #000; font-size: 0.75rem; font-weight: 500; line-height: 1.4;
-    border-radius: 0.75rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); white-space: normal; width: 200px; z-index: 1000;
+    padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(15, 30, 46, 0.1); color: var(--color-navy); font-size: 0.8rem; font-weight: 500; line-height: 1.5;
+    border-radius: 1rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); white-space: normal; width: 220px; z-index: 1000;
     opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
 }
 .tooltip-trigger:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
