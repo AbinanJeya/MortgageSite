@@ -105,9 +105,10 @@ function getAffordabilityCalculatorHTML() {
             <!-- Annual Income -->
             <div class="aff-row">
                 <div class="aff-label-col">
-                    <div class="flex items-center mb-1">
-                        <i class="ph ph-identification-card text-brand-navy/30 mr-2 text-xl"></i>
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="ph ph-identification-card text-brand-navy/30 text-xl"></i>
                         <span class="aff-row-title" style="font-family: 'Outfit', sans-serif;">Annual Income</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="Your total gross annual income before taxes. Include bonuses and other consistent sources of income."></i>
                     </div>
                     <p class="aff-row-desc">Your gross income before-tax, including bonuses and supplementary income.</p>
                 </div>
@@ -126,8 +127,10 @@ function getAffordabilityCalculatorHTML() {
             <!-- Down payment -->
             <div class="aff-row">
                 <div class="aff-label-col">
-                    <span class="aff-row-title">Down payment</span>
-                    <i class="ph ph-question info-icon"></i>
+                    <div class="flex items-center gap-2">
+                        <span class="aff-row-title">Down payment</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The total cash amount you will pay upfront towards the home purchase."></i>
+                    </div>
                 </div>
                 <div class="aff-input-col">
                     <div class="calc-input-wrapper with-symbol">
@@ -140,8 +143,10 @@ function getAffordabilityCalculatorHTML() {
             <!-- Maximum amortization -->
             <div class="aff-row">
                 <div class="aff-label-col">
-                    <span class="aff-row-title">Maximum amortization</span>
-                    <i class="ph ph-question info-icon"></i>
+                    <div class="flex items-center gap-2">
+                        <span class="aff-row-title">Maximum amortization</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The total length of time (in years) it will take to pay off your mortgage in full."></i>
+                    </div>
                 </div>
                 <div class="aff-input-col">
                     <div class="calc-input-wrapper with-symbol">
@@ -170,8 +175,10 @@ function getAffordabilityCalculatorHTML() {
             <!-- Living costs -->
             <div class="aff-row">
                 <div class="aff-label-col">
-                    <span class="aff-row-title">Living costs of your future home</span>
-                    <i class="ph ph-question info-icon"></i>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="aff-row-title">Living costs of your future home</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="Estimated monthly property taxes, condo fees, and heating costs used to calculate your total debt ratio."></i>
+                    </div>
                     <p class="aff-row-desc"><i>(Optional)</i><br>If you don't know these costs, leave the fields blank and we will estimate for you.</p>
                 </div>
                 <div class="aff-input-col">
@@ -193,8 +200,10 @@ function getAffordabilityCalculatorHTML() {
             <!-- Debt payments -->
             <div class="aff-row" style="border-bottom: none;">
                 <div class="aff-label-col">
-                    <span class="aff-row-title">Debt payments</span>
-                    <i class="ph ph-question info-icon"></i>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="aff-row-title">Debt payments</span>
+                        <i class="ph ph-question tooltip-trigger" data-tip="Any current monthly financial obligations like credit cards, car loans, or other personal loans."></i>
+                    </div>
                     <p class="aff-row-desc"><i>(Optional)</i><br>Enter debt payments if applicable. If you have none, you can leave blank.</p>
                 </div>
                 <div class="aff-input-col">
@@ -266,7 +275,10 @@ function getLandTransferTaxCalculatorHTML() {
                             <div class="w-6 h-6 border-2 border-brand-navy/20 rounded-md peer-checked:bg-brand-gold peer-checked:border-brand-gold transition-all"></div>
                             <i class="ph ph-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity"></i>
                         </div>
-                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors">I'm a first time home buyer</span>
+                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors flex items-center gap-1">
+                            I'm a first time home buyer
+                            <i class="ph ph-question tooltip-trigger" data-tip="Many provinces offer rebates for first-time buyers. Checking this will apply the relevant rebates for your location."></i>
+                        </span>
                     </label>
 
                     <label id="ltt-new-home-wrapper" class="flex items-center gap-3 cursor-pointer group" style="display: none;">
@@ -275,7 +287,10 @@ function getLandTransferTaxCalculatorHTML() {
                             <div class="w-6 h-6 border-2 border-brand-navy/20 rounded-md peer-checked:bg-brand-gold peer-checked:border-brand-gold transition-all"></div>
                             <i class="ph ph-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity"></i>
                         </div>
-                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors">I'm buying a newly built home</span>
+                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors flex items-center gap-1">
+                            I'm buying a newly built home
+                            <i class="ph ph-question tooltip-trigger" data-tip="Specifically for BC: Newly built homes up to $1.1M may be eligible for a full or partial PTT exemption."></i>
+                        </span>
                     </label>
                 </div>
 
@@ -325,11 +340,11 @@ function getRefinanceCalculatorHTML() {
             <div class="calc-scroll-wrapper">
                 <div class="calc-grid payment-grid">
                     <!-- Row 1: Start Here -->
-                    <div class="calc-cell label-cell" style="display:flex;align-items:center;">
+                    <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-house-line text-brand-gold text-xl mr-3"></i>
-                        <div>
+                        <div class="flex items-center gap-2">
                             <span style="font-weight:700;">Mortgage Amount</span>
-                            <span class="label-sub">How much do you need to borrow?</span>
+                            <i class="ph ph-question tooltip-trigger" data-tip="The total amount of your current mortgage that you are looking to refinance."></i>
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
@@ -488,9 +503,9 @@ function getPaymentCalculatorHTML() {
                     <!-- Row 1: Start Here -->
                     <div class="calc-cell label-cell flex items-center">
                         <i class="ph ph-tag text-brand-gold text-xl mr-3"></i>
-                        <div>
+                        <div class="flex items-center gap-2">
                             <span>Purchase Price</span>
-                            <span class="label-sub">The total cost of the home</span>
+                            <i class="ph ph-question tooltip-trigger" data-tip="The total agreement price of the home you are purchasing."></i>
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
@@ -551,7 +566,7 @@ function getPaymentCalculatorHTML() {
                     <!-- Row 5: Amortization -->
                     <div class="calc-cell label-cell">
                         Amortization
-                        <i class="ph ph-question info-icon"></i>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The total length of time it will take to pay off your mortgage in full. Typically 25 or 30 years."></i>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
@@ -565,7 +580,7 @@ function getPaymentCalculatorHTML() {
                     <!-- Row 6: Mortgage Rate -->
                     <div class="calc-cell label-cell">
                         Mortgage rate
-                        <i class="ph ph-question info-icon"></i>
+                        <i class="ph ph-question tooltip-trigger" data-tip="The annual interest rate charged by the lender for the mortgage."></i>
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
@@ -671,12 +686,18 @@ function getPaymentCalculatorHTML() {
                                     <span class="leader-value" id="pay-close-ltt">$-</span>
                                 </div>
                                 <div class="leader-row">
-                                    <span class="leader-label">Lawyer fees</span>
+                                    <span class="leader-label flex items-center gap-1">
+                                        Lawyer fees
+                                        <i class="ph ph-question tooltip-trigger" data-tip="The cost of hiring a real estate lawyer to handle the closing documents and title transfer."></i>
+                                    </span>
                                     <span class="leader-dots"></span>
                                     <span class="leader-value"><input type="text" id="pay-input-lawyer" class="calc-mini-input" value="$1,000" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
                                 </div>
                                 <div class="leader-row">
-                                    <span class="leader-label">Title insurance</span>
+                                    <span class="leader-label flex items-center gap-1">
+                                        Title insurance
+                                        <i class="ph ph-question tooltip-trigger" data-tip="Insurance that protects you and the lender against losses related to the property's title or ownership."></i>
+                                    </span>
                                     <span class="leader-dots"></span>
                                     <span class="leader-value"><input type="text" id="pay-input-title" class="calc-mini-input" value="$900" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
                                 </div>
@@ -733,7 +754,10 @@ function getPaymentCalculatorHTML() {
                                     <span class="leader-value" id="pay-exp-mortgage">$-</span>
                                 </div>
                                 <div class="leader-row">
-                                    <span class="leader-label">Property tax</span>
+                                    <span class="leader-label flex items-center gap-1">
+                                        Property tax
+                                        <i class="ph ph-question tooltip-trigger" data-tip="Annual taxes paid to your local municipality, typically based on the property value."></i>
+                                    </span>
                                     <span class="leader-dots"></span>
                                     <span class="leader-value"><input type="text" id="pay-input-ptax" class="calc-mini-input" value="$400" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
                                 </div>
