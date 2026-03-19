@@ -112,8 +112,14 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc">Your gross income before-tax, including bonuses and supplementary income.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" inputmode="numeric" id="aff-inc-1" class="calc-input mb-3" placeholder="e.g. 100,000">
-                    <input type="text" inputmode="numeric" id="aff-inc-2" class="calc-input" placeholder="Co-applicant's income (Optional)">
+                    <div class="calc-input-wrapper with-symbol mb-3">
+                        <span class="symbol"><i class="ph ph-wallet"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-inc-1" class="calc-input" placeholder="Your annual income">
+                    </div>
+                    <div class="calc-input-wrapper with-symbol">
+                        <span class="symbol"><i class="ph ph-plus-circle"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-inc-2" class="calc-input" placeholder="Co-applicant (Optional)">
+                    </div>
                 </div>
             </div>
 
@@ -125,7 +131,7 @@ function getAffordabilityCalculatorHTML() {
                 </div>
                 <div class="aff-input-col">
                     <div class="calc-input-wrapper with-symbol">
-                        <span class="symbol" style="color:#666;">$</span>
+                        <span class="symbol">$</span>
                         <input type="text" inputmode="numeric" id="aff-dp" class="calc-input outlined-soft" placeholder="Enter amount">
                     </div>
                 </div>
@@ -138,9 +144,13 @@ function getAffordabilityCalculatorHTML() {
                     <i class="ph ph-question info-icon"></i>
                 </div>
                 <div class="aff-input-col">
-                    <select id="aff-amort" class="calc-input outlined-soft">
-                        ${amortOptions}
-                    </select>
+                    <div class="calc-input-wrapper with-symbol">
+                        <span class="symbol"><i class="ph ph-calendar"></i></span>
+                        <select id="aff-amort" class="calc-input outlined-soft" style="appearance: none; background: transparent; width: 100%; border: none; outline: none;">
+                            ${amortOptions}
+                        </select>
+                        <i class="ph ph-caret-down absolute right-4 text-brand-navy/30 pointer-events-none"></i>
+                    </div>
                 </div>
             </div>
 
@@ -150,7 +160,10 @@ function getAffordabilityCalculatorHTML() {
                     <span class="aff-row-title">Location of your future home</span>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" inputmode="numeric" id="aff-loc" class="calc-input outlined-soft" value="Toronto, ON">
+                    <div class="calc-input-wrapper with-symbol">
+                        <span class="symbol"><i class="ph ph-map-pin"></i></span>
+                        <input type="text" id="aff-loc" class="calc-input outlined-soft" value="Toronto, ON">
+                    </div>
                 </div>
             </div>
 
@@ -162,9 +175,18 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc"><i>(Optional)</i><br>If you don't know these costs, leave the fields blank and we will estimate for you.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" inputmode="numeric" id="aff-tax" class="calc-input outlined-soft mb-2" placeholder="Annual property tax">
-                    <input type="text" inputmode="numeric" id="aff-condo" class="calc-input outlined-soft mb-2" placeholder="Monthly condo fees">
-                    <input type="text" inputmode="numeric" id="aff-heat" class="calc-input outlined-soft" placeholder="Monthly heating costs">
+                    <div class="calc-input-wrapper with-symbol mb-2">
+                        <span class="symbol"><i class="ph ph-buildings"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-tax" class="calc-input outlined-soft" placeholder="Annual property tax">
+                    </div>
+                    <div class="calc-input-wrapper with-symbol mb-2">
+                        <span class="symbol"><i class="ph ph-house-line"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-condo" class="calc-input outlined-soft" placeholder="Monthly condo fees">
+                    </div>
+                    <div class="calc-input-wrapper with-symbol">
+                        <span class="symbol"><i class="ph ph-thermometer-hot"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-heat" class="calc-input outlined-soft" placeholder="Monthly heating costs">
+                    </div>
                 </div>
             </div>
 
@@ -176,9 +198,18 @@ function getAffordabilityCalculatorHTML() {
                     <p class="aff-row-desc"><i>(Optional)</i><br>Enter debt payments if applicable. If you have none, you can leave blank.</p>
                 </div>
                 <div class="aff-input-col">
-                    <input type="text" inputmode="numeric" id="aff-cc" class="calc-input outlined-soft mb-2" placeholder="Credit card debt payment">
-                    <input type="text" inputmode="numeric" id="aff-car" class="calc-input outlined-soft mb-2" placeholder="Car payment">
-                    <input type="text" inputmode="numeric" id="aff-loan" class="calc-input outlined-soft" placeholder="Other loan expenses">
+                    <div class="calc-input-wrapper with-symbol mb-2">
+                        <span class="symbol"><i class="ph ph-credit-card"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-cc" class="calc-input outlined-soft" placeholder="Credit card debt payment">
+                    </div>
+                    <div class="calc-input-wrapper with-symbol mb-2">
+                        <span class="symbol"><i class="ph ph-car"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-car" class="calc-input outlined-soft" placeholder="Car payment">
+                    </div>
+                    <div class="calc-input-wrapper with-symbol">
+                        <span class="symbol"><i class="ph ph-money"></i></span>
+                        <input type="text" inputmode="numeric" id="aff-loan" class="calc-input outlined-soft" placeholder="Other loan expenses">
+                    </div>
                 </div>
             </div>
 
@@ -1054,7 +1085,7 @@ function initInputMasking() {
     inputs.forEach(input => {
         input.addEventListener('input', function(e) {
             // Skip pct inputs for now or handle them differently
-            if (this.id.includes('pct') || this.id.includes('rate') || this.id.includes('tax') || this.id === 'ltt-location') {
+            if (this.id.includes('pct') || this.id.includes('rate') || this.id.includes('tax') || this.id === 'ltt-location' || this.id === 'aff-loc') {
                 return;
             }
             
