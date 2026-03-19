@@ -495,10 +495,113 @@ function getPaymentCalculatorHTML() {
             </div>
 
             <div class="calc-collapsible-list mt-8">
-                <div class="calc-collapsible">Cash needed to close</div>
-                <div class="calc-collapsible">Monthly expenses</div>
-                <div class="calc-collapsible">Interest rate risk</div>
-                <div class="calc-collapsible">Amortization schedule</div>
+                <!-- Cash needed to close -->
+                <div class="calc-collapsible-item">
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>Cash needed to close</span>
+                        <i class="ph ph-caret-down"></i>
+                    </button>
+                    <div class="calc-collapsible-content">
+                        <div class="calc-collapsible-inner">
+                            <div class="collapse-row">
+                                <span>Down payment</span>
+                                <span class="collapse-val" id="pay-close-dp"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row">
+                                <span>Land transfer tax (Est.)</span>
+                                <span class="collapse-val" id="pay-close-ltt"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row">
+                                <span>Legal & Closing (Est. 1.5%)</span>
+                                <span class="collapse-val" id="pay-close-legal"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row total-row">
+                                <span>Total cash needed</span>
+                                <span class="collapse-val" id="pay-close-total"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly expenses -->
+                <div class="calc-collapsible-item">
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>Monthly expenses</span>
+                        <i class="ph ph-caret-down"></i>
+                    </button>
+                    <div class="calc-collapsible-content">
+                        <div class="calc-collapsible-inner">
+                            <div class="collapse-row">
+                                <span>Mortgage payment</span>
+                                <span class="collapse-val" id="pay-exp-mortgage"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row">
+                                <span>Property taxes (Est. 0.75%/yr)</span>
+                                <span class="collapse-val" id="pay-exp-tax"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row">
+                                <span>Utilities (Est. $250/mo)</span>
+                                <span class="collapse-val" id="pay-exp-utils"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row total-row">
+                                <span>Total monthly expenses</span>
+                                <span class="collapse-val" id="pay-exp-total"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interest rate risk -->
+                <div class="calc-collapsible-item">
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>Interest rate risk</span>
+                        <i class="ph ph-caret-down"></i>
+                    </button>
+                    <div class="calc-collapsible-content">
+                        <div class="calc-collapsible-inner">
+                            <p class="text-sm text-brand-navy/70 mb-4 px-1">See how your monthly payment would change if the interest rate was higher (Stress Test).</p>
+                            <div class="collapse-row">
+                                <span>Current Rate (<span id="pay-risk-curr-rate">-%</span>)</span>
+                                <span class="collapse-val text-brand-navy/60" id="pay-risk-curr-pmt"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row">
+                                <span class="font-bold">+ 2.00% Rate (<span id="pay-risk-stress-rate">-%</span>)</span>
+                                <span class="collapse-val text-red-600" id="pay-risk-stress-pmt"><span class="skeleton-shimmer">$-</span></span>
+                            </div>
+                            <div class="collapse-row total-row items-center text-sm border-t border-brand-navy/10 mt-2 block">
+                                <div class="flex justify-between w-full pt-1">
+                                    <span>Payment Difference</span>
+                                    <span class="collapse-val text-red-600" id="pay-risk-diff"><span class="skeleton-shimmer">$-</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amortization schedule -->
+                <div class="calc-collapsible-item">
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
+                        <span>Amortization schedule</span>
+                        <i class="ph ph-caret-down"></i>
+                    </button>
+                    <div class="calc-collapsible-content">
+                        <div class="calc-collapsible-inner overflow-x-auto p-4 md:p-6">
+                            <table class="w-full text-left text-sm" style="min-width: 320px;">
+                                <thead>
+                                    <tr class="border-b-2 border-brand-navy/10">
+                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider">Year</th>
+                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Balance</th>
+                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Principal</th>
+                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Interest</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pay-amort-table">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Elite Features: Visuals & Export -->
@@ -796,6 +899,7 @@ function updatePaymentCalculator() {
             // Update visual analysis: Principal vs Total Interest (Scenario 1)
             if (i === 0) {
                 updateCharts('payment', totalMortgage, rate, amort);
+                updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, payment);
             }
 
             // Sync Sticky Bar if it's the active scenario on mobile
@@ -1482,3 +1586,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500);
 });
+
+// --- Calculator Breakdown & UI Utils ---
+window.toggleCollapsible = function(headerElem) {
+    const item = headerElem.parentElement;
+    item.classList.toggle('active');
+    
+    const content = item.querySelector('.calc-collapsible-content');
+    if (item.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+        content.style.maxHeight = "0";
+    }
+    
+    // Recalculate surrounding max-heights if nested (not needed here but good practice)
+};
+
+function updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, payment) {
+    if (!price || !totalMortgage) return;
+
+    // 1. Cash needed to close
+    animateValue('pay-close-dp', dpAmt);
+    
+    // Quick Toronto LTT estimation as placeholder
+    let estimatedLTT = 0;
+    if (price <= 55000) estimatedLTT = price * 0.005;
+    else if (price <= 250000) estimatedLTT = 275 + (price - 55000) * 0.01;
+    else if (price <= 400000) estimatedLTT = 2225 + (price - 250000) * 0.015;
+    else if (price <= 2000000) estimatedLTT = 4475 + (price - 400000) * 0.02;
+    else estimatedLTT = 36475 + (price - 2000000) * 0.025;
+    estimatedLTT *= 2; // Approximate with Toronto Municipal added
+
+    animateValue('pay-close-ltt', estimatedLTT);
+    
+    const legalFees = price * 0.015;
+    animateValue('pay-close-legal', legalFees);
+    
+    const totalCash = dpAmt + estimatedLTT + legalFees;
+    animateValue('pay-close-total', totalCash);
+
+    // 2. Monthly Expenses
+    const monthlyPayment = (freq === 'biweekly') ? (payment * 26) / 12 : payment;
+    animateValue('pay-exp-mortgage', monthlyPayment);
+    const propertyTax = (price * 0.0075) / 12; // estimated 0.75% annual
+    animateValue('pay-exp-tax', propertyTax);
+    const utilities = 250;
+    animateValue('pay-exp-utils', utilities);
+    animateValue('pay-exp-total', monthlyPayment + propertyTax + utilities);
+
+    // 3. Interest rate risk (+2% stress test)
+    const currRateEl = document.getElementById('pay-risk-curr-rate');
+    if (currRateEl) currRateEl.innerText = rate.toFixed(2) + '%';
+    animateValue('pay-risk-curr-pmt', payment);
+    
+    const stressRate = rate + 2.00;
+    const stressRateEl = document.getElementById('pay-risk-stress-rate');
+    if (stressRateEl) stressRateEl.innerText = stressRate.toFixed(2) + '%';
+    
+    const stressPayment = computePayment(totalMortgage, stressRate, amort, freq);
+    animateValue('pay-risk-stress-pmt', stressPayment);
+    animateValue('pay-risk-diff', stressPayment - payment);
+
+    // 4. Amortization Schedule
+    const r = rate / 100;
+    const iMonths = Math.pow(1 + r/2, 2/12) - 1;
+    let currentBalance = totalMortgage;
+    let requiredMonthly = computePayment(totalMortgage, rate, amort, 'monthly');
+    let tableHTML = '';
+    
+    let totalPrincipalPaid = 0;
+    let totalInterestPaid = 0;
+
+    for (let year = 1; year <= amort; year++) {
+        let principalYear = 0;
+        let interestYear = 0;
+        
+        for (let m = 0; m < 12; m++) {
+            let interestMonth = currentBalance * iMonths;
+            let principalMonth = requiredMonthly - interestMonth;
+            
+            if (currentBalance < principalMonth) {
+                principalMonth = currentBalance;
+                interestMonth = currentBalance * iMonths;
+            }
+            
+            principalYear += principalMonth;
+            interestYear += interestMonth;
+            currentBalance -= principalMonth;
+            if (currentBalance < 0) currentBalance = 0;
+        }
+        
+        totalPrincipalPaid += principalYear;
+        totalInterestPaid += interestYear;
+
+        // Show every year or milestone year
+        if (year <= 5 || year % 5 === 0 || year === amort) {
+            tableHTML += `
+                <tr class="border-b border-brand-navy/5 hover:bg-brand-navy/5 transition-colors">
+                    <td class="py-3 px-2 font-bold">${year}</td>
+                    <td class="py-3 px-2 text-right">${formatCurrency(currentBalance)}</td>
+                    <td class="py-3 px-2 text-right">${formatCurrency(principalYear)}</td>
+                    <td class="py-3 px-2 text-right">${formatCurrency(interestYear)}</td>
+                </tr>
+            `;
+        }
+    }
+    
+    const tableBody = document.getElementById('pay-amort-table');
+    if (tableBody) tableBody.innerHTML = tableHTML;
+}
