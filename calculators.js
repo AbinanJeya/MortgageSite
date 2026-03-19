@@ -108,7 +108,7 @@ function getAffordabilityCalculatorHTML() {
                     <div class="flex items-center gap-2 mb-1">
                         <i class="ph ph-identification-card text-brand-navy/30 text-xl"></i>
                         <span class="aff-row-title" style="font-family: 'Outfit', sans-serif;">Annual Income</span>
-                        <i class="ph ph-question tooltip-trigger" data-tip="Your total gross annual income before taxes. Include bonuses and other consistent sources of income."></i>
+                        <i class="ph ph-question tooltip-trigger tooltip-down" data-tip="Your total gross annual income before taxes. Include bonuses and other consistent sources of income."></i>
                     </div>
                     <p class="aff-row-desc">Your gross income before-tax, including bonuses and supplementary income.</p>
                 </div>
@@ -249,7 +249,7 @@ function getLandTransferTaxCalculatorHTML() {
                         <div class="calc-input-wrapper with-symbol">
                             <label class="floating-label flex items-center gap-2">
                                  <i class="ph ph-tag-silver text-[10px]"></i> Price
-                                 <i class="ph ph-question tooltip-trigger" data-tip="The purchase price of the property."></i>
+                                 <i class="ph ph-question tooltip-trigger tooltip-down" data-tip="The purchase price of the property."></i>
                             </label>
                             <span class="symbol">$</span>
                             <input type="text" inputmode="numeric" id="ltt-price" placeholder="e.g. 800,000" class="calc-input fw-bold text-navy">
@@ -344,7 +344,7 @@ function getRefinanceCalculatorHTML() {
                         <i class="ph ph-house-line text-brand-gold text-xl mr-3"></i>
                         <div class="flex items-center gap-2">
                             <span style="font-weight:700;">Mortgage Amount</span>
-                            <i class="ph ph-question tooltip-trigger" data-tip="The total amount of your current mortgage that you are looking to refinance."></i>
+                            <i class="ph ph-question tooltip-trigger tooltip-down" data-tip="The total amount of your current mortgage that you are looking to refinance."></i>
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
@@ -505,7 +505,7 @@ function getPaymentCalculatorHTML() {
                         <i class="ph ph-tag text-brand-gold text-xl mr-3"></i>
                         <div class="flex items-center gap-2">
                             <span>Purchase Price</span>
-                            <i class="ph ph-question tooltip-trigger" data-tip="The total agreement price of the home you are purchasing."></i>
+                            <i class="ph ph-question tooltip-trigger tooltip-down" data-tip="The total agreement price of the home you are purchasing."></i>
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
