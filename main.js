@@ -174,7 +174,7 @@ function renderHero() {
             </div>
 
             <!-- Permanent Broker Profile Card - Top Right of Header -->
-            <div class="absolute top-6 right-10 z-30 hidden lg:block">
+            <div class="absolute top-6 right-60 z-30 hidden lg:block">
                 <div class="w-64 glass-card p-2 rounded-[2.5rem] shadow-[0_45px_100px_-20px_rgba(0,0,0,0.6)] border border-white/30 backdrop-blur-2xl bg-brand-navy/60">
                     <div class="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden">
                         <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
