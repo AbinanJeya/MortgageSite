@@ -173,43 +173,46 @@ function renderHero() {
                 <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/80 via-transparent to-brand-navy/80"></div>
             </div>
 
-            <!-- Permanent Broker Profile Card - Top Right of Header -->
-            <div class="absolute top-6 right-[184px] z-30 hidden lg:block">
-                <div class="w-64 glass-card p-2 rounded-[2.5rem] shadow-[0_45px_100px_-20px_rgba(0,0,0,0.6)] border border-white/30 backdrop-blur-2xl bg-brand-navy/60">
-                    <div class="relative w-full aspect-[3/4] rounded-[2rem] overflow-hidden">
-                        <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
-                        <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-brand-navy via-brand-navy/40 to-transparent"></div>
-                        <div class="absolute bottom-6 left-0 right-0 text-center px-4">
-                            <p class="text-brand-gold text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Expert Guidance</p>
-                            <p class="text-white text-xl font-extrabold tracking-tight">${agentConfig.agent.name}</p>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 sm:pt-0">
+                <div class="grid grid-cols-1 xl:grid-cols-12 gap-16 items-center">
+                    <!-- Left: Content -->
+                    <div class="xl:col-span-7 text-center xl:text-left reveal reveal-left">
+                        <!-- Mobile-only Circular Headshot -->
+                        <div class="flex justify-center xl:justify-start mb-8 sm:mb-10 xl:hidden">
+                            <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
+                                <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
+                            </div>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10">
+                            <span class="block">Your Path to</span>
+                            <span class="block text-brand-gold my-1 sm:my-2">Homeownership</span>
+                            <span class="block">Starts Here</span>
+                        </h1>
+                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16">
+                            ${agentConfig.agent.fullBio}
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center xl:justify-start items-center">
+                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
+                                Book a Consultation
+                            </a>
+                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
+                                Our Services
+                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-                <div class="max-w-4xl mx-auto text-center">
-                    <!-- Mobile-only Circular Headshot -->
-                    <div class="flex justify-center mb-8 sm:mb-10 lg:hidden reveal reveal-scale">
-                        <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
-                            <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
+                    <!-- Right: Profile Card (Desktop Only) -->
+                    <div class="hidden xl:flex xl:col-span-5 justify-center xl:justify-end reveal reveal-right" style="transition-delay: 200ms;">
+                        <div class="w-[340px] glass-card p-3 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20 backdrop-blur-2xl bg-white/5">
+                            <div class="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden">
+                                <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
+                                <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-brand-navy via-brand-navy/20 to-transparent"></div>
+                                <div class="absolute bottom-8 left-0 right-0 text-center px-6">
+                                    <p class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] mb-2">Expert Guidance</p>
+                                    <p class="text-white text-3xl font-black tracking-tight">${agentConfig.agent.name}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10">
-                        <span class="block">Your Path to</span>
-                        <span class="block text-brand-gold my-1 sm:my-2">Homeownership</span>
-                        <span class="block">Starts Here</span>
-                    </h1>
-                    <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto font-medium leading-relaxed mb-8 sm:mb-16 px-4">
-                        ${agentConfig.agent.fullBio}
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center items-center px-4">
-                        <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
-                            Book a Consultation
-                        </a>
-                        <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
-                            Our Services
-                        </a>
                     </div>
                 </div>
             </div>
