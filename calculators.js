@@ -1,5 +1,77 @@
 // calculators.js
 
+const LTT_LOCATIONS = [
+    'Toronto, ON', 'Vancouver, BC', 'Montreal, QC', 'Calgary, AB', 'Ottawa, ON', 'Edmonton, AB',
+    'Winnipeg, MB', 'Mississauga, ON', 'Brampton, ON', 'Hamilton, ON', 'Surrey, BC', 'Laval, QC',
+    'Halifax, NS', 'London, ON', 'Markham, ON', 'Vaughan, ON', 'Gatineau, QC', 'Saskatoon, SK',
+    'Kitchener, ON', 'Longueuil, QC', 'Burnaby, BC', 'Windsor, ON', 'Regina, SK', 'Oakville, ON',
+    'Richmond, BC', 'Richmond Hill, ON', 'Burlington, ON', 'Oshawa, ON', 'Sherbrooke, QC',
+    'Greater Sudbury, ON', 'Abbotsford, BC', 'Lévis, QC', 'Coquitlam, BC', 'Barrie, ON',
+    'Saguenay, QC', 'Kelowna, BC', 'Guelph, ON', 'Terrebonne, QC', 'Whitby, ON', 'Kingston, ON',
+    'Milton, ON', 'Langley, BC', 'Ajax, ON', 'Saint John, NB', 'Charlottetown, PE', 'St. John\'s, NL',
+    'Yellowknife, NT', 'Whitehorse, YT', 'Iqaluit, NU'
+];
+
+const LTT_RATES = {
+    'ON': {
+        prov: [
+            { threshold: 55000, rate: 0.005 },
+            { threshold: 250000, rate: 0.01 },
+            { threshold: 400000, rate: 0.015 },
+            { threshold: 2000000, rate: 0.02 },
+            { threshold: Infinity, rate: 0.025 }
+        ]
+    },
+    'BC': {
+        prov: [
+            { threshold: 200000, rate: 0.01 },
+            { threshold: 2000000, rate: 0.02 },
+            { threshold: 3000000, rate: 0.03 },
+            { threshold: Infinity, rate: 0.05 } // For amounts over 3M
+        ]
+    },
+    'AB': { prov: [] }, // No provincial LTT
+    'MB': {
+        prov: [
+            { threshold: 30000, rate: 0 },
+            { threshold: 90000, rate: 0.005 },
+            { threshold: 150000, rate: 0.01 },
+            { threshold: 250000, rate: 0.015 },
+            { threshold: 500000, rate: 0.02 },
+            { threshold: Infinity, rate: 0.02 } // Max rate is 2%
+        ]
+    },
+    'NB': { prov: [{ threshold: Infinity, rate: 0.01 }] }, // 1% of fair market value
+    'NL': {
+        prov: [
+            { threshold: 100, rate: 0.004 }, // Minimum fee $100
+            { threshold: 500, rate: 0.004 },
+            { threshold: Infinity, rate: 0.004 } // 0.4%
+        ]
+    },
+    'NS': { prov: [{ threshold: Infinity, rate: 0.015 }] }, // 1.5%
+    'PE': {
+        prov: [
+            { threshold: 30000, rate: 0 },
+            { threshold: 200000, rate: 0.01 },
+            { threshold: Infinity, rate: 0.01 } // 1%
+        ]
+    },
+    'QC': {
+        prov: [ // "Welcome Tax" - municipal, but provincial framework
+            { threshold: 58910, rate: 0.005 },
+            { threshold: 294549, rate: 0.01 },
+            { threshold: 589098, rate: 0.015 },
+            { threshold: 1178196, rate: 0.02 },
+            { threshold: Infinity, rate: 0.025 } // Varies by municipality for higher tiers
+        ]
+    },
+    'SK': { prov: [] }, // No provincial LTT
+    'YT': { prov: [{ threshold: Infinity, rate: 0.005 }] }, // 0.5%
+    'NT': { prov: [{ threshold: Infinity, rate: 0.01 }] }, // 1%
+    'NU': { prov: [{ threshold: Infinity, rate: 0.01 }] } // 1%
+};
+
 function getScenarioSelectorHTML(type) {
     return `
         <div class="scenario-selector-mobile lg:hidden">
@@ -133,46 +205,82 @@ function getLandTransferTaxCalculatorHTML() {
     return `
             <div class="ltt-calculator">
                 <div class="ltt-top-row" style="display: flex; gap: 20px; margin-bottom: 25px;">
-                    <div class="calc-cell calc-span-4">
-                        <div class="calc-input-group outlined">
+                    <div class="calc-cell calc-span-4" style="flex: 1;">
+                        <div class="calc-input-wrapper with-symbol">
                             <label class="floating-label flex items-center gap-2">
                                  <i class="ph ph-tag-silver text-[10px]"></i> Price
                                  <i class="ph ph-question tooltip-trigger" data-tip="The purchase price of the property."></i>
                             </label>
-                            <input type="text" inputmode="numeric" id="ltt-price" placeholder="e.g. 800,000" class="fw-bold text-navy">
+                            <span class="symbol">$</span>
+                            <input type="text" inputmode="numeric" id="ltt-price" placeholder="e.g. 800,000" class="calc-input fw-bold text-navy">
                         </div>
                     </div>
-                    <div class="calc-input-group outlined">
-                        <label class="floating-label flex items-center gap-2">
-                            <i class="ph ph-map-pin text-[10px]"></i> Location
-                            <i class="ph ph-question tooltip-trigger" data-tip="Toronto has its own municipal land transfer tax in addition to the provincial tax."></i>
-                        </label>
-                        <input type="text" id="ltt-location" value="Toronto, ON" class="text-navy">
+                    <div class="calc-cell calc-span-4" style="flex: 1;">
+                        <div class="calc-input-wrapper with-symbol">
+                            <label class="floating-label flex items-center gap-1">
+                                <i class="ph ph-map-pin text-[10px]"></i> Location
+                                <i class="ph ph-question tooltip-trigger" data-tip="Toronto has its own municipal land transfer tax in addition to the provincial tax."></i>
+                            </label>
+                            <span class="symbol"><i class="ph ph-map-pin"></i></span>
+                            <input type="text" id="ltt-location" value="Toronto, ON" class="calc-input text-navy" placeholder="City or Province">
+                            <div id="ltt-location-results" class="calc-autocomplete-results"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="ltt-checkbox-row" style="margin-bottom: 35px; display: flex; align-items: center; gap: 12px; padding: 15px; background: rgba(15, 30, 46, 0.03); border-radius: 1rem; border: 1px solid rgba(15, 30, 46, 0.05);">
-                    <input type="checkbox" id="ltt-ftb" style="width:24px; height:24px; cursor:pointer; accent-color: var(--color-primary);" checked>
-                    <label for="ltt-ftb" style="cursor:pointer; font-size: 1rem; font-weight: 700; color: var(--color-navy); font-family: 'Outfit', sans-serif;">I'm a first-time home buyer</label>
+                <div class="flex flex-wrap gap-6 mb-8">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <div class="relative flex items-center justify-center">
+                            <input type="checkbox" id="ltt-ftb" class="peer hidden">
+                            <div class="w-6 h-6 border-2 border-brand-navy/20 rounded-md peer-checked:bg-brand-gold peer-checked:border-brand-gold transition-all"></div>
+                            <i class="ph ph-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity"></i>
+                        </div>
+                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors">I'm a first time home buyer</span>
+                    </label>
+
+                    <label id="ltt-new-home-wrapper" class="flex items-center gap-3 cursor-pointer group" style="display: none;">
+                        <div class="relative flex items-center justify-center">
+                            <input type="checkbox" id="ltt-new-home" class="peer hidden">
+                            <div class="w-6 h-6 border-2 border-brand-navy/20 rounded-md peer-checked:bg-brand-gold peer-checked:border-brand-gold transition-all"></div>
+                            <i class="ph ph-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity"></i>
+                        </div>
+                        <span class="text-sm font-bold text-brand-navy/70 group-hover:text-brand-navy transition-colors">I'm buying a newly built home</span>
+                    </label>
                 </div>
 
-                <div class="calc-tax-breakdown ltt-results-box" style="border: 2px solid var(--color-primary); background: #fff; border-radius: 2rem; padding: 30px;">
-                    <div class="tax-row">
-                        <span class="tax-label flex items-center gap-2"><i class="ph ph-bank text-brand-navy/30"></i> Provincial</span>
-                        <span class="tax-val font-bold" id="ltt-prov"><span class="skeleton-shimmer">$-</span></span>
+                <div class="ltt-results-box glass-card p-8 rounded-[2rem] border-brand-navy/10 bg-brand-navy/5">
+                    <div class="flex flex-col gap-4 mb-8">
+                        <div class="flex justify-between items-center text-sm font-bold text-brand-navy/60">
+                            <div class="flex items-center gap-2">
+                                <span>Provincial</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="Land transfer tax paid to the province."></i>
+                            </div>
+                            <span id="ltt-prov">$0</span>
+                        </div>
+                        <div id="ltt-muni-row" class="flex justify-between items-center text-sm font-bold text-brand-navy/60">
+                            <div class="flex items-center gap-2">
+                                <span class="text-brand-navy/30">+</span>
+                                <span>Municipal</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="Land transfer tax paid to the municipality (e.g., Toronto)."></i>
+                            </div>
+                            <span id="ltt-muni">$0</span>
+                        </div>
+                        <div id="ltt-rebate-row" class="flex justify-between items-center text-sm font-bold text-brand-navy/60">
+                            <div class="flex items-center gap-2">
+                                <span class="text-brand-gold">-</span>
+                                <span>Rebate</span>
+                                <i class="ph ph-question tooltip-trigger" data-tip="Available rebates for first-time buyers or other exemptions."></i>
+                            </div>
+                            <span id="ltt-rebate" class="text-brand-gold">$0</span>
+                        </div>
                     </div>
-                    <div class="tax-row mt-4">
-                        <span class="tax-label flex items-center gap-2"><i class="ph ph-city text-brand-navy/30"></i> Municipal</span>
-                        <span class="tax-val font-bold" id="ltt-muni"><span class="skeleton-shimmer">$-</span></span>
-                    </div>
-                    <div class="tax-row mt-4 text-emerald-600">
-                        <span class="tax-label flex items-center gap-2"><i class="ph ph-gift text-emerald-500/50"></i> Total Rebate</span>
-                        <span class="tax-val font-bold" id="ltt-rebate"><span class="skeleton-shimmer">$-</span></span>
-                    </div>
-                    <div class="tax-row mt-8 pt-6 border-t flex justify-between items-center gap-2">
-                        <span class="tax-label text-sm sm:text-xl font-bold sm:font-black text-brand-navy uppercase tracking-tighter" style="font-family: 'Outfit', sans-serif;">Total Land Transfer Tax</span>
-                        <span class="text-2xl sm:text-3xl text-gold-elite font-black" id="ltt-total"><span class="skeleton-shimmer">$-</span></span>
-
+                    
+                    <div class="pt-6 border-t border-brand-navy/10 flex justify-between items-center">
+                        <div class="flex items-center gap-2 text-brand-navy font-black text-lg">
+                            <span class="text-brand-navy/30">=</span>
+                            <span>Land transfer tax</span>
+                        </div>
+                        <span id="ltt-total" class="text-3xl font-black text-brand-navy">$0</span>
                     </div>
                 </div>
             </div>
@@ -194,9 +302,10 @@ function getRefinanceCalculatorHTML() {
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
-                        <div class="calc-input-group outlined border-red">
+                        <div class="calc-input-wrapper with-symbol">
                             <label class="floating-label">Refinance Amount</label>
-                            <input type="text" inputmode="numeric" id="ref-amount" class="text-navy" placeholder="e.g. 500,000">
+                            <span class="symbol">$</span>
+                            <input type="text" inputmode="numeric" id="ref-amount" class="calc-input text-navy" placeholder="e.g. 500,000">
                         </div>
                     </div>
 
@@ -239,9 +348,8 @@ function getRefinanceCalculatorHTML() {
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="ref" data-scenario="${i}">
-                            <div class="calc-input-wrapper with-symbol">
+                            <div class="calc-input-wrapper">
                                 <input type="text" inputmode="numeric" class="calc-input" id="ref-rate-${i}" placeholder="e.g. 4.5">
-                                <span class="symbol">%</span>
                             </div>
                         </div>
                     `).join('')}
@@ -355,9 +463,10 @@ function getPaymentCalculatorHTML() {
                         </div>
                     </div>
                     <div class="calc-cell calc-span-4">
-                        <div class="calc-input-group outlined">
+                        <div class="calc-input-wrapper with-symbol">
                             <label class="floating-label">Purchase Price</label>
-                            <input type="text" inputmode="numeric" id="pay-price" placeholder="e.g. 500,000" class="text-navy">
+                            <span class="symbol">$</span>
+                            <input type="text" inputmode="numeric" id="pay-price" placeholder="e.g. 500,000" class="calc-input text-navy">
                         </div>
                     </div>
 
@@ -381,9 +490,8 @@ function getPaymentCalculatorHTML() {
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell flex-col ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
-                            <div class="calc-input-wrapper with-symbol mb-2">
+                            <div class="calc-input-wrapper mb-2">
                                 <input type="text" inputmode="numeric" class="calc-input" id="pay-dp-pct-${i}" placeholder="20">
-                                <span class="symbol">%</span>
                             </div>
                             <div class="calc-input-wrapper with-symbol">
                                 <span class="symbol">$</span>
@@ -430,9 +538,8 @@ function getPaymentCalculatorHTML() {
                     </div>
                     ${[...Array(4)].map((_, i) => `
                         <div class="calc-cell ${i > 0 ? 'mobile-hide' : ''}" data-type="pay" data-scenario="${i}">
-                            <div class="calc-input-wrapper with-symbol">
+                            <div class="calc-input-wrapper">
                                 <input type="text" inputmode="numeric" class="calc-input" id="pay-rate-${i}" placeholder="Rate">
-                                <span class="symbol">%</span>
                             </div>
                         </div>
                     `).join('')}
@@ -494,30 +601,70 @@ function getPaymentCalculatorHTML() {
                 </div>
             </div>
 
-            <div class="calc-collapsible-list mt-8">
+            <div class="calc-collapsible-list" style="margin-top: 2rem;">
                 <!-- Cash needed to close -->
                 <div class="calc-collapsible-item">
                     <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>Cash needed to close</span>
+                        <div class="calc-collapsible-header-text">
+                            <span class="calc-collapsible-header-title">Cash needed to close</span>
+                            <span class="calc-collapsible-header-total" id="hdr-close-total">$-</span>
+                        </div>
                         <i class="ph ph-caret-down"></i>
                     </button>
                     <div class="calc-collapsible-content">
-                        <div class="calc-collapsible-inner">
-                            <div class="collapse-row">
-                                <span>Down payment</span>
-                                <span class="collapse-val" id="pay-close-dp"><span class="skeleton-shimmer">$-</span></span>
+                        <div class="calc-collapsible-inner split-pane-grid">
+                            <div class="split-pane-left">
+                                <p class="split-desc">When you purchase a house, there are a number of costs you will need to put aside in addition to your down payment.</p>
+                                <div class="mb-6">
+                                    <label class="block text-xs font-bold text-brand-navy/60 uppercase tracking-widest mb-2">Down payment options</label>
+                                    <div class="relative">
+                                        <select class="w-full calc-input outlined-soft py-3 px-4 rounded-xl text-sm font-bold appearance-none bg-white border border-brand-navy/10 text-brand-navy/90" onchange="window.switchScenario('pay', parseInt(this.value))" id="panel-scenario-select-1">
+                                            <option value="0">Plan 1</option>
+                                            <option value="1">Plan 2</option>
+                                            <option value="2">Plan 3</option>
+                                            <option value="3">Plan 4</option>
+                                        </select>
+                                        <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-navy/50"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="collapse-row">
-                                <span>Land transfer tax (Est.)</span>
-                                <span class="collapse-val" id="pay-close-ltt"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row">
-                                <span>Legal & Closing (Est. 1.5%)</span>
-                                <span class="collapse-val" id="pay-close-legal"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row total-row">
-                                <span>Total cash needed</span>
-                                <span class="collapse-val" id="pay-close-total"><span class="skeleton-shimmer">$-</span></span>
+                            <div class="split-pane-right border-l-0 lg:border-l border-brand-navy/10 lg:pl-10">
+                                <div class="leader-row">
+                                    <span class="leader-label">Down payment</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value" id="pay-close-dp">$-</span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Land transfer tax</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value" id="pay-close-ltt">$-</span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Lawyer fees</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-lawyer" class="calc-mini-input" value="$1,000" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Title insurance</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-title" class="calc-mini-input" value="$900" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Home inspection</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-inspect" class="calc-mini-input" value="$500" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Appraisal fees</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-appraisal" class="calc-mini-input" value="$300" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                
+                                <div class="leader-row total-row">
+                                    <span class="leader-label py-2">Cash needed to close</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value" id="pay-close-total">$-</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -526,26 +673,70 @@ function getPaymentCalculatorHTML() {
                 <!-- Monthly expenses -->
                 <div class="calc-collapsible-item">
                     <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>Monthly expenses</span>
+                        <div class="calc-collapsible-header-text">
+                            <span class="calc-collapsible-header-title">Monthly expenses</span>
+                            <span class="calc-collapsible-header-total" id="hdr-exp-total">$-</span>
+                        </div>
                         <i class="ph ph-caret-down"></i>
                     </button>
                     <div class="calc-collapsible-content">
-                        <div class="calc-collapsible-inner">
-                            <div class="collapse-row">
-                                <span>Mortgage payment</span>
-                                <span class="collapse-val" id="pay-exp-mortgage"><span class="skeleton-shimmer">$-</span></span>
+                        <div class="calc-collapsible-inner split-pane-grid">
+                            <div class="split-pane-left">
+                                <div class="mb-6">
+                                    <label class="block text-xs font-bold text-brand-navy/60 uppercase tracking-widest mb-2">Down payment options</label>
+                                    <div class="relative">
+                                        <select class="w-full calc-input outlined-soft py-3 px-4 rounded-xl text-sm font-bold appearance-none bg-white border border-brand-navy/10 text-brand-navy/90" onchange="window.switchScenario('pay', parseInt(this.value))" id="panel-scenario-select-2">
+                                            <option value="0">Plan 1</option>
+                                            <option value="1">Plan 2</option>
+                                            <option value="2">Plan 3</option>
+                                            <option value="3">Plan 4</option>
+                                        </select>
+                                        <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-navy/50"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="collapse-row">
-                                <span>Property taxes (Est. 0.75%/yr)</span>
-                                <span class="collapse-val" id="pay-exp-tax"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row">
-                                <span>Utilities (Est. $250/mo)</span>
-                                <span class="collapse-val" id="pay-exp-utils"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row total-row">
-                                <span>Total monthly expenses</span>
-                                <span class="collapse-val" id="pay-exp-total"><span class="skeleton-shimmer">$-</span></span>
+                            <div class="split-pane-right border-l-0 lg:border-l border-brand-navy/10 lg:pl-10">
+                                <div class="leader-row">
+                                    <span class="leader-label">Mortgage payment</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value" id="pay-exp-mortgage">$-</span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Property tax</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-ptax" class="calc-mini-input" value="$400" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Monthly debt payments</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-debt" class="calc-mini-input" value="$0" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Utilities</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-utils" class="calc-mini-input" value="$185" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Property insurance</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-pins" class="calc-mini-input" value="$50" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Phone</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-phone" class="calc-mini-input" value="$60" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+                                <div class="leader-row">
+                                    <span class="leader-label">Internet / Cable</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value"><input type="text" id="pay-input-net" class="calc-mini-input" value="$80" onblur="formatOnBlurInline.call(this)" oninput="updatePaymentCalculatorInputWait()"></span>
+                                </div>
+
+                                <div class="leader-row total-row">
+                                    <span class="leader-label py-2">Monthly expenses</span>
+                                    <span class="leader-dots"></span>
+                                    <span class="leader-value" id="pay-exp-total">$-</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -553,26 +744,88 @@ function getPaymentCalculatorHTML() {
 
                 <!-- Interest rate risk -->
                 <div class="calc-collapsible-item">
-                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>Interest rate risk</span>
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this); renderHistoricalChartTimeout();">
+                        <div class="calc-collapsible-header-text">
+                            <span class="calc-collapsible-header-title">Interest rate risk</span>
+                        </div>
                         <i class="ph ph-caret-down"></i>
                     </button>
                     <div class="calc-collapsible-content">
-                        <div class="calc-collapsible-inner">
-                            <p class="text-sm text-brand-navy/70 mb-4 px-1">See how your monthly payment would change if the interest rate was higher (Stress Test).</p>
-                            <div class="collapse-row">
-                                <span>Current Rate (<span id="pay-risk-curr-rate">-%</span>)</span>
-                                <span class="collapse-val text-brand-navy/60" id="pay-risk-curr-pmt"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row">
-                                <span class="font-bold">+ 2.00% Rate (<span id="pay-risk-stress-rate">-%</span>)</span>
-                                <span class="collapse-val text-red-600" id="pay-risk-stress-pmt"><span class="skeleton-shimmer">$-</span></span>
-                            </div>
-                            <div class="collapse-row total-row items-center text-sm border-t border-brand-navy/10 mt-2 block">
-                                <div class="flex justify-between w-full pt-1">
-                                    <span>Payment Difference</span>
-                                    <span class="collapse-val text-red-600" id="pay-risk-diff"><span class="skeleton-shimmer">$-</span></span>
+                        <div class="calc-collapsible-inner split-pane-grid">
+                            <div class="split-pane-left">
+                                <p class="split-desc">When calculating your mortgage costs, it's important to look at the long-term horizon. The mortgage rate you pay today could be substantially different from the mortgage rates available in the future.<br><br>The calculation below shows how much of your mortgage principal will be left at the end of the term.</p>
+                                <div class="mb-6">
+                                    <label class="block text-xs font-bold text-brand-navy/60 uppercase tracking-widest mb-2">Down payment options</label>
+                                    <div class="relative">
+                                        <select class="w-full calc-input outlined-soft py-3 px-4 rounded-xl text-sm font-bold appearance-none bg-white border border-brand-navy/10 text-brand-navy/90" onchange="window.switchScenario('pay', parseInt(this.value))" id="panel-scenario-select-3">
+                                            <option value="0">Plan 1</option>
+                                            <option value="1">Plan 2</option>
+                                            <option value="2">Plan 3</option>
+                                            <option value="3">Plan 4</option>
+                                        </select>
+                                        <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-navy/50"></i>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="split-pane-right border-l-0 lg:border-l border-brand-navy/10 lg:pl-10">
+                                <div class="rate-matrix-box">
+                                    <div class="flex justify-between items-center text-sm mb-3">
+                                        <span>Mortgage amount today</span>
+                                        <span class="font-bold" id="risk-start-bal">$-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-sm mb-4 pb-4 border-b border-brand-primary/20">
+                                        <span class="flex gap-4"><span class="text-brand-primary">-</span> Principal paid off over term</span>
+                                        <span class="font-bold" id="risk-prin-paid">$-</span>
+                                    </div>
+                                    <div class="flex justify-between items-center font-bold text-brand-primary h-full">
+                                        <span class="flex gap-4"><span>=</span> Balance remaining at the end of your current term</span>
+                                        <span class="text-xl font-bold font-outfit" id="risk-end-bal">$-</span>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-sm text-brand-navy/80 mb-4 px-2">Using the remaining balance above, below we can calculate the mortgage payments you could encounter at renewal based on different interest rates:</p>
+                                
+                                <div class="overflow-x-auto">
+                                    <table class="rate-matrix-table text-sm w-full">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Interest rate</th>
+                                                <th>Payment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-semibold text-brand-navy/80">Selected Rate</td>
+                                                <td id="risk-rate-0">4.50%</td>
+                                                <td class="font-bold" id="risk-pmt-0">$-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold text-brand-navy/80">Selected Rate -2%</td>
+                                                <td id="risk-rate-minus2">2.50%</td>
+                                                <td class="font-bold text-green-600" id="risk-pmt-minus2">$-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold text-brand-navy/80">Selected Rate +2%</td>
+                                                <td id="risk-rate-plus2">6.50%</td>
+                                                <td class="font-bold text-red-600" id="risk-pmt-plus2">$-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="font-semibold text-brand-navy/80">Selected Rate +5%</td>
+                                                <td id="risk-rate-plus5">9.50%</td>
+                                                <td class="font-bold text-red-700" id="risk-pmt-plus5">$-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="mt-8 pt-6 border-t border-brand-primary/10 w-full">
+                                    <p class="text-sm text-brand-navy mb-4">Below is a graph that displays the approximate values of competitive 5-year fixed mortgage rates since 2006.</p>
+                                    <div class="h-[300px] relative w-full pt-4">
+                                        <canvas id="historicalRateChart"></canvas>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -580,25 +833,51 @@ function getPaymentCalculatorHTML() {
 
                 <!-- Amortization schedule -->
                 <div class="calc-collapsible-item">
-                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this)">
-                        <span>Amortization schedule</span>
+                    <button class="calc-collapsible-header" onclick="toggleCollapsible(this); renderAmortizationChartTimeout();">
+                        <div class="calc-collapsible-header-text">
+                            <span class="calc-collapsible-header-title">Amortization schedule</span>
+                        </div>
                         <i class="ph ph-caret-down"></i>
                     </button>
                     <div class="calc-collapsible-content">
-                        <div class="calc-collapsible-inner overflow-x-auto p-4 md:p-6">
-                            <table class="w-full text-left text-sm" style="min-width: 320px;">
-                                <thead>
-                                    <tr class="border-b-2 border-brand-navy/10">
-                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider">Year</th>
-                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Balance</th>
-                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Principal</th>
-                                        <th class="py-3 px-2 text-brand-navy/70 uppercase text-[10px] tracking-wider text-right">Interest</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="pay-amort-table">
-                                    <!-- Populated by JS -->
-                                </tbody>
-                            </table>
+                        <div class="calc-collapsible-inner p-4 md:p-8">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-10 gap-4 border-b border-brand-navy/10 pb-6">
+                                <h4 class="text-xl md:text-2xl font-outfit text-brand-primary">Choose your amortization scenario</h4>
+                                <div class="relative w-full md:w-64">
+                                    <select class="w-full calc-input outlined-soft py-3 px-4 rounded-xl text-sm font-bold appearance-none bg-white border border-brand-navy/10 text-brand-navy/90" onchange="window.switchScenario('pay', parseInt(this.value))" id="panel-scenario-select-4">
+                                        <option value="0">Plan 1</option>
+                                        <option value="1">Plan 2</option>
+                                        <option value="2">Plan 3</option>
+                                        <option value="3">Plan 4</option>
+                                    </select>
+                                    <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-navy/50"></i>
+                                </div>
+                            </div>
+
+                            <div class="w-full h-[400px] mb-12 relative chart-container" style="min-height: 400px">
+                                <canvas id="amortizationChartBar"></canvas>
+                            </div>
+
+                            <div class="overflow-x-auto w-full pt-4">
+                                <table class="w-full text-sm text-center">
+                                    <thead>
+                                        <tr class="border-b-2 border-brand-navy/10 bg-brand-navy/5">
+                                            <th class="py-4 px-2 font-bold text-brand-navy">Year</th>
+                                            <th class="py-4 px-2 font-bold text-brand-navy">Total paid</th>
+                                            <th class="py-4 px-2 font-bold text-brand-navy">Principal paid</th>
+                                            <th class="py-4 px-2 font-bold text-brand-navy">Interest paid</th>
+                                            <th class="py-4 px-2 font-bold text-brand-navy text-right pr-4">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pay-amort-table">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <p class="text-[0.65rem] md:text-xs text-brand-navy/60 mt-10 mx-auto text-left leading-relaxed">
+                                The line above displays the totals at the end of your mortgage term. At this time, you will renew your mortgage and choose among the rates that are available. The following analysis assumes you will lock in the same rate for the remainder of the amortization period, which may not be possible.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -775,7 +1054,7 @@ function initInputMasking() {
     inputs.forEach(input => {
         input.addEventListener('input', function(e) {
             // Skip pct inputs for now or handle them differently
-            if (this.id.includes('pct') || this.id.includes('rate') || this.id.includes('tax')) {
+            if (this.id.includes('pct') || this.id.includes('rate') || this.id.includes('tax') || this.id === 'ltt-location') {
                 return;
             }
             
@@ -785,7 +1064,7 @@ function initInputMasking() {
             let val = this.value.replace(/[^\d]/g, '');
             if (val) {
                 let formatted = parseInt(val).toLocaleString('en-CA');
-                this.value = '$ ' + formatted;
+                this.value = formatted;
             } else {
                 this.value = '';
             }
@@ -960,77 +1239,155 @@ function updateRefinanceCalculator() {
     }
 }
 
-function computeLTT(price, isToronto) {
+
+function computeLTT(price, province, location, isFTB, isNewHome) {
     let provTax = 0;
     let muniTax = 0;
+    let provRebate = 0;
+    let muniRebate = 0;
 
-    // Provincial Tax Brackets
-    if (price > 0) {
-        provTax += Math.min(price, 55000) * 0.005;
-        if (price > 55000) provTax += (Math.min(price, 250000) - 55000) * 0.01;
-        if (price > 250000) provTax += (Math.min(price, 400000) - 250000) * 0.015;
-        if (price > 400000) provTax += (Math.min(price, 2000000) - 400000) * 0.02;
-        if (price > 2000000) provTax += (price - 2000000) * 0.025;
+    const rates = LTT_RATES[province];
+    if (!rates) return { provTax, muniTax, provRebate, muniRebate };
+
+    // --- Provincial Calculation ---
+    if (rates.prov.length > 0) {
+        let remainingPrice = price;
+        let lastThreshold = 0;
+        for (const tier of rates.prov) {
+            const currentThreshold = tier.threshold === Infinity ? price : tier.threshold;
+            const taxableAmount = Math.max(0, Math.min(remainingPrice, currentThreshold - lastThreshold));
+            provTax += taxableAmount * tier.rate;
+            remainingPrice -= taxableAmount;
+            lastThreshold = currentThreshold;
+            if (remainingPrice <= 0) break;
+        }
     }
 
-    // Municipal Tax Brackets (Toronto)
-    if (isToronto && price > 0) {
-        muniTax += Math.min(price, 55000) * 0.005;
-        if (price > 55000) muniTax += (Math.min(price, 250000) - 55000) * 0.01;
-        if (price > 250000) muniTax += (Math.min(price, 400000) - 250000) * 0.015;
-        if (price > 400000) muniTax += (Math.min(price, 2000000) - 400000) * 0.02;
-        if (price > 2000000) muniTax += (price - 2000000) * 0.025;
+    // --- Municipal (Toronto) ---
+    if (location.toLowerCase().includes('toronto')) {
+        let rem = price;
+        muniTax += Math.min(rem, 55000) * 0.005;
+        if (rem > 55000) muniTax += (Math.min(rem, 250000) - 55000) * 0.01;
+        if (rem > 250000) muniTax += (Math.min(rem, 400000) - 250000) * 0.015;
+        if (rem > 400000) muniTax += (Math.min(rem, 2000000) - 400000) * 0.02;
+        if (rem > 2000000) muniTax += (Math.min(rem, 3000000) - 2000000) * 0.025;
+        if (rem > 3000000) muniTax += (Math.min(rem, 4000000) - 3000000) * 0.035;
+        if (rem > 4000000) muniTax += (Math.min(rem, 5000000) - 4000000) * 0.045;
+        if (rem > 5000000) muniTax += (Math.min(rem, 10000000) - 5000000) * 0.055;
+        if (rem > 10000000) muniTax += (Math.min(rem, 20000000) - 10000000) * 0.065;
+        if (rem > 20000000) muniTax += (price - 20000000) * 0.075;
     }
 
-    return { provTax, muniTax };
+    // --- Rebates ---
+    if (isFTB) {
+        if (province === 'ON') {
+            provRebate = Math.min(provTax, 4000);
+            if (location.toLowerCase().includes('toronto')) {
+                muniRebate = Math.min(muniTax, 4475);
+            }
+        } else if (province === 'BC') {
+            // BC FTB Exemption: Full up to 500k, partial to 525k
+            if (price <= 500000) provRebate = provTax;
+            else if (price < 525000) {
+                const proportion = (525000 - price) / 25000;
+                provRebate = provTax * proportion;
+            }
+        } else if (province === 'PE') {
+            if (price < 200000) provRebate = provTax;
+        }
+    }
+
+    // BC New Home Exemption (Effective April 1, 2024: increased to 1.1M)
+    if (isNewHome && province === 'BC') {
+        if (price <= 1100000) provRebate = Math.max(provRebate, provTax); 
+        else if (price < 1150000) { 
+            const proportion = (1150000 - price) / 50000;
+            provRebate = Math.max(provRebate, provTax * proportion);
+        }
+    }
+
+    return { provTax, muniTax, provRebate, muniRebate };
 }
 
 function updateLandTransferTaxCalculator() {
     const priceInput = document.getElementById('ltt-price');
     const locInput = document.getElementById('ltt-location');
     const ftbInput = document.getElementById('ltt-ftb');
+    const newHomeInput = document.getElementById('ltt-new-home');
+    const newHomeWrapper = document.getElementById('ltt-new-home-wrapper');
 
     if (!priceInput || !locInput || !ftbInput) return;
 
     let price = parseCurrency(priceInput.value);
     if (price <= 0) price = 0;
 
-    const isToronto = locInput.value.toLowerCase().includes('toronto');
-    const isFTB = ftbInput.checked;
+    const locVal = locInput.value.toUpperCase();
+    let province = 'ON'; // Default
 
-    const { provTax, muniTax } = computeLTT(price, isToronto);
+    const provMap = {
+        'BC': 'BC', 'BRITISH COLUMBIA': 'BC', 'VANCOUVER': 'BC', 'VICTORIA': 'BC',
+        'ON': 'ON', 'ONTARIO': 'ON', 'TORONTO': 'ON', 'OTTAWA': 'ON', 'MISSISSAUGA': 'ON',
+        'AB': 'AB', 'ALBERTA': 'AB', 'CALGARY': 'AB', 'EDMONTON': 'AB',
+        'QC': 'QC', 'QUEBEC': 'QC', 'MONTREAL': 'QC',
+        'MB': 'MB', 'MANITOBA': 'MB', 'WINNIPEG': 'MB',
+        'SK': 'SK', 'SASKATCHEWAN': 'SK', 'REGINA': 'SK', 'SASKATOON': 'SK',
+        'NS': 'NS', 'NOVA SCOTIA': 'NS', 'HALIFAX': 'NS',
+        'NB': 'NB', 'NEW BRUNSWICK': 'NB', 'FREDERICTON': 'NB',
+        'PE': 'PE', 'PRINCE EDWARD ISLAND': 'PE', 'CHARLOTTETOWN': 'PE',
+        'NL': 'NL', 'NEWFOUNDLAND': 'NL', 'ST. JOHN': 'NL',
+        'NT': 'NT', 'NORTHWEST TERRITORIES': 'NT', 'YELLOWKNIFE': 'NT',
+        'YT': 'YT', 'YUKON': 'YT', 'WHITEHORSE': 'YT',
+        'NU': 'NU', 'NUNAVUT': 'NU', 'IQALUIT': 'NU'
+    };
 
-    let provRebate = 0;
-    let muniRebate = 0;
-
-    if (isFTB) {
-        provRebate = Math.min(provTax, 4000);
-        if (isToronto) {
-            muniRebate = Math.min(muniTax, 4475);
+    for (const key in provMap) {
+        if (locVal.includes(key)) {
+            province = provMap[key];
+            break;
         }
     }
+    
+    console.log(`[LTT DEBUG] Price: ${price}, Location: ${locVal}, Province parsed: ${province}`);
+
+
+    
+    // Toggle New Home visibility for BC
+    if (province === 'BC') {
+        newHomeWrapper.style.display = 'flex';
+    } else {
+        newHomeWrapper.style.display = 'none';
+        if (newHomeInput) newHomeInput.checked = false;
+    }
+
+    const isFTB = ftbInput.checked;
+    const isNewHome = newHomeInput ? newHomeInput.checked : false;
+
+    const { provTax, muniTax, provRebate, muniRebate } = computeLTT(price, province, locVal, isFTB, isNewHome);
 
     const totalRebate = provRebate + muniRebate;
-    const totalTax = (provTax + muniTax) - totalRebate;
+    const totalTax = Math.max(0, (provTax + muniTax) - totalRebate);
 
     document.getElementById('ltt-prov').innerText = formatCurrency(provTax);
     
-    // Only show municipal if > 0 or if toronto
-    if (isToronto || muniTax > 0) {
+    // Municipal row
+    const muniRow = document.getElementById('ltt-muni-row');
+    if (muniTax > 0) {
         document.getElementById('ltt-muni').innerText = formatCurrency(muniTax);
-        document.getElementById('ltt-muni').parentElement.style.display = 'flex';
+        muniRow.style.display = 'flex';
     } else {
-        document.getElementById('ltt-muni').parentElement.style.display = 'none';
+        muniRow.style.display = 'none';
     }
 
+    // Rebate row
+    const rebateRow = document.getElementById('ltt-rebate-row');
     if (totalRebate > 0) {
         document.getElementById('ltt-rebate').innerText = formatCurrency(totalRebate);
-        document.getElementById('ltt-rebate').parentElement.style.display = 'flex';
+        rebateRow.style.display = 'flex';
     } else {
-        document.getElementById('ltt-rebate').parentElement.style.display = 'none';
+        rebateRow.style.display = 'none';
     }
 
-    animateValue('ltt-total', totalTax);
+    animateValue('ltt-total', Math.round(totalTax));
 }
 
 function computePrincipal(payment, annualRate, amortYears) {
@@ -1097,127 +1454,8 @@ function updateAffordabilityCalculator() {
     }
 }
 
-// Function exposed to main.js to initialize event listeners once DOM is ready
-window.initCalculatorLogic = function() {
-    // --- Payment Calculator Defaults ---
-    const payPrice = document.getElementById('pay-price');
-    if(payPrice) payPrice.value = '500,000';
-    
-    const payDp0 = document.getElementById('pay-dp-pct-0');
-    if(payDp0) payDp0.value = '20';
-    
-    const payRate0 = document.getElementById('pay-rate-0');
-    if(payRate0) payRate0.value = '4.50';
+// --- Calculator Initialization ---
 
-    // --- Refinance Calculator Defaults ---
-    const refAmount = document.getElementById('ref-amount');
-    if(refAmount) refAmount.value = '350,000';
-    
-    const refRate0 = document.getElementById('ref-rate-0');
-    if(refRate0) refRate0.value = '4.50';
-
-    // --- LTT Calculator Defaults ---
-    const lttPrice = document.getElementById('ltt-price');
-    if(lttPrice) lttPrice.value = '800,000';
-
-    // --- Affordability Calculator Defaults ---
-    const affInc1 = document.getElementById('aff-inc-1');
-    if(affInc1) affInc1.value = '100,000';
-    const affDp = document.getElementById('aff-dp');
-    if(affDp) affDp.value = '50,000';
-
-    // Add event listeners to all payment calculator inputs
-    const payInputs = [
-        'pay-price',
-        ...[...Array(4)].map((_, i) => `pay-dp-pct-${i}`),
-        ...[...Array(4)].map((_, i) => `pay-dp-amt-${i}`),
-        ...[...Array(4)].map((_, i) => `pay-amort-${i}`),
-        ...[...Array(4)].map((_, i) => `pay-rate-${i}`),
-        ...[...Array(4)].map((_, i) => `pay-freq-${i}`)
-    ];
-
-    payInputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', updatePaymentCalculator);
-            el.addEventListener('change', updatePaymentCalculator);
-        }
-    });
-
-    // Add event listeners to all refinance calculator inputs
-    const refInputs = [
-        'ref-amount',
-        ...[...Array(4)].map((_, i) => `ref-amort-${i}`),
-        ...[...Array(4)].map((_, i) => `ref-rate-${i}`),
-        ...[...Array(4)].map((_, i) => `ref-freq-${i}`)
-    ];
-
-    refInputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', updateRefinanceCalculator);
-            el.addEventListener('change', updateRefinanceCalculator);
-        }
-    });
-
-    // Add event listeners to LTT inputs
-    const lttInputs = ['ltt-price', 'ltt-location', 'ltt-ftb'];
-    lttInputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', updateLandTransferTaxCalculator);
-            el.addEventListener('change', updateLandTransferTaxCalculator);
-        }
-    });
-
-    // Add event listeners to Affordability inputs
-    const affInputs = [
-        'aff-inc-1', 'aff-inc-2', 'aff-dp', 'aff-amort', 'aff-loc',
-        'aff-tax', 'aff-condo', 'aff-heat', 'aff-cc', 'aff-car', 'aff-loan'
-    ];
-    affInputs.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', updateAffordabilityCalculator);
-            el.addEventListener('change', updateAffordabilityCalculator);
-        }
-    });
-
-    // Format fields on blur
-    const formatOnBlur = function() {
-        const val = parseCurrency(this.value);
-        if(val > 0) this.value = val.toLocaleString('en-US');
-    };
-
-    if(payPrice) payPrice.addEventListener('blur', formatOnBlur);
-    if(refAmount) refAmount.addEventListener('blur', formatOnBlur);
-    if(lttPrice) lttPrice.addEventListener('blur', formatOnBlur);
-    
-    ['aff-inc-1', 'aff-inc-2', 'aff-dp', 'aff-tax', 'aff-condo', 'aff-heat', 'aff-cc', 'aff-car', 'aff-loan'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) el.addEventListener('blur', formatOnBlur);
-    });
-
-    for(let i=0; i<4; i++) {
-        const dpField = document.getElementById(`pay-dp-amt-${i}`);
-        if(dpField) dpField.addEventListener('blur', formatOnBlur);
-    }
-
-    // Connect toggle buttons
-    const toggleBtns = document.querySelectorAll('.toggle-btn');
-    toggleBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    // Initial calculation
-    updatePaymentCalculator();
-    updateRefinanceCalculator();
-    updateLandTransferTaxCalculator();
-    updateAffordabilityCalculator();
-};
 
 // --- Elite Features Logic --- \\
 
@@ -1420,6 +1658,62 @@ window.initCalculatorLogic = function() {
     const lttPrice = document.getElementById('ltt-price');
     if(lttPrice) lttPrice.value = '800,000';
 
+    // Custom Autocomplete Logic for LTT Location
+    const lttLocInput = document.getElementById('ltt-location');
+    const lttLocResults = document.getElementById('ltt-location-results');
+
+    if (lttLocInput && lttLocResults) {
+        lttLocInput.addEventListener('input', () => {
+            const val = lttLocInput.value.toLowerCase();
+            lttLocResults.innerHTML = '';
+            
+            if (!val) {
+                lttLocResults.classList.remove('active');
+                return;
+            }
+
+            const matches = LTT_LOCATIONS.filter(loc => loc.toLowerCase().includes(val)).slice(0, 8);
+            
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'autocomplete-item';
+                    
+                    // Highlight the matching part
+                    const index = match.toLowerCase().indexOf(val);
+                    const before = match.substring(0, index);
+                    const mid = match.substring(index, index + val.length);
+                    const after = match.substring(index + val.length);
+                    
+                    div.innerHTML = `<i class="ph ph-map-pin text-brand-navy/30"></i> <span>${before}<span class="text-brand-gold font-bold">${mid}</span>${after}</span>`;
+                    
+                    div.addEventListener('click', () => {
+                        lttLocInput.value = match;
+                        lttLocResults.classList.remove('active');
+                        updateLandTransferTaxCalculator();
+                    });
+                    
+                    lttLocResults.appendChild(div);
+                });
+                lttLocResults.classList.add('active');
+            } else {
+                lttLocResults.classList.remove('active');
+            }
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (!lttLocInput.contains(e.target) && !lttLocResults.contains(e.target)) {
+                lttLocResults.classList.remove('active');
+            }
+        });
+
+        // Auto-select text on focus/click for easier replacement
+        lttLocInput.addEventListener('focus', () => {
+            lttLocInput.select();
+        });
+    }
+
     // --- Affordability Calculator Defaults ---
     const affInc1 = document.getElementById('aff-inc-1');
     if(affInc1) affInc1.value = '100,000';
@@ -1461,7 +1755,7 @@ window.initCalculatorLogic = function() {
     });
 
     // Add event listeners to LTT inputs
-    const lttInputs = ['ltt-price', 'ltt-location', 'ltt-ftb'];
+    const lttInputs = ['ltt-price', 'ltt-location', 'ltt-ftb', 'ltt-new-home'];
     lttInputs.forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -1488,6 +1782,12 @@ window.initCalculatorLogic = function() {
         const val = parseCurrency(this.value);
         if(val > 0) this.value = val.toLocaleString('en-US');
     };
+    
+    // Percent format on blur
+    const formatPercentOnBlur = function() {
+        let val = parseFloat(this.value.replace(/[^\d.]/g, ''));
+        if(!isNaN(val) && val > 0) this.value = val + '%';
+    };
 
     if(payPrice) payPrice.addEventListener('blur', formatOnBlur);
     if(refAmount) refAmount.addEventListener('blur', formatOnBlur);
@@ -1499,8 +1799,17 @@ window.initCalculatorLogic = function() {
     });
 
     for(let i=0; i<4; i++) {
-        const dpField = document.getElementById(`pay-dp-amt-${i}`);
-        if(dpField) dpField.addEventListener('blur', formatOnBlur);
+        const dpAmtField = document.getElementById(`pay-dp-amt-${i}`);
+        if(dpAmtField) dpAmtField.addEventListener('blur', formatOnBlur);
+        
+        const dpPctField = document.getElementById(`pay-dp-pct-${i}`);
+        if(dpPctField) dpPctField.addEventListener('blur', formatPercentOnBlur);
+        
+        const payRateField = document.getElementById(`pay-rate-${i}`);
+        if(payRateField) payRateField.addEventListener('blur', formatPercentOnBlur);
+        
+        const refRateField = document.getElementById(`ref-rate-${i}`);
+        if(refRateField) refRateField.addEventListener('blur', formatPercentOnBlur);
     }
 
     // Connect toggle buttons
@@ -1540,7 +1849,20 @@ window.switchScenario = function(type, index) {
         }
     });
 
-    // 3. Update Chart Label/Data if applicable
+    // 3. Sync Panel Dropdowns if Payment Calc
+    if (type === 'pay') {
+        const panelSelects = [
+            document.getElementById('panel-scenario-select-1'),
+            document.getElementById('panel-scenario-select-2'),
+            document.getElementById('panel-scenario-select-3'),
+            document.getElementById('panel-scenario-select-4')
+        ];
+        panelSelects.forEach(sel => {
+            if (sel) sel.value = index;
+        });
+    }
+
+    // 4. Update Chart Label/Data if applicable
     const chartLabel = document.getElementById(`${type}-chart-label`);
     if (chartLabel) {
         chartLabel.innerText = `Principal vs Total Interest (Plan ${index + 1})`;
@@ -1602,6 +1924,19 @@ window.toggleCollapsible = function(headerElem) {
     // Recalculate surrounding max-heights if nested (not needed here but good practice)
 };
 
+window.formatOnBlurInline = function() {
+    const val = parseCurrency(this.value);
+    if(val >= 0) this.value = '$' + val.toLocaleString('en-US');
+};
+
+let paymentCalcTimeout = null;
+window.updatePaymentCalculatorInputWait = function() {
+    if (paymentCalcTimeout) clearTimeout(paymentCalcTimeout);
+    paymentCalcTimeout = setTimeout(() => {
+        updatePaymentCalculator();
+    }, 400); // 400ms debounce
+};
+
 function updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, payment) {
     if (!price || !totalMortgage) return;
 
@@ -1619,33 +1954,76 @@ function updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, 
 
     animateValue('pay-close-ltt', estimatedLTT);
     
-    const legalFees = price * 0.015;
-    animateValue('pay-close-legal', legalFees);
+    // Read from inputs
+    const lawyerEl = document.getElementById('pay-input-lawyer');
+    const titleEl = document.getElementById('pay-input-title');
+    const inspectEl = document.getElementById('pay-input-inspect');
+    const appraisalEl = document.getElementById('pay-input-appraisal');
     
-    const totalCash = dpAmt + estimatedLTT + legalFees;
+    const lawyerFees = lawyerEl ? parseCurrency(lawyerEl.value) : 1000;
+    const titleFees = titleEl ? parseCurrency(titleEl.value) : 900;
+    const inspectFees = inspectEl ? parseCurrency(inspectEl.value) : 500;
+    const appraisalFees = appraisalEl ? parseCurrency(appraisalEl.value) : 300;
+    
+    const totalCash = dpAmt + estimatedLTT + lawyerFees + titleFees + inspectFees + appraisalFees;
     animateValue('pay-close-total', totalCash);
+    
+    const hdrCloseTotal = document.getElementById('hdr-close-total');
+    if (hdrCloseTotal) hdrCloseTotal.innerText = formatCurrency(totalCash);
 
     // 2. Monthly Expenses
     const monthlyPayment = (freq === 'biweekly') ? (payment * 26) / 12 : payment;
     animateValue('pay-exp-mortgage', monthlyPayment);
-    const propertyTax = (price * 0.0075) / 12; // estimated 0.75% annual
-    animateValue('pay-exp-tax', propertyTax);
-    const utilities = 250;
-    animateValue('pay-exp-utils', utilities);
-    animateValue('pay-exp-total', monthlyPayment + propertyTax + utilities);
+    
+    const ptaxEl = document.getElementById('pay-input-ptax');
+    const debtEl = document.getElementById('pay-input-debt');
+    const utilsEl = document.getElementById('pay-input-utils');
+    const pinsEl = document.getElementById('pay-input-pins');
+    const phoneEl = document.getElementById('pay-input-phone');
+    const netEl = document.getElementById('pay-input-net');
+    
+    // Optional smart default if empty
+    if (ptaxEl && !ptaxEl.value && ptaxEl !== document.activeElement) {
+        ptaxEl.value = '$' + Math.round((price * 0.0075) / 12).toLocaleString('en-US');
+    }
+    
+    const ptax = ptaxEl ? parseCurrency(ptaxEl.value) : 0;
+    const debt = debtEl ? parseCurrency(debtEl.value) : 0;
+    const utils = utilsEl ? parseCurrency(utilsEl.value) : 0;
+    const pins = pinsEl ? parseCurrency(pinsEl.value) : 0;
+    const phone = phoneEl ? parseCurrency(phoneEl.value) : 0;
+    const net = netEl ? parseCurrency(netEl.value) : 0;
+    
+    const totalExp = monthlyPayment + ptax + debt + utils + pins + phone + net;
+    animateValue('pay-exp-total', totalExp);
+    
+    const hdrExpTotal = document.getElementById('hdr-exp-total');
+    if (hdrExpTotal) hdrExpTotal.innerText = formatCurrency(totalExp);
 
-    // 3. Interest rate risk (+2% stress test)
-    const currRateEl = document.getElementById('pay-risk-curr-rate');
-    if (currRateEl) currRateEl.innerText = rate.toFixed(2) + '%';
-    animateValue('pay-risk-curr-pmt', payment);
+    // 3. Interest rate risk Matrix
+    const rStartBalEl = document.getElementById('risk-start-bal');
+    if (rStartBalEl) animateValue('risk-start-bal', totalMortgage);
     
-    const stressRate = rate + 2.00;
-    const stressRateEl = document.getElementById('pay-risk-stress-rate');
-    if (stressRateEl) stressRateEl.innerText = stressRate.toFixed(2) + '%';
-    
-    const stressPayment = computePayment(totalMortgage, stressRate, amort, freq);
-    animateValue('pay-risk-stress-pmt', stressPayment);
-    animateValue('pay-risk-diff', stressPayment - payment);
+    // We will populate principal paid & end balance after the 5 year amort calculation below
+
+    const elRate0 = document.getElementById('risk-rate-0');
+    if (elRate0) elRate0.innerText = rate.toFixed(2) + '%';
+    animateValue('risk-pmt-0', payment);
+
+    const rMinus2 = Math.max(0, rate - 2.00);
+    const elRateM2 = document.getElementById('risk-rate-minus2');
+    if (elRateM2) elRateM2.innerText = rMinus2.toFixed(2) + '%';
+    animateValue('risk-pmt-minus2', computePayment(totalMortgage, rMinus2, amort, freq));
+
+    const rPlus2 = rate + 2.00;
+    const elRateP2 = document.getElementById('risk-rate-plus2');
+    if (elRateP2) elRateP2.innerText = rPlus2.toFixed(2) + '%';
+    animateValue('risk-pmt-plus2', computePayment(totalMortgage, rPlus2, amort, freq));
+
+    const rPlus5 = rate + 5.00;
+    const elRateP5 = document.getElementById('risk-rate-plus5');
+    if (elRateP5) elRateP5.innerText = rPlus5.toFixed(2) + '%';
+    animateValue('risk-pmt-plus5', computePayment(totalMortgage, rPlus5, amort, freq));
 
     // 4. Amortization Schedule
     const r = rate / 100;
@@ -1656,6 +2034,11 @@ function updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, 
     
     let totalPrincipalPaid = 0;
     let totalInterestPaid = 0;
+
+    let chartLabels = [];
+    let chartPrincipal = [];
+    let chartInterest = [];
+    let chartBalance = [];
 
     for (let year = 1; year <= amort; year++) {
         let principalYear = 0;
@@ -1679,19 +2062,291 @@ function updatePaymentBreakdown(price, dpAmt, rate, amort, freq, totalMortgage, 
         totalPrincipalPaid += principalYear;
         totalInterestPaid += interestYear;
 
+        // Collect chart data
+        chartLabels.push(year);
+        chartPrincipal.push(principalYear);
+        chartInterest.push(interestYear);
+        chartBalance.push(currentBalance);
+
+        if (year === 5) { // Assuming a standard 5-year term for the matrix
+            animateValue('risk-prin-paid', totalPrincipalPaid);
+            animateValue('risk-end-bal', currentBalance);
+        }
+
         // Show every year or milestone year
         if (year <= 5 || year % 5 === 0 || year === amort) {
             tableHTML += `
                 <tr class="border-b border-brand-navy/5 hover:bg-brand-navy/5 transition-colors">
                     <td class="py-3 px-2 font-bold">${year}</td>
+                    <td class="py-3 px-2">${formatCurrency(principalYear + interestYear)}</td>
+                    <td class="py-3 px-2">${formatCurrency(principalYear)}</td>
+                    <td class="py-3 px-2">${formatCurrency(interestYear)}</td>
                     <td class="py-3 px-2 text-right">${formatCurrency(currentBalance)}</td>
-                    <td class="py-3 px-2 text-right">${formatCurrency(principalYear)}</td>
-                    <td class="py-3 px-2 text-right">${formatCurrency(interestYear)}</td>
                 </tr>
             `;
         }
     }
     
+    // Store chart data globally for rendering when accordion is opened
+    window.currentAmortData = {
+        labels: chartLabels,
+        principal: chartPrincipal,
+        interest: chartInterest,
+        balance: chartBalance
+    };
+
+    // If chart exists and is visible, auto-update
+    if (window.amortChartBarInstance) {
+        window.renderAmortizationChartTimeout();
+    }
+    
     const tableBody = document.getElementById('pay-amort-table');
     if (tableBody) tableBody.innerHTML = tableHTML;
 }
+
+// -------------------------------------------------------------
+// Amortization Chart.js Logic
+// -------------------------------------------------------------
+window.amortChartBarInstance = null;
+window.renderAmortizationChartTimeout = function() {
+    setTimeout(() => {
+        const ctx = document.getElementById('amortizationChartBar');
+        if (!ctx || !window.currentAmortData) return;
+
+        // Note: Chart.js might have zero height if display:none. The timeout + accordion transition helps.
+        
+        if (window.amortChartBarInstance) {
+            window.amortChartBarInstance.destroy();
+        }
+
+        window.amortChartBarInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: window.currentAmortData.labels,
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'Balance',
+                        data: window.currentAmortData.balance,
+                        borderColor: '#0F1E2E',
+                        backgroundColor: '#0F1E2E',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Principal',
+                        data: window.currentAmortData.principal,
+                        backgroundColor: '#2D7AE0', // brand-primary
+                        stacked: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Interest',
+                        data: window.currentAmortData.interest,
+                        backgroundColor: '#B5D3F8', // lighter blue
+                        stacked: true,
+                        yAxisID: 'y'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: {
+                            callback: function(val, index) {
+                                // show every 5 years roughly on x-axis
+                                return index % 5 === 0 ? this.getLabelForValue(val) : '';
+                            }
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        position: 'left',
+                        grid: { borderDash: [4, 4], color: 'rgba(15,30,46,0.05)' },
+                        ticks: {
+                            callback: function(value) { return '$' + (value/1000) + 'k'; }
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        grid: { display: false },
+                        ticks: {
+                            callback: function(value) { return '$' + (value/1000) + 'k'; }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { 
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            padding: 20,
+                            font: { family: 'Outfit', size: 12, weight: '600' }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 30, 46, 0.9)',
+                        padding: 12,
+                        titleFont: { family: 'Outfit', size: 14 },
+                        bodyFont: { family: 'Inter', size: 13 },
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }, 350); // wait for accordion to open
+};
+
+// -------------------------------------------------------------
+// Historical Interest Rate Chart.js Logic
+// -------------------------------------------------------------
+window.historicalChartInstance = null;
+window.renderHistoricalChartTimeout = function() {
+    setTimeout(() => {
+        const ctx = document.getElementById('historicalRateChart');
+        if (!ctx) return;
+
+        if (window.historicalChartInstance) {
+            window.historicalChartInstance.destroy();
+        }
+
+        // Realistic data mapping roughly 2006-2024 from the benchmark graph
+        const baseRates = [
+            5.2, 5.4, 5.0, 5.6, 5.8, 5.2, 5.4, 3.8, 4.2, 3.8, 4.2, 3.6, 3.2, 3.0, 3.1,
+            2.8, 2.6, 3.3, 2.8, 2.7, 2.4, 2.3, 2.4, 2.1, 2.8, 3.1, 3.2, 2.4, 2.5, 1.6,
+            1.4, 1.7, 2.5, 4.4, 4.6, 4.3, 5.4, 4.8, 4.0, 3.8, 3.9, 3.8
+        ];
+        
+        const hLabels = [];
+        const minArray = [];
+        const maxArray = [];
+        const avgArray = [];
+        const minVal = 1.40;
+        const maxVal = 5.89;
+        const avgVal = 3.42;
+
+        for(let i=0; i<baseRates.length; i++) {
+            // roughly mapping 42 points over 18 years
+            let year = 2006 + (i * (18 / (baseRates.length - 1)));
+            hLabels.push(Math.round(year));
+            minArray.push(minVal);
+            maxArray.push(maxVal);
+            avgArray.push(avgVal);
+        }
+
+        window.historicalChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: hLabels,
+                datasets: [
+                    {
+                        label: 'Best 5yr fixed rates',
+                        data: baseRates,
+                        borderColor: '#0070B8', // Blue line
+                        borderWidth: 2,
+                        tension: 0.2, // Slight curve to match the graph's jaggy but smooth style
+                        pointRadius: 0,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Best 5yr fixed rates (Min.)',
+                        data: minArray,
+                        borderColor: '#2BA36A', // Green line
+                        borderWidth: 1.5,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Best 5yr fixed rates (Avg.)',
+                        data: avgArray,
+                        borderColor: '#FFA000', // Yellow/Orange line
+                        borderWidth: 1.5,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Best 5yr fixed rates (Max.)',
+                        data: maxArray,
+                        borderColor: '#DE5050', // Red line
+                        borderWidth: 1.5,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            maxTicksLimit: 10,
+                            callback: function(val, index) {
+                                // show labels like '2008', '2010'
+                                const lbl = this.getLabelForValue(val);
+                                // Prevent duplicates and only show even years if it isn't cluttered
+                                if (index % 4 === 0) return lbl; 
+                                return '';
+                            }
+                        }
+                    },
+                    y: {
+                        min: 1,
+                        max: 7,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) { return value + '%'; }
+                        },
+                        grid: {
+                            color: 'rgba(15,30,46,0.1)',
+                            drawBorder: false,
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: false, // matches screenshot
+                            boxWidth: 12,
+                            boxHeight: 2
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    }, 300); // Wait for accordion animation
+};
