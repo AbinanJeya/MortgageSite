@@ -87,8 +87,9 @@
     --color-border: #E2E8F0;
     
     /* Typography */
-    --font-sans: 'Antipasto Pro', system-ui, -apple-system, sans-serif;
+    --font-sans: system-ui, -apple-system, sans-serif;
     --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Antipasto Pro', system-ui, sans-serif;
     --font-script: 'Denita Script', cursive;
     
     /* Shadows */

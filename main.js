@@ -185,12 +185,12 @@ function renderHero() {
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                             </div>
                         </div>
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10 font-heading">
                             <span class="block">Your Path to</span>
-                            <span class="block text-brand-gold my-1 sm:my-2">Homeownership</span>
+                            <span class="block text-brand-gold my-1 sm:my-2 font-script">Homeownership</span>
                             <span class="block">Starts Here</span>
                         </h1>
-                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16">
+                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16 font-body">
                             ${agentConfig.agent.fullBio}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center xl:justify-start items-center">
@@ -238,8 +238,8 @@ function renderAbout() {
                             <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                                 <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
                             </div>
-                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
-                            <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed">
+                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight font-heading">${about.title}</h2>
+                            <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed font-body">
                                 <p>${about.description1}</p>
                                 <p>${about.description2}</p>
                             </div>
@@ -276,14 +276,14 @@ function renderAbout() {
                     <!-- Right Column - Bio -->
                     <div class="order-3 lg:col-span-1 reveal reveal-left">
                         <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
-                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
+                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight font-heading">${about.meetBroker.title}</h2>
                             <div class="relative mb-10">
                                 <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
-                                <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
+                                <p class="text-xl italic font-semibold text-white/90 leading-relaxed font-script">
                                     ${about.meetBroker.quote}
                                 </p>
                             </div>
-                            <p class="text-white/60 leading-relaxed mb-10 text-lg">
+                            <p class="text-white/60 leading-relaxed mb-10 text-lg font-body">
                                 ${about.meetBroker.description}
                             </p>
                             <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-brand-gold text-brand-navy font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
@@ -309,7 +309,7 @@ function renderServices() {
                     <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                         <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
                     </div>
-                    <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
+                    <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight font-heading">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -321,7 +321,7 @@ function renderServices() {
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
-                                    <p class="text-white/60 text-lg leading-relaxed mb-8">${service.description}</p>
+                                    <p class="text-white/60 text-lg leading-relaxed mb-8 font-body">${service.description}</p>
                                     
                                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                                         ${service.details ? service.details.map(detail => `
@@ -367,8 +367,8 @@ function renderBooking() {
                                 <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                                     <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
                                 </div>
-                                <h3 class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
-                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-medium">
+                                <h3 class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight font-heading">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
+                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-medium font-body">
                                     Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
                                 </p>
                             </div>
@@ -565,7 +565,7 @@ function renderFooter() {
                 <div class="mb-8">
                     <span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
                 </div>
-                <p class="text-brand-gold text-sm max-w-md mx-auto mb-8">
+                <p class="text-brand-gold text-sm max-w-md mx-auto mb-8 font-body">
                     Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">
