@@ -119,6 +119,7 @@ function initTestimonialSlider() {
 function renderNavigation() {
     const logoContainer = document.getElementById('brand-logo-container');
     const linksContainer = document.getElementById('nav-links-container');
+    const ctaContainer = document.getElementById('nav-cta-container');
 
     logoContainer.innerHTML = `<a href="index.html">Ask<span class="text-brand-gold">Juthis</span></a>`;
 
@@ -127,8 +128,13 @@ function renderNavigation() {
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#why-choose">Why Us</a>
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#booking">Book Consultation</a>
         <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="calculators.html">Calculators</a>
-        <a class="bg-brand-slate text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
     `;
+
+    if (ctaContainer) {
+        ctaContainer.innerHTML = `
+            <a class="bg-brand-slate text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
+        `;
+    }
 
     // Populate Mobile Menu
     const mobileLinksContainer = document.getElementById('mobile-links-container');
@@ -170,9 +176,9 @@ function renderHero() {
         <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-brand-navy">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
-                <img src="assets/hero.png" alt="Home background" class="w-full h-full object-cover opacity-40">
+                <img src="assets/modern.jpg" alt="Home background" class="w-full h-full object-cover opacity-40">
                 <div class="absolute inset-0 bg-brand-navy/60"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/80 via-transparent to-brand-navy/80"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 sm:pt-0">
@@ -185,12 +191,15 @@ function renderHero() {
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                             </div>
                         </div>
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white mb-6 sm:mb-10 font-heading">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-8 reveal reveal-up">
+                            <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Expert Mortgage Guidance</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white reveal reveal-up mb-10">
                             <span class="block">Your Path to</span>
-                            <span class="block text-brand-gold my-1 sm:my-2 font-script">Homeownership</span>
-                            <span class="block">Starts Here</span>
+                            <span class="text-hero-accent">Homeownership</span>
+                            <span class="block mt-2">Starts Here<span class="text-brand-gold">.</span></span>
                         </h1>
-                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 leading-relaxed mb-8 sm:mb-16 font-body">
+                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16 reveal reveal-up" style="transition-delay: 200ms;">
                             ${agentConfig.agent.fullBio}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center xl:justify-start items-center">
@@ -227,8 +236,9 @@ function renderAbout() {
     const { about } = agentConfig;
     return `
         <section class="py-16 sm:py-32 bg-rich text-white overflow-hidden" id="about">
-            <img src="assets/about_bg.png" alt="Homeownership lifestyle" class="bg-rich-image opacity-20" loading="lazy">
-            <div class="bg-rich-overlay opacity-50"></div>
+            <img src="assets/helena.jpg" alt="Homeownership lifestyle" class="bg-rich-image opacity-40" loading="lazy">
+            <div class="absolute inset-0 bg-brand-navy/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-20 items-center">
@@ -238,8 +248,8 @@ function renderAbout() {
                             <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                                 <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
                             </div>
-                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight font-heading">${about.title}</h2>
-                            <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed font-body">
+                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
+                            <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed">
                                 <p>${about.description1}</p>
                                 <p>${about.description2}</p>
                             </div>
@@ -276,14 +286,14 @@ function renderAbout() {
                     <!-- Right Column - Bio -->
                     <div class="order-3 lg:col-span-1 reveal reveal-left">
                         <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
-                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight font-heading">${about.meetBroker.title}</h2>
+                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
                             <div class="relative mb-10">
                                 <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
-                                <p class="text-xl italic font-semibold text-white/90 leading-relaxed font-script">
+                                <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
                                     ${about.meetBroker.quote}
                                 </p>
                             </div>
-                            <p class="text-white/60 leading-relaxed mb-10 text-lg font-body">
+                            <p class="text-white/60 leading-relaxed mb-10 text-lg">
                                 ${about.meetBroker.description}
                             </p>
                             <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-brand-gold text-brand-navy font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
@@ -293,23 +303,24 @@ function renderAbout() {
                     </div>
                 </div>
             </div>
-            ${renderDivider('slant', 'fill-brand-navy')}
+            ${renderDivider('curve', 'fill-brand-navy')}
         </section>
     `;
 }
 
 function renderServices() {
     return `
-        <section class="py-16 sm:py-32 bg-rich overflow-hidden" id="services">
-            <img src="assets/services_bg.png" alt="Consultation background" class="bg-rich-image" loading="lazy">
-            <div class="bg-rich-overlay"></div>
+        <section class="py-16 sm:py-32 bg-rich relative overflow-hidden" id="services">
+            <img src="assets/puzzle.jpg" alt="Consultation background" class="bg-rich-image opacity-40" loading="lazy">
+            <div class="absolute inset-0 bg-brand-navy/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center mb-24 reveal reveal-up">
                     <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                         <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
                     </div>
-                    <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight font-heading">Comprehensive<br><span class="text-brand-gold">Financing Solutions</span></h2>
+                    <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-hero-accent">Financing Solutions</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -321,7 +332,7 @@ function renderServices() {
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
-                                    <p class="text-white/60 text-lg leading-relaxed mb-8 font-body">${service.description}</p>
+                                    <p class="text-white/60 text-lg leading-relaxed mb-8">${service.description}</p>
                                     
                                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                                         ${service.details ? service.details.map(detail => `
@@ -342,7 +353,6 @@ function renderServices() {
                     `).join('')}
                 </div>
             </div>
-            ${renderDivider('curve', 'fill-brand-navy')}
         </section>
     `;
 }
@@ -351,75 +361,70 @@ function renderServices() {
 
 function renderBooking() {
     return `
-        <section class="py-32 bg-rich glass-section relative overflow-hidden" id="booking">
-            <div class="bg-rich-image" style="background-image: url('assets/booking_bg.png'); opacity: 0.15; filter: blur(12px) grayscale(20%); transform: scale(1.1);"></div>
+        <section class="py-32 bg-brand-navy relative overflow-hidden" id="booking">
+            <img src="assets/arch.jpg" alt="Booking background" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-brand-navy/60"></div>
-            
-            <!-- Decorative Elements -->
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-[120px] reveal reveal-scale"></div>
-            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-navy/20 rounded-full blur-[120px] reveal reveal-scale"></div>
-            
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="lg:flex lg:items-center lg:justify-between gap-12">
                     <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right flex flex-col h-full">
-                        <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 h-full flex flex-col">
+                        <div class="group p-10 md:p-14 rounded-[3rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 hover:border-brand-navy/30 shadow-[0_40px_80px_-15px_rgba(211,189,115,0.3)] transition-all duration-700 h-full flex flex-col">
                             <div>
-                                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
-                                    <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
+                                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-navy/10 border border-brand-navy/20 mb-6">
+                                    <span class="text-brand-navy text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
                                 </div>
-                                <h3 class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight font-heading">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
-                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-body">
+                                <h3 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tight leading-tight group-hover:opacity-80 transition-opacity">Expert Guidance<br><span class="text-hero-accent !text-brand-navy">One Click Away</span></h3>
+                                <p class="text-xl text-brand-navy/70 mb-12 leading-relaxed font-medium">
                                     Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
                                 </p>
                             </div>
                             <div class="space-y-10">
                                 <div class="flex items-center group/item reveal reveal-up">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
-                                        <i class="ph ph-calendar-check text-4xl relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
+                                        <i class="ph ph-calendar-check text-4xl text-brand-gold relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white uppercase tracking-wider">Free 15-minute Discovery Call</span>
+                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">Free 15-minute Discovery Call</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
-                                        <i class="ph ph-shield-check text-4xl relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
+                                        <i class="ph ph-shield-check text-4xl text-brand-gold relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white uppercase tracking-wider">No obligation, just expert advice</span>
+                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">No obligation, just expert advice</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-gold animate-pulse opacity-20"></div>
-                                        <i class="ph ph-chat-text text-4xl relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
+                                        <i class="ph ph-chat-text text-4xl text-brand-gold relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white uppercase tracking-wider">Get your questions answered live</span>
+                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">Get your questions answered live</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="lg:w-1/2 reveal reveal-left">
-                        <div class="group p-6 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
-                           <div class="absolute inset-0 bg-brand-gold/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700"></div>
+                        <div class="group p-6 rounded-[3rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 hover:border-brand-navy/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
+                           
                             <div class="calendly-inline-widget relative z-10" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
-            ${renderDivider('curve', 'fill-white')}
         </section>
     `;
 }
 
 function renderTestimonials() {
     return `
-        <section class="py-24 overflow-hidden bg-brand-navy/90 glass-section" id="testimonials">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="py-24 overflow-hidden bg-brand-navy/90 glass-section relative" id="testimonials">
+            ${renderDivider('curve', 'fill-brand-navy')}
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="relative testimonial-container">
                     <div class="text-center max-w-3xl mx-auto">
                         <i class="ph ph-quotes text-6xl text-brand-gold opacity-50 mx-auto mb-6"></i>
@@ -454,22 +459,23 @@ function renderTestimonials() {
 function renderContact() {
     return `
         <section class="py-32 bg-rich overflow-hidden" id="contact">
-            <img src="assets/contact_bg.png" alt="Contact background" class="bg-rich-image">
-            <div class="bg-rich-overlay"></div>
+            <img src="assets/house.jpg" alt="Contact background" class="bg-rich-image opacity-40">
+            <div class="absolute inset-0 bg-brand-navy/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center mb-24 reveal reveal-up">
                     <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
                         <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Get Started</span>
                     </div>
-                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Secure Your<br><span class="text-brand-gold">Free Quote Today</span></h2>
+                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Secure Your<br><span class="text-hero-accent">Free Quote Today</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <!-- Contact Info Card -->
                     <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-right flex flex-col justify-between">
                         <div>
-                            <h3 class="text-4xl font-black text-white mb-6 tracking-tight leading-tight">Direct Access to<br><span class="text-brand-gold">Expert Advice</span></h3>
+                            <h3 class="text-4xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-brand-gold transition-colors">Direct Access to<br><span class="text-brand-gold">Expert Advice</span></h3>
                             <p class="text-white/60 text-xl leading-relaxed mb-12">
                                 Skip the robots. Reach out directly for a personalized consultation tailored to your unique financial goals.
                             </p>
@@ -517,7 +523,7 @@ function renderContact() {
                     </div>
                     
                     <!-- Form Card -->
-                    <div class="p-10 md:p-14 rounded-[3rem] glass-card border-white/10 reveal reveal-left">
+                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-left">
                         <form action="#" class="grid grid-cols-1 gap-y-6" onsubmit="event.preventDefault(); alert('Request sent!');">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -565,7 +571,7 @@ function renderFooter() {
                 <div class="mb-8">
                     <span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
                 </div>
-                <p class="text-brand-gold text-sm max-w-md mx-auto mb-8 font-body">
+                <p class="text-brand-gold text-sm max-w-md mx-auto mb-8">
                     Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">

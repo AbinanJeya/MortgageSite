@@ -97,7 +97,7 @@ function getAffordabilityCalculatorHTML() {
             <div class="aff-header" style="padding: 20px 0; border-bottom: 1.5px solid var(--color-primary); margin-bottom: 2.5rem;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <i class="ph ph-shield-check-fill text-brand-gold text-2xl"></i>
-                    <span style="font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--color-navy); letter-spacing: -0.02em;">Maximum Affordability Analysis</span>
+                    <span style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--color-navy); letter-spacing: -0.02em;">Maximum Affordability Analysis</span>
                     <i class="ph ph-caret-right" style="margin-left: auto; color: var(--color-primary);"></i>
                 </div>
             </div>
@@ -107,7 +107,7 @@ function getAffordabilityCalculatorHTML() {
                 <div class="aff-label-col">
                     <div class="flex items-center gap-2 mb-1">
                         <i class="ph ph-identification-card text-brand-navy/30 text-xl"></i>
-                        <span class="aff-row-title" style="font-family: 'Space Grotesk', sans-serif;">Annual Income</span>
+                        <span class="aff-row-title" style="font-family: 'Manrope', sans-serif;">Annual Income</span>
                         <i class="ph ph-question tooltip-trigger tooltip-down" data-tip="Your total gross annual income before taxes. Include bonuses and other consistent sources of income."></i>
                     </div>
                     <p class="aff-row-desc">Your gross income before-tax, including bonuses and supplementary income.</p>
@@ -226,7 +226,7 @@ function getAffordabilityCalculatorHTML() {
             <div class="aff-results-banner glass-card" style="padding: 35px; border-radius: 2rem; margin-top: 30px; text-align: center; background: rgba(15, 30, 46, 0.05); border: 1.5px solid var(--color-primary);">
                 <div class="flex items-center justify-center gap-3 mb-3">
                     <i class="ph ph-crown-simple text-brand-gold text-2xl"></i>
-                    <h4 style="color: var(--color-navy); margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;">Maximum Affordable Home Price</h4>
+                    <h4 style="color: var(--color-navy); margin: 0; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;">Maximum Affordable Home Price</h4>
                 </div>
                 <div id="aff-max-price" class="text-4xl sm:text-5xl md:text-6xl text-gold-elite font-black tracking-tighter" style="line-height: 1;"><span class="skeleton-shimmer">$-</span></div>
                 
@@ -841,7 +841,7 @@ function getPaymentCalculatorHTML() {
                                     </div>
                                     <div class="flex justify-between items-center font-bold text-brand-primary h-full">
                                         <span class="flex gap-4"><span>=</span> Balance remaining at the end of your current term</span>
-                                        <span class="text-xl font-bold font-spaceGrotesk" id="risk-end-bal">$-</span>
+                                        <span class="text-xl font-bold font-outfit" id="risk-end-bal">$-</span>
                                     </div>
                                 </div>
                                 
@@ -904,7 +904,7 @@ function getPaymentCalculatorHTML() {
                     <div class="calc-collapsible-content">
                         <div class="calc-collapsible-inner p-4 md:p-8">
                             <div class="flex flex-col md:flex-row justify-between md:items-center mb-10 gap-4 border-b border-brand-navy/10 pb-6">
-                                <h4 class="text-xl md:text-2xl font-spaceGrotesk text-brand-primary">Choose your amortization scenario</h4>
+                                <h4 class="text-xl md:text-2xl font-outfit text-brand-primary">Choose your amortization scenario</h4>
                                 <div class="relative w-full md:w-64">
                                     <select class="w-full calc-input outlined-soft py-3 px-4 rounded-xl text-sm font-bold appearance-none bg-white border border-brand-navy/10 text-brand-navy/90" onchange="window.switchScenario('pay', parseInt(this.value))" id="panel-scenario-select-4">
                                         <option value="0">Plan 1</option>
@@ -2254,14 +2254,14 @@ window.renderAmortizationChartTimeout = function() {
                             usePointStyle: true,
                             boxWidth: 8,
                             padding: 20,
-                            font: { family: 'Space Grotesk', size: 12, weight: '600' }
+                            font: { family: 'Manrope', size: 12, weight: '600' }
                         }
                     },
                     tooltip: {
                         backgroundColor: 'rgba(15, 30, 46, 0.9)',
                         padding: 12,
-                        titleFont: { family: 'Space Grotesk', size: 14 },
-                        bodyFont: { family: 'Antipasto Pro', size: 13 },
+                        titleFont: { family: 'Manrope', size: 14 },
+                        bodyFont: { family: 'Inter', size: 13 },
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';

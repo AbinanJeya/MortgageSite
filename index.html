@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>AskJuthis | Expert Guidance for Your Home Journey</title>
-    <meta name="description" content="AskJuthis provides expert mortgage guidance, competitive rates, and personalized financing solutions for first-time buyers, refinancing, and more.">
+    <meta name="description"
+        content="AskJuthis provides expert mortgage guidance, competitive rates, and personalized financing solutions for first-time buyers, refinancing, and more.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -20,13 +21,6 @@
                             slate: '#4A5D73',
                             warm: '#F4F1EE'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['system-ui', '-apple-system', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif'],
-                        spaceGrotesk: ['Space Grotesk', 'sans-serif'],
-                        body: ['Antipasto Pro', 'system-ui', 'sans-serif'],
-                        script: ['Denita Script', 'cursive']
                     }
                 }
             }
@@ -36,10 +30,14 @@
     <!-- Icons (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Fonts loaded locally via @font-face in style.css -->
+    <!-- Fonts: Manrope & Pinyon Script -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Pinyon+Script&display=swap"
+        rel="stylesheet">
 
     <!-- CSS (for custom transitions) -->
-    <link rel="stylesheet" href="style.css?v=1.0.5">
+    <link rel="stylesheet" href="style.css?v=1.0.4">
 
     <!-- Calendly Widget Script -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -48,17 +46,22 @@
 <body class="font-sans text-white bg-brand-slate">
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-brand-navy/95 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold tracking-tight text-white uppercase" id="brand-logo-container">
-                        <!-- Injected via main.js -->
-                    </span>
+        <div class="px-4 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-2 lg:grid-cols-3 h-20 items-center">
+                <!-- Left: Logo -->
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold tracking-tight text-white uppercase"
+                        id="brand-logo-container"></span>
                 </div>
-                <div class="hidden lg:flex space-x-8 items-center" id="nav-links-container">
-                    <!-- Injected via main.js -->
-                </div>
-                <div class="lg:hidden">
+
+                <!-- Center: Links (Desktop Only) -->
+                <div class="hidden lg:flex justify-center space-x-8 items-center" id="nav-links-container"></div>
+
+                <!-- Right: CTA (Desktop Only) -->
+                <div class="hidden lg:flex justify-end items-center" id="nav-cta-container"></div>
+
+                <!-- Mobile Toggle (Right aligned on mobile) -->
+                <div class="lg:hidden flex justify-end">
                     <button class="p-2 text-white" onclick="toggleMobileMenu()" aria-label="Open menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round"

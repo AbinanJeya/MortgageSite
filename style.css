@@ -3,55 +3,6 @@
  * Inspired by Moertgages.ca
  */
 
-/* ========== Custom Font Faces ========== */
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('Fonts/space-grotesk/SpaceGrotesk-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('Fonts/space-grotesk/SpaceGrotesk-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('Fonts/space-grotesk/SpaceGrotesk-SemiBold.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('Fonts/space-grotesk/SpaceGrotesk-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Antipasto Pro';
-    src: url('Fonts/antipasto/AntipastoPro-Medium_trial.ttf') format('truetype');
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Denita Script';
-    src: url('Fonts/denita-script/DenitaScript-3z8mp.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ========== Utility Classes ========== */
-.font-script { font-family: 'Denita Script', cursive !important; font-weight: 400; }
-.font-heading { font-family: 'Space Grotesk', sans-serif !important; font-weight: 700; }
-.font-body { font-family: 'Antipasto Pro', sans-serif !important; font-weight: 500 !important; }
-
 :root {
     /* Color Palette */
     --color-primary: #4A5D73; /* Slate Blue */
@@ -63,8 +14,8 @@
     /* Brand Colors (Tailwind Sync) */
     --brand-navy: #0F1E2E;
     --brand-gold: #D3BD73;
-    --brand-slate: #4A5D73;
-    --brand-warm: #F4F1EE;
+    --brand-slate: #1A2E44;
+    --brand-warm: #F8F5F0;
     
     /* Neutral Colors */
     --color-bg: #FFFFFF;
@@ -74,10 +25,8 @@
     --color-border: #E2E8F0;
     
     /* Typography */
-    --font-sans: system-ui, -apple-system, sans-serif;
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Antipasto Pro', system-ui, sans-serif;
-    --font-script: 'Denita Script', cursive;
+    --font-primary: 'Manrope', sans-serif;
+    --font-accent: 'Pinyon Script', cursive;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -114,7 +63,7 @@ html, body {
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     color: var(--color-text);
     background-color: var(--color-bg);
     line-height: 1.6;
@@ -124,7 +73,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     color: var(--color-heading);
     line-height: 1.2;
-    font-weight: 700;
+    font-weight: 800; /* Extra Bold per Bespoke requirement */
 }
 
 a {
@@ -199,8 +148,8 @@ ul {
     background-position: top left;
     background-repeat: repeat;
     opacity: 0.12;
-    filter: blur(12px) grayscale(20%);
-    transform: scale(1.1);
+    /* filter: blur(12px) grayscale(20%); */
+    transform: scale(1.0);
     z-index: 0;
     transition: transform 1.5s var(--reveal-timing);
 }
@@ -218,6 +167,7 @@ ul {
 
 .section-divider-top {
     top: 0;
+    transform: rotate(180deg);
 }
 
 .section-divider-bottom {
@@ -231,6 +181,28 @@ ul {
     height: 80px;
 }
 
+/* Bespoke Typography Utils */
+.font-pinyon {
+    font-family: var(--font-accent);
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.text-hero-main {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+}
+
+.text-hero-accent {
+    font-family: var(--font-accent);
+    color: var(--brand-gold);
+    font-size: 1.1em;
+    font-weight: 400;
+    display: inline-block;
+    transform: translateY(0.1em);
+}
 /* Specific Divider Fills */
 .fill-brand-navy { fill: var(--brand-navy); }
 .fill-brand-gold { fill: var(--brand-gold); }
@@ -294,6 +266,8 @@ ul {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid transparent;
   transition: all 0.3s ease;
+  font-weight: 600; /* Semi-bold for navigation */
+  letter-spacing: 0.05em;
 }
 
 .glass-nav-link:hover {
@@ -830,7 +804,7 @@ ul {
 }
 
 .label-cell {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: var(--color-navy);
@@ -839,7 +813,6 @@ ul {
 
 .label-sub {
     display: block;
-    font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     font-weight: 500;
     color: rgba(15, 30, 46, 0.5);
@@ -985,7 +958,7 @@ ul {
     font-weight: 600;
     color: var(--color-navy);
     transition: all 0.2s ease;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1029,7 +1002,7 @@ ul {
 }
 
 .calc-readonly {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     color: var(--color-navy);
     display: flex;
@@ -1235,7 +1208,7 @@ ul {
 }
 
 .collapse-val {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
 }
 .collapse-row.total-row .collapse-val {
@@ -1286,7 +1259,7 @@ ul {
 
 .leader-value {
     white-space: nowrap;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
 }
 
@@ -1295,7 +1268,7 @@ ul {
     padding: 0.5rem 0.75rem;
     border: 1px solid rgba(15, 30, 46, 0.15);
     border-radius: 0.25rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
     color: var(--color-navy);
     text-align: left;
@@ -1340,7 +1313,7 @@ ul {
 
 .calc-collapsible-header-total {
     font-size: 1.75rem;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 400;
     color: var(--color-primary);
     margin-top: 0.25rem;
@@ -1604,7 +1577,7 @@ ul {
 .tooltip-trigger { position: relative; cursor: help; }
 .tooltip-trigger::after {
     content: attr(data-tip);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-style: normal;
     text-transform: none;
     position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(10px);
