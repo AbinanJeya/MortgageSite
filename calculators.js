@@ -1409,10 +1409,7 @@ function updateLandTransferTaxCalculator() {
         }
     }
     
-    console.log(`[LTT DEBUG] Price: ${price}, Location: ${locVal}, Province parsed: ${province}`);
 
-
-    
     // Toggle New Home visibility for BC
     if (province === 'BC') {
         newHomeWrapper.style.display = 'flex';

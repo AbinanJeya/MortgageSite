@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
 
     // Re-initialize Calendly widget (script loads async, may not be ready yet)
+    let calendlyRetries = 0;
     function initCalendly() {
         const calendlyEl = document.querySelector('.calendly-inline-widget');
         if (calendlyEl && typeof Calendly !== 'undefined') {
@@ -51,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 url: calendlyEl.getAttribute('data-url'),
                 parentElement: calendlyEl
             });
-        } else {
+        } else if (calendlyRetries < 20) {
+            calendlyRetries++;
             setTimeout(initCalendly, 500);
         }
     }
@@ -278,7 +280,7 @@ function renderAbout() {
                             <div class="relative mb-10">
                                 <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
                                 <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
-                                    "${about.meetBroker.quote}"
+                                    ${about.meetBroker.quote}
                                 </p>
                             </div>
                             <p class="text-white/60 leading-relaxed mb-10 text-lg">
@@ -504,7 +506,7 @@ function renderContact() {
                                 </li>
                                 <li class="flex items-center text-sm font-medium text-white/80">
                                     <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
-                                    Direct Underwriter Direct Access
+                                    Direct Underwriter Access
                                 </li>
                             </ul>
                             
@@ -521,16 +523,17 @@ function renderContact() {
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">First Name</label>
-                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="John"/>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="John" required/>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Last Name</label>
-                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="Doe"/>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="Doe" required/>
+                                </div>
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Email Address</label>
-                                <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="email" placeholder="john@example.com"/>
+                                <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="email" placeholder="john@example.com" required/>
                             </div>
                             <div>
                                 <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Interest</label>
@@ -568,9 +571,9 @@ function renderFooter() {
                     Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank"><i class="ph ph-x-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank"><i class="ph ph-instagram-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank"><i class="ph ph-linkedin-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank" aria-label="Follow us on X"><i class="ph ph-x-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank" aria-label="Follow us on Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank" aria-label="Connect on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
                 </div>
                 <div class="text-xs text-brand-gold/60">
                     © ${new Date().getFullYear()} AskJuthis. All rights reserved. ${agentConfig.agent.licenseNumber}. Equal Housing Lender.

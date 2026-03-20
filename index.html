@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>AskJuthis | Expert Guidance for Your Home Journey</title>
+    <meta name="description" content="AskJuthis provides expert mortgage guidance, competitive rates, and personalized financing solutions for first-time buyers, refinancing, and more.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -28,8 +29,13 @@
     <!-- Icons (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <!-- CSS (for custom transitions) -->
-    <link rel="stylesheet" href="style.css?v=1.0.3">
+    <link rel="stylesheet" href="style.css?v=1.0.4">
 
     <!-- Calendly Widget Script -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -49,7 +55,7 @@
                     <!-- Injected via main.js -->
                 </div>
                 <div class="lg:hidden">
-                    <button class="p-2 text-white" onclick="toggleMobileMenu()">
+                    <button class="p-2 text-white" onclick="toggleMobileMenu()" aria-label="Open menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2"></path>
@@ -70,7 +76,7 @@
             <div class="p-6">
                 <div class="flex items-center justify-between mb-8">
                     <span class="text-xl font-bold text-white uppercase">Menu</span>
-                    <button class="p-2 -mr-2 text-white" onclick="toggleMobileMenu()">
+                    <button class="p-2 -mr-2 text-white" onclick="toggleMobileMenu()" aria-label="Close menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2"></path>
