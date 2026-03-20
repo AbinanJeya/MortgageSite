@@ -34,22 +34,8 @@
 }
 @font-face {
     font-family: 'Antipasto Pro';
-    src: url('Fonts/antipasto/AntipastoPro-Light_trial.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Antipasto Pro';
     src: url('Fonts/antipasto/AntipastoPro-Medium_trial.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Antipasto Pro';
-    src: url('Fonts/antipasto/AntipastoPro-Bold_trial.ttf') format('truetype');
-    font-weight: 700;
+    font-weight: 300 700;
     font-style: normal;
     font-display: swap;
 }
@@ -64,6 +50,7 @@
 /* ========== Utility Classes ========== */
 .font-script { font-family: 'Denita Script', cursive !important; font-weight: 400; }
 .font-heading { font-family: 'Space Grotesk', sans-serif !important; font-weight: 700; }
+.font-body { font-family: 'Antipasto Pro', sans-serif !important; font-weight: 500 !important; }
 
 :root {
     /* Color Palette */

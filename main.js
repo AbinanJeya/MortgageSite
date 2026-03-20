@@ -190,7 +190,7 @@ function renderHero() {
                             <span class="block text-brand-gold my-1 sm:my-2 font-script">Homeownership</span>
                             <span class="block">Starts Here</span>
                         </h1>
-                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16 font-body">
+                        <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 leading-relaxed mb-8 sm:mb-16 font-body">
                             ${agentConfig.agent.fullBio}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center xl:justify-start items-center">
@@ -368,7 +368,7 @@ function renderBooking() {
                                     <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
                                 </div>
                                 <h3 class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight font-heading">Expert Guidance<br><span class="text-brand-gold">One Click Away</span></h3>
-                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-medium font-body">
+                                <p class="text-xl text-white/70 mb-12 leading-relaxed font-body">
                                     Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
                                 </p>
                             </div>
