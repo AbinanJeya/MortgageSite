@@ -1,5 +1,5 @@
 /**
- * Main application logic for Cholan Mortgages
+ * Main application logic for AskJuthis Mortgages
  * Reads from config.js and injects Tailwind-based UI into the DOM.
  */
 
@@ -227,7 +227,7 @@ function renderAbout() {
     const { about } = agentConfig;
     return `
         <section class="py-16 sm:py-32 bg-rich text-white overflow-hidden" id="about">
-            <img src="assets/about_bg.png" alt="Homeownership lifestyle" class="bg-rich-image opacity-20">
+            <img src="assets/about_bg.png" alt="Homeownership lifestyle" class="bg-rich-image opacity-20" loading="lazy">
             <div class="bg-rich-overlay opacity-50"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -288,7 +288,6 @@ function renderAbout() {
                             </p>
                             <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-brand-gold text-brand-navy font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
                                 ${about.meetBroker.linkText}
-                                <i class="ph ph-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
@@ -302,7 +301,7 @@ function renderAbout() {
 function renderServices() {
     return `
         <section class="py-16 sm:py-32 bg-rich overflow-hidden" id="services">
-            <img src="assets/services_bg.png" alt="Consultation background" class="bg-rich-image">
+            <img src="assets/services_bg.png" alt="Consultation background" class="bg-rich-image" loading="lazy">
             <div class="bg-rich-overlay"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -333,7 +332,7 @@ function renderServices() {
                                         `).join('') : ''}
                                     </ul>
                                     
-                                    <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="#">
+                                    <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="#contact">
                                         Explore Scope 
                                         <div class="ml-3 w-8 h-[2px] bg-brand-gold transform group-hover/btn:w-12 transition-all"></div>
                                     </a>
@@ -380,7 +379,7 @@ function renderBooking() {
                                         <i class="ph ph-calendar-check text-4xl relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">Free 15-minute Discovery Call</span>
+                                        <span class="text-lg font-black text-white uppercase tracking-wider">Free 15-minute Discovery Call</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
@@ -389,7 +388,7 @@ function renderBooking() {
                                         <i class="ph ph-shield-check text-4xl relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">No obligation, just expert advice</span>
+                                        <span class="text-lg font-black text-white uppercase tracking-wider">No obligation, just expert advice</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
@@ -398,7 +397,7 @@ function renderBooking() {
                                         <i class="ph ph-chat-text text-4xl relative z-10"></i>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-white tracking-tight uppercase tracking-wider">Get your questions answered live</span>
+                                        <span class="text-lg font-black text-white uppercase tracking-wider">Get your questions answered live</span>
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +528,6 @@ function renderContact() {
                                     <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Last Name</label>
                                     <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="Doe" required/>
                                 </div>
-                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Email Address</label>
@@ -571,9 +569,9 @@ function renderFooter() {
                     Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank" aria-label="Follow us on X"><i class="ph ph-x-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank" aria-label="Follow us on Instagram"><i class="ph ph-instagram-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank" aria-label="Connect on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X"><i class="ph ph-x-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
                 </div>
                 <div class="text-xs text-brand-gold/60">
                     © ${new Date().getFullYear()} AskJuthis. All rights reserved. ${agentConfig.agent.licenseNumber}. Equal Housing Lender.
