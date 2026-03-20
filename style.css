@@ -6,56 +6,56 @@
 /* ========== Custom Font Faces ========== */
 @font-face {
     font-family: 'Space Grotesk';
-    src: url('fonts/space-grotesk/SpaceGrotesk-Regular.otf') format('opentype');
+    src: url('Fonts/space-grotesk/SpaceGrotesk-Regular.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Space Grotesk';
-    src: url('fonts/space-grotesk/SpaceGrotesk-Medium.otf') format('opentype');
+    src: url('Fonts/space-grotesk/SpaceGrotesk-Medium.otf') format('opentype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Space Grotesk';
-    src: url('fonts/space-grotesk/SpaceGrotesk-SemiBold.otf') format('opentype');
+    src: url('Fonts/space-grotesk/SpaceGrotesk-SemiBold.otf') format('opentype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Space Grotesk';
-    src: url('fonts/space-grotesk/SpaceGrotesk-Bold.otf') format('opentype');
+    src: url('Fonts/space-grotesk/SpaceGrotesk-Bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Antipasto Pro';
-    src: url('fonts/antipasto/AntipastoPro-Light_trial.ttf') format('truetype');
+    src: url('Fonts/antipasto/AntipastoPro-Light_trial.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Antipasto Pro';
-    src: url('fonts/antipasto/AntipastoPro-Medium_trial.ttf') format('truetype');
+    src: url('Fonts/antipasto/AntipastoPro-Medium_trial.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Antipasto Pro';
-    src: url('fonts/antipasto/AntipastoPro-Bold_trial.ttf') format('truetype');
+    src: url('Fonts/antipasto/AntipastoPro-Bold_trial.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Denita Script';
-    src: url('fonts/denita-script/DenitaScript-3z8mp.ttf') format('truetype');
+    src: url('Fonts/denita-script/DenitaScript-3z8mp.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
