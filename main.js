@@ -153,15 +153,17 @@ function renderNavigation() {
 
 // Global state for brochure content
 let brochureHTML = '';
+let loanCompleted = false;
 
 window.togglePortal = function(showPortal) {
     const appContent = document.getElementById('app-content');
     
     if (showPortal) {
         if (!brochureHTML) brochureHTML = appContent.innerHTML;
-        appContent.innerHTML = renderPortal();
+        // Start at Login
+        appContent.innerHTML = renderLogin();
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        initScrollReveal(); // Re-init for portal elements
+        initScrollReveal();
     } else {
         if (brochureHTML) {
             appContent.innerHTML = brochureHTML;
@@ -170,6 +172,308 @@ window.togglePortal = function(showPortal) {
             initTestimonialSlider();
         }
     }
+}
+
+// State transition functions
+window.submitLogin = function() {
+    const appContent = document.getElementById('app-content');
+    appContent.innerHTML = renderMFA();
+    initScrollReveal();
+}
+
+window.verifyMFA = function() {
+    const appContent = document.getElementById('app-content');
+    appContent.innerHTML = renderPortal();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    initScrollReveal();
+}
+
+window.startWizard = function(step = 1) {
+    const appContent = document.getElementById('app-content');
+    appContent.innerHTML = renderWizard(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    initScrollReveal();
+}
+
+window.nextWizardStep = function(currentStep) {
+    if (currentStep < 3) {
+        window.startWizard(currentStep + 1);
+    } else {
+        loanCompleted = true; // Set success state
+        window.verifyMFA(); // Return to dashboard
+    }
+}
+
+window.showAIProcessing = function() {
+    const container = document.getElementById('ai-status-container');
+    const uploadDiv = document.querySelector('div[onclick="window.showAIProcessing()"]');
+    const nextBtn = document.getElementById('wizard-next-btn');
+    
+    if (container && uploadDiv) {
+        uploadDiv.classList.add('hidden');
+        container.classList.remove('hidden');
+        
+        container.innerHTML = `
+            <div class="flex flex-col items-center py-10">
+                <div class="relative w-20 h-20 mb-6">
+                    <div class="absolute inset-0 border-4 border-brand-gold/20 rounded-full"></div>
+                    <div class="absolute inset-0 border-4 border-brand-gold rounded-full border-t-transparent animate-spin"></div>
+                </div>
+                <p class="text-brand-gold font-black uppercase tracking-[0.2em] text-xs animate-pulse">AI Agent Scanning Document...</p>
+                <p class="text-white/30 text-[10px] mt-2 font-bold uppercase tracking-widest">Extracting Income & Tax Data</p>
+            </div>
+        `;
+
+        setTimeout(() => {
+            container.innerHTML = renderAIResult();
+            if (nextBtn) {
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                nextBtn.removeAttribute('disabled');
+            }
+        }, 3000);
+    }
+}
+
+function renderAIResult() {
+    return `
+        <div class="w-full bg-white/5 rounded-3xl p-8 border border-green-500/30 text-left mb-8 reveal reveal-up">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
+                    <i class="ph-bold ph-check"></i>
+                </div>
+                <span class="text-[10px] font-black text-white uppercase tracking-widest">AI Extraction Complete (99.2% Confidence)</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Employer</span>
+                    <span class="text-white font-bold">Initech Corp.</span>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Period</span>
+                    <span class="text-white font-bold">Mar 01 - Mar 15</span>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Gross Pay</span>
+                    <span class="text-brand-gold font-black">$4,582.50</span>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Net Pay</span>
+                    <span class="text-white font-bold">$3,210.15</span>
+                </div>
+            </div>
+            
+            <div class="mt-6 pt-4 border-t border-white/10">
+                <div class="flex items-center justify-between">
+                     <span class="text-[9px] font-black text-white/30 uppercase tracking-widest">YTD Earnings</span>
+                     <span class="text-white/60 font-bold">$22,912.50</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderWizard(step) {
+    const steps = [
+        { id: 1, title: 'Identity', icon: 'ph-identification-card', desc: 'Secure ID Verification' },
+        { id: 2, title: 'Income', icon: 'ph-briefcase', desc: 'W-2 / Paystub Capture' },
+        { id: 3, title: 'Assets', icon: 'ph-bank', desc: 'Direct Bank Link' }
+    ];
+
+    const currentStep = steps.find(s => s.id === step);
+
+    return `
+        <section class="min-h-screen bg-brand-navy pt-32 pb-24 relative overflow-hidden">
+             <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0 opacity-10">
+                <img src="assets/modern.jpg" alt="Wizard Background" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-brand-navy/90 z-0"></div>
+
+            <div class="max-w-4xl mx-auto px-4 relative z-10">
+                <!-- Wizard Header -->
+                <div class="flex flex-col items-center text-center mb-16 reveal reveal-up">
+                    <div class="flex items-center gap-4 mb-8">
+                        ${steps.map(s => `
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs ${s.id === step ? 'bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20' : (s.id < step ? 'bg-green-500 text-white' : 'bg-white/10 text-white/30')}">
+                                    ${s.id < step ? '<i class="ph-bold ph-check"></i>' : s.id}
+                                </div>
+                                <span class="hidden md:block text-[10px] font-black uppercase tracking-widest ${s.id === step ? 'text-white' : 'text-white/20'}">${s.title}</span>
+                                ${s.id < 3 ? `<div class="w-8 h-px ${s.id < step ? 'bg-green-500/50' : 'bg-white/10'}"></div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Step ${step}: <span class="text-brand-gold">${currentStep.title}</span></h2>
+                    <p class="text-white/40 font-bold uppercase tracking-[0.2em] text-sm">${currentStep.desc}</p>
+                </div>
+
+                <!-- Wizard Content Card -->
+                <div class="p-10 md:p-16 rounded-[4rem] glass-card border-white/10 shadow-2xl reveal reveal-up">
+                    ${step === 1 ? `
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
+                                <i class="ph-fill ph-identification-card text-brand-gold text-6xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Drivers License or Passport</h3>
+                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Please ensure your ID is within the frame and the text is clearly visible. We use bank-grade encryption to verify your identity instantly.</p>
+                            
+                            <div class="w-full max-w-sm aspect-[3/2] rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:bg-white/10 transition-all group mb-12">
+                                <i class="ph ph-camera text-4xl text-white/20 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                                <span class="text-white/40 font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">Open Camera or Upload</span>
+                            </div>
+
+                            <button onclick="window.nextWizardStep(1)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                                Identification Verified
+                            </button>
+                        </div>
+                    ` : step === 2 ? `
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
+                                <i class="ph-fill ph-briefcase text-brand-gold text-6xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Income Documentation</h3>
+                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Upload your most recent two paystubs or your T4 tax form. Our AI will automatically extract the data to speed up your approval.</p>
+                            
+                            <div onclick="window.showAIProcessing()" class="w-full max-w-sm py-12 rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:bg-white/10 transition-all group mb-12">
+                                <i class="ph ph-file-arrow-up text-4xl text-white/20 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                                <span class="text-white/40 font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">Upload Paystub / T4</span>
+                            </div>
+
+                            <div id="ai-status-container" class="hidden w-full max-w-xs">
+                                <!-- AI Processing UI will be injected here -->
+                            </div>
+
+                            <button id="wizard-next-btn" onclick="window.nextWizardStep(2)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
+                                Confirm Extracted Data
+                            </button>
+                        </div>
+                    ` : `
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
+                                <i class="ph-fill ph-bank text-brand-gold text-6xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Asset Verification (Plaid)</h3>
+                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Securely link your primary bank account to verify your down payment and closing funds. This is the fastest, safest way to complete your application.</p>
+                            
+                            <div class="w-full max-w-md p-8 rounded-3xl bg-brand-navy border border-white/10 mb-12 text-left">
+                                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                                    <div class="w-8 h-8 rounded bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                                        <i class="ph-bold ph-shield-check"></i>
+                                    </div>
+                                    <span class="text-[10px] font-black text-white uppercase tracking-widest">Bank-Grade 256-bit Security</span>
+                                </div>
+                                <div class="space-y-4">
+                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
+                                        <span class="font-bold">TD Canada Trust</span>
+                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
+                                     </div>
+                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
+                                        <span class="font-bold">RBC Royal Bank</span>
+                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
+                                     </div>
+                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
+                                        <span class="font-bold">Scotiabank</span>
+                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
+                                     </div>
+                                </div>
+                            </div>
+
+                            <button onclick="window.nextWizardStep(3)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                                Accounts Linked
+                            </button>
+                        </div>
+                    `}
+                </div>
+
+                <button onclick="window.togglePortal(true)" class="mt-12 w-full text-center text-white/20 hover:text-white transition-colors uppercase font-black tracking-widest text-xs">
+                    Cancel & Return to Dashboard
+                </button>
+            </div>
+        </section>
+    `;
+}
+
+function renderLogin() {
+    return `
+        <section class="min-h-screen bg-brand-navy flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
+             <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="assets/modern.jpg" alt="Login Background" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-brand-navy/80 z-0"></div>
+
+            <div class="max-w-md w-full px-6 relative z-10 reveal reveal-up">
+                <div class="p-10 md:p-12 rounded-[3.5rem] glass-card border-white/10 shadow-2xl text-center">
+                    <div class="w-20 h-20 rounded-3xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-8 mx-auto">
+                        <i class="ph-fill ph-lock-key text-brand-gold text-4xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Secure Access</h2>
+                    <p class="text-white/40 text-sm mb-10 font-bold uppercase tracking-[0.2em]">Borrower Portal 2026</p>
+
+                    <div class="space-y-6 text-left">
+                        <div>
+                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Broker Assigned Email</label>
+                            <input type="email" placeholder="client@example.com" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Access Key</label>
+                            <input type="password" placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                        </div>
+                        <button onclick="window.submitLogin()" class="w-full py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 mt-4">
+                            Log In & Authenticate
+                        </button>
+                    </div>
+                    
+                    <button onclick="window.togglePortal(false)" class="mt-8 text-white/40 text-xs font-bold hover:text-white transition-colors uppercase tracking-[0.1em]">
+                        Cancel & Return to Site
+                    </button>
+                </div>
+            </div>
+        </section>
+    `;
+}
+
+function renderMFA() {
+    return `
+        <section class="min-h-screen bg-brand-navy flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
+             <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0 opacity-10">
+                <img src="assets/modern.jpg" alt="MFA Background" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-brand-navy/90 z-0"></div>
+
+            <div class="max-w-md w-full px-6 relative z-10 reveal reveal-up">
+                <div class="p-10 md:p-12 rounded-[3.5rem] glass-card border-white/10 shadow-2xl text-center">
+                    <div class="w-20 h-20 rounded-3xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-8 mx-auto">
+                        <i class="phph-device-mobile-speaker text-brand-gold text-4xl animate-bounce"></i>
+                    </div>
+                    <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Check Your Phone</h2>
+                    <p class="text-white/40 text-sm mb-10 leading-relaxed font-bold uppercase tracking-widest px-4">We've sent a 6-digit verification code to (***) ***-8829</p>
+
+                    <div class="flex justify-center gap-3 mb-10">
+                        <input type="text" maxlength="1" value="7" class="w-12 h-16 bg-white/5 border border-white/20 rounded-xl text-2xl font-black text-brand-gold text-center outline-none">
+                        <input type="text" maxlength="1" value="4" class="w-12 h-16 bg-white/5 border border-white/20 rounded-xl text-2xl font-black text-brand-gold text-center outline-none focus:border-brand-gold">
+                        <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-brand-gold rounded-xl text-2xl font-black text-white text-center outline-none">
+                        <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-xl text-2xl font-black text-white text-center outline-none">
+                        <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-xl text-2xl font-black text-white text-center outline-none">
+                        <input type="text" maxlength="1" class="w-12 h-16 bg-white/5 border border-white/10 rounded-xl text-2xl font-black text-white text-center outline-none">
+                    </div>
+
+                    <button onclick="window.verifyMFA()" class="w-full py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                        Verify Identity
+                    </button>
+                    
+                    <div class="mt-8 flex flex-col gap-4">
+                        <button class="text-brand-gold text-xs font-bold uppercase tracking-widest hover:underline">Resend SMS Code</button>
+                        <button onclick="window.togglePortal(true)" class="text-white/40 text-xs font-bold hover:text-white transition-colors uppercase tracking-[0.1em]">
+                            Back to Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
 }
 
 function renderPortal() {
@@ -206,53 +510,56 @@ function renderPortal() {
                     <!-- Left: Progress & AI Score -->
                     <div class="lg:col-span-2 space-y-8">
                         <!-- Loan Tracker Card -->
-                        <div class="group p-8 md:p-12 rounded-[3.5rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 shadow-2xl reveal reveal-up">
+                        <div class="group p-8 md:p-12 rounded-[3.5rem] ${loanCompleted ? 'bg-green-500/90 text-white' : 'bg-brand-gold/85 text-brand-navy'} backdrop-blur-xl border-white/20 shadow-2xl reveal reveal-up">
                             <div class="flex items-center justify-between mb-12">
-                                <h3 class="text-3xl font-black text-brand-navy uppercase tracking-tight">Application Status</h3>
-                                <span class="px-6 py-2 rounded-full bg-brand-navy text-brand-gold text-sm font-black uppercase tracking-widest">In Review</span>
+                                <h3 class="text-3xl font-black uppercase tracking-tight">${loanCompleted ? 'Approval Issued' : 'Application Status'}</h3>
+                                <span class="px-6 py-2 rounded-full ${loanCompleted ? 'bg-white text-green-600' : 'bg-brand-navy text-brand-gold'} text-sm font-black uppercase tracking-widest">${loanCompleted ? 'Finalized' : 'In Review'}</span>
                             </div>
                             
                             <!-- Tracker Visual -->
                             <div class="relative py-8">
-                                <div class="absolute top-1/2 left-0 w-full h-1.5 bg-brand-navy/10 -translate-y-1/2 rounded-full"></div>
-                                <div class="absolute top-1/2 left-0 w-3/4 h-1.5 bg-brand-navy -translate-y-1/2 rounded-full"></div>
+                                <div class="absolute top-1/2 left-0 w-full h-1.5 ${loanCompleted ? 'bg-white/20' : 'bg-brand-navy/10'} -translate-y-1/2 rounded-full"></div>
+                                <div class="absolute top-1/2 left-0 ${loanCompleted ? 'w-full' : 'w-3/4'} h-1.5 ${loanCompleted ? 'bg-white' : 'bg-brand-navy'} -translate-y-1/2 rounded-full"></div>
                                 
                                 <div class="relative flex justify-between">
                                     <div class="flex flex-col items-center gap-4">
-                                        <div class="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                            <i class="ph ph-check-bold text-sm"></i>
+                                        <div class="w-8 h-8 rounded-full ${loanCompleted ? 'bg-white text-green-600' : 'bg-brand-navy text-brand-gold'} flex items-center justify-center">
+                                            <i class="ph-bold ph-check text-sm"></i>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Applied</span>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter">${loanCompleted ? 'Verified' : 'Applied'}</span>
                                     </div>
                                     <div class="flex flex-col items-center gap-4">
-                                        <div class="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                             <i class="ph ph-check-bold text-sm"></i>
+                                        <div class="w-8 h-8 rounded-full ${loanCompleted ? 'bg-white text-green-600' : 'bg-brand-navy text-brand-gold'} flex items-center justify-center">
+                                             <i class="ph-bold ph-check text-sm"></i>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Documented</span>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter">${loanCompleted ? 'Verified' : 'Documented'}</span>
                                     </div>
                                     <div class="flex flex-col items-center gap-4">
-                                        <div class="w-10 h-10 rounded-full bg-brand-navy border-4 border-white flex items-center justify-center text-brand-gold shadow-lg transform scale-125">
-                                             <i class="ph ph-magnifying-glass-bold text-sm animate-pulse"></i>
+                                        <div class="w-8 h-8 rounded-full ${loanCompleted ? 'bg-white text-green-600' : 'bg-brand-navy text-brand-gold'} flex items-center justify-center">
+                                             <i class="ph-bold ph-check text-sm"></i>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Underwriting</span>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter">${loanCompleted ? 'Verified' : 'Underwriting'}</span>
                                     </div>
                                     <div class="flex flex-col items-center gap-4">
-                                        <div class="w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-brand-navy/30">
-                                             <i class="ph ph-lock-key-bold text-sm"></i>
+                                        <div class="w-10 h-10 rounded-full ${loanCompleted ? 'bg-white text-green-600' : 'bg-brand-navy/10 text-brand-navy/30'} border-4 border-brand-navy flex items-center justify-center shadow-lg transform scale-125">
+                                             <i class="ph-bold ${loanCompleted ? 'ph-check' : 'ph-lock-key'} text-sm"></i>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy/30">Approval</span>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter">${loanCompleted ? 'Approved' : 'Approval'}</span>
                                     </div>
                                     <div class="flex flex-col items-center gap-4">
-                                        <div class="w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-brand-navy/30">
+                                        <div class="w-8 h-8 rounded-full ${loanCompleted ? 'bg-white/20' : 'bg-brand-navy/10'} flex items-center justify-center">
                                              <i class="ph ph-house-bold text-sm"></i>
                                         </div>
-                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy/30">Funded</span>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter">${loanCompleted ? 'Funding Ready' : 'Funded'}</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <p class="mt-12 text-lg text-brand-navy/70 leading-relaxed font-medium">
-                                Our <span class="font-black text-brand-navy underline decoration-brand-navy/20">AI Underwriting System</span> has analyzed your bank statements from the last 24 hours. We've verified 70% of your file. Just one small update needed to hit 'Approved' status.
+                            <p class="mt-12 text-lg ${loanCompleted ? 'text-white/90' : 'text-brand-navy/70'} leading-relaxed font-medium">
+                                ${loanCompleted 
+                                    ? `Congratulations! Our **AI Underwriting Agent** has verified your assets and identity with 100% confidence. Your commitment letter is now ready for signature.`
+                                    : `Our <span class="font-black underline decoration-brand-navy/20">AI Underwriting System</span> has analyzed your bank statements from the last 24 hours. We've verified 70% of your file. Just one small update needed to hit 'Approved' status.`
+                                }
                             </p>
                         </div>
 
@@ -264,7 +571,7 @@ function renderPortal() {
                                 </div>
                                 <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Sync Wealth (Direct API)</h4>
                                 <p class="text-white/60 mb-8 leading-relaxed font-medium">Link your Bank or Payroll app (Plaid) for instant, 100% accurate verification. No papers needed.</p>
-                                <button class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Link Bank Account</button>
+                                <button onclick="window.startWizard(3)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Link Bank Account</button>
                              </div>
 
                              <div class="group p-8 md:p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-up" style="transition-delay: 100ms;">
@@ -273,7 +580,7 @@ function renderPortal() {
                                 </div>
                                 <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Snap Docs (AI-OCR)</h4>
                                 <p class="text-white/60 mb-8 leading-relaxed font-medium">Snap a photo of your paystub or tax T4. Our AI will read and extract the numbers in seconds.</p>
-                                <button class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Upload or Take Photo</button>
+                                <button onclick="window.startWizard(1)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Upload or Take Photo</button>
                              </div>
                         </div>
                     </div>
@@ -281,14 +588,14 @@ function renderPortal() {
                     <!-- Right: Advisor & Compliance -->
                     <div class="space-y-8">
                         <!-- AI Score Badge -->
-                        <div class="p-8 rounded-[3rem] bg-brand-slate/30 border border-white/10 backdrop-blur-md reveal reveal-left">
+                        <div class="p-8 rounded-[3rem] ${loanCompleted ? 'bg-green-500/20 border-green-500/30' : 'bg-brand-slate/30 border-white/10'} backdrop-blur-md reveal reveal-left">
                             <div class="flex flex-col items-center text-center">
                                 <div class="relative w-32 h-32 flex items-center justify-center mb-6">
                                     <svg class="w-full h-full -rotate-90">
                                         <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-white/10"></circle>
-                                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364" stroke-dashoffset="109" class="text-brand-gold"></circle>
+                                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364" stroke-dashoffset="${loanCompleted ? '0' : '109'}" class="${loanCompleted ? 'text-green-500' : 'text-brand-gold'} transition-all duration-1000"></circle>
                                     </svg>
-                                    <span class="absolute text-3xl font-black text-white">70%</span>
+                                    <span class="absolute text-3xl font-black text-white">${loanCompleted ? '100%' : '70%'}</span>
                                 </div>
                                 <h4 class="text-xl font-black text-white uppercase tracking-wider mb-2">Loan Readiness</h4>
                                 <p class="text-white/50 text-sm">Powered by Real-Time Machine Learning Underwriting</p>
