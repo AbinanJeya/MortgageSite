@@ -204,6 +204,52 @@ window.nextWizardStep = function(currentStep) {
     }
 }
 
+// --- REAL PLAID INTEGRATION ---
+let plaidHandler = null;
+
+window.initializePlaidLink = async function() {
+    try {
+        const response = await fetch('http://localhost:3000/api/create_link_token', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.link_token) {
+            plaidHandler = Plaid.create({
+                token: data.link_token,
+                onSuccess: (public_token, metadata) => {
+                    console.log('Plaid Link Success:', public_token);
+                    window.handlePlaidSuccess(public_token);
+                },
+                onLoad: () => { console.log('Plaid Loaded'); },
+                onExit: (err, metadata) => { if (err) console.error('Plaid Exit Error:', err); },
+                onEvent: (eventName, metadata) => { console.log('Plaid Event:', eventName); }
+            });
+            plaidHandler.open();
+        } else {
+            console.error('Failed to get link_token from backend. Make sure server.js is running!');
+            alert('Bank Link Error: Make sure your local server is running on port 3000 node server.js');
+        }
+    } catch (error) {
+        console.error('Error initializing Plaid:', error);
+        alert('Could not connect to the backend. Please ensure the server is running.');
+    }
+}
+
+window.handlePlaidSuccess = async function(public_token) {
+    try {
+        const response = await fetch('http://localhost:3000/api/exchange_public_token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ public_token })
+        });
+        const result = await response.json();
+        if (result.status === 'success') {
+            window.nextWizardStep(3); // Successfully linked!
+        }
+    } catch (error) {
+        console.error('Error exchanging public token:', error);
+    }
+}
+
 window.showSyncProcessing = function() {
     const container = document.getElementById('sync-status-container');
     const uploadDiv = document.querySelector('div[onclick="window.showSyncProcessing()"]');
@@ -349,40 +395,17 @@ function renderWizard(step) {
                             </button>
                         </div>
                     ` : `
-                        <div class="flex flex-col items-center text-center">
-                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
-                                <i class="ph-fill ph-bank text-brand-gold text-6xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Asset Verification (Plaid)</h3>
-                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Securely link your primary bank account to verify your down payment and closing funds. This is the fastest, safest way to complete your application.</p>
-                            
-                            <div class="w-full max-w-md p-8 rounded-3xl bg-brand-navy border border-white/10 mb-12 text-left">
-                                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
-                                    <div class="w-8 h-8 rounded bg-brand-gold/10 flex items-center justify-center text-brand-gold">
-                                        <i class="ph-bold ph-shield-check"></i>
-                                    </div>
-                                    <span class="text-[10px] font-black text-white uppercase tracking-widest">Bank-Grade 256-bit Security</span>
+                             <div class="w-full max-w-md p-10 rounded-3xl bg-brand-navy border border-white/10 mb-12 text-center group hover:border-brand-gold transition-all duration-700">
+                                <div class="w-20 h-20 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold mx-auto mb-8 transform group-hover:scale-110 transition-transform">
+                                    <i class="ph-fill ph-shield-check text-4xl"></i>
                                 </div>
-                                <div class="space-y-4">
-                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
-                                        <span class="font-bold">TD Canada Trust</span>
-                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
-                                     </div>
-                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
-                                        <span class="font-bold">RBC Royal Bank</span>
-                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
-                                     </div>
-                                     <div class="flex items-center justify-between text-white/60 hover:text-white transition-colors cursor-pointer group">
-                                        <span class="font-bold">Scotiabank</span>
-                                        <i class="ph ph-caret-right opacity-0 group-hover:opacity-100 transition-all"></i>
-                                     </div>
-                                </div>
-                            </div>
-
-                            <button onclick="window.nextWizardStep(3)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
-                                Accounts Linked
-                            </button>
-                        </div>
+                                <h4 class="text-xl font-black text-white uppercase tracking-tight mb-4">Plaid Direct Link</h4>
+                                <p class="text-white/40 text-sm leading-relaxed mb-8">Securely link your primary account for 100% verified asset confirmation. Use Sandbox credentials for testing.</p>
+                                
+                                <button onclick="window.initializePlaidLink()" class="w-full py-5 rounded-2xl bg-brand-gold text-brand-navy font-black text-sm uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
+                                    Launch Secure Link
+                                </button>
+                             </div>
                     `}
                 </div>
 
