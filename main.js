@@ -204,9 +204,9 @@ window.nextWizardStep = function(currentStep) {
     }
 }
 
-window.showAIProcessing = function() {
-    const container = document.getElementById('ai-status-container');
-    const uploadDiv = document.querySelector('div[onclick="window.showAIProcessing()"]');
+window.showSyncProcessing = function() {
+    const container = document.getElementById('sync-status-container');
+    const uploadDiv = document.querySelector('div[onclick="window.showSyncProcessing()"]');
     const nextBtn = document.getElementById('wizard-next-btn');
     
     if (container && uploadDiv) {
@@ -219,13 +219,13 @@ window.showAIProcessing = function() {
                     <div class="absolute inset-0 border-4 border-brand-gold/20 rounded-full"></div>
                     <div class="absolute inset-0 border-4 border-brand-gold rounded-full border-t-transparent animate-spin"></div>
                 </div>
-                <p class="text-brand-gold font-black uppercase tracking-[0.2em] text-xs animate-pulse">AI Agent Scanning Document...</p>
-                <p class="text-white/30 text-[10px] mt-2 font-bold uppercase tracking-widest">Extracting Income & Tax Data</p>
+                <p class="text-brand-gold font-black uppercase tracking-[0.2em] text-xs animate-pulse">Establishing Secure API Connection...</p>
+                <p class="text-white/30 text-[10px] mt-2 font-bold uppercase tracking-widest">Syncing Verified Payroll & Tax Data</p>
             </div>
         `;
 
         setTimeout(() => {
-            container.innerHTML = renderAIResult();
+            container.innerHTML = renderSyncResult();
             if (nextBtn) {
                 nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
                 nextBtn.removeAttribute('disabled');
@@ -234,38 +234,38 @@ window.showAIProcessing = function() {
     }
 }
 
-function renderAIResult() {
+function renderSyncResult() {
     return `
         <div class="w-full bg-white/5 rounded-3xl p-8 border border-green-500/30 text-left mb-8 reveal reveal-up">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
                     <i class="ph-bold ph-check"></i>
                 </div>
-                <span class="text-[10px] font-black text-white uppercase tracking-widest">AI Extraction Complete (99.2% Confidence)</span>
+                <span class="text-[10px] font-black text-white uppercase tracking-widest">Direct Sync Verified (API Key: AUTH-8829)</span>
             </div>
             
             <div class="grid grid-cols-2 gap-6">
                 <div>
-                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Employer</span>
-                    <span class="text-white font-bold">Initech Corp.</span>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Payroll Provider</span>
+                    <span class="text-white font-bold">ADP Global</span>
                 </div>
                 <div>
-                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Period</span>
-                    <span class="text-white font-bold">Mar 01 - Mar 15</span>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Sync Date</span>
+                    <span class="text-white font-bold">Mar 21, 2026</span>
                 </div>
                 <div>
-                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Gross Pay</span>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Avg. Gross Pay</span>
                     <span class="text-brand-gold font-black">$4,582.50</span>
                 </div>
                 <div>
-                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Net Pay</span>
-                    <span class="text-white font-bold">$3,210.15</span>
+                    <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Status</span>
+                    <span class="text-white font-bold">Fully Verified</span>
                 </div>
             </div>
             
             <div class="mt-6 pt-4 border-t border-white/10">
                 <div class="flex items-center justify-between">
-                     <span class="text-[9px] font-black text-white/30 uppercase tracking-widest">YTD Earnings</span>
+                     <span class="text-[9px] font-black text-white/30 uppercase tracking-widest">YTD Earnings (Verified)</span>
                      <span class="text-white/60 font-bold">$22,912.50</span>
                 </div>
             </div>
@@ -276,7 +276,7 @@ function renderAIResult() {
 function renderWizard(step) {
     const steps = [
         { id: 1, title: 'Identity', icon: 'ph-identification-card', desc: 'Secure ID Verification' },
-        { id: 2, title: 'Income', icon: 'ph-briefcase', desc: 'W-2 / Paystub Capture' },
+        { id: 2, title: 'Payroll', icon: 'ph-briefcase', desc: 'Direct Employer Sync' },
         { id: 3, title: 'Assets', icon: 'ph-bank', desc: 'Direct Bank Link' }
     ];
 
@@ -332,20 +332,20 @@ function renderWizard(step) {
                             <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
                                 <i class="ph-fill ph-briefcase text-brand-gold text-6xl"></i>
                             </div>
-                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Income Documentation</h3>
-                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Upload your most recent two paystubs or your T4 tax form. Our AI will automatically extract the data to speed up your approval.</p>
+                            <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Financial Sync: Income</h3>
+                            <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Connect directly to your payroll provider (ADP, Workday) or pull verified tax data from the CRA. This is the most secure method for serious financing.</p>
                             
-                            <div onclick="window.showAIProcessing()" class="w-full max-w-sm py-12 rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:bg-white/10 transition-all group mb-12">
-                                <i class="ph ph-file-arrow-up text-4xl text-white/20 group-hover:text-brand-gold mb-4 transition-colors"></i>
-                                <span class="text-white/40 font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">Upload Paystub / T4</span>
+                            <div onclick="window.showSyncProcessing()" class="w-full max-w-sm py-12 rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:bg-white/10 transition-all group mb-12">
+                                <i class="ph ph-shield-check text-4xl text-white/20 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                                <span class="text-white/40 font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">Connect Payroll Account</span>
                             </div>
 
-                            <div id="ai-status-container" class="hidden w-full max-w-xs">
-                                <!-- AI Processing UI will be injected here -->
+                            <div id="sync-status-container" class="hidden w-full max-w-xs">
+                                <!-- Sync Processing UI will be injected here -->
                             </div>
 
                             <button id="wizard-next-btn" onclick="window.nextWizardStep(2)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
-                                Confirm Extracted Data
+                                Confirm Synced Data
                             </button>
                         </div>
                     ` : `
@@ -557,8 +557,8 @@ function renderPortal() {
                             
                             <p class="mt-12 text-lg ${loanCompleted ? 'text-white/90' : 'text-brand-navy/70'} leading-relaxed font-medium">
                                 ${loanCompleted 
-                                    ? `Congratulations! Our **AI Underwriting Agent** has verified your assets and identity with 100% confidence. Your commitment letter is now ready for signature.`
-                                    : `Our <span class="font-black underline decoration-brand-navy/20">AI Underwriting System</span> has analyzed your bank statements from the last 24 hours. We've verified 70% of your file. Just one small update needed to hit 'Approved' status.`
+                                    ? `Direct verification successful. Your financial data has been synced from **ADP** and **CRA** with 100% data integrity. Your commitment letter is ready.`
+                                    : `Our <span class="font-black underline decoration-brand-navy/20">Direct Sync Engine</span> has verified your last 24 months of income. We've synced 70% of your required data. Complete the payroll link to finalize.`
                                 }
                             </p>
                         </div>
@@ -567,20 +567,20 @@ function renderPortal() {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                              <div class="group p-8 md:p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-up">
                                 <div class="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold mb-8 transform group-hover:rotate-[15deg] transition-transform duration-700">
-                                    <i class="ph ph-lightning-fill text-3xl"></i>
+                                    <i class="ph ph-address-book-fill text-3xl"></i>
                                 </div>
-                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Sync Wealth (Direct API)</h4>
-                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Link your Bank or Payroll app (Plaid) for instant, 100% accurate verification. No papers needed.</p>
-                                <button onclick="window.startWizard(3)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Link Bank Account</button>
+                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Payroll Connect</h4>
+                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Direct sync with your employer (ADP, Workday, etc.). This ensures 100% accurate, tamper-proof income data.</p>
+                                <button onclick="window.startWizard(2)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Connect Payroll</button>
                              </div>
 
                              <div class="group p-8 md:p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-up" style="transition-delay: 100ms;">
                                 <div class="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold mb-8 transform group-hover:rotate-[15deg] transition-transform duration-700">
-                                    <i class="ph ph-camera-fill text-3xl"></i>
+                                    <i class="ph ph-bank-fill text-3xl"></i>
                                 </div>
-                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Snap Docs (AI-OCR)</h4>
-                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Snap a photo of your paystub or tax T4. Our AI will read and extract the numbers in seconds.</p>
-                                <button onclick="window.startWizard(1)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Upload or Take Photo</button>
+                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Secure Bank Link</h4>
+                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Link your primary bank account (Plaid) for verified down payment and tax verification. No document uploads required.</p>
+                                <button onclick="window.startWizard(3)" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Link Bank Account</button>
                              </div>
                         </div>
                     </div>
@@ -597,8 +597,8 @@ function renderPortal() {
                                     </svg>
                                     <span class="absolute text-3xl font-black text-white">${loanCompleted ? '100%' : '70%'}</span>
                                 </div>
-                                <h4 class="text-xl font-black text-white uppercase tracking-wider mb-2">Loan Readiness</h4>
-                                <p class="text-white/50 text-sm">Powered by Real-Time Machine Learning Underwriting</p>
+                                <h4 class="text-xl font-black text-white uppercase tracking-wider mb-2">Sync Verification</h4>
+                                <p class="text-white/50 text-sm">Verified via Direct Bank & Payroll API Integrations</p>
                             </div>
                         </div>
 
