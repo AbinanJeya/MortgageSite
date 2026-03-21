@@ -132,6 +132,7 @@ function renderNavigation() {
 
     if (ctaContainer) {
         ctaContainer.innerHTML = `
+            <a class="text-sm font-semibold text-brand-gold hover:text-white transition-colors px-4 py-2 border border-brand-gold/30 rounded-full cursor-pointer" onclick="window.togglePortal(true)">Borrower Portal</a>
             <a class="bg-brand-slate text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
         `;
     }
@@ -144,9 +145,187 @@ function renderNavigation() {
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#why-choose" onclick="toggleMobileMenu()">Why Us</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#booking" onclick="toggleMobileMenu()">Book Consultation</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
+            <a class="text-lg font-semibold text-brand-gold border-b border-white/10 pb-2" onclick="window.togglePortal(true); toggleMobileMenu()">Borrower Portal</a>
             <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-white hover:text-brand-navy transition-all shadow-lg mt-4" href="#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
         `;
     }
+}
+
+// Global state for brochure content
+let brochureHTML = '';
+
+window.togglePortal = function(showPortal) {
+    const appContent = document.getElementById('app-content');
+    
+    if (showPortal) {
+        if (!brochureHTML) brochureHTML = appContent.innerHTML;
+        appContent.innerHTML = renderPortal();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        initScrollReveal(); // Re-init for portal elements
+    } else {
+        if (brochureHTML) {
+            appContent.innerHTML = brochureHTML;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            initScrollReveal();
+            initTestimonialSlider();
+        }
+    }
+}
+
+function renderPortal() {
+    return `
+        <section class="min-h-screen bg-brand-navy pt-32 pb-24 relative overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="assets/modern.jpg" alt="Portal Background" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-brand-navy/60 z-0"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <div class="reveal reveal-right">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
+                            <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Borrower Portal</span>
+                        </div>
+                        <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">My Home<br><span class="text-hero-accent">Journey</span></h2>
+                    </div>
+                    <div class="flex items-center gap-4 reveal reveal-left">
+                        <button onclick="window.togglePortal(false)" class="px-8 py-3 rounded-full border border-white/10 text-white font-bold hover:bg-white/5 transition-all flex items-center gap-2">
+                            <i class="ph ph-arrow-left"></i> Back to Site
+                        </button>
+                        <div class="w-16 h-16 rounded-full bg-brand-gold flex items-center justify-center text-brand-navy shadow-lg overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" class="w-full h-full object-cover" alt="User">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left: Progress & AI Score -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- Loan Tracker Card -->
+                        <div class="group p-8 md:p-12 rounded-[3.5rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 shadow-2xl reveal reveal-up">
+                            <div class="flex items-center justify-between mb-12">
+                                <h3 class="text-3xl font-black text-brand-navy uppercase tracking-tight">Application Status</h3>
+                                <span class="px-6 py-2 rounded-full bg-brand-navy text-brand-gold text-sm font-black uppercase tracking-widest">In Review</span>
+                            </div>
+                            
+                            <!-- Tracker Visual -->
+                            <div class="relative py-8">
+                                <div class="absolute top-1/2 left-0 w-full h-1.5 bg-brand-navy/10 -translate-y-1/2 rounded-full"></div>
+                                <div class="absolute top-1/2 left-0 w-3/4 h-1.5 bg-brand-navy -translate-y-1/2 rounded-full"></div>
+                                
+                                <div class="relative flex justify-between">
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div class="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
+                                            <i class="ph ph-check-bold text-sm"></i>
+                                        </div>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Applied</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div class="w-8 h-8 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
+                                             <i class="ph ph-check-bold text-sm"></i>
+                                        </div>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Documented</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-brand-navy border-4 border-white flex items-center justify-center text-brand-gold shadow-lg transform scale-125">
+                                             <i class="ph ph-magnifying-glass-bold text-sm animate-pulse"></i>
+                                        </div>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy">Underwriting</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div class="w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-brand-navy/30">
+                                             <i class="ph ph-lock-key-bold text-sm"></i>
+                                        </div>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy/30">Approval</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div class="w-8 h-8 rounded-full bg-brand-navy/10 flex items-center justify-center text-brand-navy/30">
+                                             <i class="ph ph-house-bold text-sm"></i>
+                                        </div>
+                                        <span class="text-[10px] font-black uppercase tracking-tighter text-brand-navy/30">Funded</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p class="mt-12 text-lg text-brand-navy/70 leading-relaxed font-medium">
+                                Our <span class="font-black text-brand-navy underline decoration-brand-navy/20">AI Underwriting System</span> has analyzed your bank statements from the last 24 hours. We've verified 70% of your file. Just one small update needed to hit 'Approved' status.
+                            </p>
+                        </div>
+
+                        <!-- Document Snap (API-First vs AI) -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                             <div class="group p-8 md:p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-up">
+                                <div class="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold mb-8 transform group-hover:rotate-[15deg] transition-transform duration-700">
+                                    <i class="ph ph-lightning-fill text-3xl"></i>
+                                </div>
+                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Sync Wealth (Direct API)</h4>
+                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Link your Bank or Payroll app (Plaid) for instant, 100% accurate verification. No papers needed.</p>
+                                <button class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Link Bank Account</button>
+                             </div>
+
+                             <div class="group p-8 md:p-10 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-up" style="transition-delay: 100ms;">
+                                <div class="w-16 h-16 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold mb-8 transform group-hover:rotate-[15deg] transition-transform duration-700">
+                                    <i class="ph ph-camera-fill text-3xl"></i>
+                                </div>
+                                <h4 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Snap Docs (AI-OCR)</h4>
+                                <p class="text-white/60 mb-8 leading-relaxed font-medium">Snap a photo of your paystub or tax T4. Our AI will read and extract the numbers in seconds.</p>
+                                <button class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-brand-gold hover:text-brand-navy transition-all">Upload or Take Photo</button>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Advisor & Compliance -->
+                    <div class="space-y-8">
+                        <!-- AI Score Badge -->
+                        <div class="p-8 rounded-[3rem] bg-brand-slate/30 border border-white/10 backdrop-blur-md reveal reveal-left">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="relative w-32 h-32 flex items-center justify-center mb-6">
+                                    <svg class="w-full h-full -rotate-90">
+                                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-white/10"></circle>
+                                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364" stroke-dashoffset="109" class="text-brand-gold"></circle>
+                                    </svg>
+                                    <span class="absolute text-3xl font-black text-white">70%</span>
+                                </div>
+                                <h4 class="text-xl font-black text-white uppercase tracking-wider mb-2">Loan Readiness</h4>
+                                <p class="text-white/50 text-sm">Powered by Real-Time Machine Learning Underwriting</p>
+                            </div>
+                        </div>
+
+                         <!-- Advisor Card -->
+                        <div class="p-8 rounded-[3rem] glass-card border-white/10 reveal reveal-left" style="transition-delay: 100ms;">
+                            <h4 class="text-lg font-black text-brand-gold uppercase tracking-[0.2em] mb-8">Your Lead Expert</h4>
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="w-12 h-12 rounded-full bg-brand-gold flex items-center justify-center overflow-hidden border-2 border-brand-gold/20">
+                                      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&h=200&auto=format&fit=crop" class="w-full h-full object-cover" alt="Advisor">
+                                </div>
+                                <div>
+                                    <div class="text-white font-black text-lg leading-none mb-1">Juthi Akhy</div>
+                                    <div class="text-brand-gold text-xs font-bold uppercase tracking-widest">Master Broker</div>
+                                </div>
+                            </div>
+                            <button class="w-full py-4 rounded-2xl bg-brand-gold text-brand-navy font-black text-sm uppercase tracking-widest hover:scale-[1.02] transition-all shadow-lg active:scale-95">Message Advisor</button>
+                        </div>
+
+                        <!-- Compliance Badge -->
+                        <div class="p-8 rounded-[3rem] bg-brand-navy/50 border border-white/5 reveal reveal-left" style="transition-delay: 200ms;">
+                             <div class="flex items-center gap-3 text-white/40 mb-2">
+                                <i class="ph ph-shield-check-fill text-brand-gold"></i>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Automated Compliance</span>
+                             </div>
+                             <p class="text-[10px] text-white/20 uppercase tracking-tighter leading-tight">
+                                TRID, HMDA, and State-Level regulatory monitoring active. All data encrypted via 256-bit AES protocol.
+                             </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    `;
 }
 
 function renderDivider(type, colorClass, isTop = false) {
