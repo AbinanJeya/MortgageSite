@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>AskJuthis | Expert Guidance for Your Home Journey</title>
+    <title>Borrower Portal | AskJuthis</title>
     <meta name="description"
-        content="AskJuthis provides expert mortgage guidance, competitive rates, and personalized financing solutions for first-time buyers, refinancing, and more.">
+        content="Secure borrower portal for managing your mortgage application, uploading documents, and tracking progress.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -82,8 +82,10 @@
         }
     </script>
 
-
-
+    <!-- Third-party SDKs (deferred) -->
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js" defer></script>
+    <script src="https://cdn.withpersona.com/dist/persona-v4.9.0.js" defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
 
     <!-- Fonts: Manrope, Inter & Pinyon Script -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,76 +93,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Inter:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
-    <!-- CSS (for custom transitions) -->
-    <link rel="stylesheet" href="style.css?v=1.0.5">
-
-    <!-- Calendly Widget Script -->
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../style.css?v=1.0.5">
 </head>
 
-<body class="font-sans text-white bg-brand-slate">
+<body class="font-sans text-white bg-primary min-h-screen">
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-brand-navy/95 backdrop-blur-md border-b border-white/10">
+    <nav class="sticky top-0 z-50 bg-primary/95 backdrop-blur-md border-b border-white/10">
         <div class="px-4 sm:px-8 lg:px-12">
-            <div class="grid grid-cols-2 lg:grid-cols-3 h-20 items-center">
+            <div class="flex h-20 items-center justify-between">
                 <!-- Left: Logo -->
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold tracking-tight text-white uppercase"
-                        id="brand-logo-container"></span>
+                    <a href="/" class="text-2xl font-bold tracking-tight text-white uppercase">Ask<span class="text-secondary-fixed">Juthis</span></a>
                 </div>
 
-                <!-- Center: Links (Desktop Only) -->
-                <div class="hidden lg:flex justify-center space-x-8 items-center" id="nav-links-container"></div>
-
-                <!-- Right: CTA (Desktop Only) -->
-                <div class="hidden lg:flex justify-end items-center space-x-4" id="nav-cta-container"></div>
-
-                <!-- Mobile Toggle (Right aligned on mobile) -->
-                <div class="lg:hidden flex justify-end">
-                    <button class="p-2 text-white" onclick="toggleMobileMenu()" aria-label="Open menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"></path>
-                        </svg>
-                    </button>
+                <!-- Right: Back to site -->
+                <div class="flex items-center space-x-4">
+                    <a class="text-sm font-medium hover:text-secondary-fixed transition-colors text-white/60 px-3 py-2"
+                        href="/">← Back to Site</a>
+                    <button id="portal-sign-out-btn" class="hidden px-6 py-2 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-all font-bold text-sm" onclick="window.portalSignOut()">Sign Out</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay & Panel -->
-    <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
-        <!-- Backdrop -->
-        <div class="fixed inset-0 bg-brand-navy/60 backdrop-blur-md" onclick="toggleMobileMenu()"></div>
-        <!-- Sidebar -->
-        <div
-            class="fixed right-0 top-0 h-full w-72 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl transition-transform duration-300 transform border-l border-white/20">
-            <div class="p-6">
-                <div class="flex items-center justify-between mb-8">
-                    <span class="text-xl font-bold text-white uppercase">Menu</span>
-                    <button class="p-2 -mr-2 text-white" onclick="toggleMobileMenu()" aria-label="Close menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex flex-col space-y-6" id="mobile-links-container">
-                    <!-- Injected via main.js -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Dynamic Content Injection Point -->
     <main id="app-content">
-        <!-- Hero, Services, Why Us, Booking, Testimonials, Contact, Footer will be injected here -->
+        <!-- Login, Portal, Wizard, Admin will be injected here -->
     </main>
 
     <!-- Scripts -->
-    <script src="config.js"></script>
-    <script src="main.js?v=1.0.3"></script>
+    <script src="../config.js"></script>
+    <script src="portal.js?v=1.0.0"></script>
 </body>
 
 </html>
