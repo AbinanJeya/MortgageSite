@@ -157,7 +157,7 @@ function renderHero() {
         <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-primary">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
-                <img src="assets/modern.jpg" alt="Home background" class="w-full h-full object-cover opacity-40" loading="lazy">
+                <img src="assets/modern.webp" alt="Home background" class="w-full h-full object-cover opacity-40" loading="lazy">
                 <div class="absolute inset-0 bg-primary/60"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             </div>
@@ -187,7 +187,7 @@ function renderHero() {
                             <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-primary bg-secondary-fixed hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
                                 Book a Consultation
                             </a>
-                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-primary transform hover:scale-105 transition-all" href="#services">
+                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30  text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-primary transform hover:scale-105 transition-all" href="#services">
                                 Our Services
                             </a>
                         </div>
@@ -195,7 +195,7 @@ function renderHero() {
 
                     <!-- Right: Profile Card (Desktop Only) -->
                     <div class="hidden xl:flex xl:col-span-5 justify-center xl:justify-end reveal reveal-right" style="transition-delay: 200ms;">
-                        <div class="w-[340px] glass-card p-3 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20 backdrop-blur-2xl bg-white/5">
+                        <div class="w-[340px] glass-card p-3 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20  bg-white/5">
                             <div class="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                                 <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary via-primary/20 to-transparent"></div>
@@ -217,7 +217,7 @@ function renderAbout() {
     const { about } = agentConfig;
     return `
         <section class="py-16 sm:py-32 bg-rich text-white overflow-hidden" id="about">
-            <img src="assets/helena.jpg" alt="Homeownership lifestyle" class="bg-rich-image opacity-40" loading="lazy">
+            <img src="assets/helena.webp" alt="Homeownership lifestyle" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-primary/60"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
@@ -225,7 +225,7 @@ function renderAbout() {
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-20 items-center">
                     <!-- Left Column - Stats & Info -->
                     <div class="order-2 lg:order-1 lg:col-span-1 reveal reveal-right">
-                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-2xl bg-primary/60 backdrop-blur-3xl">
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-2xl bg-primary/60 ">
                             <div class="inline-block px-4 py-1.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/20 mb-6">
                                 <span class="text-secondary-fixed text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
                             </div>
@@ -253,10 +253,10 @@ function renderAbout() {
                     <div class="order-1 lg:order-2 flex justify-center reveal reveal-up">
                         <div class="relative group">
                             <div class="absolute -inset-10 bg-secondary-fixed/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                            <div class="relative w-64 h-[24rem] sm:w-80 sm:h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[8px] sm:border-[12px] border-white backdrop-blur-md bg-white/40">
+                            <div class="relative w-64 h-[24rem] sm:w-80 sm:h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[8px] sm:border-[12px] border-white  bg-white/40">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105">
                                 <div class="absolute bottom-8 left-0 right-0 text-center">
-                                    <div class="inline-block bg-primary/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
+                                    <div class="inline-block bg-primary/90  px-6 py-2 rounded-full border border-white/20 shadow-xl">
                                         <span class="text-white text-xs font-bold uppercase tracking-[0.2em]">Dedicated to You</span>
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@ function renderAbout() {
 
                     <!-- Right Column - Bio -->
                     <div class="order-3 lg:col-span-1 reveal reveal-left">
-                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-primary/60 backdrop-blur-3xl shadow-2xl">
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-primary/60  shadow-2xl">
                             <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-secondary-fixed tracking-tight leading-tight">${about.meetBroker.title}</h2>
                             <div class="relative mb-10">
                                 <span class="material-symbols-outlined absolute -left-8 -top-8 text-6xl text-secondary-fixed/10">format_quote</span>
@@ -292,7 +292,7 @@ function renderAbout() {
 function renderServices() {
     return `
         <section class="py-16 sm:py-32 bg-rich relative overflow-hidden" id="services">
-            <img src="assets/puzzle.jpg" alt="Consultation background" class="bg-rich-image opacity-40" loading="lazy">
+            <img src="assets/puzzle.webp" alt="Consultation background" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-primary/60"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
@@ -343,13 +343,13 @@ function renderServices() {
 function renderBooking() {
     return `
         <section class="py-32 bg-primary relative overflow-hidden" id="booking">
-            <img src="assets/arch.jpg" alt="Booking background" class="bg-rich-image opacity-40" loading="lazy">
+            <img src="assets/arch.webp" alt="Booking background" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-primary/60"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="lg:flex lg:items-center lg:justify-between gap-12">
                     <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right flex flex-col h-full">
-                        <div class="group p-10 md:p-14 rounded-[3rem] bg-secondary-fixed/85 backdrop-blur-xl border-secondary-fixed/20 hover:border-primary/30 shadow-[0_40px_80px_-15px_rgba(211,189,115,0.3)] transition-all duration-700 h-full flex flex-col">
+                        <div class="group p-10 md:p-14 rounded-[3rem] bg-secondary-fixed/85  border-secondary-fixed/20 hover:border-primary/30 shadow-[0_40px_80px_-15px_rgba(211,189,115,0.3)] transition-all duration-700 h-full flex flex-col">
                             <div>
                                 <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
                                     <span class="text-primary text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
@@ -391,7 +391,7 @@ function renderBooking() {
                         </div>
                     </div>
                     <div class="lg:w-1/2 reveal reveal-left">
-                        <div class="group p-6 rounded-[3rem] bg-secondary-fixed/85 backdrop-blur-xl border-secondary-fixed/20 hover:border-primary/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
+                        <div class="group p-6 rounded-[3rem] bg-secondary-fixed/85  border-secondary-fixed/20 hover:border-primary/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
                            
                             <div class="calendly-inline-widget relative z-10" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
                     </div>
@@ -440,7 +440,7 @@ function renderTestimonials() {
 function renderContact() {
     return `
         <section class="py-32 bg-rich overflow-hidden" id="contact">
-            <img src="assets/house.jpg" alt="Contact background" class="bg-rich-image opacity-40" loading="lazy">
+            <img src="assets/house.webp" alt="Contact background" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-primary/60"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
