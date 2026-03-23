@@ -703,7 +703,7 @@ function renderWizard(step) {
         <section class="min-h-screen bg-primary pt-32 pb-24 relative overflow-hidden">
              <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0 opacity-10">
-                <img src="assets/modern.jpg" alt="Wizard Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Wizard Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="absolute inset-0 bg-primary/90 z-0"></div>
 
@@ -966,7 +966,7 @@ function renderLogin() {
         <section class="min-h-screen bg-primary flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
              <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0 opacity-20">
-                <img src="assets/modern.jpg" alt="Login Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Login Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="absolute inset-0 bg-primary/80 z-0"></div>
 
@@ -1010,7 +1010,7 @@ function renderRegister() {
     return `
         <section class="min-h-screen bg-primary flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-20">
-                <img src="assets/modern.jpg" alt="Register Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Register Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="absolute inset-0 bg-primary/80 z-0"></div>
 
@@ -1062,7 +1062,7 @@ function renderMFAChallenge(type) {
     return `
         <section class="min-h-screen bg-primary flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
-                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="max-w-md w-full p-8 relative z-10">
                 <div class="glass-card p-10 rounded-[3.5rem] border-white/10 shadow-2xl text-center">
@@ -1092,7 +1092,7 @@ function renderRegistrationVerification(email) {
     return `
         <section class="min-h-screen bg-primary flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
-                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="max-w-2xl w-full p-8 relative z-10">
                 <div class="glass-card p-12 rounded-[4rem] border-white/10 shadow-2xl text-center">
@@ -1219,7 +1219,7 @@ function renderSecuritySettings() {
     return `
         <section class="min-h-screen bg-primary pt-32 pb-24 relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
-                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
+                <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover" loading="lazy">
             </div>
             <div class="max-w-4xl mx-auto px-4 relative z-10">
                 <div class="flex items-center justify-between mb-12">
@@ -1334,7 +1334,7 @@ window.setupTOTP = async function() {
         const res = await authFetch('/api/auth/mfa/setup', { method: 'POST' });
         const data = await res.json();
         if (data.success) {
-            qrContainer.innerHTML = `<img src="${data.qrCode}" alt="QR Code" class="w-full h-full">`;
+            qrContainer.innerHTML = `<img src="${data.qrCode}" alt="QR Code" class="w-full h-full" loading="lazy">`;
         }
     } catch (e) { console.error(e); }
 }
@@ -2249,7 +2249,7 @@ function renderHero() {
         <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-primary">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
-                <img src="assets/modern.jpg" alt="Home background" class="w-full h-full object-cover opacity-40">
+                <img src="assets/modern.jpg" alt="Home background" class="w-full h-full object-cover opacity-40" loading="lazy">
                 <div class="absolute inset-0 bg-primary/60"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             </div>
@@ -2532,7 +2532,7 @@ function renderTestimonials() {
 function renderContact() {
     return `
         <section class="py-32 bg-rich overflow-hidden" id="contact">
-            <img src="assets/house.jpg" alt="Contact background" class="bg-rich-image opacity-40">
+            <img src="assets/house.jpg" alt="Contact background" class="bg-rich-image opacity-40" loading="lazy">
             <div class="absolute inset-0 bg-primary/60"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             

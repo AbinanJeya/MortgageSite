@@ -138,19 +138,20 @@ ul {
 /* Scroll Reveal Animations */
 .reveal {
     opacity: 0;
-    filter: blur(5px);
-    transition: all var(--reveal-duration) var(--reveal-timing);
+    will-change: opacity, transform;
+    transition: opacity var(--reveal-duration) var(--reveal-timing),
+                transform var(--reveal-duration) var(--reveal-timing);
 }
 
-.reveal-up { transform: translateY(40px); }
-.reveal-down { transform: translateY(-40px); }
-.reveal-left { transform: translateX(40px); }
-.reveal-right { transform: translateX(-40px); }
+.reveal-up { transform: translateY(30px); }
+.reveal-down { transform: translateY(-30px); }
+.reveal-left { transform: translateX(30px); }
+.reveal-right { transform: translateX(-30px); }
 
 .reveal.revealed {
     opacity: 1;
-    filter: blur(0);
     transform: translate(0, 0);
+    will-change: auto;
 }
 
 /* Background Enhancement */

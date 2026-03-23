@@ -82,13 +82,10 @@
         }
     </script>
 
-    <!-- Icons (Phosphor Icons) -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-    <script src="https://cdn.withpersona.com/dist/persona-v4.9.0.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- Third-party SDKs (deferred to avoid blocking render) -->
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js" defer></script>
+    <script src="https://cdn.withpersona.com/dist/persona-v4.9.0.js" defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
 
     <!-- Fonts: Manrope, Inter & Pinyon Script -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
