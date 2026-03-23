@@ -76,6 +76,20 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 800; /* Extra Bold per Bespoke requirement */
 }
 
+/* Phosphor Icon Stabilization */
+i.ph, .ph {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+i.ph {
+    width: 1em;
+    height: 1em;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -93,11 +107,18 @@ ul {
   transform: translateY(-5px);
 }
 /* Glassmorphism Classes */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.hero-gradient-overlay {
+    background: linear-gradient(135deg, rgba(0, 3, 9, 0.85) 0%, rgba(15, 30, 46, 0.6) 100%);
+}
+
 .glass-card {
-    background: var(--glass-bg-navy);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: var(--glass-border);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 }
 
 .glass-section {
@@ -1611,4 +1632,20 @@ ul {
     body.is-printing svg { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     body.is-printing .calc-cell { color: #000 !important; }
     body.is-printing .text-white { color: #000 !important; }
+}
+/* Utilities */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* responsive table fixes */
+@media (max-width: 640px) {
+    .admin-table-container {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
 }

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AskJuthis | Borrower Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0F1E2E", // Deep Navy
+              "secondary-fixed": "#D3BD73", // Gold
+              "on-primary-container": "#4A5D73", // Slate Blue
+              "tertiary-fixed-dim": "#b4c8e2",
+              "on-tertiary-container": "#73879e",
+              "on-surface": "#ffffff",
+              "on-secondary": "#ffffff",
+              "surface-dim": "#d9dadb",
+              "secondary-fixed-dim": "#D3BD73",
+              "primary-fixed": "#d5e4fa",
+              "surface-variant": "#e1e3e4",
+              "on-tertiary-fixed-variant": "#35485d",
+              "on-secondary-fixed-variant": "#554505",
+              "inverse-on-surface": "#f0f1f2",
+              "secondary-container": "rgba(211, 189, 115, 0.1)",
+              "primary-container": "#0f1e2e",
+              "secondary-fixed": "#D3BD73",
+              "on-primary-fixed": "#0d1c2c",
+              "primary-fixed-dim": "#b9c8dd",
+              "outline-variant": "rgba(255, 255, 255, 0.1)",
+              "on-secondary-container": "#D3BD73",
+              "on-background": "#ffffff",
+              "inverse-surface": "#2e3132",
+              "on-surface-variant": "#cbd5e1",
+              "tertiary-container": "#091e31",
+              "on-error": "#ffffff",
+              "surface-container-low": "rgba(255, 255, 255, 0.03)",
+              "tertiary-fixed": "#d0e4ff",
+              "surface-container-highest": "rgba(255, 255, 255, 0.05)",
+              "on-primary-fixed-variant": "#3a485a",
+              "error": "#ba1a1a",
+              "background": "#0F1E2E",
+              "on-secondary-fixed": "#231b00",
+              "surface-bright": "#f8f9fa",
+              "on-primary-container": "#4A5D73",
+              "inverse-primary": "#b9c8dd",
+              "surface-container-high": "rgba(255, 255, 255, 0.08)",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "surface": "#0F1E2E",
+              "on-tertiary": "#ffffff",
+              "tertiary": "#000308",
+              "surface-container-lowest": "rgba(255, 255, 255, 0.02)",
+              "outline": "rgba(211, 189, 115, 0.2)",
+              "surface-tint": "#516072",
+              "surface-container": "rgba(255, 255, 255, 0.04)",
+              "secondary": "#D3BD73",
+              "on-tertiary-fixed": "#071d30"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .hero-gradient-overlay {
+        background: linear-gradient(135deg, rgba(0, 3, 9, 0.85) 0%, rgba(15, 30, 46, 0.6) 100%);
+      }
+    </style>
+</head>
+<body class="bg-primary font-body text-white antialiased">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-slate-950/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto h-20">
+<div class="text-2xl font-bold tracking-tighter text-white font-headline">AskJuthis</div>
+<nav class="hidden md:flex gap-8 font-headline antialiased tracking-tight text-sm font-medium">
+<a class="text-amber-200 border-b-2 border-amber-200 pb-1" href="#">Dashboard</a>
+<a class="text-slate-300 hover:text-white transition-colors" href="#">My Loans</a>
+<a class="text-slate-300 hover:text-white transition-colors" href="#">Documents</a>
+<a class="text-slate-300 hover:text-white transition-colors" href="#">Market Rates</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-slate-300 hover:text-white transition-all">notifications</button>
+<div class="w-10 h-10 rounded-full border-2 border-secondary-fixed overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnfUZg_bl9OOUfE7KiZM3Rz4Jx-n5h1EyYj89wOdu7eVQKf_DjgBFdFAnUrN9w3LryLWnkpLU8VzagoFMvBFwELzna5kFE74-ydyyTt_QnmmgLVmaAuH8Mxx63OJFocQCUAf412NSoyekMC3a_cGju_G1Nf503mPH1Q-idNvrXMiR_5g9QbCCe7peh7flk7Bcy2h4jptbs2ghTBJr2NOHZa71bPo5wYp2_FsAEfixKStnBR_uMY4lwLenRee7L_x1Jwpidy3LQ05Tv"/>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-secondary-fixed px-6 py-2 rounded-lg font-headline font-bold text-sm tracking-wide hover:scale-105 transition-transform border border-secondary-fixed/30">
+                    Apply Now
+                </button>
+</div>
+</div>
+</header>
+<main class="min-h-screen pt-28 relative overflow-hidden">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Modern luxury architecture" class="w-full h-full object-cover grayscale-[20%] opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8reoSJJiSaylM7f4pV1doOnLZvBxGGSi0XFjuaC-5Dbbfg_Gu2fUR_YdvCNFZRCTxcTuzsPtfGzSQJ-YtlleDdrvKdlMMPQ3YqXir6VoCf7PaH9szTBShUfkd79ftEoS9WKYS5TVvA1ZlD9fODBKtntWhH29sqhh61S9CRP7-Xeha7n7BDmBmUkqTHU69pqS4zWnusZiBFzUKG2xyH-UgSyrLyCKvDWMaRf1D1PCgmsXbjUy6QkyEmCac828gdgkQgJVd2OJRiNNO"/>
+<div class="absolute inset-0 hero-gradient-overlay"></div>
+</div>
+<!-- Main Editorial Application Container -->
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
+<div class="glass-card rounded-[2rem] border border-secondary-fixed/20 p-8 md:p-16 shadow-2xl">
+<!-- Hero Section Inside Container -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+<div class="lg:col-span-7">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container border border-secondary/30 text-secondary-fixed text-xs font-headline font-bold uppercase tracking-[0.2em] mb-6">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></span>
+                            Welcome back, Sarah
+                        </span>
+<h1 class="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-8 leading-[1.05]">
+                            My Home <br/><span class="text-secondary-fixed">Journey</span>
+</h1>
+<div class="glass-card p-8 rounded-2xl border border-white/10 max-w-xl">
+<div class="flex justify-between items-end mb-4">
+<span class="text-white font-headline font-bold text-lg">Application Phase</span>
+<span class="text-secondary-fixed font-headline font-black text-2xl">0%</span>
+</div>
+<div class="h-[2px] w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-fixed w-[2%] shadow-[0_0_15px_rgba(211,189,115,0.5)]"></div>
+</div>
+<p class="mt-6 text-on-primary-container text-sm font-body leading-relaxed">
+                                You're at the starting line. Complete your identity verification to unlock your personalized loan terms and dedicated support.
+                            </p>
+</div>
+</div>
+<div class="lg:col-span-5 flex flex-col gap-8 items-end">
+<!-- Circular Progress Matching SCREEN_12 Spirit -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle cx="50%" cy="50%" fill="transparent" r="45%" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
+<circle class="shadow-[0_0_15px_rgba(211,189,115,0.3)]" cx="50%" cy="50%" fill="transparent" r="45%" stroke="#D3BD73" stroke-dasharray="10 1000" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<div class="text-center">
+<span class="text-white font-headline text-5xl font-black">0%</span>
+<p class="text-on-primary-container font-headline text-[10px] uppercase tracking-widest mt-1">Completion</p>
+</div>
+</div>
+<!-- Expert Card -->
+<div class="glass-card p-6 rounded-2xl flex items-center gap-5 w-full max-w-sm border-l-4 border-secondary-fixed shadow-xl">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10">
+<img alt="Juthi Akhy" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUxHMTMwNAf5KXFYgZYocChf_-f-djms8_5bL5fORGPzf3Ka_JTPi2Ay2BBTXM3lWf8kjTUbbL5uZO2KN3EhlpWLnHwEIpiPDohqgDHBD38PpFEH3LWI-V8wpPTV4A1S3vmOud_VIfykxmowpCDEVTA0RmdFZHz_NgwKPvTZrq90HqcCWisZjNxqgEe-bHa_PI1kCwuHzc3cigtKTp1KNRIQwoHpDgd07vhyBYSDy0MP5sqnBteG0iF9f9bDBmEtTKkATsW5uQ6_nG"/>
+</div>
+<div>
+<h4 class="text-white font-headline font-bold text-lg">Juthi Akhy</h4>
+<p class="text-secondary-fixed text-xs font-headline font-bold uppercase tracking-wider">Your Lead Expert</p>
+<div class="mt-3 flex gap-4">
+<button class="text-white/60 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">chat</span>
+</button>
+<button class="text-white/60 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Cards: The Tonal Grid -->
+<div class="mb-16">
+<h2 class="font-headline text-2xl font-extrabold text-white mb-8 tracking-tight">Active Verifications</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Verify ID -->
+<div class="glass-card p-8 rounded-2xl border border-secondary-fixed/30 hover:bg-white/5 transition-all group">
+<div class="w-12 h-12 rounded-xl bg-secondary-container border border-secondary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary-fixed">fingerprint</span>
+</div>
+<h3 class="font-headline font-bold text-lg text-white mb-2">Verify ID</h3>
+<p class="text-on-primary-container text-sm mb-8 leading-relaxed">Government-issued document verification.</p>
+<button class="w-full py-3 bg-secondary-fixed text-primary text-xs font-headline font-extrabold uppercase tracking-widest rounded-lg transition-all hover:brightness-110 active:scale-95 shadow-lg shadow-secondary/10">Start Now</button>
+</div>
+<!-- Payroll Sync -->
+<div class="glass-card p-8 rounded-2xl border border-white/5 opacity-60 transition-all">
+<div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white/40">account_balance_wallet</span>
+</div>
+<h3 class="font-headline font-bold text-lg text-white/60 mb-2">Payroll Sync</h3>
+<p class="text-on-primary-container text-sm mb-8 leading-relaxed">Connect to your employer portal securely.</p>
+<button class="w-full py-3 border border-white/10 text-white/30 text-xs font-headline font-bold uppercase tracking-widest rounded-lg cursor-not-allowed">Locked</button>
+</div>
+<!-- Link Bank -->
+<div class="glass-card p-8 rounded-2xl border border-white/5 opacity-60 transition-all">
+<div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white/40">account_balance</span>
+</div>
+<h3 class="font-headline font-bold text-lg text-white/60 mb-2">Link Bank</h3>
+<p class="text-on-primary-container text-sm mb-8 leading-relaxed">Verify income and monthly assets.</p>
+<button class="w-full py-3 border border-white/10 text-white/30 text-xs font-headline font-bold uppercase tracking-widest rounded-lg cursor-not-allowed">Locked</button>
+</div>
+<!-- Credit Check -->
+<div class="glass-card p-8 rounded-2xl border border-white/5 opacity-60 transition-all">
+<div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white/40">speed</span>
+</div>
+<h3 class="font-headline font-bold text-lg text-white/60 mb-2">Credit Check</h3>
+<p class="text-on-primary-container text-sm mb-8 leading-relaxed">Pull official credit scores for rate locks.</p>
+<button class="w-full py-3 border border-white/10 text-white/30 text-xs font-headline font-bold uppercase tracking-widest rounded-lg cursor-not-allowed">Locked</button>
+</div>
+</div>
+</div>
+<!-- Document Center -->
+<div class="pt-8 border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-10">
+<h2 class="font-headline text-2xl font-extrabold text-white tracking-tight">Document Center</h2>
+<span class="text-secondary-fixed text-xs font-headline font-bold uppercase tracking-widest">4 Required Documents Pending</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 glass-card p-12 rounded-2xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center text-center group cursor-pointer hover:border-secondary-fixed transition-colors">
+<div class="w-16 h-16 bg-secondary-container border border-secondary/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl">upload_file</span>
+</div>
+<h4 class="font-headline text-xl font-bold text-white mb-2">Drag &amp; Drop Documents</h4>
+<p class="text-on-primary-container max-w-xs mb-8 text-sm">Securely upload bank statements, pay stubs, or tax returns in PDF or JPG format.</p>
+<button class="bg-secondary-fixed text-primary px-10 py-3 rounded-lg font-headline font-extrabold text-sm tracking-wide transition-all hover:shadow-xl active:scale-95 shadow-lg shadow-secondary/10">Browse Files</button>
+</div>
+<div class="bg-white/5 p-10 rounded-2xl border border-white/5">
+<h4 class="font-headline font-bold text-lg mb-6 text-secondary-fixed uppercase tracking-wider">Compliance Guide</h4>
+<ul class="space-y-6">
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary-fixed text-xl shrink-0">check_circle</span>
+<p class="text-on-primary-container text-xs leading-relaxed font-medium">Documents must be less than 3 months old for active income verification.</p>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary-fixed text-xl shrink-0">check_circle</span>
+<p class="text-on-primary-container text-xs leading-relaxed font-medium">Ensure all four corners of the page are visible in any photo uploads.</p>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary-fixed text-xl shrink-0">check_circle</span>
+<p class="text-on-primary-container text-xs leading-relaxed font-medium">Redact any non-essential personal identifiers if preferred.</p>
+</li>
+</ul>
+<div class="mt-12 pt-8 border-t border-white/5 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed text-sm">verified_user</span>
+<span class="text-[9px] uppercase tracking-[0.2em] font-bold text-white/40">Data Security Active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 px-8 bg-slate-950 mt-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-t border-white/5 pt-12 max-w-screen-2xl mx-auto">
+<div>
+<div class="text-xl font-bold text-white mb-4 font-headline">AskJuthis</div>
+<p class="font-headline text-xs uppercase tracking-widest text-slate-500 max-w-sm">© 2024 AskJuthis Mortgage Excellence. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-8 md:justify-end">
+<a class="font-headline text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-all" href="#">Privacy Policy</a>
+<a class="font-headline text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-all" href="#">Terms</a>
+<a class="font-headline text-xs uppercase tracking-widest text-slate-500 hover:text-white transition-all" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>
