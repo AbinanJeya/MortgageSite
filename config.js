@@ -60,10 +60,10 @@ const agentConfig = {
         description1: "We are dedicated to helping families achieve their homeownership dreams. Our commitment to personalized service and expert guidance sets us apart from the rest.",
         description2: "We work with a wide network of lenders to ensure you get the most competitive rates and terms. Our transparent process means no hidden fees or surprises—just honest, straightforward mortgage solutions.",
         stats: [
-            { icon: "medal", value: "50+", label: "Lender Options" },
-            { icon: "users-three", value: "1-on-1", label: "Personal Service" },
-            { icon: "clock", value: "24/7", label: "Support Available" },
-            { icon: "heart", value: "Fast", label: "Pre-Approvals" }
+            { icon: "military_tech", value: "50+", label: "Lender Options" },
+            { icon: "groups", value: "1-on-1", label: "Personal Service" },
+            { icon: "schedule", value: "24/7", label: "Support Available" },
+            { icon: "favorite", value: "Fast", label: "Pre-Approvals" }
         ],
         meetBroker: {
             title: "Meet Your Broker",
@@ -81,14 +81,14 @@ const agentConfig = {
             title: "Home Purchase",
             description: "Buying your first home or moving up? We find the best rates and terms to make your dream home a reality.",
             details: ["First-time Homebuyer Programs", "Conventional & FHA Loans"],
-            icon: "house"
+            icon: "home"
         },
         {
             id: "refinance",
             title: "Refinancing",
             description: "Lower your monthly payments or tap into your home's equity. We analyze your situation to ensure it's the right move.",
             details: ["Rate & Term Refinance", "Cash-Out Equity Access"],
-            icon: "currency-dollar"
+            icon: "attach_money"
         }
     ]
 };

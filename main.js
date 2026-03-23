@@ -25,7 +25,7 @@ if (typeof io !== 'undefined') {
             const bubble = document.createElement('div');
             bubble.className = `flex flex-col ${isMe ? 'items-end' : 'items-start'}`;
             bubble.innerHTML = `
-                <div class="max-w-[80%] rounded-2xl p-4 ${isMe ? 'bg-brand-gold text-brand-navy rounded-tr-sm' : 'bg-brand-navy text-white border border-white/10 rounded-tl-sm'}">
+                <div class="max-w-[80%] rounded-2xl p-4 ${isMe ? 'bg-secondary-fixed text-primary rounded-tr-sm' : 'bg-primary text-white border border-white/10 rounded-tl-sm'}">
                     <div class="text-[10px] uppercase font-black tracking-widest opacity-50 mb-1">${msg.senderName}</div>
                     <div class="text-sm font-medium">${msg.message}</div>
                 </div>
@@ -59,10 +59,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const appContent = document.getElementById('app-content');
         if (appContent) {
             appContent.innerHTML = `
-                <section class="min-h-screen bg-brand-navy flex items-center justify-center">
+                <section class="min-h-screen bg-primary flex items-center justify-center">
                     <div class="text-center">
-                        <div class="w-24 h-24 rounded-full bg-brand-gold/20 flex items-center justify-center mb-8 mx-auto animate-pulse">
-                            <i class="ph ph-check-circle text-6xl text-brand-gold"></i>
+                        <div class="w-24 h-24 rounded-full bg-secondary-fixed/20 flex items-center justify-center mb-8 mx-auto animate-pulse">
+                            <span class="material-symbols-outlined text-6xl text-secondary-fixed">check_circle</span>
                         </div>
                         <h2 class="text-2xl font-black text-white uppercase tracking-widest mb-4">Payment Verified</h2>
                         <p class="text-white/40 font-bold uppercase tracking-widest text-xs">Finalizing your application dashboard...</p>
@@ -167,7 +167,7 @@ function initTestimonialSlider() {
     function showSlide(index) {
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
-            dots[i].classList.toggle('bg-brand-gold', i === index);
+            dots[i].classList.toggle('bg-secondary-fixed', i === index);
             dots[i].classList.toggle('bg-white/20', i !== index);
         });
     }
@@ -198,19 +198,19 @@ function renderNavigation() {
     const linksContainer = document.getElementById('nav-links-container');
     const ctaContainer = document.getElementById('nav-cta-container');
 
-    logoContainer.innerHTML = `<a href="index.html">Ask<span class="text-brand-gold">Juthis</span></a>`;
+    logoContainer.innerHTML = `<a href="index.html">Ask<span class="text-secondary-fixed">Juthis</span></a>`;
 
     linksContainer.innerHTML = `
-        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#services">Services</a>
-        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#why-choose">Why Us</a>
-        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#booking">Book Consultation</a>
-        <a class="text-sm font-medium hover:text-brand-gold transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="calculators.html">Calculators</a>
+        <a class="text-sm font-medium hover:text-secondary-fixed transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#services">Services</a>
+        <a class="text-sm font-medium hover:text-secondary-fixed transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#why-choose">Why Us</a>
+        <a class="text-sm font-medium hover:text-secondary-fixed transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="#booking">Book Consultation</a>
+        <a class="text-sm font-medium hover:text-secondary-fixed transition-colors text-white glass-nav-link px-3 py-2 rounded-lg" href="calculators.html">Calculators</a>
     `;
 
     if (ctaContainer) {
         ctaContainer.innerHTML = `
-            <a class="text-sm font-semibold text-brand-gold hover:text-white transition-colors px-4 py-2 border border-brand-gold/30 rounded-full cursor-pointer" onclick="window.togglePortal(true)">Borrower Portal</a>
-            <a class="bg-brand-slate text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-gold hover:text-brand-navy transition-all shadow-md" href="#contact">Get a Free Quote</a>
+            <a class="text-sm font-semibold text-secondary-fixed hover:text-white transition-colors px-4 py-2 border border-secondary-fixed/30 rounded-full cursor-pointer" onclick="window.togglePortal(true)">Borrower Portal</a>
+            <a class="bg-primary-container text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-secondary-fixed hover:text-primary transition-all shadow-md" href="#contact">Get a Free Quote</a>
         `;
     }
 
@@ -222,8 +222,8 @@ function renderNavigation() {
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#why-choose" onclick="toggleMobileMenu()">Why Us</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="#booking" onclick="toggleMobileMenu()">Book Consultation</a>
             <a class="text-lg font-semibold text-white border-b border-white/10 pb-2" href="calculators.html" onclick="toggleMobileMenu()">Calculators</a>
-            <a class="text-lg font-semibold text-brand-gold border-b border-white/10 pb-2" onclick="window.togglePortal(true); toggleMobileMenu()">Borrower Portal</a>
-            <a class="bg-brand-navy text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-white hover:text-brand-navy transition-all shadow-lg mt-4" href="#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
+            <a class="text-lg font-semibold text-secondary-fixed border-b border-white/10 pb-2" onclick="window.togglePortal(true); toggleMobileMenu()">Borrower Portal</a>
+            <a class="bg-primary text-white px-6 py-4 rounded-xl text-center font-bold text-lg hover:bg-white hover:text-primary transition-all shadow-lg mt-4" href="#contact" onclick="toggleMobileMenu()">Get a Free Quote</a>
         `;
     }
 }
@@ -292,7 +292,7 @@ window.submitLogin = async function() {
         return;
     }
 
-    if (btn) btn.innerHTML = '<i class="ph ph-circle-notch animate-spin mr-2"></i> Authenticating...';
+    if (btn) btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Authenticating...';
 
     try {
         const res = await fetch('/api/auth/login', {
@@ -356,7 +356,7 @@ window.submitRegister = async function() {
         return;
     }
 
-    if (btn) btn.innerHTML = '<i class="ph ph-circle-notch animate-spin mr-2"></i> Creating Account...';
+    if (btn) btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Creating Account...';
 
     try {
         const res = await fetch('/api/auth/register', {
@@ -445,9 +445,9 @@ window.submitApplication = async function() {
     try {
         const appContent = document.getElementById('app-content');
         appContent.innerHTML = `
-            <section class="min-h-screen bg-brand-navy flex items-center justify-center">
+            <section class="min-h-screen bg-primary flex items-center justify-center">
                 <div class="text-center">
-                    <i class="ph ph-circle-notch animate-spin text-6xl text-brand-gold mb-6"></i>
+                    <span class="material-symbols-outlined animate-spin text-6xl text-secondary-fixed mb-6">progress_activity</span>
                     <h2 class="text-2xl font-black text-white uppercase tracking-widest">Submitting Application...</h2>
                 </div>
             </section>
@@ -539,7 +539,7 @@ window.initializePlaidLink = async function(isIncomeStep = false) {
 
 window.handlePlaidSuccess = async function(public_token, isIncomeStep) {
     const btn = isIncomeStep ? document.getElementById('payroll-sync-box') : document.querySelector('button[onclick="window.initializePlaidLink()"]');
-    if (btn) btn.innerHTML = '<i class="ph ph-circle-notch animate-spin text-4xl mb-4"></i><span class="text-xs uppercase tracking-widest">Securing Bank Data...</span>';
+    if (btn) btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-4xl mb-4">progress_activity</span><span class="text-xs uppercase tracking-widest">Securing Bank Data...</span>';
 
     try {
         const response = await fetch('/api/exchange_public_token', {
@@ -580,8 +580,8 @@ window.showSyncProcessing = function() {
         container.innerHTML = `
             <div class="flex flex-col items-center py-10">
                 <div class="relative w-20 h-20 mb-6">
-                    <div class="absolute inset-0 border-4 border-brand-gold/10 rounded-full"></div>
-                    <div class="absolute inset-0 border-4 border-brand-gold rounded-full border-t-transparent animate-spin"></div>
+                    <div class="absolute inset-0 border-4 border-secondary-fixed/10 rounded-full"></div>
+                    <div class="absolute inset-0 border-4 border-secondary-fixed rounded-full border-t-transparent animate-spin"></div>
                 </div>
                 <p class="text-white font-bold uppercase tracking-[0.2em] text-[10px] animate-pulse">Syncing Financial Records...</p>
                 <p class="text-white/30 text-[10px] mt-2 font-bold uppercase tracking-widest">Secure Bank-Level Encryption Active</p>
@@ -615,7 +615,7 @@ window.startAssetSync = function() {
     const box = document.getElementById('asset-sync-box');
     const nextBtn = document.getElementById('assets-next-btn');
     
-    if (box) box.innerHTML = '<i class="ph ph-circle-notch animate-spin text-4xl text-brand-gold mb-4 mx-auto"></i><span class="text-xs text-brand-gold uppercase tracking-widest font-bold">Scanning Balances...</span>';
+    if (box) box.innerHTML = '<span class="material-symbols-outlined animate-spin text-4xl text-secondary-fixed mb-4 mx-auto">progress_activity</span><span class="text-xs text-secondary-fixed uppercase tracking-widest font-bold">Scanning Balances...</span>';
 
     setTimeout(async () => {
         try {
@@ -623,12 +623,12 @@ window.startAssetSync = function() {
             window.trackEvent('Verification', 'Real Bank Assets Saved to DB');
             
             if (box) {
-                box.classList.replace('bg-brand-navy', 'bg-green-500/10');
+                box.classList.replace('bg-primary', 'bg-green-500/10');
                 box.classList.replace('border-white/10', 'border-green-500/30');
                 box.innerHTML = `
                     <div class="flex flex-col items-center">
                         <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-4">
-                            <i class="ph-bold ph-check text-3xl"></i>
+                            <span class="material-symbols-outlined text-3xl">check</span>
                         </div>
                         <span class="text-green-400 font-bold uppercase tracking-widest text-xs">Balances Verified Successfully</span>
                     </div>
@@ -651,7 +651,7 @@ function renderSyncResult() {
         <div class="w-full bg-white/5 rounded-3xl p-8 border border-green-500/30 text-left mb-8 reveal reveal-up">
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
-                    <i class="ph-bold ph-check"></i>
+                    <span class="material-symbols-outlined">check</span>
                 </div>
                 <span class="text-[10px] font-black text-white uppercase tracking-widest">Verified Multi-Source Income Data</span>
             </div>
@@ -667,7 +667,7 @@ function renderSyncResult() {
                 </div>
                 <div>
                     <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Avg. Gross Pay</span>
-                    <span class="text-brand-gold font-black">$4,582.50</span>
+                    <span class="text-secondary-fixed font-black">$4,582.50</span>
                 </div>
                 <div>
                     <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Status</span>
@@ -687,24 +687,25 @@ function renderSyncResult() {
 
 function renderWizard(step) {
     const steps = [
-        { id: 1, title: 'Identity', icon: 'ph-identification-card', desc: 'Secure ID Verification' },
-        { id: 2, title: 'Payroll', icon: 'ph-briefcase', desc: 'Direct Employer Sync' },
-        { id: 3, title: 'Assets', icon: 'ph-bank', desc: 'Direct Bank Link' },
-        { id: 4, title: 'Credit', icon: 'ph-chart-line-up', desc: 'Secure Credit Pull' },
-        { id: 5, title: 'Loan', icon: 'ph-house', desc: 'Property & Loan Details' },
-        { id: 6, title: 'History', icon: 'ph-clock-counter-clockwise', desc: '2-Year Tracking' },
-        { id: 7, title: 'Final', icon: 'ph-file-text', desc: 'Legal Declarations' }
+        { id: 1, title: 'Identity', icon: 'badge', desc: 'Secure ID Verification' },
+        { id: 2, title: 'Payroll', icon: 'work', desc: 'Direct Employer Sync' },
+        { id: 3, title: 'Assets', icon: 'account_balance', desc: 'Direct Bank Link' },
+        { id: 4, title: 'Credit', icon: 'trending_up', desc: 'Secure Credit Pull' },
+        { id: 5, title: 'Loan', icon: 'home', desc: 'Property & Loan Details' },
+        { id: 6, title: 'History', icon: 'history', desc: '2-Year Tracking' },
+        { id: 7, title: 'Final', icon: 'description', desc: 'Legal Declarations' }
     ];
+
 
     const currentStep = steps.find(s => s.id === step);
 
     return `
-        <section class="min-h-screen bg-brand-navy pt-32 pb-24 relative overflow-hidden">
+        <section class="min-h-screen bg-primary pt-32 pb-24 relative overflow-hidden">
              <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0 opacity-10">
                 <img src="assets/modern.jpg" alt="Wizard Background" class="w-full h-full object-cover">
             </div>
-            <div class="absolute inset-0 bg-brand-navy/90 z-0"></div>
+            <div class="absolute inset-0 bg-primary/90 z-0"></div>
 
             <div class="max-w-4xl mx-auto px-4 relative z-10">
                 <!-- Wizard Header -->
@@ -712,15 +713,15 @@ function renderWizard(step) {
                     <div class="flex items-center gap-4 mb-8">
                         ${steps.map(s => `
                             <div class="flex items-center gap-2">
-                                <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs ${s.id === step ? 'bg-brand-gold text-brand-navy shadow-lg shadow-brand-gold/20' : (s.id < step ? 'bg-green-500 text-white' : 'bg-white/10 text-white/30')}">
-                                    ${s.id < step ? '<i class="ph-bold ph-check"></i>' : s.id}
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs ${s.id === step ? 'bg-secondary-fixed text-primary shadow-lg shadow-secondary-fixed/20' : (s.id < step ? 'bg-green-500 text-white' : 'bg-white/10 text-white/30')}">
+                                    ${s.id < step ? '<span class="material-symbols-outlined">check</span>' : s.id}
                                 </div>
                                  <span class="hidden md:block text-[10px] font-black uppercase tracking-widest ${s.id === step ? 'text-white' : 'text-white/20'}">${s.title}</span>
                                 ${s.id < 7 ? `<div class="w-8 h-px ${s.id < step ? 'bg-green-500/50' : 'bg-white/10'}"></div>` : ''}
                             </div>
                         `).join('')}
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Step ${step}: <span class="text-brand-gold">${currentStep.title}</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Step ${step}: <span class="text-secondary-fixed">${currentStep.title}</span></h2>
                     <p class="text-white/40 font-bold uppercase tracking-[0.2em] text-sm">${currentStep.desc}</p>
                 </div>
 
@@ -728,109 +729,109 @@ function renderWizard(step) {
                 <div class="p-10 md:p-16 rounded-[4rem] glass-card border-white/10 shadow-2xl reveal reveal-up">
                     ${step === 1 ? `
                         <div class="flex flex-col items-center text-center">
-                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
-                                <i class="ph-fill ph-identification-card text-brand-gold text-6xl"></i>
+                            <div class="w-32 h-32 rounded-[2rem] bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-10">
+                                <span class="material-symbols-outlined text-secondary-fixed text-6xl">badge</span>
                             </div>
                             <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Drivers License or Passport</h3>
                             <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">We use **Persona** to verify your identity. Please have your ID ready. This process is encrypted and takes less than 60 seconds.</p>
                             
                             <div id="persona-verification-container" class="w-full max-w-sm mb-12">
                                 <button onclick="window.startPersonaVerification()" id="persona-start-btn" class="w-full py-12 rounded-3xl border-2 border-dashed border-white/10 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:bg-white/10 transition-all group mb-4">
-                                    <i class="ph ph-fingerprint text-4xl text-white/20 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                                    <span class="material-symbols-outlined text-4xl text-white/20 group-hover:text-secondary-fixed mb-4 transition-colors">fingerprint</span>
                                     <span class="text-white/40 font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">Start ID Verification</span>
                                 </button>
                             </div>
 
-                            <button id="id-next-btn" onclick="window.nextWizardStep(1)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
+                            <button id="id-next-btn" onclick="window.nextWizardStep(1)" class="w-full max-w-xs py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
                                 Identification Verified
                             </button>
                         </div>
                     ` : step === 2 ? `
                         <div class="flex flex-col items-center text-center">
-                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
-                                <i class="ph-fill ph-briefcase text-brand-gold text-6xl"></i>
+                            <div class="w-32 h-32 rounded-[2rem] bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-10">
+                                <span class="material-symbols-outlined text-secondary-fixed text-6xl">work</span>
                             </div>
                             <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Income Verification</h3>
                             <p class="text-white/40 mb-12 max-w-md mx-auto leading-relaxed">Securely connect your primary bank account so we can scan for recent payroll direct deposits. This allows us to instantly verify your income without needing paystubs.</p>
                             
-                            <div onclick="window.initializePlaidLink(true)" id="payroll-sync-box" class="w-full max-w-sm py-12 rounded-3xl border-2 border-brand-gold/50 bg-brand-gold/10 flex flex-col items-center justify-center cursor-pointer hover:bg-brand-gold/20 transition-all group mb-8 shadow-[0_0_30px_rgba(211,189,115,0.15)]">
-                                <i class="ph ph-bank text-4xl text-brand-gold mb-4 transition-transform group-hover:scale-110"></i>
-                                <span class="text-brand-gold font-black uppercase tracking-widest text-xs">Connect Bank to Verify Income</span>
+                            <div onclick="window.initializePlaidLink(true)" id="payroll-sync-box" class="w-full max-w-sm py-12 rounded-3xl border-2 border-secondary-fixed/50 bg-secondary-fixed/10 flex flex-col items-center justify-center cursor-pointer hover:bg-secondary-fixed/20 transition-all group mb-8 shadow-[0_0_30px_rgba(211,189,115,0.15)]">
+                                <span class="material-symbols-outlined text-4xl text-secondary-fixed mb-4 transition-transform group-hover:scale-110">account_balance</span>
+                                <span class="text-secondary-fixed font-black uppercase tracking-widest text-xs">Connect Bank to Verify Income</span>
                             </div>
 
                             <div id="sync-status-container" class="hidden w-full max-w-xs">
                                 <!-- Sync Processing UI will be injected here -->
                             </div>
 
-                            <button id="wizard-next-btn" onclick="window.nextWizardStep(2)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
+                            <button id="wizard-next-btn" onclick="window.nextWizardStep(2)" class="w-full max-w-xs py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
                                 Confirm Synced Data
                             </button>
                         </div>
                         <div class="flex flex-col items-center text-center">
-                            <div class="w-32 h-32 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-10">
-                                <i class="ph-fill ph-bank text-brand-gold text-6xl"></i>
+                            <div class="w-32 h-32 rounded-[2rem] bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-10">
+                                <span class="material-symbols-outlined text-secondary-fixed text-6xl">account_balance</span>
                             </div>
                             <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Down Payment & Assets</h3>
                             <p class="text-white/40 mb-8 max-w-md mx-auto leading-relaxed">Since you securely linked your bank in the previous step, we can now instantly verify your liquid account balances without needing statements.</p>
                             
-                             <div id="asset-sync-box" class="w-full max-w-md p-10 rounded-3xl bg-brand-navy border border-white/10 mb-12 text-center group hover:border-brand-gold transition-all duration-700">
-                                <div class="w-16 h-16 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold mx-auto mb-6 transform group-hover:scale-110 transition-transform">
-                                    <i class="ph ph-lock-key text-3xl"></i>
+                             <div id="asset-sync-box" class="w-full max-w-md p-10 rounded-3xl bg-primary border border-white/10 mb-12 text-center group hover:border-secondary-fixed transition-all duration-700">
+                                <div class="w-16 h-16 rounded-full bg-secondary-fixed/10 flex items-center justify-center text-secondary-fixed mx-auto mb-6 transform group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-3xl">lock</span>
                                 </div>
-                                <button onclick="window.startAssetSync()" class="w-full py-5 rounded-2xl bg-brand-gold text-brand-navy font-black text-sm uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
+                                <button onclick="window.startAssetSync()" class="w-full py-5 rounded-2xl bg-secondary-fixed text-primary font-black text-sm uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
                                     Sync Live Balances Now
                                 </button>
                              </div>
 
-                            <button id="assets-next-btn" onclick="window.nextWizardStep(3)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
+                            <button id="assets-next-btn" onclick="window.nextWizardStep(3)" class="w-full max-w-xs py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
                                 Assets Verified
                             </button>
                         </div>
                     ` : step === 4 ? `
                         <div class="flex flex-col items-center text-center">
-                            <div class="w-24 h-24 rounded-[2rem] bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-6">
-                                <i class="ph-fill ph-chart-line-up text-brand-gold text-5xl"></i>
+                            <div class="w-24 h-24 rounded-[2rem] bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-secondary-fixed text-5xl">trending_up</span>
                             </div>
                             <h3 class="text-2xl font-black text-white mb-4 uppercase tracking-tight">Credit & Background</h3>
                             <p class="text-white/40 mb-8 max-w-md mx-auto leading-relaxed text-sm">We perform a soft-pull of your credit via **Experian Sandbox**. Please enter test data.</p>
                             
-                             <div id="credit-status-container" class="w-full max-w-md p-8 rounded-3xl bg-brand-navy border border-white/10 mb-8 text-left transition-all duration-700">
+                             <div id="credit-status-container" class="w-full max-w-md p-8 rounded-3xl bg-primary border border-white/10 mb-8 text-left transition-all duration-700">
                                 
                                 <form id="credit-pull-form" onsubmit="event.preventDefault(); window.pullCreditRecord();" class="space-y-4">
                                     <div>
-                                        <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Full SSN (Sandbox Only)</label>
-                                        <input id="cp-ssn" type="text" placeholder="XXX-XX-XXXX" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm" required>
+                                        <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Full SSN (Sandbox Only)</label>
+                                        <input id="cp-ssn" type="text" placeholder="XXX-XX-XXXX" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm" required>
                                     </div>
                                     <div>
-                                        <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Date of Birth</label>
-                                        <input id="cp-dob" type="date" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm" required>
+                                        <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Date of Birth</label>
+                                        <input id="cp-dob" type="date" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm" required>
                                     </div>
                                     <div>
-                                        <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Street Address</label>
-                                        <input id="cp-address" type="text" placeholder="123 Main St" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm" required>
+                                        <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Street Address</label>
+                                        <input id="cp-address" type="text" placeholder="123 Main St" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm" required>
                                     </div>
                                     <div class="grid grid-cols-3 gap-3">
                                         <div class="col-span-1">
-                                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">City</label>
-                                            <input id="cp-city" type="text" placeholder="Boston" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm" required>
+                                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">City</label>
+                                            <input id="cp-city" type="text" placeholder="Boston" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm" required>
                                         </div>
                                         <div class="col-span-1">
-                                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">State</label>
-                                            <input id="cp-state" type="text" placeholder="MA" maxlength="2" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm uppercase" required>
+                                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">State</label>
+                                            <input id="cp-state" type="text" placeholder="MA" maxlength="2" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm uppercase" required>
                                         </div>
                                         <div class="col-span-1">
-                                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Zip</label>
-                                            <input id="cp-zip" type="text" placeholder="02108" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 transition-all font-medium text-sm" required>
+                                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Zip</label>
+                                            <input id="cp-zip" type="text" placeholder="02108" class="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 transition-all font-medium text-sm" required>
                                         </div>
                                     </div>
                                     
-                                    <button id="credit-pull-btn" type="submit" class="w-full mt-4 py-4 rounded-xl bg-brand-gold text-brand-navy font-black text-sm uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
+                                    <button id="credit-pull-btn" type="submit" class="w-full mt-4 py-4 rounded-xl bg-secondary-fixed text-primary font-black text-sm uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
                                         Verify via Experian
                                     </button>
                                 </form>
                              </div>
 
-                            <button id="credit-next-btn" onclick="window.nextWizardStep(4)" class="w-full max-w-xs py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
+                            <button id="credit-next-btn" onclick="window.nextWizardStep(4)" class="w-full max-w-xs py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 opacity-50 cursor-not-allowed" disabled>
                                 Verify & Continue To Loan Details
                             </button>
                         </div>
@@ -839,8 +840,8 @@ function renderWizard(step) {
                             <h3 class="text-2xl font-black text-white mb-6 uppercase tracking-tight">Property & Loan Details</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                                 <div>
-                                    <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-1">Subject Property Type</label>
-                                    <select id="step5-property-type" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-brand-gold transition-all font-bold">
+                                    <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-1">Subject Property Type</label>
+                                    <select id="step5-property-type" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-secondary-fixed transition-all font-bold">
                                         <option value="SingleFamily">Single Family Home</option>
                                         <option value="Townhouse">Townhouse</option>
                                         <option value="Condo">Condominium</option>
@@ -848,23 +849,23 @@ function renderWizard(step) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-1">Occupancy Type</label>
-                                    <select id="step5-occupancy-type" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-brand-gold transition-all font-bold">
+                                    <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-1">Occupancy Type</label>
+                                    <select id="step5-occupancy-type" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-secondary-fixed transition-all font-bold">
                                         <option value="PrimaryResidence">Primary Residence</option>
                                         <option value="SecondHome">Second Home</option>
                                         <option value="Investment">Investment Property</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-1">Purchase Price</label>
-                                    <input id="step5-price" type="number" value="750000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-brand-gold outline-none transition-all font-bold">
+                                    <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-1">Purchase Price</label>
+                                    <input id="step5-price" type="number" value="750000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-secondary-fixed outline-none transition-all font-bold">
                                 </div>
                                 <div>
-                                    <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-1">Estimated Down Payment</label>
-                                    <input id="step5-down" type="number" value="150000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-brand-gold outline-none transition-all font-bold">
+                                    <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-1">Estimated Down Payment</label>
+                                    <input id="step5-down" type="number" value="150000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white focus:border-secondary-fixed outline-none transition-all font-bold">
                                 </div>
                             </div>
-                            <button onclick="window.nextWizardStep(5)" class="w-full py-5 rounded-[2rem] bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                            <button onclick="window.nextWizardStep(5)" class="w-full py-5 rounded-[2rem] bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
                                 Save & Continue
                             </button>
                         </div>
@@ -876,15 +877,15 @@ function renderWizard(step) {
                             <!-- Employment -->
                             <div class="mb-12">
                                 <div class="flex items-center justify-between mb-6">
-                                    <span class="text-brand-gold font-black uppercase tracking-[0.2em] text-xs">Employment History</span>
+                                    <span class="text-secondary-fixed font-black uppercase tracking-[0.2em] text-xs">Employment History</span>
                                     <button onclick="window.addEmploymentRow()" class="text-[10px] bg-white/5 hover:bg-white/10 text-white font-black py-2 px-4 rounded-full border border-white/10 transition-all">+ Add Employer</button>
                                 </div>
                                 <div id="employment-rows" class="space-y-4">
                                     <div class="employment-row p-6 rounded-3xl bg-white/5 border border-white/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                        <input type="text" placeholder="Employer Name" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-name">
-                                        <input type="text" placeholder="Position/Title" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-title">
-                                        <input type="date" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-start">
-                                        <input type="number" placeholder="Gross Monthly Income" class="w-full bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-income">
+                                        <input type="text" placeholder="Employer Name" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-name">
+                                        <input type="text" placeholder="Position/Title" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-title">
+                                        <input type="date" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-start">
+                                        <input type="number" placeholder="Gross Monthly Income" class="w-full bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-income">
                                     </div>
                                 </div>
                             </div>
@@ -892,13 +893,13 @@ function renderWizard(step) {
                             <!-- Residential -->
                             <div class="mb-12">
                                 <div class="flex items-center justify-between mb-6">
-                                    <span class="text-brand-gold font-black uppercase tracking-[0.2em] text-xs">Residential History</span>
+                                    <span class="text-secondary-fixed font-black uppercase tracking-[0.2em] text-xs">Residential History</span>
                                     <button onclick="window.addResidencyRow()" class="text-[10px] bg-white/5 hover:bg-white/10 text-white font-black py-2 px-4 rounded-full border border-white/10 transition-all">+ Add Previous Address</button>
                                 </div>
                                 <div id="residency-rows" class="space-y-4">
                                     <div class="residency-row p-6 rounded-3xl bg-white/5 border border-white/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        <input type="text" placeholder="Full Home Address" class="lg:col-span-2 bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold res-address">
-                                        <select class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold res-status">
+                                        <input type="text" placeholder="Full Home Address" class="lg:col-span-2 bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold res-address">
+                                        <select class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold res-status">
                                             <option value="Own">Own</option>
                                             <option value="Rent">Rent</option>
                                             <option value="LivingRentFree">Living Rent Free</option>
@@ -907,7 +908,7 @@ function renderWizard(step) {
                                 </div>
                             </div>
 
-                            <button onclick="window.nextWizardStep(6)" class="w-full py-5 rounded-[2rem] bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                            <button onclick="window.nextWizardStep(6)" class="w-full py-5 rounded-[2rem] bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
                                 Save History & Continue
                             </button>
                         </div>
@@ -918,34 +919,34 @@ function renderWizard(step) {
                                 <div class="flex items-center justify-between p-6 bg-white/5 rounded-3xl border border-white/10">
                                     <span class="text-sm font-bold text-white uppercase tracking-tight w-2/3">Are there any outstanding judgments against you?</span>
                                     <div class="flex space-x-6 w-1/3 justify-end leading-none">
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-judgments" value="yes" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-judgments" value="no" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-judgments" value="yes" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-judgments" value="no" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between p-6 bg-white/5 rounded-3xl border border-white/10">
                                     <span class="text-sm font-bold text-white uppercase tracking-tight w-2/3">Have you declared bankruptcy within the past 7 years?</span>
                                     <div class="flex space-x-6 w-1/3 justify-end leading-none">
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-bankruptcy" value="yes" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-bankruptcy" value="no" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-bankruptcy" value="yes" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-bankruptcy" value="no" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between p-6 bg-white/5 rounded-3xl border border-white/10">
                                     <span class="text-sm font-bold text-white uppercase tracking-tight w-2/3">Are you currently a party to a lawsuit?</span>
                                     <div class="flex space-x-6 w-1/3 justify-end leading-none">
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-lawsuits" value="yes" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-lawsuits" value="no" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-lawsuits" value="yes" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-lawsuits" value="no" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between p-6 bg-white/5 rounded-3xl border border-white/10">
                                     <span class="text-sm font-bold text-white uppercase tracking-tight w-2/3">Are you a Canadian Citizen or Permanent Resident?</span>
                                     <div class="flex space-x-6 w-1/3 justify-end leading-none">
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-citizen" value="yes" checked class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
-                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-citizen" value="no" class="w-5 h-5 text-brand-gold bg-brand-navy border-white/20 focus:ring-brand-gold focus:ring-offset-brand-navy cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-citizen" value="yes" checked class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer" required><span class="text-sm font-bold text-white">Yes</span></label>
+                                        <label class="flex items-center space-x-2 cursor-pointer"><input type="radio" name="decl-citizen" value="no" class="w-5 h-5 text-secondary-fixed bg-primary border-white/20 focus:ring-secondary-fixed focus:ring-offset-primary cursor-pointer"><span class="text-sm font-bold text-white">No</span></label>
                                     </div>
                                 </div>
                             </div>
                             
-                            <button id="final-submit-btn" onclick="window.nextWizardStep(7)" class="w-full py-6 rounded-[2rem] bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.05] transition-all shadow-2xl active:scale-95">
+                            <button id="final-submit-btn" onclick="window.nextWizardStep(7)" class="w-full py-6 rounded-[2rem] bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.05] transition-all shadow-2xl active:scale-95">
                                 Complete & Submit Official Application
                             </button>
                         </div>
@@ -962,17 +963,17 @@ function renderWizard(step) {
 
 function renderLogin() {
     return `
-        <section class="min-h-screen bg-brand-navy flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
+        <section class="min-h-screen bg-primary flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
              <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0 opacity-20">
                 <img src="assets/modern.jpg" alt="Login Background" class="w-full h-full object-cover">
             </div>
-            <div class="absolute inset-0 bg-brand-navy/80 z-0"></div>
+            <div class="absolute inset-0 bg-primary/80 z-0"></div>
 
             <div class="max-w-md w-full px-6 relative z-10 reveal reveal-up">
                 <div class="p-10 md:p-12 rounded-[3.5rem] glass-card border-white/10 shadow-2xl text-center">
-                    <div class="w-20 h-20 rounded-3xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-8 mx-auto">
-                        <i class="ph-fill ph-lock-key text-brand-gold text-4xl"></i>
+                    <div class="w-20 h-20 rounded-3xl bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-8 mx-auto">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl">lock</span>
                     </div>
                     <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Secure Access</h2>
                     <p class="text-white/40 text-sm mb-10 font-bold uppercase tracking-[0.2em]">Borrower Portal 2026</p>
@@ -981,20 +982,20 @@ function renderLogin() {
 
                     <div class="space-y-6 text-left">
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Email Address</label>
-                            <input id="login-email" type="email" placeholder="client@example.com" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Email Address</label>
+                            <input id="login-email" type="email" placeholder="client@example.com" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Password</label>
-                            <input id="login-password" type="password" placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium" onkeydown="if(event.key==='Enter') window.submitLogin()">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Password</label>
+                            <input id="login-password" type="password" placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium" onkeydown="if(event.key==='Enter') window.submitLogin()">
                         </div>
-                        <button id="login-btn" onclick="window.submitLogin()" class="w-full py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 mt-4">
+                        <button id="login-btn" onclick="window.submitLogin()" class="w-full py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 mt-4">
                             Log In & Authenticate
                         </button>
                     </div>
                     
                     <div class="mt-8 flex flex-col gap-4">
-                        <button onclick="window.showRegister()" class="text-brand-gold text-xs font-bold uppercase tracking-widest hover:underline">Create New Account</button>
+                        <button onclick="window.showRegister()" class="text-secondary-fixed text-xs font-bold uppercase tracking-widest hover:underline">Create New Account</button>
                         <button onclick="window.togglePortal(false)" class="text-white/40 text-xs font-bold hover:text-white transition-colors uppercase tracking-[0.1em]">
                             Cancel & Return to Site
                         </button>
@@ -1007,16 +1008,16 @@ function renderLogin() {
 
 function renderRegister() {
     return `
-        <section class="min-h-screen bg-brand-navy flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
+        <section class="min-h-screen bg-primary flex items-center justify-center pt-24 pb-12 relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-20">
                 <img src="assets/modern.jpg" alt="Register Background" class="w-full h-full object-cover">
             </div>
-            <div class="absolute inset-0 bg-brand-navy/80 z-0"></div>
+            <div class="absolute inset-0 bg-primary/80 z-0"></div>
 
             <div class="max-w-md w-full px-6 relative z-10 reveal reveal-up">
                 <div class="p-10 md:p-12 rounded-[3.5rem] glass-card border-white/10 shadow-2xl text-center">
-                    <div class="w-20 h-20 rounded-3xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center mb-8 mx-auto">
-                        <i class="ph-fill ph-user-plus text-brand-gold text-4xl"></i>
+                    <div class="w-20 h-20 rounded-3xl bg-secondary-fixed/10 border border-secondary-fixed/20 flex items-center justify-center mb-8 mx-auto">
+                        <span class="material-symbols-outlined text-secondary-fixed text-4xl">person_add</span>
                     </div>
                     <h2 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">New Application</h2>
                     <p class="text-white/40 text-sm mb-10 font-bold uppercase tracking-[0.2em]">Create Your Secure Profile</p>
@@ -1025,28 +1026,28 @@ function renderRegister() {
 
                     <div class="space-y-6 text-left">
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Full Name</label>
-                            <input id="register-name" type="text" placeholder="John Smith" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Full Name</label>
+                            <input id="register-name" type="text" placeholder="John Smith" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Email Address</label>
-                            <input id="register-email" type="email" placeholder="your@email.com" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Email Address</label>
+                            <input id="register-email" type="email" placeholder="your@email.com" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Phone Number</label>
-                            <input id="register-phone" type="tel" placeholder="(555) 000-0000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Phone Number</label>
+                            <input id="register-phone" type="tel" placeholder="(555) 000-0000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3 px-2">Create Password</label>
-                            <input id="register-password" type="password" placeholder="Min 6 characters" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-brand-gold/50 outline-none transition-all font-medium" onkeydown="if(event.key==='Enter') window.submitRegister()">
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-widest mb-3 px-2">Create Password</label>
+                            <input id="register-password" type="password" placeholder="Min 6 characters" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder:text-white/20 focus:border-secondary-fixed/50 outline-none transition-all font-medium" onkeydown="if(event.key==='Enter') window.submitRegister()">
                         </div>
-                        <button id="register-btn" onclick="window.submitRegister()" class="w-full py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 mt-4">
+                        <button id="register-btn" onclick="window.submitRegister()" class="w-full py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95 mt-4">
                             Create Secure Account
                         </button>
                     </div>
                     
                     <div class="mt-8 flex flex-col gap-4">
-                        <button onclick="window.showLogin()" class="text-brand-gold text-xs font-bold uppercase tracking-widest hover:underline">Already Have an Account? Log In</button>
+                        <button onclick="window.showLogin()" class="text-secondary-fixed text-xs font-bold uppercase tracking-widest hover:underline">Already Have an Account? Log In</button>
                         <button onclick="window.togglePortal(false)" class="text-white/40 text-xs font-bold hover:text-white transition-colors uppercase tracking-[0.1em]">
                             Cancel & Return to Site
                         </button>
@@ -1059,14 +1060,14 @@ function renderRegister() {
 
 function renderMFAChallenge(type) {
     return `
-        <section class="min-h-screen bg-brand-navy flex items-center justify-center relative overflow-hidden">
+        <section class="min-h-screen bg-primary flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
                 <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
             </div>
             <div class="max-w-md w-full p-8 relative z-10">
                 <div class="glass-card p-10 rounded-[3.5rem] border-white/10 shadow-2xl text-center">
-                    <div class="w-20 h-20 rounded-full bg-brand-gold/20 flex items-center justify-center mx-auto mb-8">
-                        <i class="ph-fill ${type === 'totp' ? 'ph-shield-check' : 'ph-envelope-simple-open'} text-4xl text-brand-gold"></i>
+                    <div class="w-20 h-20 rounded-full bg-secondary-fixed/20 flex items-center justify-center mx-auto mb-8">
+                        <span class="material-symbols-outlined text-4xl text-secondary-fixed">${type === 'totp' ? 'verified_user' : 'mark_email_read'}</span>
                     </div>
                     <h2 class="text-3xl font-black text-white uppercase tracking-tight mb-4">Two-Step Verification</h2>
                     <p class="text-white/60 mb-8 font-medium">
@@ -1074,9 +1075,9 @@ function renderMFAChallenge(type) {
                     </p>
                     
                     <div class="space-y-6">
-                        <input id="mfa-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-3xl font-black text-brand-gold placeholder:text-white/10 tracking-[0.5em] outline-none focus:border-brand-gold/50 transition-all" autofocus>
+                        <input id="mfa-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-3xl font-black text-secondary-fixed placeholder:text-white/10 tracking-[0.5em] outline-none focus:border-secondary-fixed/50 transition-all" autofocus>
                         <div id="mfa-error" class="text-red-400 text-xs font-bold uppercase tracking-widest h-4"></div>
-                        <button onclick="window.submitMFA()" class="w-full py-5 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                        <button onclick="window.submitMFA()" class="w-full py-5 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
                             Verify & Log In
                         </button>
                         <button onclick="window.showLogin()" class="text-white/30 text-[10px] font-black uppercase tracking-widest hover:text-white transition-all">Cancel</button>
@@ -1089,14 +1090,14 @@ function renderMFAChallenge(type) {
 
 function renderRegistrationVerification(email) {
     return `
-        <section class="min-h-screen bg-brand-navy flex items-center justify-center relative overflow-hidden">
+        <section class="min-h-screen bg-primary flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
                 <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
             </div>
             <div class="max-w-2xl w-full p-8 relative z-10">
                 <div class="glass-card p-12 rounded-[4rem] border-white/10 shadow-2xl text-center">
-                    <div class="w-20 h-20 rounded-full bg-brand-gold/20 flex items-center justify-center mx-auto mb-8">
-                        <i class="ph-fill ph-shield-check text-4xl text-brand-gold"></i>
+                    <div class="w-20 h-20 rounded-full bg-secondary-fixed/20 flex items-center justify-center mx-auto mb-8">
+                        <span class="material-symbols-outlined text-4xl text-secondary-fixed">verified_user</span>
                     </div>
                     <h2 class="text-3xl font-black text-white uppercase tracking-tight mb-4">Verification Required</h2>
                     <p class="text-white/60 mb-12 font-medium max-w-md mx-auto line-tight">
@@ -1105,23 +1106,23 @@ function renderRegistrationVerification(email) {
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                         <div class="space-y-4">
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-[0.2em] px-2 flex items-center gap-2">
-                                <i class="ph ph-envelope"></i> Email Code
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-[0.2em] px-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined">mail</span> Email Code
                             </label>
-                            <input id="verify-email-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-2xl font-black text-white placeholder:text-white/10 tracking-[0.3em] outline-none focus:border-brand-gold transition-all">
+                            <input id="verify-email-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-2xl font-black text-white placeholder:text-white/10 tracking-[0.3em] outline-none focus:border-secondary-fixed transition-all">
                         </div>
                         <div class="space-y-4">
-                            <label class="block text-[10px] font-black text-brand-gold uppercase tracking-[0.2em] px-2 flex items-center gap-2">
-                                <i class="ph ph-phone"></i> SMS Code
+                            <label class="block text-[10px] font-black text-secondary-fixed uppercase tracking-[0.2em] px-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined">phone_iphone</span> SMS Code
                             </label>
-                            <input id="verify-phone-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-2xl font-black text-white placeholder:text-white/10 tracking-[0.3em] outline-none focus:border-brand-gold transition-all">
+                            <input id="verify-phone-code" type="text" maxlength="6" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-5 text-center text-2xl font-black text-white placeholder:text-white/10 tracking-[0.3em] outline-none focus:border-secondary-fixed transition-all">
                         </div>
                     </div>
 
                     <div id="verify-reg-error" class="text-red-400 text-xs font-bold uppercase tracking-widest h-4 my-8"></div>
                     
                     <div class="flex flex-col gap-4">
-                        <button onclick="window.submitRegistrationVerification()" class="w-full py-6 rounded-3xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
+                        <button onclick="window.submitRegistrationVerification()" class="w-full py-6 rounded-3xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-sm hover:scale-[1.02] transition-all shadow-xl active:scale-95">
                             Complete Verification
                         </button>
                         <div class="flex items-center justify-between px-4 mt-4">
@@ -1216,58 +1217,58 @@ window.showSecurity = function() {
 
 function renderSecuritySettings() {
     return `
-        <section class="min-h-screen bg-brand-navy pt-32 pb-24 relative overflow-hidden">
+        <section class="min-h-screen bg-primary pt-32 pb-24 relative overflow-hidden">
             <div class="absolute inset-0 z-0 opacity-10">
                 <img src="assets/modern.jpg" alt="Background" class="w-full h-full object-cover">
             </div>
             <div class="max-w-4xl mx-auto px-4 relative z-10">
                 <div class="flex items-center justify-between mb-12">
                     <button onclick="window.togglePortal(true)" class="flex items-center gap-2 text-white/40 hover:text-white transition-all font-bold uppercase tracking-widest text-xs">
-                        <i class="ph ph-caret-left"></i> Back to Dashboard
+                        <span class="material-symbols-outlined">chevron_left</span> Back to Dashboard
                     </button>
-                    <h2 class="text-3xl font-black text-white uppercase tracking-tight">Account <span class="text-brand-gold">Security</span></h2>
+                    <h2 class="text-3xl font-black text-white uppercase tracking-tight">Account <span class="text-secondary-fixed">Security</span></h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Method 1: Email -->
-                    <div class="glass-card p-10 rounded-[3rem] border-white/10 hover:border-brand-gold/20 transition-all group">
-                        <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-8 group-hover:scale-110 transition-transform">
-                            <i class="ph-fill ph-envelope-simple text-3xl"></i>
+                    <div class="glass-card p-10 rounded-[3rem] border-white/10 hover:border-secondary-fixed/20 transition-all group">
+                        <div class="w-16 h-16 rounded-2xl bg-secondary-fixed/10 flex items-center justify-center text-secondary-fixed mb-8 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl">mail</span>
                         </div>
                         <h3 class="text-xl font-black text-white uppercase mb-2">Email Verification</h3>
                         <p class="text-white/40 text-sm mb-8 leading-relaxed">Receive a 6-digit code in your inbox for every login attempt.</p>
                         <div id="email-mfa-status">
-                             <button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-brand-gold hover:text-brand-navy transition-all">Enable Email MFA</button>
+                             <button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-secondary-fixed hover:text-primary transition-all">Enable Email MFA</button>
                         </div>
                     </div>
 
                     <!-- Method 2: Authenticator -->
-                    <div class="glass-card p-10 rounded-[3rem] border-white/10 hover:border-brand-gold/20 transition-all group">
-                        <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-8 group-hover:scale-110 transition-transform">
-                            <i class="ph-fill ph-shield-check text-3xl"></i>
+                    <div class="glass-card p-10 rounded-[3rem] border-white/10 hover:border-secondary-fixed/20 transition-all group">
+                        <div class="w-16 h-16 rounded-2xl bg-secondary-fixed/10 flex items-center justify-center text-secondary-fixed mb-8 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl">verified_user</span>
                         </div>
                         <h3 class="text-xl font-black text-white uppercase mb-2">Authenticator App</h3>
                         <p class="text-white/40 text-sm mb-8 leading-relaxed">Use apps like Google Authenticator or Authy to generate secure codes.</p>
                         <div id="totp-mfa-status">
-                            <button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-xs hover:bg-white transition-all">Setup Authenticator</button>
+                            <button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-xs hover:bg-white transition-all">Setup Authenticator</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- TOTP Setup Modal (Hidden by default) -->
-                <div id="totp-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-brand-navy/90 backdrop-blur-sm p-4">
+                <div id="totp-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-primary/90 backdrop-blur-sm p-4">
                     <div class="glass-card p-10 rounded-[3.5rem] border-white/20 shadow-2xl max-w-md w-full text-center">
                         <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-6">Setup Authenticator</h3>
                         <div id="qr-container" class="bg-white p-4 rounded-3xl inline-block mb-8 shadow-inner overflow-hidden">
                             <div class="w-48 h-48 bg-gray-100 flex items-center justify-center">
-                                <i class="ph ph-circle-notch animate-spin text-2xl text-brand-navy"></i>
+                                <span class="material-symbols-outlined animate-spin text-2xl text-primary">progress_activity</span>
                             </div>
                         </div>
                         <p class="text-white/60 text-sm mb-8">Scan this QR code with your Authenticator app, then enter the 6-digit code below to confirm.</p>
-                        <input id="totp-setup-code" type="text" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 text-center text-xl font-bold text-brand-gold mb-6 outline-none">
+                        <input id="totp-setup-code" type="text" placeholder="000000" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 text-center text-xl font-bold text-secondary-fixed mb-6 outline-none">
                         <div class="flex gap-4">
                             <button onclick="document.getElementById('totp-modal').classList.add('hidden')" class="flex-1 py-4 text-white/40 font-bold uppercase tracking-widest text-xs">Cancel</button>
-                            <button onclick="window.verifyTOTP()" class="flex-1 py-4 rounded-2xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-xs">Verify & Enable</button>
+                            <button onclick="window.verifyTOTP()" class="flex-1 py-4 rounded-2xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-xs">Verify & Enable</button>
                         </div>
                     </div>
                 </div>
@@ -1285,19 +1286,19 @@ window.loadSecurityData = async function() {
     const totpStatus = document.getElementById('totp-mfa-status');
 
     if (!user.mfaEnabled) {
-        emailStatus.innerHTML = `<button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-brand-gold hover:text-brand-navy transition-all">Enable Email MFA</button>`;
-        totpStatus.innerHTML = `<button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-xs hover:bg-white transition-all">Setup Authenticator</button>`;
+        emailStatus.innerHTML = `<button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-secondary-fixed hover:text-primary transition-all">Enable Email MFA</button>`;
+        totpStatus.innerHTML = `<button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-xs hover:bg-white transition-all">Setup Authenticator</button>`;
         return;
     }
 
     if (user.mfaType === 'email') {
-        emailStatus.innerHTML = `<div class="flex items-center gap-2 text-green-400 font-black text-xs uppercase"><i class="ph-fill ph-check-circle text-lg"></i> Active</div>
+        emailStatus.innerHTML = `<div class="flex items-center gap-2 text-green-400 font-black text-xs uppercase"><span class="material-symbols-outlined text-lg">check_circle</span> Active</div>
                                   <button onclick="window.disableMFA()" class="mt-4 text-white/20 hover:text-red-400 text-[10px] font-black uppercase underline">Disable</button>`;
-        totpStatus.innerHTML = `<button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-brand-gold hover:text-brand-navy transition-all">Switch to App</button>`;
+        totpStatus.innerHTML = `<button onclick="window.setupTOTP()" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-secondary-fixed hover:text-primary transition-all">Switch to App</button>`;
     } else if (user.mfaType === 'totp') {
-        totpStatus.innerHTML = `<div class="flex items-center gap-2 text-green-400 font-black text-xs uppercase"><i class="ph-fill ph-check-circle text-lg"></i> Active</div>
+        totpStatus.innerHTML = `<div class="flex items-center gap-2 text-green-400 font-black text-xs uppercase"><span class="material-symbols-outlined text-lg">check_circle</span> Active</div>
                                  <button onclick="window.disableMFA()" class="mt-4 text-white/20 hover:text-red-400 text-[10px] font-black uppercase underline">Disable</button>`;
-        emailStatus.innerHTML = `<button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-brand-gold hover:text-brand-navy transition-all">Switch to Email</button>`;
+        emailStatus.innerHTML = `<button onclick="window.enableMFA('email')" class="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-secondary-fixed hover:text-primary transition-all">Switch to Email</button>`;
     }
 }
 
@@ -1536,7 +1537,7 @@ function renderPortal() {
                 <div class="mb-16 pt-8 border-t border-white/5">
                     <h2 class="font-headline text-2xl font-extrabold text-white mb-8 tracking-tight">Messages with Broker</h2>
                     <div id="chat-messages" class="h-64 overflow-y-auto mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
-                        <p class="text-white/40 text-sm italic text-center"><i class="ph ph-circle-notch animate-spin"></i> Loading messages...</p>
+                        <p class="text-white/40 text-sm italic text-center"><span class="material-symbols-outlined animate-spin">progress_activity</span> Loading messages...</p>
                     </div>
                     <form onsubmit="window.sendMessage(event, '${appStatus._id}')" class="flex gap-4">
                         <input type="text" id="chat-input" placeholder="Type a message to your broker..." class="flex-1 bg-white/5 border border-white/20 rounded-full text-white px-6 py-3 outline-none focus:border-secondary-fixed transition-colors font-body" required>
@@ -1616,12 +1617,12 @@ function renderPortal() {
 // --- PHASE 9: ADMIN DASHBOARD ---
 function renderAdminDashboard() {
     return `
-        <section class="min-h-screen bg-brand-navy pt-32 pb-24">
+        <section class="min-h-screen bg-primary pt-32 pb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center mb-12">
                     <div>
                         <h2 class="text-3xl font-black text-white uppercase tracking-tight">Broker Dashboard</h2>
-                        <p class="text-brand-gold/80 font-bold uppercase tracking-widest text-sm mt-1">Application Management</p>
+                        <p class="text-secondary-fixed/80 font-bold uppercase tracking-widest text-sm mt-1">Application Management</p>
                     </div>
                     <button onclick="window.togglePortal(false)" class="px-6 py-2 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-all font-bold text-sm">Sign Out</button>
                 </div>
@@ -1642,7 +1643,7 @@ function renderAdminDashboard() {
                     <div class="overflow-x-auto scrollbar-hide">
                         <table class="w-full text-left border-collapse min-w-[800px]">
                             <thead>
-                                <tr class="bg-brand-navy">
+                                <tr class="bg-primary">
                                     <th class="py-4 px-8 text-xs font-black text-white/40 uppercase tracking-widest">Borrower</th>
                                     <th class="py-4 px-8 text-xs font-black text-white/40 uppercase tracking-widest">Type</th>
                                     <th class="py-4 px-8 text-xs font-black text-white/40 uppercase tracking-widest">Amount</th>
@@ -1651,7 +1652,7 @@ function renderAdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody id="admin-applications-tbody" class="text-white/80">
-                                <tr><td colspan="5" class="p-8 text-center text-white/30"><i class="ph ph-circle-notch animate-spin text-2xl"></i> Loading...</td></tr>
+                                <tr><td colspan="5" class="p-8 text-center text-white/30"><span class="material-symbols-outlined animate-spin text-2xl">progress_activity</span> Loading...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1668,10 +1669,10 @@ function renderAdminDashboard() {
                             <p class="text-white/40 italic">Select an application...</p>
                         </div>
                         
-                        <h4 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-3 mt-auto">Internal Broker Notes</h4>
-                        <textarea id="admin-notes-input" class="w-full focus:outline-none focus:border-brand-gold bg-white/5 border border-white/20 rounded-2xl p-4 text-white text-sm resize-none h-32 mb-4" placeholder="Enter private notes here..."></textarea>
+                        <h4 class="text-xs font-bold text-secondary-fixed uppercase tracking-widest mb-3 mt-auto">Internal Broker Notes</h4>
+                        <textarea id="admin-notes-input" class="w-full focus:outline-none focus:border-secondary-fixed bg-white/5 border border-white/20 rounded-2xl p-4 text-white text-sm resize-none h-32 mb-4" placeholder="Enter private notes here..."></textarea>
                         
-                        <button id="admin-save-notes-btn" class="w-full py-3 rounded-full bg-brand-gold text-brand-navy font-black text-sm uppercase tracking-widest hover:bg-white transition-all">Save Notes</button>
+                        <button id="admin-save-notes-btn" class="w-full py-3 rounded-full bg-secondary-fixed text-primary font-black text-sm uppercase tracking-widest hover:bg-white transition-all">Save Notes</button>
                     </div>
 
                     <!-- Chat -->
@@ -1682,9 +1683,9 @@ function renderAdminDashboard() {
                         <div id="chat-messages" class="h-64 overflow-y-auto mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
                         </div>
                         <form id="admin-chat-form" class="flex gap-4">
-                            <input type="text" id="chat-input" placeholder="Type message..." class="flex-1 bg-white/5 border border-white/20 rounded-full text-white px-6 py-3 outline-none focus:border-brand-gold transition-colors" required>
-                            <button type="submit" class="w-12 h-12 rounded-full bg-brand-gold text-brand-navy flex items-center justify-center hover:bg-white transition-all">
-                                <i class="ph-bold ph-paper-plane-right"></i>
+                            <input type="text" id="chat-input" placeholder="Type message..." class="flex-1 bg-white/5 border border-white/20 rounded-full text-white px-6 py-3 outline-none focus:border-secondary-fixed transition-colors" required>
+                            <button type="submit" class="w-12 h-12 rounded-full bg-secondary-fixed text-primary flex items-center justify-center hover:bg-white transition-all">
+                                <span class="material-symbols-outlined">send</span>
                             </button>
                         </form>
                     </div>
@@ -1701,7 +1702,7 @@ function renderAdminDashboard() {
                              <input type="hidden" id="admin-upload-userid" value="">
                              <h4 class="text-xs font-bold text-[#EAB308] uppercase tracking-widest leading-none">Upload to Borrower</h4>
                              <input type="file" id="admin-doc-file" class="text-white/80 text-xs w-full file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all" required>
-                             <button type="submit" id="admin-upload-btn" class="w-full py-2 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-brand-navy transition-all border border-white/20">Send Document</button>
+                             <button type="submit" id="admin-upload-btn" class="w-full py-2 rounded-full bg-white/10 text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-primary transition-all border border-white/20">Send Document</button>
                         </form>
                     </div>
                 </div>
@@ -1718,19 +1719,19 @@ window.loadAdminData = async function() {
         const statsContainer = document.getElementById('admin-stats-container');
         if (statsContainer) {
             statsContainer.innerHTML = `
-                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-brand-navy/50">
+                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-primary/50">
                     <div class="text-white/40 font-bold uppercase tracking-widest text-xs mb-2">Total Borrowers</div>
                     <div class="text-4xl font-black text-white">${stats.totalUsers}</div>
                 </div>
-                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-brand-navy/50">
-                    <div class="text-brand-gold/80 font-bold uppercase tracking-widest text-xs mb-2">Total Apps</div>
-                    <div class="text-4xl font-black text-brand-gold">${stats.totalApps}</div>
+                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-primary/50">
+                    <div class="text-secondary-fixed/80 font-bold uppercase tracking-widest text-xs mb-2">Total Apps</div>
+                    <div class="text-4xl font-black text-secondary-fixed">${stats.totalApps}</div>
                 </div>
-                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-brand-navy/50">
+                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-primary/50">
                     <div class="text-yellow-500/80 font-bold uppercase tracking-widest text-xs mb-2">Under Review</div>
                     <div class="text-4xl font-black text-yellow-500">${stats.underReview}</div>
                 </div>
-                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-brand-navy/50">
+                <div class="p-6 rounded-[2rem] glass-card border-white/10 bg-primary/50">
                     <div class="text-green-500/80 font-bold uppercase tracking-widest text-xs mb-2">Approved</div>
                     <div class="text-4xl font-black text-green-500">${stats.approved}</div>
                 </div>
@@ -1757,12 +1758,12 @@ window.loadAdminData = async function() {
                             <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest 
                                 ${app.status === 'Approved' ? 'bg-green-500/20 text-green-400' : 
                                   app.status === 'Under Review' ? 'bg-yellow-500/20 text-yellow-400' : 
-                                  'bg-brand-navy text-brand-gold'}">
+                                  'bg-primary text-secondary-fixed'}">
                                 ${app.status}
                             </span>
                         </td>
                         <td class="py-4 px-8 text-right" onclick="event.stopPropagation()">
-                            <select onchange="window.updateAppStatus('${app._id}', this.value)" class="bg-brand-navy border border-white/20 rounded-lg text-white text-xs px-2 py-1 outline-none">
+                            <select onchange="window.updateAppStatus('${app._id}', this.value)" class="bg-primary border border-white/20 rounded-lg text-white text-xs px-2 py-1 outline-none">
                                 <option value="" disabled selected>Update Status</option>
                                 <option value="Under Review">Under Review</option>
                                 <option value="Approved">Approved</option>
@@ -1813,7 +1814,7 @@ window.viewApplication = async function(appId, name, userId) {
                     <div class="flex justify-between items-center mb-1"><span class="text-white/50">Residential History:</span> <span class="text-white font-bold">${fullApp.residentialHistory?.length || 0} Records</span></div>
                     
                     <div class="mt-4 pt-4 border-t border-white/10"></div>
-                    <div class="flex justify-between items-center mb-1"><span class="text-white/50">Credit Score:</span> <span class="text-brand-gold font-bold">${fullApp.creditScore || 'Pending'}</span></div>
+                    <div class="flex justify-between items-center mb-1"><span class="text-white/50">Credit Score:</span> <span class="text-secondary-fixed font-bold">${fullApp.creditScore || 'Pending'}</span></div>
                     <div class="flex justify-between items-center mb-1"><span class="text-white/50">Declarations:</span> <span class="${fullApp.declarations?.bankruptcy ? 'text-red-400' : 'text-green-400'} font-bold">Checked</span></div>
                     
                     <div class="mt-4 pt-4 border-t border-white/10"></div>
@@ -1822,9 +1823,9 @@ window.viewApplication = async function(appId, name, userId) {
                     <!-- LOS Export Button -->
                     <div class="mt-8">
                         <a href="/api/admin/applications/${appId}/export" 
-                           class="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-brand-gold text-brand-navy font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl"
+                           class="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-secondary-fixed text-primary font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl"
                            download>
-                            <i class="ph-bold ph-file-arrow-down text-xl"></i>
+                            <span class="material-symbols-outlined text-xl">file_download</span>
                             Export to LOS (FNM 3.2)
                         </a>
                         <p class="text-[10px] text-white/30 text-center mt-3 uppercase font-bold tracking-tighter italic">Legacy MISMO Format for Encompass/Calyx</p>
@@ -1854,8 +1855,8 @@ window.viewApplication = async function(appId, name, userId) {
                 docsList.innerHTML = docsData.documents.map(doc => `
                     <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 mb-2">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                <i class="ph ph-file-text text-xl"></i>
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed">
+                                <span class="material-symbols-outlined text-xl">description</span>
                             </div>
                             <div>
                                 <div class="text-white font-bold text-sm">${doc.originalName}</div>
@@ -1887,16 +1888,16 @@ window.viewApplication = async function(appId, name, userId) {
                 docsList.innerHTML = docsData.documents.map(doc => `
                     <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 mb-2">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                <i class="ph ph-file-text text-xl"></i>
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed">
+                                <span class="material-symbols-outlined text-xl">description</span>
                             </div>
                             <div>
                                 <div class="text-white font-bold text-sm">` + doc.originalName + `</div>
                                 <div class="text-white/40 text-[10px] uppercase font-bold tracking-widest">` + doc.category + ` &bull; ` + (doc.size / 1024 / 1024).toFixed(2) + ` MB</div>
                             </div>
                         </div>
-                        <a href="` + doc.url + `" target="_blank" class="text-brand-gold hover:text-white transition-colors">
-                            <i class="ph-bold ph-download-simple text-xl"></i>
+                        <a href="` + doc.url + `" target="_blank" class="text-secondary-fixed hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-xl">download</span>
                         </a>
                     </div>
                 `).join('');
@@ -1923,11 +1924,11 @@ window.saveAdminNotes = async function(appId) {
         });
         
         if (res.ok) {
-            btn.innerHTML = '<i class="ph-bold ph-check"></i> Saved';
-            btn.classList.replace('bg-brand-gold', 'bg-green-500');
+            btn.innerHTML = '<span class="material-symbols-outlined">check</span> Saved';
+            btn.classList.replace('bg-secondary-fixed', 'bg-green-500');
             setTimeout(() => {
                 btn.innerText = originalText;
-                btn.classList.replace('bg-green-500', 'bg-brand-gold');
+                btn.classList.replace('bg-green-500', 'bg-secondary-fixed');
                 btn.disabled = false;
             }, 2000);
         } else {
@@ -1968,7 +1969,7 @@ window.uploadAdminDocument = async function(event) {
         const data = await res.json();
         if (data.success) {
             fileInput.value = '';
-            btn.innerHTML = '<i class="ph-bold ph-check"></i> Sent';
+            btn.innerHTML = '<span class="material-symbols-outlined">check</span> Sent';
             btn.classList.add('bg-green-500', 'text-white', 'border-transparent');
             
             // Refetch docs
@@ -1980,16 +1981,16 @@ window.uploadAdminDocument = async function(event) {
                 docsList.innerHTML = docsData.documents.map(doc => `
                     <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 mb-2">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                <i class="ph ph-file-text text-xl"></i>
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed">
+                                <span class="material-symbols-outlined text-xl">description</span>
                             </div>
                             <div>
                                 <div class="text-white font-bold text-sm">` + doc.originalName + `</div>
                                 <div class="text-white/40 text-[10px] uppercase font-bold tracking-widest">` + doc.category + `</div>
                             </div>
                         </div>
-                        <a href="` + doc.url + `" target="_blank" class="text-brand-gold hover:text-white transition-colors">
-                            <i class="ph-bold ph-download-simple text-xl"></i>
+                        <a href="` + doc.url + `" target="_blank" class="text-secondary-fixed hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-xl">download</span>
                         </a>
                     </div>
                 `).join('');
@@ -2084,7 +2085,7 @@ window.uploadDocument = async function(event) {
 
     const btn = document.getElementById('upload-btn');
     const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="ph ph-circle-notch animate-spin"></i> Uploading...';
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Uploading...';
     btn.disabled = true;
 
     try {
@@ -2134,8 +2135,8 @@ window.loadDocuments = async function() {
                 list.innerHTML = data.documents.map(doc => `
                     <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 mb-2">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-navy flex items-center justify-center text-brand-gold">
-                                <i class="ph ph-file-text text-xl"></i>
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed">
+                                <span class="material-symbols-outlined text-xl">description</span>
                             </div>
                             <div>
                                 <div class="text-white font-bold text-sm">${doc.originalName}</div>
@@ -2143,7 +2144,7 @@ window.loadDocuments = async function() {
                             </div>
                         </div>
                         <button onclick="window.deleteDocument('${doc._id}')" class="text-red-400/60 hover:text-red-400 transition-colors p-2">
-                            <i class="ph ph-trash"></i>
+                            <span class="material-symbols-outlined">delete</span>
                         </button>
                     </div>
                 `).join('');
@@ -2176,7 +2177,7 @@ window.loadMessages = async function(appId) {
             
             chatContainer.innerHTML = data.messages.map(msg => `
                 <div class="flex flex-col ${msg.senderRole === window.userStatus.role ? 'items-end' : 'items-start'}">
-                    <div class="max-w-[80%] rounded-2xl p-4 ${msg.senderRole === window.userStatus.role ? 'bg-brand-gold text-brand-navy rounded-tr-sm' : 'bg-brand-navy text-white border border-white/10 rounded-tl-sm'}">
+                    <div class="max-w-[80%] rounded-2xl p-4 ${msg.senderRole === window.userStatus.role ? 'bg-secondary-fixed text-primary rounded-tr-sm' : 'bg-primary text-white border border-white/10 rounded-tl-sm'}">
                         <div class="text-[10px] uppercase font-black tracking-widest opacity-50 mb-1">${msg.senderName}</div>
                         <div class="text-sm font-medium">${msg.message}</div>
                     </div>
@@ -2245,12 +2246,12 @@ function renderDivider(type, colorClass, isTop = false) {
 
 function renderHero() {
     return `
-        <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-brand-navy">
+        <header class="relative min-h-screen flex items-start lg:items-center pt-12 sm:pt-44 pb-12 sm:pb-24 bg-primary">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/modern.jpg" alt="Home background" class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 bg-brand-navy/60"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
+                <div class="absolute inset-0 bg-primary/60"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 sm:pt-0">
@@ -2259,26 +2260,26 @@ function renderHero() {
                     <div class="xl:col-span-7 text-center xl:text-left reveal reveal-left">
                         <!-- Mobile-only Circular Headshot -->
                         <div class="flex justify-center xl:justify-start mb-8 sm:mb-10 xl:hidden">
-                            <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-brand-gold shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-brand-navy ring-4 ring-white/10">
+                            <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full border-4 border-secondary-fixed shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)] overflow-hidden bg-primary ring-4 ring-white/10">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
                             </div>
                         </div>
-                        <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-8 reveal reveal-up">
-                            <span class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] leading-none">Expert Mortgage Guidance</span>
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/20 mb-8 reveal reveal-up">
+                            <span class="text-secondary-fixed text-xs font-black uppercase tracking-[0.3em] leading-none">Expert Mortgage Guidance</span>
                         </div>
                         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tight font-extrabold text-white reveal reveal-up mb-10">
                             <span class="block">Your Path to</span>
                             <span class="text-hero-accent">Homeownership</span>
-                            <span class="block mt-2">Starts Here<span class="text-brand-gold">.</span></span>
+                            <span class="block mt-2">Starts Here<span class="text-secondary-fixed">.</span></span>
                         </h1>
                         <p class="mt-4 sm:mt-8 text-base sm:text-lg md:text-xl lg:text-3xl text-white/90 max-w-3xl mx-auto xl:mx-0 font-medium leading-relaxed mb-8 sm:mb-16 reveal reveal-up" style="transition-delay: 200ms;">
                             ${agentConfig.agent.fullBio}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center xl:justify-start items-center">
-                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-brand-navy bg-brand-gold hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
+                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-transparent text-base sm:text-xl font-bold rounded-xl text-primary bg-secondary-fixed hover:bg-white transform hover:scale-105 transition-all shadow-[0_20px_50px_-10px_rgba(211,189,115,0.4)]" href="#booking">
                                 Book a Consultation
                             </a>
-                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-brand-navy transform hover:scale-105 transition-all" href="#services">
+                            <a class="w-full sm:w-auto flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border-2 border-white/30 backdrop-blur-sm text-base sm:text-xl font-bold rounded-xl text-white bg-white/10 hover:bg-white hover:text-primary transform hover:scale-105 transition-all" href="#services">
                                 Our Services
                             </a>
                         </div>
@@ -2289,9 +2290,9 @@ function renderHero() {
                         <div class="w-[340px] glass-card p-3 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] border border-white/20 backdrop-blur-2xl bg-white/5">
                             <div class="relative w-full aspect-[4/5] rounded-[2.5rem] overflow-hidden">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top">
-                                <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-brand-navy via-brand-navy/20 to-transparent"></div>
+                                <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary via-primary/20 to-transparent"></div>
                                 <div class="absolute bottom-8 left-0 right-0 text-center px-6">
-                                    <p class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] mb-2">Expert Guidance</p>
+                                    <p class="text-secondary-fixed text-xs font-bold uppercase tracking-[0.3em] mb-2">Expert Guidance</p>
                                     <p class="text-white text-3xl font-black tracking-tight">${agentConfig.agent.name}</p>
                                 </div>
                             </div>
@@ -2299,7 +2300,7 @@ function renderHero() {
                     </div>
                 </div>
             </div>
-            ${renderDivider('curve', 'fill-brand-navy')}
+            ${renderDivider('curve', 'fill-primary')}
         </header>
     `;
 }
@@ -2309,18 +2310,18 @@ function renderAbout() {
     return `
         <section class="py-16 sm:py-32 bg-rich text-white overflow-hidden" id="about">
             <img src="assets/helena.jpg" alt="Homeownership lifestyle" class="bg-rich-image opacity-40" loading="lazy">
-            <div class="absolute inset-0 bg-brand-navy/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
+            <div class="absolute inset-0 bg-primary/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-20 items-center">
                     <!-- Left Column - Stats & Info -->
                     <div class="order-2 lg:order-1 lg:col-span-1 reveal reveal-right">
-                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-2xl bg-brand-navy/60 backdrop-blur-3xl">
-                            <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
-                                <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 shadow-2xl bg-primary/60 backdrop-blur-3xl">
+                            <div class="inline-block px-4 py-1.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/20 mb-6">
+                                <span class="text-secondary-fixed text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Mission</span>
                             </div>
-                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.title}</h2>
+                            <h2 class="text-3xl sm:text-5xl font-black mb-6 sm:mb-8 text-secondary-fixed tracking-tight leading-tight">${about.title}</h2>
                             <div class="space-y-4 sm:space-y-6 text-white/60 mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed">
                                 <p>${about.description1}</p>
                                 <p>${about.description2}</p>
@@ -2329,8 +2330,8 @@ function renderAbout() {
                             <div class="grid grid-cols-2 gap-x-8 gap-y-10">
                                 ${about.stats.map(stat => `
                                     <div class="flex flex-col items-center lg:items-start group/stat">
-                                        <div class="text-brand-gold mb-3 transform transition-transform group-hover/stat:scale-110">
-                                            <i class="ph ph-${stat.icon} text-3xl"></i>
+                                        <div class="text-secondary-fixed mb-3 transform transition-transform group-hover/stat:scale-110">
+                                            <span class="material-symbols-outlined text-3xl">${stat.icon}</span>
                                         </div>
                                         <div class="text-3xl font-black text-white tracking-tight">${stat.value}</div>
                                         <div class="text-xs text-white/60 font-bold uppercase tracking-[0.2em]">${stat.label}</div>
@@ -2343,11 +2344,11 @@ function renderAbout() {
                     <!-- Middle Column - Broker Photo -->
                     <div class="order-1 lg:order-2 flex justify-center reveal reveal-up">
                         <div class="relative group">
-                            <div class="absolute -inset-10 bg-brand-gold/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                            <div class="absolute -inset-10 bg-secondary-fixed/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                             <div class="relative w-64 h-[24rem] sm:w-80 sm:h-[32rem] lg:w-[26rem] lg:h-[36rem] overflow-hidden rounded-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(15,30,46,0.4)] border-[8px] sm:border-[12px] border-white backdrop-blur-md bg-white/40">
                                 <img src="${agentConfig.agent.photoUrl}" alt="${agentConfig.agent.name}" class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105">
                                 <div class="absolute bottom-8 left-0 right-0 text-center">
-                                    <div class="inline-block bg-brand-navy/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
+                                    <div class="inline-block bg-primary/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 shadow-xl">
                                         <span class="text-white text-xs font-bold uppercase tracking-[0.2em]">Dedicated to You</span>
                                     </div>
                                 </div>
@@ -2357,10 +2358,10 @@ function renderAbout() {
 
                     <!-- Right Column - Bio -->
                     <div class="order-3 lg:col-span-1 reveal reveal-left">
-                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-brand-navy/60 backdrop-blur-3xl shadow-2xl">
-                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-brand-gold tracking-tight leading-tight">${about.meetBroker.title}</h2>
+                        <div class="glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] border-white/10 bg-primary/60 backdrop-blur-3xl shadow-2xl">
+                            <h2 class="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 text-secondary-fixed tracking-tight leading-tight">${about.meetBroker.title}</h2>
                             <div class="relative mb-10">
-                                <i class="ph ph-quotes absolute -left-8 -top-8 text-6xl text-brand-gold/10"></i>
+                                <span class="material-symbols-outlined absolute -left-8 -top-8 text-6xl text-secondary-fixed/10">format_quote</span>
                                 <p class="text-xl italic font-semibold text-white/90 leading-relaxed">
                                     ${about.meetBroker.quote}
                                 </p>
@@ -2368,14 +2369,14 @@ function renderAbout() {
                             <p class="text-white/60 leading-relaxed mb-10 text-lg">
                                 ${about.meetBroker.description}
                             </p>
-                            <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-brand-gold text-brand-navy font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
+                            <a href="${about.meetBroker.linkUrl}" class="inline-flex items-center px-8 py-4 rounded-full bg-secondary-fixed text-primary font-black uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 group">
                                 ${about.meetBroker.linkText}
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            ${renderDivider('curve', 'fill-brand-navy')}
+            ${renderDivider('curve', 'fill-primary')}
         </section>
     `;
 }
@@ -2384,40 +2385,40 @@ function renderServices() {
     return `
         <section class="py-16 sm:py-32 bg-rich relative overflow-hidden" id="services">
             <img src="assets/puzzle.jpg" alt="Consultation background" class="bg-rich-image opacity-40" loading="lazy">
-            <div class="absolute inset-0 bg-brand-navy/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
+            <div class="absolute inset-0 bg-primary/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center mb-24 reveal reveal-up">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
-                        <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/20 mb-6">
+                        <span class="text-secondary-fixed text-xs font-bold uppercase tracking-[0.3em] leading-none">Our Expertise</span>
                     </div>
                     <h2 class="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Comprehensive<br><span class="text-hero-accent">Financing Solutions</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     ${agentConfig.services.map((service, index) => `
-                        <div class="group p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
+                        <div class="group p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] glass-card border-white/10 hover:border-secondary-fixed/30 transition-all duration-700 reveal ${index % 2 === 0 ? 'reveal-right' : 'reveal-left'}">
                             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-8">
-                                <div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
-                                    <i class="ph ph-${service.icon} text-3xl sm:text-4xl"></i>
+                                <div class="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-secondary-fixed to-secondary-fixed/50 flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover:rotate-[10deg] transition-transform duration-700">
+                                    <span class="material-symbols-outlined text-3xl sm:text-4xl">${service.icon}</span>
                                 </div>
                                 <div class="flex-grow">
-                                    <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-brand-gold transition-colors">${service.title}</h3>
+                                    <h3 class="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 group-hover:text-secondary-fixed transition-colors">${service.title}</h3>
                                     <p class="text-white/60 text-lg leading-relaxed mb-8">${service.description}</p>
                                     
                                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                                         ${service.details ? service.details.map(detail => `
                                             <li class="flex items-center text-sm font-medium text-white/80">
-                                                <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                                <div class="w-2 h-2 rounded-full bg-secondary-fixed mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
                                                 ${detail}
                                             </li>
                                         `).join('') : ''}
                                     </ul>
                                     
-                                    <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="#contact">
+                                    <a class="inline-flex items-center text-sm font-black text-secondary-fixed uppercase tracking-widest hover:text-white transition-all group/btn" href="#contact">
                                         Explore Scope 
-                                        <div class="ml-3 w-8 h-[2px] bg-brand-gold transform group-hover/btn:w-12 transition-all"></div>
+                                        <div class="ml-3 w-8 h-[2px] bg-secondary-fixed transform group-hover/btn:w-12 transition-all"></div>
                                     </a>
                                 </div>
                             </div>
@@ -2433,56 +2434,56 @@ function renderServices() {
 
 function renderBooking() {
     return `
-        <section class="py-32 bg-brand-navy relative overflow-hidden" id="booking">
+        <section class="py-32 bg-primary relative overflow-hidden" id="booking">
             <img src="assets/arch.jpg" alt="Booking background" class="bg-rich-image opacity-40" loading="lazy">
-            <div class="absolute inset-0 bg-brand-navy/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
+            <div class="absolute inset-0 bg-primary/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="lg:flex lg:items-center lg:justify-between gap-12">
                     <div class="lg:w-1/2 mb-16 lg:mb-0 reveal reveal-right flex flex-col h-full">
-                        <div class="group p-10 md:p-14 rounded-[3rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 hover:border-brand-navy/30 shadow-[0_40px_80px_-15px_rgba(211,189,115,0.3)] transition-all duration-700 h-full flex flex-col">
+                        <div class="group p-10 md:p-14 rounded-[3rem] bg-secondary-fixed/85 backdrop-blur-xl border-secondary-fixed/20 hover:border-primary/30 shadow-[0_40px_80px_-15px_rgba(211,189,115,0.3)] transition-all duration-700 h-full flex flex-col">
                             <div>
-                                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-navy/10 border border-brand-navy/20 mb-6">
-                                    <span class="text-brand-navy text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
+                                <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                                    <span class="text-primary text-xs font-black uppercase tracking-[0.3em] leading-none">Consultation</span>
                                 </div>
-                                <h3 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tight leading-tight group-hover:opacity-80 transition-opacity">Expert Guidance<br><span class="text-hero-accent !text-brand-navy">One Click Away</span></h3>
-                                <p class="text-xl text-brand-navy/70 mb-12 leading-relaxed font-medium">
+                                <h3 class="text-5xl md:text-6xl font-black text-primary mb-8 tracking-tight leading-tight group-hover:opacity-80 transition-opacity">Expert Guidance<br><span class="text-hero-accent !text-primary">One Click Away</span></h3>
+                                <p class="text-xl text-primary/70 mb-12 leading-relaxed font-medium">
                                     Pick a time that works for you. Our expert consultants are ready to walk you through your options, answer your questions, and help you build a clear path to homeownership. 
                                 </p>
                             </div>
                             <div class="space-y-10">
                                 <div class="flex items-center group/item reveal reveal-up">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
-                                        <i class="ph ph-calendar-check text-4xl text-brand-gold relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-primary animate-pulse opacity-10"></div>
+                                        <span class="material-symbols-outlined text-4xl text-secondary-fixed relative z-10">event_available</span>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">Free 15-minute Discovery Call</span>
+                                        <span class="text-lg font-black text-primary uppercase tracking-wider">Free 15-minute Discovery Call</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 100ms;">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
-                                        <i class="ph ph-shield-check text-4xl text-brand-gold relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-primary animate-pulse opacity-10"></div>
+                                        <span class="material-symbols-outlined text-4xl text-secondary-fixed relative z-10">verified_user</span>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">No obligation, just expert advice</span>
+                                        <span class="text-lg font-black text-primary uppercase tracking-wider">No obligation, just expert advice</span>
                                     </div>
                                 </div>
                                 <div class="flex items-center group/item reveal reveal-up" style="transition-delay: 200ms;">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-brand-navy flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
-                                        <div class="absolute inset-0 rounded-full bg-brand-navy animate-pulse opacity-10"></div>
-                                        <i class="ph ph-chat-text text-4xl text-brand-gold relative z-10"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(15,30,46,0.2)] transform group-hover/item:rotate-[10deg] transition-transform duration-700 relative">
+                                        <div class="absolute inset-0 rounded-full bg-primary animate-pulse opacity-10"></div>
+                                        <span class="material-symbols-outlined text-4xl text-secondary-fixed relative z-10">chat</span>
                                     </div>
                                     <div class="ml-8">
-                                        <span class="text-lg font-black text-brand-navy uppercase tracking-wider">Get your questions answered live</span>
+                                        <span class="text-lg font-black text-primary uppercase tracking-wider">Get your questions answered live</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="lg:w-1/2 reveal reveal-left">
-                        <div class="group p-6 rounded-[3rem] bg-brand-gold/85 backdrop-blur-xl border-brand-gold/20 hover:border-brand-navy/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
+                        <div class="group p-6 rounded-[3rem] bg-secondary-fixed/85 backdrop-blur-xl border-secondary-fixed/20 hover:border-primary/30 transition-all duration-700 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] min-h-[600px] relative overflow-hidden">
                            
                             <div class="calendly-inline-widget relative z-10" data-url="${agentConfig.contact.bookingWidgetUrl}?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
                     </div>
@@ -2494,22 +2495,22 @@ function renderBooking() {
 
 function renderTestimonials() {
     return `
-        <section class="py-24 overflow-hidden bg-brand-navy/90 glass-section relative" id="testimonials">
-            ${renderDivider('curve', 'fill-brand-navy')}
+        <section class="py-24 overflow-hidden bg-primary/90 glass-section relative" id="testimonials">
+            ${renderDivider('curve', 'fill-primary')}
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="relative testimonial-container">
                     <div class="text-center max-w-3xl mx-auto">
-                        <i class="ph ph-quotes text-6xl text-brand-gold opacity-50 mx-auto mb-6"></i>
+                        <span class="material-symbols-outlined text-6xl text-secondary-fixed opacity-50 mx-auto mb-6">format_quote</span>
                         <div class="relative h-64 md:h-48">
                             ${agentConfig.agent.testimonials.map((t, i) => `
                                 <div class="testimonial-slide absolute inset-0 transition-all duration-700 opacity-0 transform translate-x-8 ${i === 0 ? 'active' : ''}">
-                                    <p class="text-2xl italic font-black mb-8 text-brand-gold tracking-tight leading-relaxed">
+                                    <p class="text-2xl italic font-black mb-8 text-secondary-fixed tracking-tight leading-relaxed">
                                         "${t.quote}"
                                     </p>
                                     <div class="flex items-center justify-center">
                                         <div class="ml-4 text-center">
                                             <div class="text-base font-black text-white tracking-tight uppercase tracking-[0.1em]">${t.author}</div>
-                                            <div class="text-sm text-brand-gold/60 font-bold uppercase tracking-[0.2em]">${t.role}</div>
+                                            <div class="text-sm text-secondary-fixed/60 font-bold uppercase tracking-[0.2em]">${t.role}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2518,12 +2519,12 @@ function renderTestimonials() {
                     </div>
                     <div class="flex justify-center mt-12 gap-2">
                         ${agentConfig.agent.testimonials.map((_, i) => `
-                            <button class="testimonial-dot w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? 'bg-brand-gold' : 'bg-white/20'}" data-index="${i}"></button>
+                            <button class="testimonial-dot w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? 'bg-secondary-fixed' : 'bg-white/20'}" data-index="${i}"></button>
                         `).join('')}
                     </div>
                 </div>
             </div>
-            ${renderDivider('slant', 'fill-brand-navy')}
+            ${renderDivider('slant', 'fill-primary')}
         </section>
     `;
 }
@@ -2532,43 +2533,43 @@ function renderContact() {
     return `
         <section class="py-32 bg-rich overflow-hidden" id="contact">
             <img src="assets/house.jpg" alt="Contact background" class="bg-rich-image opacity-40">
-            <div class="absolute inset-0 bg-brand-navy/60"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-transparent to-brand-navy"></div>
+            <div class="absolute inset-0 bg-primary/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="text-center mb-24 reveal reveal-up">
-                    <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-6">
-                        <span class="text-brand-gold text-xs font-bold uppercase tracking-[0.3em] leading-none">Get Started</span>
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/20 mb-6">
+                        <span class="text-secondary-fixed text-xs font-bold uppercase tracking-[0.3em] leading-none">Get Started</span>
                     </div>
                     <h2 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight">Secure Your<br><span class="text-hero-accent">Free Quote Today</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <!-- Contact Info Card -->
-                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-right flex flex-col justify-between">
+                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-secondary-fixed/30 transition-all duration-700 reveal reveal-right flex flex-col justify-between">
                         <div>
-                            <h3 class="text-4xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-brand-gold transition-colors">Direct Access to<br><span class="text-brand-gold">Expert Advice</span></h3>
+                            <h3 class="text-4xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-secondary-fixed transition-colors">Direct Access to<br><span class="text-secondary-fixed">Expert Advice</span></h3>
                             <p class="text-white/60 text-xl leading-relaxed mb-12">
                                 Skip the robots. Reach out directly for a personalized consultation tailored to your unique financial goals.
                             </p>
                             
                             <div class="space-y-10">
                                 <div class="flex items-center group/item transform hover:translate-x-3 transition-transform duration-500">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
-                                        <i class="ph ph-phone text-4xl"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-secondary-fixed to-secondary-fixed/50 flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
+                                        <span class="material-symbols-outlined text-4xl">phone_iphone</span>
                                     </div>
                                     <div class="ml-8">
-                                        <p class="text-brand-gold/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Call Anytime</p>
+                                        <p class="text-secondary-fixed/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Call Anytime</p>
                                         <p class="text-2xl font-black text-white tracking-tight">${agentConfig.contact.phone}</p>
                                     </div>
                                 </div>
                                 
                                 <div class="flex items-center group/item transform hover:translate-x-3 transition-transform duration-500">
-                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-gold/50 flex items-center justify-center text-brand-navy shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
-                                        <i class="ph ph-envelope-simple text-4xl"></i>
+                                    <div class="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-secondary-fixed to-secondary-fixed/50 flex items-center justify-center text-primary shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] transform group-hover/item:rotate-[10deg] transition-transform duration-700">
+                                        <span class="material-symbols-outlined text-4xl">mail</span>
                                     </div>
                                     <div class="ml-8">
-                                        <p class="text-brand-gold/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Email Us</p>
+                                        <p class="text-secondary-fixed/60 text-sm font-black uppercase tracking-[0.2em] mb-1">Email Us</p>
                                         <p class="text-2xl font-black text-white tracking-tight">${agentConfig.contact.email}</p>
                                     </div>
                                 </div>
@@ -2578,42 +2579,42 @@ function renderContact() {
                         <div class="mt-16">
                             <ul class="space-y-4 mb-10">
                                 <li class="flex items-center text-sm font-medium text-white/80">
-                                    <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                    <div class="w-2 h-2 rounded-full bg-secondary-fixed mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
                                     No-Obligation Financial Review
                                 </li>
                                 <li class="flex items-center text-sm font-medium text-white/80">
-                                    <div class="w-2 h-2 rounded-full bg-brand-gold mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
+                                    <div class="w-2 h-2 rounded-full bg-secondary-fixed mr-3 shadow-[0_0_10px_rgba(211,189,115,0.8)]"></div>
                                     Direct Underwriter Access
                                 </li>
                             </ul>
                             
-                            <a class="inline-flex items-center text-sm font-black text-brand-gold uppercase tracking-widest hover:text-white transition-all group/btn" href="mailto:${agentConfig.contact.email}">
+                            <a class="inline-flex items-center text-sm font-black text-secondary-fixed uppercase tracking-widest hover:text-white transition-all group/btn" href="mailto:${agentConfig.contact.email}">
                                 Send Message 
-                                <div class="ml-3 w-8 h-[2px] bg-brand-gold transform group-hover/btn:w-12 transition-all"></div>
+                                <div class="ml-3 w-8 h-[2px] bg-secondary-fixed transform group-hover/btn:w-12 transition-all"></div>
                             </a>
                         </div>
                     </div>
                     
                     <!-- Form Card -->
-                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-brand-gold/30 transition-all duration-700 reveal reveal-left">
+                    <div class="group p-10 md:p-14 rounded-[3rem] glass-card border-white/10 hover:border-secondary-fixed/30 transition-all duration-700 reveal reveal-left">
                         <form action="#" class="grid grid-cols-1 gap-y-6" onsubmit="event.preventDefault(); alert('Request sent!');">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">First Name</label>
-                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="John" required/>
+                                    <label class="block text-sm font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">First Name</label>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 focus:ring-1 focus:ring-secondary-fixed/50 transition-all font-bold" type="text" placeholder="John" required/>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Last Name</label>
-                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="text" placeholder="Doe" required/>
+                                    <label class="block text-sm font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Last Name</label>
+                                    <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 focus:ring-1 focus:ring-secondary-fixed/50 transition-all font-bold" type="text" placeholder="Doe" required/>
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Email Address</label>
-                                <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" type="email" placeholder="john@example.com" required/>
+                                <label class="block text-sm font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Email Address</label>
+                                <input class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 focus:ring-1 focus:ring-secondary-fixed/50 transition-all font-bold" type="email" placeholder="john@example.com" required/>
                             </div>
                             <div>
-                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Interest</label>
-                                <select class="w-full bg-brand-navy border border-white/10 rounded-2xl py-4 px-6 text-white appearance-none focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold cursor-pointer">
+                                <label class="block text-sm font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Interest</label>
+                                <select class="w-full bg-primary border border-white/10 rounded-2xl py-4 px-6 text-white appearance-none focus:outline-none focus:border-secondary-fixed/50 focus:ring-1 focus:ring-secondary-fixed/50 transition-all font-bold cursor-pointer">
                                     <option>New Home Purchase</option>
                                     <option>Refinancing</option>
                                     <option>Debt Consolidation</option>
@@ -2621,37 +2622,38 @@ function renderContact() {
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-black text-brand-gold uppercase tracking-widest mb-2 px-1">Message</label>
-                                <textarea class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/50 transition-all font-bold" rows="4" placeholder="How can we help?"></textarea>
+                                <label class="block text-sm font-black text-secondary-fixed uppercase tracking-widest mb-2 px-1">Message</label>
+                                <textarea class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white placeholder-white/20 focus:outline-none focus:border-secondary-fixed/50 focus:ring-1 focus:ring-secondary-fixed/50 transition-all font-bold" rows="4" placeholder="How can we help?"></textarea>
                             </div>
-                            <button class="w-full mt-4 bg-brand-gold text-brand-navy font-black py-5 rounded-[2rem] hover:bg-brand-navy hover:text-white hover:scale-[1.02] transition-all shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] uppercase tracking-[0.2em] text-sm" type="submit">
+                            <button class="w-full mt-4 bg-secondary-fixed text-primary font-black py-5 rounded-[2rem] hover:bg-primary hover:text-white hover:scale-[1.02] transition-all shadow-[0_20px_40px_-10px_rgba(211,189,115,0.4)] uppercase tracking-[0.2em] text-sm" type="submit">
                                 Request Quote
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-            ${renderDivider('curve', 'fill-brand-gold')}
+            ${renderDivider('curve', 'fill-secondary-fixed')}
         </section>
     `;
 }
 
 function renderFooter() {
     return `
-        <footer class="bg-brand-navy/90 glass-section border-t border-white/10 py-12">
+        <footer class="bg-primary/90 glass-section border-t border-white/10 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="mb-8">
-                    <span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-brand-gold">Juthis</span></span>
+                    <span class="text-xl font-bold tracking-tight text-white uppercase">Ask<span class="text-secondary-fixed">Juthis</span></span>
                 </div>
-                <p class="text-brand-gold text-sm max-w-md mx-auto mb-8">
+                <p class="text-secondary-fixed text-sm max-w-md mx-auto mb-8">
                     Providing expert mortgage advice and financing solutions to help you achieve your homeownership dreams. 
                 </p>
                 <div class="flex justify-center space-x-6 mb-8">
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X"><i class="ph ph-x-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><i class="ph ph-instagram-logo"></i></a>
-                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.x}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X"><span class="material-symbols-outlined">close</span></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><span class="material-symbols-outlined">photo_camera</span></a>
+                    <a class="text-white/60 hover:text-white text-2xl" href="${agentConfig.social.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn"><span class="material-symbols-outlined">work</span></a>
+
                 </div>
-                <div class="text-xs text-brand-gold/60">
+                <div class="text-xs text-secondary-fixed/60">
                     © ${new Date().getFullYear()} AskJuthis. All rights reserved. ${agentConfig.agent.licenseNumber}. Equal Housing Lender.
                 </div>
             </div>
@@ -2704,7 +2706,7 @@ window.checkUserStatus = async function() {
                 if (idBtn) {
                      idBtn.parentElement.innerHTML = `
                         <div class="py-12 rounded-3xl border-2 border-green-500/50 bg-green-500/10 flex flex-col items-center justify-center">
-                            <i class="ph-fill ph-check-circle text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500"></i>
+                            <span class="material-symbols-outlined text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500">check_circle</span>
                             <span class="text-green-500 font-bold uppercase tracking-widest text-xs">Identity Authenticated</span>
                         </div>
                     `;
@@ -2717,7 +2719,7 @@ window.checkUserStatus = async function() {
                 if (creditBtn) {
                     creditBtn.parentElement.innerHTML = `
                         <div class="flex flex-col items-center">
-                            <div class="text-5xl font-black text-brand-gold mb-2">${data.creditScore}</div>
+                            <div class="text-5xl font-black text-secondary-fixed mb-2">${data.creditScore}</div>
                             <div class="text-white/40 font-bold uppercase tracking-widest text-[10px]">Verified FICO® Score</div>
                         </div>
                     `;
@@ -2742,7 +2744,7 @@ window.checkUserStatus = async function() {
 window.startPersonaVerification = async function() {
     console.log('🚀 Initializing Persona Verification...');
     const btn = document.getElementById('persona-start-btn');
-    if (btn) btn.innerHTML = '<i class="ph ph-circle-notch animate-spin text-4xl mb-4"></i><span class="text-xs uppercase tracking-widest">Generating Session...</span>';
+    if (btn) btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-4xl mb-4">progress_activity</span><span class="text-xs uppercase tracking-widest">Generating Session...</span>';
 
     try {
         const response = await authFetch('/api/create_inquiry', { method: 'POST' });
@@ -2758,7 +2760,7 @@ window.startPersonaVerification = async function() {
         if (!templateId) throw new Error('Persona Template ID is missing');
 
         if (typeof Persona === 'undefined') {
-            if (btn) btn.innerHTML = '<i class="ph ph-shield-warning text-4xl mb-4 text-red-500"></i><span class="text-xs uppercase tracking-widest text-center px-4">Adblocker Detected.<br>Please disable it to Verify ID.</span>';
+            if (btn) btn.innerHTML = '<span class="material-symbols-outlined text-4xl mb-4 text-red-500">gpp_maybe</span><span class="text-xs uppercase tracking-widest text-center px-4">Adblocker Detected.<br>Please disable it to Verify ID.</span>';
             console.error('❌ Persona SDK failed to load. Likely blocked by an Adblocker or Privacy Shield.');
             return;
         }
@@ -2785,7 +2787,7 @@ window.startPersonaVerification = async function() {
                 if (container) {
                     container.innerHTML = `
                         <div class="py-12 rounded-3xl border-2 border-green-500/50 bg-green-500/10 flex flex-col items-center justify-center">
-                            <i class="ph-fill ph-check-circle text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500"></i>
+                            <span class="material-symbols-outlined text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500">check_circle</span>
                             <span class="text-green-500 font-bold uppercase tracking-widest text-xs">Identity Authenticated</span>
                         </div>
                     `;
@@ -2799,17 +2801,17 @@ window.startPersonaVerification = async function() {
             },
             onCancel: () => {
                 console.log('❌ Persona Cancelled.');
-                if (btn) btn.innerHTML = '<i class="ph ph-fingerprint text-4xl text-white/20 mb-4"></i><span class="text-xs uppercase tracking-widest">Retry ID Verification</span>';
+                if (btn) btn.innerHTML = '<span class="material-symbols-outlined text-4xl text-white/20 mb-4">fingerprint</span><span class="text-xs uppercase tracking-widest">Retry ID Verification</span>';
             },
             onError: (error) => {
                 console.error('Persona SDK Error:', error);
-                if (btn) btn.innerHTML = '<i class="ph ph-warning text-4xl mb-4 text-red-500"></i><span class="text-xs uppercase tracking-widest text-center px-4">Persona SDK Error. Check Console.</span>';
+                if (btn) btn.innerHTML = '<span class="material-symbols-outlined text-4xl mb-4 text-red-500">warning</span><span class="text-xs uppercase tracking-widest text-center px-4">Persona SDK Error. Check Console.</span>';
             }
         });
     } catch (error) {
         console.error('❌ Failed to start Persona:', error);
         if (btn) {
-            btn.innerHTML = `<i class="ph ph-warning text-4xl mb-4 text-red-500"></i><span class="text-xs uppercase tracking-widest text-center px-4">${error.message || 'Error Loading Session'}</span>`;
+            btn.innerHTML = `<span class="material-symbols-outlined text-4xl mb-4 text-red-500">warning</span><span class="text-xs uppercase tracking-widest text-center px-4">${error.message || 'Error Loading Session'}</span>`;
         }
     }
 };
@@ -2850,7 +2852,7 @@ window.simulatePersonaSuccess = async function() {
         if (container) {
             container.innerHTML = `
                 <div class="py-12 rounded-3xl border-2 border-green-500/50 bg-green-500/10 flex flex-col items-center justify-center">
-                    <i class="ph-fill ph-check-circle text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500"></i>
+                    <span class="material-symbols-outlined text-4xl text-green-500 mb-4 scale-125 transition-transform duration-500">check_circle</span>
                     <span class="text-green-500 font-bold uppercase tracking-widest text-xs">Identity Verified</span>
                 </div>
             `;
@@ -2867,7 +2869,7 @@ window.simulatePersonaSuccess = async function() {
 window.pullCreditRecord = async function() {
     console.log('📉 Fetching Credit Score...');
     const btn = document.getElementById('credit-pull-btn');
-    if (btn) btn.innerHTML = '<i class="ph ph-circle-notch animate-spin mr-2"></i> Fetching Record...';
+    if (btn) btn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Fetching Record...';
     
     // Gather Secure Form Data
     const ssn = document.getElementById('cp-ssn')?.value;
@@ -2891,7 +2893,7 @@ window.pullCreditRecord = async function() {
             if (container) {
                 container.innerHTML = `
                     <div class="flex flex-col items-center">
-                        <div class="text-5xl font-black text-brand-gold mb-2">${data.score}</div>
+                        <div class="text-5xl font-black text-secondary-fixed mb-2">${data.score}</div>
                         <div class="text-white/40 font-bold uppercase tracking-widest text-[10px] mb-6">Verified FICO® Score</div>
                         
                         <div class="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-left">
@@ -2932,10 +2934,10 @@ window.addEmploymentRow = function() {
         const row = document.createElement('div');
         row.className = 'employment-row p-6 rounded-3xl bg-white/5 border border-white/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 reveal reveal-up';
         row.innerHTML = `
-            <input type="text" placeholder="Employer Name" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-name">
-            <input type="text" placeholder="Position/Title" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-title">
-            <input type="date" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-start">
-            <input type="number" placeholder="Gross Monthly Income" class="w-full bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold employer-income">
+            <input type="text" placeholder="Employer Name" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-name">
+            <input type="text" placeholder="Position/Title" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-title">
+            <input type="date" class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-start">
+            <input type="number" placeholder="Gross Monthly Income" class="w-full bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold employer-income">
         `;
         list.appendChild(row);
     }
@@ -2947,8 +2949,8 @@ window.addResidencyRow = function() {
         const row = document.createElement('div');
         row.className = 'residency-row p-6 rounded-3xl bg-white/5 border border-white/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal reveal-up';
         row.innerHTML = `
-            <input type="text" placeholder="Full Home Address" class="lg:col-span-2 bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold res-address">
-            <select class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-brand-gold transition-all text-sm font-bold res-status">
+            <input type="text" placeholder="Full Home Address" class="lg:col-span-2 bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold res-address">
+            <select class="bg-transparent border-b border-white/20 px-2 py-2 text-white outline-none focus:border-secondary-fixed transition-all text-sm font-bold res-status">
                 <option value="Own">Own</option>
                 <option value="Rent">Rent</option>
                 <option value="LivingRentFree">Living Rent Free</option>
