@@ -116,9 +116,9 @@ ul {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    /* backdrop-filter removed */
-    -webkit-/* backdrop-filter removed */
+    background: rgba(15, 25, 40, 0.65);
+    border: 1px solid rgba(211, 189, 115, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-section {
@@ -200,8 +200,11 @@ ul {
 .section-divider svg {
     position: relative;
     display: block;
-    width: calc(100% + 1.3px);
-    height: 80px;
+    width: max(100%, 1000px); /* Prevents the curve from being squished into sharp spikes on narrow mobile screens */
+    height: 80px; 
+    /* Centers the gracefully overflowing SVG shape within the narrow wrapper box */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Bespoke Typography Utils */
@@ -1650,4 +1653,145 @@ ul {
         margin: 0 -1rem;
         padding: 0 1rem;
     }
+}
+
+/* ============================
+   Animated Background System
+   ============================ */
+
+/* Hero background — slow Ken Burns on the house image */
+@keyframes heroAlive {
+    0% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.08) translate(-1%, -0.5%); }
+    100% { transform: scale(1.04) translate(0.5%, -1%); }
+}
+
+.hero-bg-alive {
+    animation: heroAlive 40s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* Wrapper spans the full height of all content below hero */
+.animated-bg-wrapper {
+    position: relative;
+}
+
+/* Fixed background canvas behind all sections */
+.animated-bg-wrapper::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        /* Added sweeping blur light areas to give depth under the lines */
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(20, 50, 85, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 80% 80%, rgba(15, 35, 65, 0.5) 0%, transparent 70%),
+        /* Base: very dark navy */
+        linear-gradient(135deg, #050c16 0%, #0a1520 40%, #0d1a2a 60%, #070e18 100%);
+    background-size: 100% 100%;
+    animation: bgPulse 20s ease-in-out infinite alternate;
+}
+
+/* Slow, subtle brightness pulse */
+@keyframes bgPulse {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.85;
+        filter: brightness(1.15);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1.05);
+    }
+}
+
+/* Traveling curved gold accent lines — infinite right-to-left loop */
+.animated-bg-wrapper::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Ensure the animated SVG doesn't horizontally compress on tall mobile viewports, 
+       maintaining an elegant minimum aspect ratio of 2:1 while still covering the screen perfectly. */
+    width: max(200vw, 200vh);
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        /* Elegant swooping organic gold curves using a single unbroken double-width SVG data URI */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1000' preserveAspectRatio='none' overflow='visible'%3E%3Cpath d='M 0,700 C 400,900 600,500 1000,700 C 1400,900 1600,500 2000,700' stroke='%23D3BD73' stroke-opacity='0.30' stroke-width='3' fill='none' /%3E%3Cpath d='M 0,200 C 300,50 700,350 1000,200 C 1300,50 1700,350 2000,200' stroke='%23D3BD73' stroke-opacity='0.20' stroke-width='5' fill='none' /%3E%3Cpath d='M 0,800 C 300,200 700,1400 1000,800 C 1300,200 1700,1400 2000,800' stroke='%23D3BD73' stroke-opacity='0.15' stroke-width='2' fill='none' /%3E%3Cpath d='M 0,500 C 300,600 700,400 1000,500 C 1300,600 1700,400 2000,500' stroke='%23D3BD73' stroke-opacity='0.25' stroke-width='4' fill='none' /%3E%3Cpath d='M 0,100 C 500,-50 500,250 1000,100 C 1500,-50 1500,250 2000,100' stroke='%23D3BD73' stroke-opacity='0.15' stroke-width='3' fill='none' /%3E%3Cpath d='M 0,900 C 200,700 800,1100 1000,900 C 1200,700 1800,1100 2000,900' stroke='%23D3BD73' stroke-opacity='0.10' stroke-width='4' fill='none' /%3E%3C/svg%3E");
+    background-size: max(200vw, 200vh) 100vh;
+    background-repeat: no-repeat;
+    animation: bgSlide 30s linear infinite;
+}
+
+@keyframes bgSlide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Ensure sections inside the wrapper are transparent */
+.animated-bg-wrapper > section,
+.animated-bg-wrapper > footer {
+    background: transparent !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================================================
+   Ultra-Premium Micro-Interactions
+   ========================================================================= */
+
+/* 1. Glass Glare Hover Effect */
+.glass-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.03), 
+        rgba(255, 255, 255, 0.15), 
+        rgba(255, 255, 255, 0.03), 
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.glass-card:hover::before {
+    left: 200%;
+}
+
+/* 2. Authority Marquee */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+    animation: marquee 50s linear infinite;
+    display: inline-flex;
+    width: max-content;
 }

@@ -61,9 +61,9 @@ const agentConfig = {
         description2: "We work with a wide network of lenders to ensure you get the most competitive rates and terms. Our transparent process means no hidden fees or surprises—just honest, straightforward mortgage solutions.",
         stats: [
             { icon: "military_tech", value: "50+", label: "Lender Options" },
-            { icon: "groups", value: "1-on-1", label: "Personal Service" },
-            { icon: "schedule", value: "24/7", label: "Support Available" },
-            { icon: "favorite", value: "Fast", label: "Pre-Approvals" }
+            { icon: "monetization_on", value: "$500M+", label: "Funded Volume" },
+            { icon: "groups", value: "1500+", label: "Families Helped" },
+            { icon: "star", value: "5.0", label: "Average Rating" }
         ],
         meetBroker: {
             title: "Meet Your Broker",
@@ -90,5 +90,58 @@ const agentConfig = {
             details: ["Rate & Term Refinance", "Cash-Out Equity Access"],
             icon: "attach_money"
         }
-    ]
+    ],
+
+    // The Mortgage Process Roadmap
+    processSteps: [
+        {
+            title: "Discovery & Strategy",
+            description: "We start with a deep dive into your financial goals, uncovering the exact mortgage architecture needed to get you approved.",
+            icon: "explore"
+        },
+        {
+            title: "The Pre-Approval",
+            description: "We secure a firm commitment from our elite lender network, locking in your rate and giving you absolute buying power.",
+            icon: "verified"
+        },
+        {
+            title: "The Property Hunt",
+            description: "Shop with absolute confidence. We work directly with your Realtor to structure the financing on the exact home you want.",
+            icon: "search"
+        },
+        {
+            title: "Closing & Keys",
+            description: "We handle all the complex underwriting and legal coordination behind the scenes so you can focus on moving in.",
+            icon: "key"
+        }
+    ],
+
+    // Credentials & Distinctions
+    credentials: {
+        title: "Distinctions & Credentials",
+        subtitle: "A Standard of Excellence",
+        items: [
+            { icon: "workspace_premium", title: "Top 1% Originator", description: "Consistently ranked in the top 1% of mortgage professionals nationwide for funding volume." },
+            { icon: "gavel", title: "Licensed Level 2 Agent", description: "Fully licensed and regulated by the Financial Services Regulatory Authority (FSRA)." },
+            { icon: "public", title: "MPC Member", description: "Active member in good standing with Mortgage Professionals Canada." },
+            { icon: "school", title: "Structuring Expert", description: "Specialized training in alternative lending, B-lender bridging, and multi-collateral financing." }
+        ]
+    },
+
+    // Live Market Rates (Top Bar)
+    liveRates: {
+        lastUpdated: "Today",
+        rates: [
+            { label: "5-Year Fixed", value: "4.49%" },
+            { label: "3-Year Variable", value: "5.80%" },
+            { label: "Prime Rate", value: "6.95%" }
+        ]
+    },
+
+    // Direct Lead Capture Form
+    leadCapture: {
+        title: "Request Your Custom Rate",
+        subtitle: "In 60 Seconds",
+        description: "You have strong financing options available. Enter your details to receive your custom rate matrix from our underwriters."
+    }
 };

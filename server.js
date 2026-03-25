@@ -51,6 +51,9 @@ const io = new Server(server, {
 // Socket.io event handling
 io.on('connection', (socket) => {
     console.log('🔌 Client connected:', socket.id);
+    
+    // Broadcast updated viewer count to all connected clients
+    io.emit('viewer_count_update', io.engine.clientsCount);
 
     socket.on('join_application', (appId) => {
         socket.join(appId);
@@ -59,6 +62,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('🔌 Client disconnected:', socket.id);
+        io.emit('viewer_count_update', io.engine.clientsCount);
     });
 });
 

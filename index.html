@@ -99,8 +99,11 @@
 </head>
 
 <body class="font-sans text-white bg-brand-slate">
+    <!-- Top Bar (Live Rates) -->
+    <div id="top-bar-container"></div>
+
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-brand-navy/95  border-b border-white/10">
+    <nav class="sticky top-0 z-50 bg-brand-navy/95 border-b border-white/10">
         <div class="px-4 sm:px-8 lg:px-12">
             <div class="grid grid-cols-2 lg:grid-cols-3 h-20 items-center">
                 <!-- Left: Logo -->
@@ -159,6 +162,8 @@
     </main>
 
     <!-- Scripts -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
     <script src="config.js"></script>
     <script src="main.js?v=1.0.3"></script>
 </body>
